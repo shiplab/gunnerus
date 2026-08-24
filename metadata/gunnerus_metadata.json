@@ -1,0 +1,720 @@
+{
+  "_schema_note": "Metadata for RV Gunnerus derived from General Arrangement drawing 165821B7 (source: title block, deck plans, profile/section views). Primary classification hierarchy is the SFI Group System (Maingroup/Group/Subgroup). Where confident, a cross-reference to DNV VIS/GMOD (v3.10a) top-level node is added as vis_gmod_ref. Every data point is provenance-tagged via 'source'.",
+  "vessel_identity": {
+    "name": "RV Gunnerus",
+    "hull_marking": [
+      "GUNNERUS",
+      "TRONDHEIM"
+    ],
+    "call_sign_radio_id": "LNVZ",
+    "ship_type": "Ice-classed multi-purpose research/survey vessel",
+    "project_designation": "FF Gunnerus –LNVZ– (FF = Forskningsfartøy / Research Vessel)",
+    "owner_operator": "NTNU (Norwegian University of Science and Technology)",
+    "port_of_registry": "Trondheim, Norway",
+    "designer_yard_agent": "polarkonsult AS",
+    "based_on_drawing": "165821B7 Rev.1",
+    "drawing_reference": {
+      "drawing_number": "165821B7",
+      "drawing_title": "GENERAL ARRANGEMENT",
+      "scale": "1:100",
+      "sheet": "1/1",
+      "latest_revision": "B7",
+      "creator_software": "AutoCAD 2026",
+      "source_files": [
+        "165821B7 GA Gunnerus Rev1.dwg",
+        "165821B7 GA Gunnerus Rev1.pdf"
+      ]
+    },
+    "revision_history": [
+      {
+        "rev": "Rev1",
+        "description": "Publish",
+        "date": "2026-08-21",
+        "by": "AM"
+      }
+    ],
+    "_source": "title block / revision table"
+  },
+  "classification_regulatory": {
+    "sfi_maingroup": "1 - Ship General",
+    "flag_authority": "Sjøfartsdirektoratet (Norwegian Maritime Authority, NMD)",
+    "class_society": "DNV",
+    "class_notation": "+1A1 Ice C EO R2",
+    "sfi_scheme_reference": "SFI Group System (per SFIcodes.xlsx)",
+    "vis_scheme_reference": "DNV VIS v3.10a (GMOD)",
+    "_source": "title block: CLASS / ACC TO fields"
+  },
+  "main_dimensions": {
+    "sfi_subgroup": "101",
+    "sfi_subgroup_desc": "Contract/specific. Work, general design, model testing (particulars table)",
+    "vis_gmod_ref": "100",
+    "vis_gmod_ref_desc": "Main structure",
+    "length_oa_m": 36.25,
+    "length_bpp_m": 33.9,
+    "breadth_moulded_m": 9.6,
+    "depth_to_1deck_m": 4.287,
+    "depth_to_a_deck_m": 6.6,
+    "draught_norm_operative_m": 2.5,
+    "draught_max_loaded_m": 2.787,
+    "scantling_draught_m": 2.9,
+    "gross_tonnage": 430,
+    "frame_distance_mm": 500,
+    "frame_numbering": "0 (AP/stern) to 60 (FP/bow); lettered sub-frames 25-30/A-J amidships (engine room/accommodation block)",
+    "_source": "title block MAIN DIMENSIONS table"
+  },
+  "capacities": {
+    "sfi_maingroup": "2/7/8 (Hull tankage / Fuel & fluid systems)",
+    "vis_gmod_ref": "600",
+    "vis_gmod_ref_desc": "Machinery and marine piping systems",
+    "fuel_oil_total_m3": 60.2,
+    "fresh_water_total_m3": 18.4,
+    "water_ballast_total_m3": 62.3,
+    "cargo_hold_m3": 37.8,
+    "deadweight_t": 164,
+    "deadweight_at_draught_m": 2.786,
+    "_source": "title block CAPACITIES table (rounded/aggregate values)"
+  },
+  "tanks": [
+    {
+      "no": "1",
+      "content": "Technical water",
+      "capacity_m3": 5.6,
+      "sfi_subgroup": "761",
+      "sfi_desc": "Distilled & make-up water systems",
+      "location": "Tank top, fwd (fr.45-50)"
+    },
+    {
+      "no": "2p",
+      "content": "Fuel oil",
+      "capacity_m3": 11.9,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Tank top, port fwd"
+    },
+    {
+      "no": "2sb",
+      "content": "Fuel oil",
+      "capacity_m3": 11.9,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Tank top, stbd fwd"
+    },
+    {
+      "no": "3p",
+      "content": "Technical water",
+      "capacity_m3": 12.8,
+      "sfi_subgroup": "761",
+      "sfi_desc": "Distilled & make-up water systems",
+      "location": "Tank top"
+    },
+    {
+      "no": "3sb",
+      "content": "Technical water",
+      "capacity_m3": 12.8,
+      "sfi_subgroup": "761",
+      "sfi_desc": "Distilled & make-up water systems",
+      "location": "Tank top"
+    },
+    {
+      "no": "4",
+      "content": "Dry tank",
+      "capacity_m3": 4.4,
+      "sfi_subgroup": null,
+      "sfi_desc": "Void/dry space (no system assigned)",
+      "location": "Tank top amidships"
+    },
+    {
+      "no": "5",
+      "content": "Fresh water",
+      "capacity_m3": 17.0,
+      "sfi_subgroup": "581",
+      "sfi_desc": "Sanitary supply systems",
+      "location": "Tank top"
+    },
+    {
+      "no": "6p",
+      "content": "Fuel oil",
+      "capacity_m3": 7.8,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Tank top, engine room area"
+    },
+    {
+      "no": "6sb",
+      "content": "Fuel oil settling tank",
+      "capacity_m3": 7.8,
+      "sfi_subgroup": "702",
+      "sfi_desc": "Fuel oil purification plants",
+      "location": "Tank top, engine room area"
+    },
+    {
+      "no": "7p",
+      "content": "Grey water",
+      "capacity_m3": 3.2,
+      "sfi_subgroup": "582",
+      "sfi_desc": "Sanitary discharge / accommodation drainage systems",
+      "location": "Tank top, aft"
+    },
+    {
+      "no": "7sb",
+      "content": "Black water",
+      "capacity_m3": 3.2,
+      "sfi_subgroup": "582",
+      "sfi_desc": "Sanitary discharge / accommodation drainage systems",
+      "location": "Tank top, aft"
+    },
+    {
+      "no": "8",
+      "content": "Sludge",
+      "capacity_m3": 1.7,
+      "sfi_subgroup": "701",
+      "sfi_desc": "Fuel oil transfer & drain systems (sludge handling)",
+      "location": "Tank top, aft"
+    },
+    {
+      "no": "9",
+      "content": "Waste oil",
+      "capacity_m3": 7.8,
+      "sfi_subgroup": "701",
+      "sfi_desc": "Fuel oil transfer & drain systems",
+      "location": "Tank top, aft"
+    },
+    {
+      "no": "10",
+      "content": "Bilge",
+      "capacity_m3": 3.5,
+      "sfi_subgroup": "803",
+      "sfi_desc": "Bilge systems",
+      "location": "Tank top, aft"
+    },
+    {
+      "no": "11p",
+      "content": "FO service tank",
+      "capacity_m3": 2.2,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Below 1-deck, engine room"
+    },
+    {
+      "no": "11sb",
+      "content": "FO service tank",
+      "capacity_m3": 2.2,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Below 1-deck, engine room"
+    },
+    {
+      "no": "12",
+      "content": "Roll damping tank",
+      "capacity_m3": 21.2,
+      "sfi_subgroup": "405",
+      "sfi_desc": "Mechanical or fluid stabilizers against rolling/heeling/trimming",
+      "location": "Below 1-deck, fwd of engine room"
+    },
+    {
+      "no": "13p",
+      "content": "Technical water",
+      "capacity_m3": 5.0,
+      "sfi_subgroup": "761",
+      "sfi_desc": "Distilled & make-up water systems",
+      "location": "Below 1-deck, fwd (port)"
+    },
+    {
+      "no": "13sb",
+      "content": "Technical water",
+      "capacity_m3": 5.0,
+      "sfi_subgroup": "761",
+      "sfi_desc": "Distilled & make-up water systems",
+      "location": "Below 1-deck, fwd (stbd)"
+    },
+    {
+      "no": null,
+      "content": "New fuel oil tank",
+      "capacity_m3": 8.0,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Tank top amidships (added, no number assigned on GA)"
+    },
+    {
+      "no": null,
+      "content": "New fuel oil tank",
+      "capacity_m3": 8.0,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Tank top amidships (added, no number assigned on GA)"
+    },
+    {
+      "no": null,
+      "content": "Grey water (new)",
+      "capacity_m3": null,
+      "sfi_subgroup": "582",
+      "sfi_desc": "Sanitary discharge systems",
+      "location": "Tank top, aft (capacity not labelled)"
+    },
+    {
+      "no": null,
+      "content": "Black water (new)",
+      "capacity_m3": null,
+      "sfi_subgroup": "582",
+      "sfi_desc": "Sanitary discharge systems",
+      "location": "Tank top, aft (capacity not labelled)"
+    },
+    {
+      "no": null,
+      "content": "Fuel oil (inboard profile)",
+      "capacity_m3": 2.8,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems",
+      "location": "Inboard profile, 2x2.8m3 (may duplicate a tank-top tank)"
+    },
+    {
+      "no": null,
+      "content": "Optional DO tank",
+      "capacity_m3": 8.0,
+      "sfi_subgroup": "703",
+      "sfi_desc": "Fuel oil supply systems (diesel oil)",
+      "location": "Inboard profile, 2x8m3, labelled optional"
+    },
+    {
+      "no": null,
+      "content": "Dry tank (inboard profile)",
+      "capacity_m3": null,
+      "sfi_subgroup": null,
+      "sfi_desc": "Void/dry space",
+      "location": "Inboard profile, amidships"
+    }
+  ],
+  "_tanks_note": "Tank numbering/capacities read from the TANK TOP plan and inboard profile. Some tanks appear twice (once numbered in tank-top plan, once generically in inboard profile) and could not be fully reconciled from the GA alone — flagged rather than merged silently. Capacities table in the title block gives rounded system totals (fuel 60.2 m3, fresh water 18.4 m3, ballast 62.3 m3); this itemised list won't sum exactly to those totals.",
+  "general_arrangement": {
+    "frame_orientation": "Frame 0 = Aft Perpendicular (stern); Frame 60 = Forward Perpendicular (bow)",
+    "decks": [
+      {
+        "deck_name": "Wheelhouse / Bridge",
+        "sfi_group": "25",
+        "sfi_group_desc": "Deck houses & superstructures",
+        "vis_gmod_ref": "700",
+        "vis_gmod_ref_desc": "Navigation, communication and control systems",
+        "spaces": [
+          {
+            "name": "Bridge",
+            "area_m2": 20,
+            "sfi_subgroup": "791",
+            "sfi_desc": "Manoeuvre consoles, main consoles"
+          }
+        ]
+      },
+      {
+        "deck_name": "A-Deck",
+        "sfi_group": "25/54/57",
+        "sfi_group_desc": "Deck houses & superstructures / Furniture & inventory / Ventilation",
+        "vis_gmod_ref": "100",
+        "vis_gmod_ref_desc": "Main structure (superstructure)",
+        "spaces": [
+          {
+            "name": "Day room / Conference",
+            "area_m2": null,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "Galley",
+            "area_m2": 4.5,
+            "sfi_subgroup": "551",
+            "sfi_desc": "Galley machinery"
+          },
+          {
+            "name": "Ventilation / electronics room",
+            "area_m2": null,
+            "sfi_subgroup": "573",
+            "sfi_desc": "Ventilation systems (accommodation)"
+          },
+          {
+            "name": "CO2 room",
+            "area_m2": null,
+            "sfi_subgroup": "815",
+            "sfi_desc": "Fire fighting systems w/gas (CO2)"
+          },
+          {
+            "name": "Locker for emergency equipment",
+            "area_m2": null,
+            "sfi_subgroup": "503",
+            "sfi_desc": "Lifesaving, safety & emergency equipment"
+          },
+          {
+            "name": "Lifeboat station (davit-launched)",
+            "area_m2": null,
+            "sfi_subgroup": "501",
+            "sfi_desc": "Lifeboats w/equipment"
+          }
+        ]
+      },
+      {
+        "deck_name": "1-Deck",
+        "sfi_group": "50/54/48",
+        "sfi_group_desc": "Lifesaving & crew / Furniture / Special equipment (labs)",
+        "vis_gmod_ref": "300",
+        "vis_gmod_ref_desc": "Hull equipment",
+        "spaces": [
+          {
+            "name": "Diving platform",
+            "dims_mm": "1500x800",
+            "sfi_subgroup": "483",
+            "sfi_desc": "Diving equipment"
+          },
+          {
+            "name": "Wet lab",
+            "area_m2": 13.8,
+            "sfi_subgroup": "484",
+            "sfi_desc": "Laboratory equipment"
+          },
+          {
+            "name": "Dry lab",
+            "area_m2": 12.0,
+            "sfi_subgroup": "484",
+            "sfi_desc": "Laboratory equipment"
+          },
+          {
+            "name": "ROV container (removable)",
+            "area_m2": null,
+            "sfi_subgroup": "917",
+            "vis_gmod_ref": "1000",
+            "sfi_desc": "ROV and diving equipment (SFI special-vessel extension)"
+          },
+          {
+            "name": "Weather protected working area",
+            "area_m2": null,
+            "sfi_subgroup": null,
+            "sfi_desc": "n/a"
+          },
+          {
+            "name": "Wardrobe / wash room",
+            "area_m2": 2.0,
+            "sfi_subgroup": "583",
+            "sfi_desc": "Bathtubs, showers, WC, washbasins"
+          },
+          {
+            "name": "Store / workshop",
+            "area_m2": null,
+            "sfi_subgroup": "446",
+            "sfi_desc": "Outfitting in store rooms & workshops"
+          },
+          {
+            "name": "Data room",
+            "area_m2": 11.7,
+            "sfi_subgroup": "855",
+            "sfi_desc": "Common computer systems"
+          },
+          {
+            "name": "Master cabin",
+            "area_m2": 10.5,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "1-person cabin",
+            "area_m2": 9.3,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "1-person cabin",
+            "area_m2": 8.5,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "Store",
+            "area_m2": null,
+            "sfi_subgroup": "547",
+            "sfi_desc": "Inventory, smaller items"
+          }
+        ]
+      },
+      {
+        "deck_name": "Below 1-Deck",
+        "sfi_group": "22/60/86",
+        "sfi_group_desc": "Engine area / Diesel engines / Electric power supply",
+        "vis_gmod_ref": "600",
+        "vis_gmod_ref_desc": "Machinery and marine piping systems",
+        "spaces": [
+          {
+            "name": "Cargo hold",
+            "area_or_vol": "37.8 m3",
+            "sfi_subgroup": "231",
+            "sfi_desc": "Hull sections and panels, cargo area"
+          },
+          {
+            "name": "Thruster room",
+            "area_m2": null,
+            "sfi_subgroup": "404",
+            "sfi_desc": "Propeller plants forward/aft for manoeuvring"
+          },
+          {
+            "name": "Engine room (3x main engine sets)",
+            "area_m2": null,
+            "sfi_subgroup": "601",
+            "sfi_desc": "Diesel engines"
+          },
+          {
+            "name": "Engine Control Room (ECR)",
+            "area_m2": null,
+            "sfi_subgroup": "792",
+            "sfi_desc": "Common automation equipment, engine room alarm systems"
+          },
+          {
+            "name": "Main switchboards",
+            "area_m2": null,
+            "sfi_subgroup": "871",
+            "sfi_desc": "Main switchboards"
+          },
+          {
+            "name": "Frequency converters",
+            "area_m2": null,
+            "sfi_subgroup": "867",
+            "sfi_desc": "Rectifiers & converters"
+          },
+          {
+            "name": "Conference room",
+            "area_m2": 16.8,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "4-person cabin",
+            "area_m2": 8.9,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "4-person cabin",
+            "area_m2": 8.0,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "2-person cabin",
+            "area_m2": 9.3,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "2-person cabin",
+            "area_m2": 10.1,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "2-person cabin",
+            "area_m2": 11.0,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "2-person cabin",
+            "area_m2": 12.1,
+            "sfi_subgroup": "541",
+            "sfi_desc": "Furniture for crew"
+          },
+          {
+            "name": "Linen store",
+            "area_m2": 4.3,
+            "sfi_subgroup": "547",
+            "sfi_desc": "Inventory, smaller items"
+          },
+          {
+            "name": "Dry provisions",
+            "area_m2": null,
+            "sfi_subgroup": "554",
+            "sfi_desc": "Freezing/refrigerating systems for provisions"
+          }
+        ]
+      },
+      {
+        "deck_name": "Tank Top",
+        "sfi_group": "20/70/80",
+        "sfi_group_desc": "Hull materials / Fuel systems / Ballast & bilge systems",
+        "vis_gmod_ref": "600",
+        "vis_gmod_ref_desc": "Machinery and marine piping systems",
+        "spaces": [
+          {
+            "name": "Cargo hold",
+            "area_or_vol": "37.8 m3",
+            "sfi_subgroup": "231"
+          },
+          {
+            "name": "Thruster room",
+            "sfi_subgroup": "404"
+          },
+          {
+            "name": "Engine room",
+            "sfi_subgroup": "220"
+          },
+          {
+            "name": "Tank arrangement",
+            "sfi_subgroup": "see 'tanks' array above"
+          }
+        ]
+      }
+    ],
+    "_source": "GA deck plan labels (A-DECK, 1-DECK, BELOW 1-DECK, TANK TOP); areas as printed on drawing where legible"
+  },
+  "equipment_inventory": [
+    {
+      "item": "Bow A-frame (oceanographic handling)",
+      "supplier": "SH Group",
+      "sfi_subgroup": "926",
+      "sfi_desc": "Ocean. - transport, lifting, towing",
+      "vis_gmod_ref": "1000",
+      "vis_gmod_ref_desc": "Cargo handling arrangements",
+      "location": "Foredeck, fwd of wheelhouse",
+      "notes": "Installed per rev. B3 (2018-12-20); lengthened per rev. B6 (2026-02-27)",
+      "source": "profile view + revision table"
+    },
+    {
+      "item": "Knuckle-boom deck crane, model PK65002M",
+      "supplier": "Polarkonsult (PK-series)",
+      "sfi_subgroup": "331",
+      "sfi_desc": "Rotating cranes w/crane pillars",
+      "vis_gmod_ref": "1000",
+      "vis_gmod_ref_desc": "Cargo handling arrangements",
+      "location": "Amidships, Section Fr.17 (near engine casing)",
+      "capacity": "SWL 4 t",
+      "outreach_mm": 3810,
+      "slew_range_deg": "20-60 (working sector shown)",
+      "notes": "Installed per rev. B2 (2018-11-23)",
+      "source": "Section FR.17 detail + revision table"
+    },
+    {
+      "item": "Stern gantry / slipway launch & recovery system",
+      "sfi_subgroup": "917",
+      "sfi_desc": "ROV and diving equipment",
+      "vis_gmod_ref": "1000",
+      "vis_gmod_ref_desc": "Cargo handling arrangements",
+      "location": "Stern, over slipway",
+      "notes": "Slipway arrangement with railing added per rev. B7 (2026-03-20); twin-leg gantry with multiple lifting points shown in 'SEEN FROM AFT' view",
+      "source": "Aft view (SEEN FROM AFT)"
+    },
+    {
+      "item": "Deck winch (\"Vinsj\")",
+      "dims_mm": "2000x960",
+      "sfi_subgroup": "917",
+      "sfi_desc": "ROV and diving equipment",
+      "vis_gmod_ref": "1000",
+      "vis_gmod_ref_desc": "Cargo handling arrangements",
+      "location": "1-Deck, near ROV hatch",
+      "source": "1-Deck plan"
+    },
+    {
+      "item": "ROV handling hatch",
+      "dims_mm": "3075x1650",
+      "sfi_subgroup": "304",
+      "sfi_desc": "Small hatches / access hatches",
+      "vis_gmod_ref": "300",
+      "vis_gmod_ref_desc": "Hull equipment",
+      "location": "1-Deck, moonpool/cargo hold access",
+      "source": "1-Deck plan"
+    },
+    {
+      "item": "Flush hatch",
+      "dims_mm": "1750x2100",
+      "sfi_subgroup": "301",
+      "sfi_desc": "Weather deck hatch covers",
+      "vis_gmod_ref": "300",
+      "vis_gmod_ref_desc": "Hull equipment",
+      "location": "1-Deck",
+      "source": "1-Deck plan"
+    },
+    {
+      "item": "Propulsion units, twin cycloidal (Voith-Schneider type, visually identified)",
+      "sfi_subgroup": "628",
+      "sfi_desc": "Special propulsion aggregates",
+      "vis_gmod_ref": "400",
+      "vis_gmod_ref_desc": "Propulsion and steering arrangements",
+      "location": "Stern, under slipway",
+      "notes": "Identification from characteristic circular wheel geometry in 'SEEN FROM AFT' view; NOT labelled by name on drawing — treat as inferred, not confirmed",
+      "confidence": "inferred_from_geometry",
+      "source": "Aft view (SEEN FROM AFT)"
+    },
+    {
+      "item": "Main engines (3x, symmetric sets)",
+      "sfi_subgroup": "601",
+      "sfi_desc": "Diesel engines",
+      "vis_gmod_ref": "600",
+      "vis_gmod_ref_desc": "Machinery and marine piping systems",
+      "location": "Engine room, Below 1-Deck",
+      "notes": "Make/model not labelled on GA drawing",
+      "source": "Below 1-Deck plan, Section FR.17"
+    },
+    {
+      "item": "Main switchboards",
+      "sfi_subgroup": "871",
+      "sfi_desc": "Main switchboards",
+      "vis_gmod_ref": "500",
+      "vis_gmod_ref_desc": "Electric power system",
+      "location": "ECR, Below 1-Deck",
+      "source": "Below 1-Deck plan"
+    },
+    {
+      "item": "Frequency converters",
+      "sfi_subgroup": "867",
+      "sfi_desc": "Rectifiers & converters",
+      "vis_gmod_ref": "500",
+      "vis_gmod_ref_desc": "Electric power system",
+      "location": "ECR, Below 1-Deck",
+      "source": "Below 1-Deck plan"
+    },
+    {
+      "item": "Radar / signal / antenna mast",
+      "sfi_subgroup": "418",
+      "sfi_desc": "Radar, signal, observation & antenna masts",
+      "vis_gmod_ref": "700",
+      "vis_gmod_ref_desc": "Navigation, communication and control systems",
+      "location": "Wheelhouse roof",
+      "source": "Profile view"
+    },
+    {
+      "item": "Exhaust funnels/stacks (3x, one per engine)",
+      "sfi_subgroup": "268",
+      "sfi_desc": "Funnels",
+      "vis_gmod_ref": "100",
+      "vis_gmod_ref_desc": "Main structure",
+      "location": "Wheelhouse deck roof, aft of mast",
+      "source": "Profile / Section FR.17"
+    },
+    {
+      "item": "Davit-launched lifeboat",
+      "sfi_subgroup": "501",
+      "sfi_desc": "Lifeboats w/equipment",
+      "vis_gmod_ref": "800",
+      "vis_gmod_ref_desc": "Safety",
+      "location": "A-Deck, starboard aft",
+      "source": "Profile view + A-Deck plan"
+    },
+    {
+      "item": "Bridge manoeuvring console",
+      "sfi_subgroup": "791",
+      "sfi_desc": "Manoeuvre consoles, main consoles",
+      "vis_gmod_ref": "700",
+      "vis_gmod_ref_desc": "Navigation, communication and control systems",
+      "location": "Wheelhouse",
+      "source": "Wheelhouse plan"
+    }
+  ],
+  "_equipment_note": "This list covers every distinctly labelled or clearly identifiable item of equipment across all views on the GA drawing. It is NOT a full outfit list — items with no label and no unambiguous visual identity (e.g. unlabelled valves, small deck fittings) are omitted rather than guessed. The propulsion-unit entry is explicitly flagged as inferred since it is not textually labelled.",
+  "vis_gmod_top_level_reference": {
+    "000": "General",
+    "100": "Main structure",
+    "200": "Stability, watertight and weathertight integrity",
+    "300": "Hull equipment",
+    "400": "Propulsion and steering arrangements",
+    "500": "Electric power system",
+    "600": "Machinery and marine piping systems",
+    "700": "Navigation, communication and control systems",
+    "800": "Safety",
+    "900": "Environment",
+    "1000": "Cargo handling arrangements",
+    "1100": "Hydrocarbon production plant",
+    "1200": "Drilling and well intervention arrangements",
+    "_source": "https://docs.vista.dnv.com/docs/resources/vis/v3-10a (VIS/GMOD top-level nodes)"
+  }
+}
