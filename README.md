@@ -93,6 +93,7 @@ The three sheets do not agree on all of these. Where they differ:
 Check these against the current stability book before using any of them. The general arrangement and tank plan also carry figures the lines plan does not — gross tonnage 430, scantling draught 2.90 m and flag authority Sjøfartsdirektoratet (NMD) — and the GA values are in the metadata file.
 
 ## Credit & License
+This drawing is a derivative work based on the R/V Gunnerus General Arrangement drawing (dwg. 165821B7), courtesy of Polarkonsult(<https://www.polarkonsult.com/>), published by NTNU. Licensed CC BY‑NC 4.0. Derived work by C‑Job (Nikolayev, <https://c-job.com/contact-us/nikolayev/>) and NTNU. Non‑commercial use only.
 
 The material in this repository is licensed under the
 **[Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)** license.
@@ -103,10 +104,6 @@ This means:
 - **Open for non-commercial use** — you are free to use, share and adapt the material for research, teaching and other non-commercial activities.
 - **No commercial use (NC)** — commercial use is not permitted unless polarkonsult approves it. Contact to request permission.
 - **As-is** — the material is provided *as-is*, with **no warranty, responsibility or liability** of any kind. Use of the material is entirely at your own risk.
-
-### Polarkonsult's rights
-
-Polarkonsult (<https://www.polarkonsult.com/>)remains free to use Gunnerus-related data, and to continue using or adapting the design commercially. Publishing under CC BY-NC 4.0 does not transfer ownership and does not restrict polarkonsult's own use of the material in any way.
 
 ### Referring to this initiative
 
