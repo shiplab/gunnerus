@@ -20,15 +20,19 @@ Publishing it openly is intended to benefit the maritime research and education 
 
 ## Repository contents
 
-The repository holds three production drawings of R/V Gunnerus, each supplied as DWG, DXF and a plotted A0 PDF sheet dated 2026-08-19:
+The repository holds seven production drawings of R/V Gunnerus, each supplied as DWG, DXF and a plotted A0 PDF sheet:
 
-| Drawing | Folder | Contents |
-| --- | --- | --- |
-| **General arrangement** — `165821B7 GA Gunnerus Rev1`, scale 1:100 | [`polarkonsult/`](polarkonsult/) | Profile and inboard profile, A-deck, 1-deck, below 1-deck and tank top plans, wheelhouse, section at frame 17 and the view from aft, with main dimensions and capacity tables. |
-| **Tank plan** — `166151A3 Tankplan Rev1`, scale 1:50 | [`polarkonsult/`](polarkonsult/) | Tank arrangement in profile and on the tank top, with a tank schedule giving frame range, net volume and mass per fluid type (technical water, fuel oil, fresh water, lube oil, misc.) for tanks 1–13 and the cargo hold — 180.03 m³ in total — plus a separate table for tanks 14 and 15 added in the lengthening. |
-| **Lines plan** — `LINES PLAN Rev0`, scale 1:100 | [`extended/CJOB/`](extended/CJOB/) | The moulded hull form as sheer plan, body plan and half-breadth plan, with the main particulars table reproduced below. |
+| Drawing | Folder | Sheet date | Contents |
+| --- | --- | --- | --- |
+| **General arrangement** — `GA Gunnerus Rev1`, 1:100 | [`polarkonsult/`](polarkonsult/) | 2026-08-19 | Profile and inboard profile, A-deck, 1-deck, below 1-deck and tank top plans, wheelhouse, section at frame 17 and the view from aft, with main dimensions and capacity tables. |
+| **Tank plan** — `Tankplan Rev1`, 1:50 | [`polarkonsult/`](polarkonsult/) | 2026-08-19 | Tank arrangement in profile and on the tank top, with a tank schedule giving frame range, net volume and mass per fluid type for tanks 1–13 and the cargo hold — 180.03 m³ in total — plus a separate table for tanks 14 and 15 added in the lengthening. |
+| **Lines plan** — `Lines Plan Rev0`, 1:100 | [`polarkonsult/`](polarkonsult/) | 2026-08-19 | The moulded hull form as sheer plan, body plan and half-breadth plan, with the main particulars table reproduced below. |
+| **Profile and plan** — `Profile and Plan Rev0`, 1:50 / 1:25 / 1:10 | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Hull structure: section at the centreline and at 2700–1400 FCL starboard, the 1-deck plan and the tanktops and single bottom, with scantlings, girder and pillar arrangements, welding details and the 5 m lengthening called out. Sheet 1 of 2. |
+| **Midship section** — `Midship Section Rev0`, 1:50 (keel detail 1:10) | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Transverse structural sections through the midbody — frames 22, 23, 32, sections A to I and bulkhead 200 A.F. #1 — with scantlings, new and existing bulkheads, the old and new baselines from the lengthening, welding details and a keel section. Carries the anchor and chain requirement (equipment number EN = 250, two 780 kg stockless bower anchors or 658 kg HHP, 330 m of ø24 mm K2 chain). |
+| **Shell expansion** — `Shell Expansion Rev0`, 1:50 (details 1:25, keel 1:10) | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Shell plating developed over the ship's length, with plate thicknesses, seams and butts, tank boundaries, sea chest, HiPAP opening and knuckle lines. Two sheets: **1/2 starboard side, 2/2 port side**, despite the file name. Includes bilge keel details, freeing port sizing (eight ports per side) and the deck line marking to the Sjøfartsdirektoratet scheme. |
+| **Engine room arrangement** — `Engine Room Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-08-31 | Machinery spaces as a centreline section, a plan under 1-deck, a plan of the engine room and three transverse sections, with a 43-item numbered equipment list. See [`extended/CJOB/README.md`](extended/CJOB/README.md). |
 
- Per the title blocks, the general arrangement and tank plan were designed by **polarkonsult** for NTNU; the lines plan was designed by **C-JOB**.
+The drawing folders are named after the design office the material comes from. Per the title blocks, everything published here traces back to polarkonsult originals: the sheets in `polarkonsult/` are courtesy of **polarkonsult**, several of them marked as derivative works based on a named polarkonsult drawing, and the engine room arrangement in `extended/CJOB/` is a derivative work made by **C-JOB** and NTNU from a polarkonsult drawing. All of it is published by NTNU.
 
 Two further folders hold material derived from the drawings rather than the drawings themselves:
 
@@ -47,7 +51,7 @@ The CAD formats:
 
 Drawing units are millimetres; waterlines are labelled `WL <mm>` above the baseline and stations by frame number, running from frame 0 at the aft perpendicular to frame 60 at the forward perpendicular at 500 mm spacing.
 
-All three sheets carry the licence terms in the title block: *open use for research/teaching and other non-commercial activities, commercial use not permitted without approval (CC BY-NC 4.0)*.
+Every sheet carries the licence terms in the title block: *open use for research/teaching and other non-commercial activities, commercial use not permitted without approval (CC BY-NC 4.0)*.
 
 ## Metadata
 
@@ -81,19 +85,18 @@ Main particulars as stated on the lines plan:
 | Rake of keel | 1140 mm |
 | Class | DNV +1A1 Ice C E0 R2 |
 
-The three sheets do not agree on all of these. Where they differ:
+The sheets do not agree on all of these. The lines plan, midship section and engine room arrangement match; the general arrangement and tank plan differ:
 
-| Particular | Lines plan | General arrangement | Tank plan |
+| Particular | Lines plan, midship section, engine room arr. | General arrangement | Tank plan |
 | --- | --- | --- | --- |
 | Depth to 1-deck | 4.287 m | 4.287 m | **4.20 m** |
 | Depth to A-deck | 6.687 m | **6.60 m** | **6.60 m** |
 | Draught, max. loaded | 2.787 m | 2.787 m | **2.70 m** |
 | Deadweight at d = 2.786 m | 169 t | **164 t** | — |
 
-Check these against the current stability book before using any of them. The general arrangement and tank plan also carry figures the lines plan does not — gross tonnage 430, scantling draught 2.90 m and flag authority Sjøfartsdirektoratet (NMD) — and the GA values are in the metadata file.
+Check these against the current stability book before using any of them. The general arrangement and tank plan also carry figures the others do not — gross tonnage 430, scantling draught 2.90 m and flag authority Sjøfartsdirektoratet (NMD) — and the GA values are in the metadata file.
 
 ## Credit & License
-This drawing is a derivative work based on the R/V Gunnerus General Arrangement drawing (dwg. 165821B7), courtesy of Polarkonsult(<https://www.polarkonsult.com/>), published by NTNU. Licensed CC BY‑NC 4.0. Derived work by C‑Job (Nikolayev, <https://c-job.com/contact-us/nikolayev/>) and NTNU. Non‑commercial use only.
 
 The material in this repository is licensed under the
 **[Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)** license.
@@ -104,6 +107,10 @@ This means:
 - **Open for non-commercial use** — you are free to use, share and adapt the material for research, teaching and other non-commercial activities.
 - **No commercial use (NC)** — commercial use is not permitted unless polarkonsult approves it. Contact to request permission.
 - **As-is** — the material is provided *as-is*, with **no warranty, responsibility or liability** of any kind. Use of the material is entirely at your own risk.
+
+### Polarkonsult's rights
+
+Polarkonsult (<https://www.polarkonsult.com/>)remains free to use Gunnerus-related data, and to continue using or adapting the design commercially. Publishing under CC BY-NC 4.0 does not transfer ownership and does not restrict polarkonsult's own use of the material in any way.
 
 ### Referring to this initiative
 
