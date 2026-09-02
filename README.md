@@ -99,7 +99,7 @@ This means:
 
 ### Polarkonsult's rights
 
-Polarkonsult (<https://www.polarkonsult.com/>)remains free to use Gunnerus-related data, and to continue using or adapting the design commercially. Publishing under CC BY-NC 4.0 does not transfer ownership and does not restrict polarkonsult's own use of the material in any way.
+Polarkonsult (<https://www.polarkonsult.com/>) remains free to use Gunnerus-related data, and to continue using or adapting the design commercially. Publishing under CC BY-NC 4.0 does not transfer ownership and does not restrict polarkonsult's own use of the material in any way.
 
 ### Referring to this initiative
 
