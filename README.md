@@ -85,17 +85,6 @@ Main particulars as stated on the lines plan:
 | Rake of keel | 1140 mm |
 | Class | DNV +1A1 Ice C E0 R2 |
 
-The sheets do not agree on all of these. The lines plan, midship section and engine room arrangement match; the general arrangement and tank plan differ:
-
-| Particular | Lines plan, midship section, engine room arr. | General arrangement | Tank plan |
-| --- | --- | --- | --- |
-| Depth to 1-deck | 4.287 m | 4.287 m | **4.20 m** |
-| Depth to A-deck | 6.687 m | **6.60 m** | **6.60 m** |
-| Draught, max. loaded | 2.787 m | 2.787 m | **2.70 m** |
-| Deadweight at d = 2.786 m | 169 t | **164 t** | — |
-
-Check these against the current stability book before using any of them. The general arrangement and tank plan also carry figures the others do not — gross tonnage 430, scantling draught 2.90 m and flag authority Sjøfartsdirektoratet (NMD) — and the GA values are in the metadata file.
-
 ## Credit & License
 
 The material in this repository is licensed under the
