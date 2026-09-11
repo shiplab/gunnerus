@@ -20,19 +20,27 @@ Publishing it openly is intended to benefit the maritime research and education 
 
 ## Repository contents
 
-The repository holds seven production drawings of R/V Gunnerus, each supplied as DWG, DXF and a plotted A0 PDF sheet:
+The repository holds thirteen production drawings of R/V Gunnerus, each supplied as DWG, DXF and a plotted A0 PDF sheet:
 
 | Drawing | Folder | Sheet date | Contents |
 | --- | --- | --- | --- |
 | **General arrangement** — `GA Gunnerus Rev1`, 1:100 | [`polarkonsult/`](polarkonsult/) | 2026-08-19 | Profile and inboard profile, A-deck, 1-deck, below 1-deck and tank top plans, wheelhouse, section at frame 17 and the view from aft, with main dimensions and capacity tables. |
-| **Tank plan** — `Tankplan Rev1`, 1:50 | [`polarkonsult/`](polarkonsult/) | 2026-08-19 | Tank arrangement in profile and on the tank top, with a tank schedule giving frame range, net volume and mass per fluid type for tanks 1–13 and the cargo hold — 180.03 m³ in total — plus a separate table for tanks 14 and 15 added in the lengthening. |
+| **Tank plan** — `Tank Plan Rev1`, 1:50 | [`polarkonsult/`](polarkonsult/) | 2026-08-19 | Tank arrangement in profile and on the tank top, with a tank schedule giving frame range, net volume and mass per fluid type for tanks 1–15 and the cargo hold — 202.42 m³ in total, now folded into a single table (tanks 14 and 15, added in the lengthening, are no longer broken out separately). |
 | **Lines plan** — `Lines Plan Rev0`, 1:100 | [`polarkonsult/`](polarkonsult/) | 2026-08-19 | The moulded hull form as sheer plan, body plan and half-breadth plan, with the main particulars table reproduced below. |
 | **Profile and plan** — `Profile and Plan Rev0`, 1:50 / 1:25 / 1:10 | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Hull structure: section at the centreline and at 2700–1400 FCL starboard, the 1-deck plan and the tanktops and single bottom, with scantlings, girder and pillar arrangements, welding details. Sheet 1 of 2. |
 | **Midship section** — `Midship Section Rev0`, 1:50 (keel detail 1:10) | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Transverse structural sections through the midbody — frames 22, 23, 32, sections A to I and bulkhead 200 A.F. #1 — with scantlings, new and existing bulkheads, the old and new baselines from the lengthening, welding details and a keel section. |
 | **Shell expansion** — `Shell Expansion Rev0`, 1:50 (details 1:25, keel 1:10) | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Shell plating developed over the ship's length, with plate thicknesses, seams and butts, tank boundaries, sea chest, HiPAP opening and knuckle lines. Two sheets: **1/2 starboard side, 2/2 port side**, despite the file name. |
-| **Engine room arrangement** — `Engine Room Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-08-31 | Machinery spaces as a centreline section, a plan under 1-deck, a plan of the engine room and three transverse sections, with a 43-item numbered equipment list. See [`extended/CJOB/README.md`](extended/CJOB/README.md). |
+| **Engine room arrangement** — `Engine Room Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-08-31 | Machinery spaces as a centreline section, a plan under 1-deck, a plan of the engine room and three transverse sections, with a 43-item numbered equipment list. |
+| **Construction plan** — `Construction Plan Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | *not given* | Structural framing plan: frame elevation and plan views, deck framing, midship and end sections, and bow/stern/transom construction details. |
+| **Draught and hullmarks** — `Draught and Hullmarks Rev0`, 1:100 (details 1:10) | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | Draft mark positions and hull marking templates — name, homeport, bow, deck, bowthruster centre and underwater search-equipment markings — with cutting/welding notes. |
+| **Freeboard plan** — `Freeboard Plan Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | *not given* | Openings and closing appliances: air pipes, windows/scuttles, doors, hatches, ventilators, freeing ports, sea inlet/outlet and sanitary discharge, over the profile and deck plans. |
+| **Retractable telescopic diver's platform arrangement** — `Retractable Telescopic Diver's Platform Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | The stern diving platform in stored and launched position — side, plan and end views, frame details and a parts list. |
+| **Safety fire zone plan** — `Safety Fire Zone Plan Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | Fire-fighting equipment and escape routes over the profile and deck plans, with a numbered equipment/legend table. |
+| **Tank arrangement** — `Tank Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | Tank arrangement and schedule (profile, below-1-deck and below-tank-top plans), separate from the polarkonsult tank plan above. |
 
-The drawing folders are named after the design office the material comes from. Per the title blocks, everything published here traces back to polarkonsult originals: the sheets in `polarkonsult/` are courtesy of **polarkonsult**, several of them marked as derivative works based on a named polarkonsult drawing, and the engine room arrangement in `extended/CJOB/` is a derivative work made by **C-JOB** and NTNU from a polarkonsult drawing. All of it is published by NTNU.
+See [`extended/CJOB/README.md`](extended/CJOB/README.md) for a fuller description of each `extended/CJOB/` drawing, including two known data gaps in that batch (a couple of sheets missing their title-block date, and a built-year mismatch between two sheets).
+
+The drawing folders are named after the design office the material comes from. Per the title blocks, everything published here traces back to polarkonsult originals: the sheets in `polarkonsult/` are courtesy of **polarkonsult**, several of them marked as derivative works based on a named polarkonsult drawing, and the drawings in `extended/CJOB/` are derivative works made by **C-JOB** and NTNU from polarkonsult drawings. All of it is published by NTNU.
 
 Two further folders hold material derived from the drawings rather than the drawings themselves:
 
@@ -119,8 +127,6 @@ If you have modified the material, state that changes were made.
 CC BY-NC 4.0 is intended for data, drawings and documentation, not for source code. If scripts or software are added to this repository later, they should be placed in a clearly separated folder with their own software license.
 
 ## Contact
-
-<!-- TODO: add contact points before publishing. -->
 
 - Data / dataset questions (NTNU): Henrique Gaspar (henrique.gaspar@ntnu.no)
 - Commercial use requests (polarkonsult approval): Polarkonsult (<https://www.polarkonsult.com/>)
