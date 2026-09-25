@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gunnerus Open Data</title>
+<meta name="description" content="Production drawings, a 3D model, engineering documents and structured metadata for the NTNU research vessel R/V Gunnerus, published openly for research and teaching.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#f4f6f7; --sheet:#ffffff; --ink:#0f1d2a; --ink-2:#44545f; --ink-3:#6b7a84;
+  --rule:#d3dbdf; --rule-2:#e5eaec;
+  --ntnu:#00509e; --ntnu-ink:#003a73; --ntnu-wash:#e3edf7;
+  --hull:#97aaae; --prop:#d9b646; --prop-wash:#f7efd2; --prop-ink:#6b5410;
+  --viewer:#e9eef0; --shadow:0 1px 2px rgba(15,29,42,.06),0 8px 24px rgba(15,29,42,.06);
+  --logo-filter:none;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c151d; --sheet:#121e28; --ink:#e6edf1; --ink-2:#aebbc4; --ink-3:#8494a0;
+    --rule:#26343f; --rule-2:#1b2833;
+    --ntnu:#6aa8e8; --ntnu-ink:#9cc6f2; --ntnu-wash:#132a42;
+    --hull:#7d8f94; --prop:#e2c25a; --prop-wash:#2d2710; --prop-ink:#ecd488;
+    --viewer:#101b24; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    --logo-filter:brightness(0) invert(1);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c151d; --sheet:#121e28; --ink:#e6edf1; --ink-2:#aebbc4; --ink-3:#8494a0;
+  --rule:#26343f; --rule-2:#1b2833;
+  --ntnu:#6aa8e8; --ntnu-ink:#9cc6f2; --ntnu-wash:#132a42;
+  --hull:#7d8f94; --prop:#e2c25a; --prop-wash:#2d2710; --prop-ink:#ecd488;
+  --viewer:#101b24; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  --logo-filter:brightness(0) invert(1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:var(--ntnu)}
+a:hover{color:var(--ntnu-ink)}
+:focus-visible{outline:2px solid var(--ntnu);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono);font-size:.82em;letter-spacing:0}
+.tnum{font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.05;letter-spacing:.005em;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4vw,2.75rem)}
+h3{font-size:1.35rem;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 .78rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3)}
+.lede{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:64px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+.brand img{height:26px;width:auto;filter:var(--logo-filter)}
+.brand .fallback{font:700 1.4rem/1 var(--body);letter-spacing:.02em;color:var(--ntnu)}
+.brand .sep{width:1px;height:26px;background:var(--rule)}
+.brand .name{font:600 1.1rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font:500 .95rem/1 var(--body);color:var(--ink-2);text-decoration:none;padding:8px 10px;border-radius:6px}
+.nav a:hover{background:var(--rule-2);color:var(--ink)}
+.gh{display:inline-flex;align-items:center;gap:8px;font:600 .9rem/1 var(--body);color:#fff;background:var(--ntnu);padding:10px 14px;border-radius:6px;text-decoration:none;white-space:nowrap}
+.gh:hover{color:#fff;background:var(--ntnu-ink)}
+:root[data-theme="dark"] .gh{color:#0c151d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gh{color:#0c151d}}
+.gh svg{width:16px;height:16px;fill:currentColor}
+@media (max-width:860px){.nav{display:none}.top .gh{margin-left:auto}}
+@media (max-width:420px){.brand .sep,.brand .name{display:none}}
+
+/* hero */
+.hero{padding-block:clamp(36px,6vw,72px) 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end}
+.hero h1{font-size:clamp(3.4rem,10vw,7.5rem);font-weight:700;letter-spacing:-.005em;line-height:.9;margin-block:14px 18px}
+.hero h1 .rv{color:var(--ntnu)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 1rem/1 var(--body);padding:13px 18px;border-radius:6px;text-decoration:none;border:1px solid var(--rule);color:var(--ink);background:var(--sheet)}
+.btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.btn.primary{background:var(--ntnu);border-color:var(--ntnu);color:#fff}
+.btn.primary:hover{background:var(--ntnu-ink);border-color:var(--ntnu-ink);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0c151d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0c151d}}
+.inventory{display:grid;grid-template-columns:repeat(2,auto);gap:14px 28px;font-family:var(--display);align-self:end}
+.inventory div{display:flex;flex-direction:column}
+.inventory b{font-size:2.6rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.inventory span{font:500 .72rem/1.3 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-top:4px}
+@media (max-width:760px){.hero-grid{grid-template-columns:minmax(0,1fr)}.inventory{grid-template-columns:repeat(4,auto);justify-content:start}}
+@media (max-width:480px){.inventory{grid-template-columns:repeat(2,auto)}}
+
+/* viewer */
+.stage{margin-top:clamp(28px,4vw,48px);position:relative;background:var(--viewer);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.stage canvas{display:block;width:100%;height:clamp(340px,56vw,600px);touch-action:none;cursor:grab}
+.stage canvas:active{cursor:grabbing}
+.stage .status{position:absolute;inset:0;display:grid;place-items:center;font:500 .85rem var(--mono);color:var(--ink-3);pointer-events:none;text-align:center;padding:24px}
+.stage .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;border-top:1px solid var(--rule);background:var(--sheet)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.seg button,.tog{font:500 .85rem/1 var(--body);color:var(--ink-2);background:transparent;border:0;padding:9px 12px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button:hover,.tog:hover{color:var(--ink);background:var(--rule-2)}
+.seg button[aria-pressed="true"],.tog[aria-pressed="true"]{background:var(--ntnu-wash);color:var(--ntnu-ink)}
+.tog{border:1px solid var(--rule);border-radius:6px}
+.bar .hint{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
+@media (max-width:640px){.bar .hint{display:none}}
+/* title block overlaid on viewer */
+.tblock{position:absolute;right:14px;top:14px;background:var(--sheet);border:1.5px solid var(--ink);font-family:var(--mono);font-size:.72rem;color:var(--ink);display:grid;grid-template-columns:auto auto;min-width:260px;box-shadow:var(--shadow)}
+.tblock div{padding:5px 9px;border-top:1px solid var(--ink)}
+.tblock div:nth-child(-n+2){border-top:0}
+.tblock div:nth-child(odd){border-right:1px solid var(--ink);color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-size:.66rem;display:flex;align-items:center}
+.tblock .head{grid-column:1/-1;border-right:0!important;font:600 1rem/1.1 var(--display);letter-spacing:.06em;color:var(--ink)!important;font-size:1rem!important;background:var(--ntnu-wash)}
+@media (max-width:720px){.tblock{display:none}}
+
+/* particulars */
+.particulars{margin-top:22px;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border:1px solid var(--rule);border-radius:10px;background:var(--sheet);overflow:hidden}
+.particulars div{padding:14px 16px;border-left:1px solid var(--rule)}
+.particulars div:first-child{border-left:0}
+.particulars dt{font:500 .68rem/1.3 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.particulars dd{margin:6px 0 0;font:600 1.45rem/1.1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.particulars dd small{font:500 .9rem var(--body);color:var(--ink-2);margin-left:2px}
+.particulars .wide dd{white-space:normal;font-size:1.05rem;line-height:1.2}
+@media (max-width:1000px){.particulars{grid-template-columns:repeat(4,minmax(0,1fr))}.particulars div:nth-child(4n+1){border-left:0}.particulars div:nth-child(n+5){border-top:1px solid var(--rule)}}
+@media (max-width:520px){.particulars{grid-template-columns:repeat(2,minmax(0,1fr))}.particulars div{border-left:0!important;border-top:1px solid var(--rule)}.particulars div:nth-child(-n+2){border-top:0}.particulars div:nth-child(even){border-left:1px solid var(--rule)!important}}
+.src-note{margin-top:10px;font:.78rem var(--mono);color:var(--ink-3)}
+
+/* sections */
+section.block{padding-block:clamp(56px,8vw,96px) 0}
+.sec-head{display:grid;gap:12px;margin-bottom:32px;max-width:760px}
+.uses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+.uses li{list-style:none;padding:18px 20px 4px 0;display:grid;gap:8px;align-content:start}
+.uses li+li{padding-left:20px;border-left:1px solid var(--rule)}
+.uses h3{font-size:1.3rem}
+.uses p{color:var(--ink-2);font-size:.98rem}
+.uses ul,.uses{margin:0;padding:0}
+@media (max-width:860px){.uses{grid-template-columns:repeat(2,minmax(0,1fr))}.uses li:nth-child(3){padding-left:0;border-left:0}.uses li:nth-child(n+3){border-top:1px solid var(--rule);margin-top:12px}}
+@media (max-width:520px){.uses{grid-template-columns:minmax(0,1fr)}.uses li{padding-left:0!important;border-left:0!important}.uses li+li{border-top:1px solid var(--rule);margin-top:4px}}
+
+/* drawings */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;align-items:center}
+.filters .count{margin-left:auto;font:.8rem var(--mono);color:var(--ink-3)}
+.chip{font:500 .9rem/1 var(--body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2);padding:9px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--ink-3);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card .thumb{display:block;aspect-ratio:4/3;background:#fff;border:0;padding:0;width:100%;cursor:zoom-in;border-bottom:1px solid var(--rule);position:relative}
+.card .thumb img{width:100%;height:100%;object-fit:contain;padding:10px}
+:root[data-theme="dark"] .card .thumb img{filter:invert(.92) hue-rotate(180deg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .card .thumb img{filter:invert(.92) hue-rotate(180deg)}}
+:root[data-theme="dark"] .card .thumb{background:#162330}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .card .thumb{background:#162330}}
+.card .thumb .scale{position:absolute;left:10px;top:10px;font:500 .7rem/1 var(--mono);background:var(--ink);color:var(--paper);padding:5px 7px;border-radius:3px}
+.card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font:.74rem var(--mono);color:var(--ink-3)}
+.card .by{font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:4px 6px;border-radius:3px}
+.by.pk{background:var(--ntnu-wash);color:var(--ntnu-ink)}
+.by.cj{background:var(--prop-wash);color:var(--prop-ink)}
+.card p{font-size:.95rem;color:var(--ink-2)}
+.files{display:flex;gap:6px;margin-top:auto;padding-top:10px;flex-wrap:wrap}
+.files a{flex:1;min-width:84px;display:flex;flex-direction:column;gap:2px;text-decoration:none;border:1px solid var(--rule);border-radius:6px;padding:8px 10px;color:var(--ink)}
+.files a:hover{border-color:var(--ntnu);background:var(--ntnu-wash)}
+.files b{font:600 .85rem/1.1 var(--mono)}
+.files span{font:.7rem/1.1 var(--mono);color:var(--ink-3)}
+
+/* lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1200px,96vw);width:100%}
+dialog.lb::backdrop{background:rgba(8,16,24,.82)}
+.lb figure{margin:0;background:#fff;border-radius:8px;overflow:hidden}
+.lb img{width:100%;max-height:78vh;object-fit:contain;background:#fff}
+.lb figcaption{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:12px 16px;background:var(--sheet);color:var(--ink)}
+.lb figcaption b{font:600 1.15rem var(--display)}
+.lb figcaption .sp{margin-left:auto;display:flex;gap:8px}
+.lb button.x{font:600 .9rem var(--body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:6px;padding:9px 12px;cursor:pointer}
+
+/* model & docs */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:24px}
+@media (max-width:900px){.two{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:22px}
+.panel h3{margin-bottom:6px}
+.panel>p{color:var(--ink-2);font-size:.96rem;margin-bottom:14px}
+.tbl{width:100%;border-collapse:collapse;font-size:.93rem}
+.tbl th{text-align:left;font:500 .68rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);padding:8px 10px 8px 0;border-bottom:1px solid var(--rule)}
+.tbl td{padding:10px 10px 10px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl a{font-family:var(--mono);font-size:.8rem;margin-right:8px;white-space:nowrap}
+.scroll{overflow-x:auto}
+.badge{display:inline-block;font:600 .68rem/1 var(--mono);padding:4px 6px;border-radius:3px;background:var(--prop-wash);color:var(--prop-ink);letter-spacing:.04em;white-space:nowrap}
+.warn{margin-top:14px;border-left:3px solid var(--prop);padding:10px 14px;background:var(--prop-wash);color:var(--ink);font-size:.9rem;border-radius:0 6px 6px 0}
+
+/* metadata */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin-bottom:22px;overflow-x:auto}
+.tabs button{font:600 1.05rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid transparent;padding:12px 16px;color:var(--ink-3);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ntnu)}
+.tabs button .n{font:500 .72rem var(--mono);color:var(--ink-3);margin-left:6px}
+.decks{display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px}
+@media (max-width:760px){.decks{grid-template-columns:minmax(0,1fr)}}
+.deck-list{display:flex;flex-direction:column;gap:6px}
+.deck-list button{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;text-align:left;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:6px;padding:12px 14px;cursor:pointer;font:500 1rem var(--body)}
+.deck-list button span{font:.75rem var(--mono);color:var(--ink-3)}
+.deck-list button[aria-pressed="true"]{border-color:var(--ntnu);background:var(--ntnu-wash)}
+.deck-list .lvl{font:500 .68rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);padding:4px 2px}
+.code{font:500 .76rem/1 var(--mono);padding:4px 6px;border-radius:3px;background:var(--rule-2);color:var(--ink-2);white-space:nowrap;display:inline-block}
+.code.vis{background:var(--ntnu-wash);color:var(--ntnu-ink)}
+.muted{color:var(--ink-3)}
+.meta-foot{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px 24px;font-size:.9rem;color:var(--ink-2);align-items:center}
+
+/* discrepancies */
+.diff{width:100%;border-collapse:collapse;font-size:.95rem}
+.diff th,.diff td{padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.diff th{font:500 .68rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.diff td.v{font:600 1.2rem var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* credits */
+.credits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:860px){.credits{grid-template-columns:minmax(0,1fr)}}
+.credits .panel h3{font-size:1.5rem}
+.credits .role{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-bottom:10px}
+.lic{margin-top:24px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px}
+@media (max-width:860px){.lic{grid-template-columns:minmax(0,1fr)}}
+.lic ul{margin:10px 0 0;padding-left:18px;color:var(--ink-2)}
+.lic li{margin-bottom:6px}
+.attr{font:.9rem/1.55 var(--mono);background:var(--paper);border:1px dashed var(--ink-3);border-radius:6px;padding:14px 16px;margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;user-select:all}
+.copy{margin-top:10px;font:600 .9rem var(--body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:6px;padding:9px 12px;cursor:pointer}
+.copy:hover{border-color:var(--ink-3)}
+
+footer{margin-top:clamp(64px,9vw,110px);border-top:1px solid var(--rule);padding-block:28px 40px;background:var(--sheet)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;font-size:.9rem;color:var(--ink-2)}
+footer .brand img{height:22px}
+footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Gunnerus Open Data, top of page">
+      <img src="assets/ntnu-logo.svg" alt="NTNU" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span class="fallback" hidden>NTNU</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="name">Gunnerus Open Data</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#model">3D model</a>
+      <a href="#drawings">Drawings</a>
+      <a href="#documents">Documents</a>
+      <a href="#metadata">Metadata</a>
+      <a href="#licence">Licence</a>
+    </nav>
+    <a class="gh" href="https://github.com/shiplab/gunnerus">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Repository
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">NTNU open ship data · CC BY-NC 4.0</p>
+          <h1><span class="rv">R/V</span> Gunnerus</h1>
+          <p class="lede">A real, working research vessel, documented in full and published openly. Production drawings, a 3D model, engineering documents and structured metadata, ready for research, teaching and tool development.</p>
+          <div class="cta">
+            <a class="btn primary" href="#drawings">Browse the drawings</a>
+            <a class="btn" href="https://github.com/shiplab/gunnerus/archive/refs/heads/main.zip">Download the repository (.zip)</a>
+          </div>
+        </div>
+        <div class="inventory" aria-label="Repository contents">
+          <div><b>15</b><span>Drawings</span></div>
+          <div><b>3</b><span>Formats each</span></div>
+          <div><b>5</b><span>Engineering docs</span></div>
+          <div><b>1</b><span>3D model</span></div>
+        </div>
+      </div>
+
+      <div class="stage" id="model">
+        <canvas id="ship" aria-label="Interactive 3D model of R/V Gunnerus. Drag to rotate, scroll or pinch to zoom."></canvas>
+        <div class="status" id="status">Loading 3D model (3.5 MB)…</div>
+        <div class="tblock" aria-hidden="true">
+          <div class="head">FF GUNNERUS · LNVZ</div>
+          <div>Model</div><div>C-JOB 25.1142-000-113</div>
+          <div>Source</div><div>Gunnerus 3D Model Rev0.3dm</div>
+          <div>Web copy</div><div id="triCount">simplified glTF</div>
+          <div>Units</div><div>metres</div>
+        </div>
+        <div class="bar">
+          <div class="seg" role="group" aria-label="Camera view">
+            <button type="button" data-view="iso" aria-pressed="true">3/4 bow</button>
+            <button type="button" data-view="side" aria-pressed="false">Profile</button>
+            <button type="button" data-view="top" aria-pressed="false">Plan</button>
+            <button type="button" data-view="aft" aria-pressed="false">Stern</button>
+          </div>
+          <button type="button" class="tog" id="wl" aria-pressed="false">Waterline T = 2.50 m</button>
+          <button type="button" class="tog" id="spin" aria-pressed="false">Rotate</button>
+          <span class="hint">Drag to orbit · scroll to zoom · right-drag to pan</span>
+        </div>
+      </div>
+
+      <dl class="particulars">
+        <div><dt>Length o.a.</dt><dd class="tnum">36.25<small>m</small></dd></div>
+        <div><dt>Length b.p.</dt><dd class="tnum">33.90<small>m</small></dd></div>
+        <div><dt>Breadth mld.</dt><dd class="tnum">9.60<small>m</small></dd></div>
+        <div><dt>Depth 1-deck</dt><dd class="tnum">4.287<small>m</small></dd></div>
+        <div><dt>Draught, oper.</dt><dd class="tnum">2.50<small>m</small></dd></div>
+        <div><dt>Deadweight</dt><dd class="tnum">169<small>t</small></dd></div>
+        <div><dt>Frame spacing</dt><dd class="tnum">500<small>mm</small></dd></div>
+        <div class="wide"><dt>Class</dt><dd>DNV +1A1 Ice C E0 R2</dd></div>
+      </dl>
+      <p class="src-note">Main particulars as stated on Lines Plan Rev0 (polarkonsult). In service since 2006, home port Trondheim.</p>
+    </div>
+  </section>
+
+  <section class="block" id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Why this exists</p>
+        <h2>Complete ship data is usually locked away</h2>
+        <p class="lede">Design and engineering material for a vessel is normally proprietary. That makes it hard for students and researchers to work on a realistic, complete ship. This repository opens up one real case, so everyone can work on the same vessel.</p>
+      </div>
+      <ul class="uses">
+        <li><h3>Research</h3><p>Ship design, hydrodynamics, structures and digital ship models, on a hull that exists and sails.</p></li>
+        <li><h3>Teaching</h3><p>Student projects and courses built around full drawings, not simplified textbook examples.</p></li>
+        <li><h3>Benchmarking</h3><p>A shared reference for validation and reproducible experiments across groups.</p></li>
+        <li><h3>Digital tools</h3><p>Test data for digital shipbuilding tools, CAD pipelines and exchange formats.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="drawings">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Production drawings · A0 sheets</p>
+        <h2>Fifteen drawings, each in DWG, DXF and PDF</h2>
+        <p class="lede">From the general arrangement and lines plan to shell expansion and the fire zone plan. Drawing units are millimetres. Frames run from 0 at the aft perpendicular at 500 mm spacing.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter drawings by source">
+        <button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-filter="pk" aria-pressed="false">polarkonsult originals</button>
+        <button type="button" class="chip" data-filter="cj" aria-pressed="false">C-JOB &amp; NTNU derivatives</button>
+        <span class="count" id="dcount"></span>
+      </div>
+      <div class="grid" id="dgrid"></div>
+      <p class="src-note">PDF opens GitHub's viewer. DWG (AutoCAD 2018, AC1032) is the authoritative source; DXF is the ASCII exchange format.</p>
+    </div>
+  </section>
+
+  <section class="block" id="documents">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">3D model &amp; engineering documents</p>
+        <h2>Beyond the drawings</h2>
+      </div>
+      <div class="two">
+        <div class="panel">
+          <h3>3D CAD model</h3>
+          <p>Hull and superstructure modelled by C-JOB from the same source data as the drawings. The viewer above uses a simplified web copy.</p>
+          <div class="scroll">
+          <table class="tbl">
+            <thead><tr><th>File</th><th>Format</th><th>Size</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://github.com/shiplab/gunnerus/raw/main/extended/CJOB/3d%20models/Gunnerus%203D%20Model%20Rev0.3dm">Gunnerus 3D Model Rev0.3dm</a></td><td>Rhinoceros 3D</td><td class="num">396 MB</td></tr>
+              <tr><td><a href="https://github.com/shiplab/gunnerus/raw/main/extended/CJOB/3d%20models/Gunnerus%203D%20Model%20STEP%20Rev0.stp">Gunnerus 3D Model STEP Rev0.stp</a></td><td>STEP (ISO 10303)</td><td class="num">728 MB</td></tr>
+              <tr><td><a href="assets/gunnerus.glb">gunnerus.glb</a></td><td>glTF, simplified</td><td class="num">3.5 MB</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="warn">The two CAD files are stored with Git LFS. Cloning without LFS gives small pointer files; use the links above or <span class="mono">git lfs pull</span>.</p>
+        </div>
+        <div class="panel">
+          <h3>C-JOB engineering documents <span class="badge">CC BY-SA 4.0</span></h3>
+          <p>Supporting documents from C-JOB project 25.1142. All Revision 0, status preliminary, December 2025. These are licensed CC BY-SA 4.0, unlike the rest of the repository.</p>
+          <div class="scroll">
+          <table class="tbl" id="docs"></table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="metadata">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">metadata/gunnerus_metadata.json</p>
+        <h2>The general arrangement, as data</h2>
+        <p class="lede">The GA drawing read into structured JSON: decks and spaces, tanks and equipment. Every entry carries its SFI group code and, where the mapping is unambiguous, a DNV VIS/GMOD v3.10a top-level node, so it joins against other SFI- or VIS-coded datasets.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Metadata views">
+        <button role="tab" id="tab-decks" aria-selected="true" aria-controls="pane-decks">Decks &amp; spaces<span class="n" id="n-spaces"></span></button>
+        <button role="tab" id="tab-tanks" aria-selected="false" aria-controls="pane-tanks">Tanks<span class="n" id="n-tanks"></span></button>
+        <button role="tab" id="tab-equip" aria-selected="false" aria-controls="pane-equip">Equipment<span class="n" id="n-equip"></span></button>
+      </div>
+      <div id="meta-status" class="muted">Loading metadata…</div>
+      <div role="tabpanel" id="pane-decks" aria-labelledby="tab-decks" hidden>
+        <div class="decks">
+          <div class="deck-list" id="deckList"><div class="lvl">Top to bottom</div></div>
+          <div class="scroll"><table class="tbl" id="spaceTbl"></table></div>
+        </div>
+      </div>
+      <div role="tabpanel" id="pane-tanks" aria-labelledby="tab-tanks" hidden>
+        <p class="warn" style="margin:0 0 16px">This list is read from the GA and does not reconcile with the capacity totals. Use <b>Tank Plan Rev1</b> (tanks 1–15, 202.42 m³ net) when the tank data matters.</p>
+        <div class="scroll"><table class="tbl" id="tankTbl"></table></div>
+      </div>
+      <div role="tabpanel" id="pane-equip" aria-labelledby="tab-equip" hidden>
+        <p class="warn" style="margin:0 0 16px">The propulsion entry was inferred from geometry and is wrong. The engine room arrangement identifies <b>PM azimuth drives</b>, port and starboard.</p>
+        <div class="scroll"><table class="tbl" id="equipTbl"></table></div>
+      </div>
+      <div class="meta-foot">
+        <a class="btn" href="https://github.com/shiplab/gunnerus/blob/main/metadata/gunnerus_metadata.json">View the JSON on GitHub</a>
+        <a href="https://github.com/shiplab/gunnerus/blob/main/metadata/README.md">Structure, units and known limitations</a>
+        <span class="muted"><span class="code">null</span> means the drawing does not state the value.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="discrepancies">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Traceability</p>
+        <h2>Where the sheets disagree</h2>
+        <p class="lede">Values are kept as printed on each sheet rather than silently corrected. These are the known differences.</p>
+      </div>
+      <div class="scroll">
+      <table class="diff">
+        <thead><tr><th>Quantity</th><th>Sheet A</th><th></th><th>Sheet B</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Deadweight</td><td>GA Gunnerus Rev1</td><td class="v">164 t</td><td>Lines Plan, Engine Room Arrangement</td><td class="v">169 t</td></tr>
+          <tr><td>Depth to A-deck</td><td>GA Gunnerus Rev1</td><td class="v">6.60 m</td><td>Lines Plan, Engine Room Arrangement</td><td class="v">6.687 m</td></tr>
+          <tr><td>Built year</td><td>Freeboard Plan Rev0</td><td class="v">2005</td><td>Safety Fire Zone Plan Rev0</td><td class="v">2006</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="licence">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Credit &amp; licence</p>
+        <h2>Who made it, and how you may use it</h2>
+      </div>
+      <div class="credits">
+        <div class="panel">
+          <p class="role">Designer · original drawings</p>
+          <h3>polarkonsult</h3>
+          <p class="muted" style="margin-top:8px">All published material traces back to polarkonsult originals. Polarkonsult keeps full rights to use and adapt the design commercially.</p>
+          <p style="margin-top:12px"><a href="https://www.polarkonsult.com/">polarkonsult.com</a></p>
+        </div>
+        <div class="panel">
+          <p class="role">Derivative drawings · 3D model · documents</p>
+          <h3>C-JOB</h3>
+          <p class="muted" style="margin-top:8px">Nine drawings in <span class="mono">extended/CJOB/</span>, made with NTNU from polarkonsult drawings, plus the 3D model and engineering documents.</p>
+          <p style="margin-top:12px"><a href="https://c-job.com/contact-us/nikolayev/">c-job.com</a></p>
+        </div>
+        <div class="panel">
+          <p class="role">Owner, operator · publisher</p>
+          <h3>NTNU</h3>
+          <p class="muted" style="margin-top:8px">R/V Gunnerus is owned and operated by NTNU and supports research in biology, technology, geology, archaeology, oceanography and fisheries.</p>
+          <p style="margin-top:12px"><a href="https://www.ntnu.edu/gunnerus">ntnu.edu/gunnerus</a></p>
+        </div>
+      </div>
+      <div class="lic">
+        <div class="panel">
+          <h3>CC BY-NC 4.0</h3>
+          <ul>
+            <li><b>Open for non-commercial use.</b> Use, share and adapt the material for research, teaching and other non-commercial work.</li>
+            <li><b>No commercial use</b> without approval from polarkonsult.</li>
+            <li><b>As is.</b> Provided without warranty, responsibility or liability of any kind.</li>
+            <li>The C-JOB documents in <span class="mono">extended/CJOB/docs/</span> are <b>CC BY-SA 4.0</b>.</li>
+          </ul>
+          <p style="margin-top:12px"><a href="https://creativecommons.org/licenses/by-nc/4.0/">Licence summary</a> · <a href="https://github.com/shiplab/gunnerus/blob/main/LICENSE">Full text</a></p>
+        </div>
+        <div class="panel">
+          <h3>How to attribute</h3>
+          <div class="attr" id="attr">Gunnerus open data, courtesy of polarkonsult, published by NTNU.
+Licensed under CC BY-NC 4.0 — https://creativecommons.org/licenses/by-nc/4.0/</div>
+          <button type="button" class="copy" id="copyAttr">Copy attribution</button>
+          <p class="muted" style="margin-top:14px;font-size:.92rem">If you modified the material, say that changes were made. Dataset questions: Henrique Gaspar, <span class="mono">henrique.gaspar@ntnu.no</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="https://www.ntnu.edu/">
+      <img src="assets/ntnu-logo.svg" alt="NTNU" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span class="fallback" hidden>NTNU</span>
+    </a>
+    <span>Gunnerus open data · <a href="https://github.com/shiplab/gunnerus">github.com/shiplab/gunnerus</a></span>
+    <span class="end">3D model credit: C-JOB, CC BY-NC 4.0</span>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Drawing preview">
+  <figure>
+    <img id="lbImg" alt="">
+    <figcaption><b id="lbTitle"></b><span class="mono muted" id="lbMeta"></span>
+      <span class="sp"><a class="btn primary" id="lbPdf" href="#">Open full PDF</a><button type="button" class="x" id="lbClose">Close</button></span>
+    </figcaption>
+  </figure>
+</dialog>
+
+<script>
+const REPO="https://github.com/shiplab/gunnerus";
+const enc=p=>p.split("/").map(encodeURIComponent).join("/");
+const blob=p=>`${REPO}/blob/main/${enc(p)}`, raw=p=>`${REPO}/raw/main/${enc(p)}`;
+const D=[
+ ["ga-gunnerus","General arrangement","polarkonsult","GA Gunnerus Rev1","1:100","2026-08-19","165821B7","pk","Profile and inboard profile, all deck plans, wheelhouse, section at frame 17 and the view from aft, with main dimensions and capacity tables.",[1.5,7.0,53.0]],
+ ["tank-plan","Tank plan","polarkonsult","Tank Plan Rev1","1:50","2026-08-19","","pk","Tank arrangement in profile and on the tank top, with a schedule of frame range, net volume and mass for tanks 1–15 and the cargo hold. 202.42 m³ in total.",[0.6,0.3,0.9]],
+ ["lines-plan","Lines plan","polarkonsult","Lines Plan Rev0","1:100","2026-08-19","","pk","The moulded hull form as sheer plan, body plan and half-breadth plan, with the main particulars table.",[0.5,8.7,42.7]],
+ ["profile-and-plan","Profile and plan","polarkonsult","Profile and Plan Rev0","1:50 / 1:25 / 1:10","2026-08-31","","pk","Hull structure at the centreline and at 2700–1400 FCL, the 1-deck plan and the tanktops and single bottom, with scantlings, girders, pillars and welding details.",[1.6,1.7,3.6]],
+ ["midship-section","Midship section","polarkonsult","Midship Section Rev0","1:50","2026-08-31","","pk","Transverse sections through the midbody with scantlings, new and existing bulkheads, and the old and new baselines from the lengthening.",[0.5,0.4,1.9]],
+ ["shell-expansion","Shell expansion","polarkonsult","Shell Expansion Rev0","1:50","2026-08-31","","pk","Shell plating developed over the length: plate thicknesses, seams and butts, sea chest, HiPAP opening and knuckle lines. Sheet 1 starboard, sheet 2 port.",[0.7,0.4,1.6]],
+ ["engine-room-arrangement","Engine room arrangement","extended/CJOB","Engine Room Arrangement Rev0","1:100","2026-08-31","25.1142-052-100","cj","Machinery spaces in section and plan, with a 43-item equipment list: 3 × 475 kW main engines, PM azimuth drives, converters and pumps.",[0.7,2.9,12.6]],
+ ["construction-plan-deck-and-double-bottom","Construction plan, deck and double bottom","extended/CJOB","Construction Plan Deck and Double Bottom Rev0","1:50","2026-09-11","25.1142-100-120","cj","Framing plans for the 1-deck, tanktop and single bottom and A-deck, plus the wheelhouse top and superstructure top.",[0.8,0.7,3.5]],
+ ["construction-plan-longitudinal-section","Construction plan, longitudinal section","extended/CJOB","Construction Plan Longitudinal Section Rev0","1:50","2026-09-25","25.1142-100-121","cj","Structural section at the centreline from keel to wheelhouse top, with scantling callouts.",[0.2,0.5,2.6]],
+ ["construction-plan-transverse-section","Construction plan, transverse section","extended/CJOB","Construction Plan Transverse Section Rev0","1:50","2026-09-25","25.1142-100-122","cj","Numbered frame sections along the length, including the transom, with stringer, floor and detail callouts.",[0.8,0.8,3.8]],
+ ["draught-and-hullmarks","Draught and hullmarks","extended/CJOB","Draught and Hullmarks Rev0","1:50","2026-09-11","25.1142-650-102","cj","Draught mark positions and hull marking templates: name, home port, bow thruster and underwater equipment markings.",[0.8,1.5,6.9]],
+ ["freeboard-plan","Freeboard plan","extended/CJOB","Freeboard Plan Rev0","1:150","2026-09-25","25.1142-000-019","cj","Openings and closing appliances over profile and deck plans: air pipes, windows, doors, hatches, ventilators and freeing ports.",[1.4,5.6,22.8]],
+ ["retractable-telescopic-divers-platform-arrangement","Diver's platform arrangement","extended/CJOB","Retractable Telescopic Diver's Platform Arrangement Rev0","1:25","2026-09-25","25.1142-560-000","cj","The stern diving platform in stored and launched position, with frame details and a parts list.",[0.3,0.5,1.9]],
+ ["safety-fire-zone-plan","Safety fire zone plan","extended/CJOB","Safety Fire Zone Plan Rev0","1:100","2026-09-11","25.1142-570-100","cj","Fire-fighting equipment and escape routes over the profile and deck plans, with a numbered legend.",[2.1,5.4,22.1]],
+ ["tank-arrangement","Tank arrangement","extended/CJOB","Tank Arrangement Rev0","1:100","2026-09-11","25.1142-000-009","cj","Tank arrangement and schedule in profile and plans, separate from the polarkonsult tank plan.",[0.3,0.4,1.3]]
+].map(a=>({slug:a[0],title:a[1],dir:a[2],file:a[3],scale:a[4],date:a[5],no:a[6],src:a[7],desc:a[8],size:a[9]}));
+const mb=v=>v<1?`${Math.round(v*1024)} kB`:`${v.toFixed(1)} MB`;
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const grid=document.getElementById("dgrid");
+grid.innerHTML=D.map((d,i)=>{const p=`${d.dir}/${d.file}`;return `
+<article class="card" data-src="${d.src}">
+  <button type="button" class="thumb" data-i="${i}" aria-label="Preview ${esc(d.title)}">
+    <img src="assets/thumbs/${d.slug}.webp" alt="Thumbnail of ${esc(d.title)} drawing" loading="lazy" width="1200" height="850">
+    <span class="scale">${esc(d.scale)}</span>
+  </button>
+  <div class="body">
+    <div class="meta"><span class="by ${d.src}">${d.src==="pk"?"polarkonsult":"C-JOB / NTNU"}</span><span>${d.date}</span>${d.no?`<span>${d.no}</span>`:""}</div>
+    <h3>${esc(d.title)}</h3>
+    <p>${esc(d.desc)}</p>
+    <div class="files">
+      <a href="${blob(p+".pdf")}"><b>PDF</b><span>${mb(d.size[0])}</span></a>
+      <a href="${raw(p+".dwg")}"><b>DWG</b><span>${mb(d.size[1])}</span></a>
+      <a href="${raw(p+".dxf")}"><b>DXF</b><span>${mb(d.size[2])}</span></a>
+    </div>
+  </div>
+</article>`}).join("");
+const dcount=document.getElementById("dcount");
+function filt(f){document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c.dataset.filter===f));let n=0;grid.querySelectorAll(".card").forEach(c=>{const s=f==="all"||c.dataset.src===f;c.hidden=!s;n+=s});dcount.textContent=`${n} of ${D.length} drawings`;}
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>filt(c.dataset.filter));filt("all");
+
+const lb=document.getElementById("lb");
+grid.addEventListener("click",e=>{const b=e.target.closest(".thumb");if(!b)return;const d=D[b.dataset.i];
+  document.getElementById("lbImg").src=`assets/thumbs/${d.slug}.webp`;document.getElementById("lbImg").alt=d.title;
+  document.getElementById("lbTitle").textContent=d.title;document.getElementById("lbMeta").textContent=`${d.file} · ${d.scale}`;
+  document.getElementById("lbPdf").href=blob(`${d.dir}/${d.file}.pdf`);
+  if(lb.showModal)lb.showModal();});
+document.getElementById("lbClose").onclick=()=>lb.close();
+lb.addEventListener("click",e=>{if(e.target===lb)lb.close()});
+
+const DOCS=[["Weight calculation","25.1142-000-002","2025-12-24",3,["pdf","xlsx"],"Weight Calculation Rev0","Light-ship weight breakdown with centres of gravity: 411.79 t."],
+ ["Gross/net tonnage calculation","25.1142-000-024","2025-12-24",2,["pdf","xlsm"],"Gross and Net Tonnage Calculation Rev0","IMO Tonnage 1969 Annex I calculation."],
+ ["Specification","25.1142-030-005","2025-12-18",12,["pdf"],"Specification Rev0","Preliminary vessel specification."],
+ ["List of project documents","25.1142-080-001","2025-12-24",3,["pdf"],"List of Project Documents Rev0","Index of the 19 project deliverables."],
+ ["List of main equipment","25.1142-080-309","2025-12-18",9,["pdf"],"List of Main Equipment Rev0","Numbered equipment list, grouped by system."]];
+document.getElementById("docs").innerHTML=`<thead><tr><th>Document</th><th>Doc. no.</th><th>Pages</th><th>Files</th></tr></thead><tbody>`+
+ DOCS.map(d=>`<tr><td><b>${d[0]}</b><br><span class="muted" style="font-size:.88rem">${d[6]}</span></td><td class="num mono">${d[1]}</td><td class="num">${d[3]}</td><td>${d[4].map(x=>{const p=`extended/CJOB/docs/${d[5]}.${x}`;return `<a href="${x==="pdf"?blob(p):raw(p)}">.${x}</a>`}).join("")}</td></tr>`).join("")+`</tbody>`;
+
+const at=document.getElementById("attr"),cb=document.getElementById("copyAttr");
+cb.onclick=async()=>{try{await navigator.clipboard.writeText(at.textContent);cb.textContent="Copied";}catch(e){const r=document.createRange();r.selectNodeContents(at);const s=getSelection();s.removeAllRanges();s.addRange(r);cb.textContent="Selected. Press Ctrl+C to copy";}setTimeout(()=>cb.textContent="Copy attribution",2500)};
+
+/* metadata */
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+function showTab(t){tabs.forEach(b=>{const on=b===t;b.setAttribute("aria-selected",on);document.getElementById(b.getAttribute("aria-controls")).hidden=!on||!window.__meta});}
+tabs.forEach(b=>b.onclick=()=>showTab(b));
+const codes=(r)=>`${r.sfi_subgroup?`<span class="code" title="SFI">${esc(r.sfi_subgroup)}</span> `:""}${r.vis_gmod_ref?`<span class="code vis" title="VIS/GMOD">VIS ${esc(r.vis_gmod_ref)}</span>`:""}`;
+async function loadMeta(){
+  const urls=["metadata/gunnerus_metadata.json","../metadata/gunnerus_metadata.json","https://raw.githubusercontent.com/shiplab/gunnerus/main/metadata/gunnerus_metadata.json"];
+  let m=null;for(const u of urls){try{const r=await fetch(u);if(r.ok){m=await r.json();break}}catch(e){}}
+  const st=document.getElementById("meta-status");
+  if(!m){st.textContent="The metadata file could not be loaded here. Open it on GitHub with the link below.";return}
+  window.__meta=m;st.hidden=true;
+  const decks=m.general_arrangement.decks||m.general_arrangement;
+  const nSp=decks.reduce((a,d)=>a+d.spaces.length,0);
+  document.getElementById("n-spaces").textContent=nSp;document.getElementById("n-tanks").textContent=m.tanks.length;document.getElementById("n-equip").textContent=m.equipment_inventory.length;
+  const dl=document.getElementById("deckList");
+  decks.forEach((d,i)=>{const b=document.createElement("button");b.type="button";b.innerHTML=`${esc(d.deck_name)}<span>${d.spaces.length}</span>`;b.onclick=()=>deck(i);dl.appendChild(b)});
+  function deck(i){[...dl.querySelectorAll("button")].forEach((b,j)=>b.setAttribute("aria-pressed",j===i));const d=decks[i];
+    document.getElementById("spaceTbl").innerHTML=`<caption style="text-align:left;padding-bottom:10px;caption-side:top"><span class="muted" style="font-size:.9rem">SFI group ${esc(d.sfi_group)}: ${esc(d.sfi_group_desc)}</span></caption><thead><tr><th>Space</th><th>Area</th><th>Codes</th><th>SFI description</th></tr></thead><tbody>`+
+    d.spaces.map(s=>`<tr><td>${esc(s.name)}</td><td class="num">${s.area_m2!=null?s.area_m2+" m²":s.area_or_vol?esc(s.area_or_vol):s.dims_mm?esc(s.dims_mm)+" mm":'<span class="muted">null</span>'}</td><td>${codes(s)}</td><td class="muted">${esc(s.sfi_desc||"")}</td></tr>`).join("")+`</tbody>`;}
+  deck(2);
+  document.getElementById("tankTbl").innerHTML=`<thead><tr><th>No.</th><th>Content</th><th>Capacity</th><th>Location</th><th>SFI</th></tr></thead><tbody>`+
+    m.tanks.map(t=>`<tr><td class="num mono">${t.no??'<span class="muted">–</span>'}</td><td>${esc(t.content)}</td><td class="num">${t.capacity_m3!=null?t.capacity_m3+" m³":'<span class="muted">null</span>'}</td><td class="muted">${esc(t.location)}</td><td>${codes(t)}</td></tr>`).join("")+`</tbody>`;
+  document.getElementById("equipTbl").innerHTML=`<thead><tr><th>Item</th><th>Location</th><th>Codes</th><th>Notes</th></tr></thead><tbody>`+
+    m.equipment_inventory.map(e=>`<tr><td><b>${esc(e.item)}</b>${e.capacity?`<br><span class="muted">${esc(e.capacity)}</span>`:""}${e.confidence?`<br><span class="badge">${esc(e.confidence.replaceAll("_"," "))}</span>`:""}</td><td class="muted">${esc(e.location)}</td><td>${codes(e)}</td><td class="muted" style="font-size:.88rem">${esc(e.notes||"")}</td></tr>`).join("")+`</tbody>`;
+  showTab(tabs[0]);
+}
+loadMeta();
+</script>
+
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {MeshoptDecoder} from "three/addons/libs/meshopt_decoder.module.js";
+import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
+
+const canvas=document.getElementById("ship"), status=document.getElementById("status");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let renderer;
+try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});}catch(e){status.textContent="3D preview needs WebGL, which this browser has turned off. The model files are listed further down.";throw e;}
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.NeutralToneMapping;
+const scene=new THREE.Scene();
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(),0.04).texture;
+scene.add(new THREE.HemisphereLight(0xffffff,0x5a6a74,0.8));
+const sun=new THREE.DirectionalLight(0xffffff,1.4);sun.position.set(-20,40,25);scene.add(sun);
+const camera=new THREE.PerspectiveCamera(30,2,0.1,1000);
+const controls=new OrbitControls(camera,canvas);
+controls.enableDamping=true;controls.dampingFactor=0.08;controls.maxPolarAngle=Math.PI*(camera.aspect<1?0.9:0.62);controls.minDistance=8;controls.maxDistance=160;
+controls.autoRotateSpeed=0.8;
+
+// waterline plane at operating draught (keel line at y = 0 in the model)
+const water=new THREE.Mesh(new THREE.PlaneGeometry(70,34),new THREE.MeshBasicMaterial({color:0x2f7fc4,transparent:true,opacity:.28,depthWrite:false,side:THREE.DoubleSide}));
+water.rotation.x=-Math.PI/2;water.visible=false;scene.add(water);
+
+let center=new THREE.Vector3(17,5,0), radius=22;
+const VIEWS={iso:[1,.42,1.05],side:[0,.02,1],top:[0,1,.0001],aft:[-1,.35,.35]};
+let anim=null;
+function setView(v,instant){
+  document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.view===v));
+  const dir=new THREE.Vector3(...VIEWS[v]).normalize();
+  const vf=camera.fov*Math.PI/180, hf=2*Math.atan(Math.tan(vf/2)*camera.aspect), fit=radius/Math.sin(Math.min(vf,hf)/2)*(camera.aspect<1?0.95:0.62);
+  const to=center.clone().add(dir.multiplyScalar(fit));
+  if(instant||reduce){camera.position.copy(to);controls.target.copy(center);controls.update();return}
+  const from=camera.position.clone(), tFrom=controls.target.clone(), t0=performance.now();
+  anim=t=>{const k=Math.min(1,(t-t0)/700), e=1-Math.pow(1-k,3);camera.position.lerpVectors(from,to,e);controls.target.lerpVectors(tFrom,center,e);if(k>=1)anim=null;};
+}
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setView(b.dataset.view));
+const wl=document.getElementById("wl");wl.onclick=()=>{water.visible=!water.visible;wl.setAttribute("aria-pressed",water.visible)};
+const spin=document.getElementById("spin");spin.onclick=()=>{controls.autoRotate=!controls.autoRotate;spin.setAttribute("aria-pressed",controls.autoRotate)};
+
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==Math.round(w*renderer.getPixelRatio())||canvas.height!==Math.round(h*renderer.getPixelRatio())){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}}
+new ResizeObserver(()=>resize()).observe(canvas);
+
+new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load("assets/gunnerus.glb",g=>{
+  const ship=g.scene;let tris=0;
+  ship.traverse(o=>{if(o.isMesh){tris+=o.geometry.index?o.geometry.index.count/3:o.geometry.attributes.position.count/3;o.material.side=THREE.DoubleSide;}});
+  scene.add(ship);
+  const box=new THREE.Box3().setFromObject(ship);box.getCenter(center);
+  const sph=box.getBoundingSphere(new THREE.Sphere());radius=sph.radius;
+  water.position.set(center.x,2.5,center.z);
+  document.getElementById("triCount").textContent=`${Math.round(tris/1000)}k triangles`;
+  status.hidden=true;resize();setView("iso",true);
+},p=>{if(p.total)status.textContent=`Loading 3D model… ${Math.round(p.loaded/p.total*100)}%`},
+e=>{status.textContent="The 3D model could not be loaded. The model files are listed further down.";console.error(e)});
+
+renderer.setAnimationLoop(t=>{resize();if(anim)anim(t);controls.update();renderer.render(scene,camera);});
+</script>
+</body>
+</html>
