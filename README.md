@@ -129,8 +129,3 @@ If you have modified the material, state that changes were made.
 ### Note on software
 
 CC BY-NC 4.0 is intended for data, drawings and documentation, not for source code. If scripts or software are added to this repository later, they should be placed in a clearly separated folder with their own software license.
-
-## Contact
-
-- Data / dataset questions (NTNU): Henrique Gaspar (henrique.gaspar@ntnu.no)
-- Commercial use requests (polarkonsult approval): Polarkonsult (<https://www.polarkonsult.com/>)
