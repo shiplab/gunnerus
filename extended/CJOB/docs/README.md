@@ -10,14 +10,6 @@ Supporting engineering documents from C-JOB's Gunnerus project (project number `
 | List of project documents | `25.1142-080-001` | 2025-12-24 | 3 | `.pdf` |
 | List of main equipment | `25.1142-080-309` | 2025-12-18 | 9 | `.pdf` |
 
-## ⚠️ License differs from the rest of the repository
-
-Every one of these documents carries its own notice: **© C-JOB & NTNU (2026), licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)** (share-alike — adaptations must be released under the same licence), not CC BY-NC 4.0 like the drawings elsewhere in this repository. Each also states:
-
-> Created by C-JOB based on data from NTNU. Provided "as is", without warranty or liability. Not certified or class-approved. Not for construction, operation, or regulatory or safety-critical use.
-
-See the main [README](../../../README.md#exception-extendedcjobdocs) for how this fits with the rest of the repository's licensing.
-
 ## Weight calculation
 
 Light-ship weight breakdown with CG coordinates (LCG/TCG/VCG) and moments (Mx/My/Mz) per item — hull, cargo equipment, ship equipment, crew/passenger equipment and more — totalling **411.79 t** light ship weight. The `.xlsx` is the live calculation; the `.pdf` is the plotted issue.

@@ -130,10 +130,6 @@ If you have modified the material, state that changes were made.
 
 CC BY-NC 4.0 is intended for data, drawings and documentation, not for source code. If scripts or software are added to this repository later, they should be placed in a clearly separated folder with their own software license.
 
-### Exception: `extended/CJOB/docs/`
-
-The supporting documents in [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) (weight calculation, tonnage calculation, specification, and the equipment/document lists) carry their own notice in each file: **© C-JOB & NTNU (2026), licensed CC BY-SA 4.0** (share-alike, not CC BY-NC), marked *preliminary* status and *"not certified or class-approved, not for construction, operation, or regulatory or safety-critical use."* Everything else in the repository remains CC BY-NC 4.0 as above.
-
 ## Contact
 
 - Data / dataset questions (NTNU): Henrique Gaspar (henrique.gaspar@ntnu.no)
