@@ -14,7 +14,7 @@
 | At a glance | |
 | --- | --- |
 | Drawings | 15 production drawings, each as DWG, DXF and A0 PDF |
-| 3D model | Rhino `.3dm` and STEP, hull and superstructure |
+| 3D model | Rhino `.3dm` and STEP, hull and superstructure, plus a lightweight glTF in [`derived/`](derived/README.md) |
 | Documents | 5 engineering documents: weight, tonnage, specification, equipment and document lists |
 | Metadata | GA drawing as JSON, coded by SFI group and DNV VIS/GMOD |
 | Licence | CC BY-NC 4.0 (engineering documents: CC BY-SA 4.0) |
@@ -86,7 +86,8 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 | [`extended/CJOB/3d models/`](<extended/CJOB/3d models/README.md>) | 3D CAD model of the hull and superstructure: Rhino `.3dm` (~396 MB) and STEP `.stp` (~728 MB), stored with Git LFS. |
 | [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | C-JOB engineering documents: weight calculation (411.79 t light ship), gross and net tonnage calculation, specification, list of main equipment, list of project documents. **Licensed CC BY-SA 4.0.** |
 | [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON. See [Metadata](#metadata). |
-| [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/), including a simplified glTF copy of the 3D model for the browser viewer. |
+| [`derived/`](derived/README.md) | Files made by NTNU from the published material, such as a 3.5 MB glTF version of the 3D model for web viewers and teaching. Simplified, so not a source for dimensions. |
+| [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/). |
 | [`images/`](images/README.md) | Images used in this README. |
 
 ### Formats and conventions
