@@ -4,13 +4,17 @@ The drawings are derivative works made by **C-JOB (<https://c-job.com/contact-us
 
 | Drawing | Scale | Sheet date | Formats |
 | --- | --- | --- | --- |
-| `Engine Room Arrangement Rev0` | 1:100 | 2026-08-31 | `.dwg`, `.dxf`, `.pdf` (A0) |
-| `Construction Plan Rev0` | 1:100 | *not given in title block — see [Notes](#notes)* | `.dwg`, `.dxf`, `.pdf` (A0) |
-| `Draught and Hullmarks Rev0` | 1:100 (marking details 1:10) | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
-| `Freeboard Plan Rev0` | 1:100 | *not given in title block — see [Notes](#notes)* | `.dwg`, `.dxf`, `.pdf` (A0) |
-| `Retractable Telescopic Diver's Platform Arrangement Rev0` | 1:100 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
-| `Safety Fire Zone Plan Rev0` | 1:100 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
-| `Tank Arrangement Rev0` | 1:100 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Engine Room Arrangement Rev0` (`25.1142-052-100`) | 1:100 | 2026-08-31 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Construction Plan Deck and Double Bottom Rev0` (`25.1142-100-120`) | 1:50 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Construction Plan Longitudinal Section Rev0` (`25.1142-100-121`) | 1:50 | 2026-09-25 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Construction Plan Transverse Section Rev0` (`25.1142-100-122`) | 1:50 | 2026-09-25 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Draught and Hullmarks Rev0` (`25.1142-650-102`) | 1:50 (marking details 1:10) | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Freeboard Plan Rev0` (`25.1142-000-019`) | 1:150 | 2026-09-25 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Retractable Telescopic Diver's Platform Arrangement Rev0` (`25.1142-560-000`) | 1:25 | 2026-09-25 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Safety Fire Zone Plan Rev0` (`25.1142-570-100`) | 1:100 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
+| `Tank Arrangement Rev0` (`25.1142-000-009`) | 1:100 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
+
+Document numbers are C-JOB's own, per `25.1142-080-001-REV0-LIST OF PROJECT DOCUMENTS.pdf` in [`docs/`](docs/README.md).
 
 ## Engine room arrangement
 
@@ -27,7 +31,13 @@ The sheet also repeats the vessel's main particulars and tank capacities.
 
 ## Construction plan
 
-The general structural framing plan: shell/frame elevation and plan views fore and aft, deck framing plans, midship and end sections, and a set of detail callouts for bow, stern, transom and deck construction. Single A0 sheet, no equipment list or main-particulars table.
+The structural framing plan, issued as three sheets at 1:50 (an earlier single-sheet `Construction Plan Rev0` at 1:100 has been superseded and removed):
+
+- **Deck and double bottom** — 1-deck, tanktop/single-bottom and A-deck framing plans, plus the wheelhouse-top and superstructure-top structure.
+- **Longitudinal section** — the structural section at the centreline, keel to wheelhouse top, with scantling callouts.
+- **Transverse section** — numbered frame sections along the length (including the transom), plus stringer, floor and connection details.
+
+None of the three carries an equipment list or main-particulars table.
 
 ## Draught and hullmarks
 
@@ -47,15 +57,22 @@ Fire safety arrangement and equipment: profile, wheelhouse and deck plans (A-dec
 
 ## Tank arrangement
 
-Tank arrangement in profile, below-1-deck and below-tank-top plans, with a tank schedule giving location/frame range, net volume and mass per fluid type (water ballast, fresh water, fuel oil and miscellaneous) plus the dry/cargo compartments. This is C-JOB's own tank arrangement drawing; for the polarkonsult tank plan and its tank-by-tank schedule, see [`../../polarkonsult/`](../../polarkonsult/).
+Tank arrangement in profile, below-1-deck and below-tank-top plans, with a tank schedule giving location/frame range, net volume and mass per fluid type (water ballast, fresh water, fuel oil and miscellaneous) plus the dry/cargo compartments.
+
+## Other material in this folder
+
+| Folder | Contents |
+| --- | --- |
+| [`3d models/`](<3d models/README.md>) | 3D CAD model of the hull and superstructure. ⚠️ Very large files — read that README before cloning or pushing. |
+| [`docs/`](docs/README.md) | Supporting C-JOB documents: weight calculation, GT/NT calculation, specification, and the project document/equipment lists. **Licensed CC BY-SA 4.0**, not CC BY-NC 4.0 — see that folder's README. |
 
 ## Notes
 
 Known gaps and inconsistencies in this batch, kept here for traceability rather than silently corrected (the PDFs are plotted sheets, not editable at the README level):
 
-- **Construction Plan Rev0** and **Freeboard Plan Rev0** do not carry the "based on dwg. / date" title-block row that the other five sheets in this folder have, so no sheet date could be read off them.
 - **Freeboard Plan Rev0**'s main-particulars table states `BUILT YEAR 2005`, while **Safety Fire Zone Plan Rev0**'s main-particulars table states `BUILT YEAR: 2006` — the two sheets disagree, and only 2006 matches the main [README](../../README.md#vessel)'s "in service since 2006".
-- `Safety Fire Zone Plan Rev0.dwg` was originally exported without the `Rev0` suffix carried by its `.dxf`/`.pdf` siblings; it has been renamed here for consistency.
+- `Safety Fire Zone Plan Rev0.dwg` and `Construction Plan Deck and Double Bottom Rev0.dwg` were both originally exported with a filename that didn't match their `.dxf`/`.pdf` siblings (missing the `Rev0` suffix, and a stray trailing space, respectively); both have been renamed here for consistency.
+- The C-JOB project document list (`25.1142-080-001`, in [`docs/`](docs/README.md)) also lists `25.1142-000-020 Freeboard Calculation` and a `25.1142-100-123 Shell Expansion` deliverable; neither is included in this repository under those numbers (a Shell Expansion drawing does exist, but as the polarkonsult original in [`../../polarkonsult/`](../../polarkonsult/README.md)).
 
 ## License
 

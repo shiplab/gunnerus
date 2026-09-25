@@ -1,0 +1,2 @@
+extended/CJOB/3d[[:space:]]models/*.3dm filter=lfs diff=lfs merge=lfs -text
+extended/CJOB/3d[[:space:]]models/*.stp filter=lfs diff=lfs merge=lfs -text

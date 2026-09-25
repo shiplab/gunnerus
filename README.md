@@ -12,7 +12,7 @@ This repository makes a curated set of Gunnerus-related material publicly availa
 - development and testing of digital shipbuilding tools and data formats
 
 
-![General arrangement drawing of R/V Gunnerus: profile, deck plans and sections](docs/images/ga-preview.png)
+![General arrangement drawing of R/V Gunnerus: profile, deck plans and sections](images/ga-preview.png)
 
 *Excerpt from the Gunnerus general arrangement drawing.*
 
@@ -20,7 +20,7 @@ Publishing it openly is intended to benefit the maritime research and education 
 
 ## Repository contents
 
-The repository holds thirteen production drawings of R/V Gunnerus, each supplied as DWG, DXF and a plotted A0 PDF sheet:
+The repository holds fifteen production drawings of R/V Gunnerus, each supplied as DWG, DXF and a plotted A0 PDF sheet, plus a 3D CAD model and a set of supporting engineering documents:
 
 | Drawing | Folder | Sheet date | Contents |
 | --- | --- | --- | --- |
@@ -31,23 +31,27 @@ The repository holds thirteen production drawings of R/V Gunnerus, each supplied
 | **Midship section** — `Midship Section Rev0`, 1:50 (keel detail 1:10) | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Transverse structural sections through the midbody — frames 22, 23, 32, sections A to I and bulkhead 200 A.F. #1 — with scantlings, new and existing bulkheads, the old and new baselines from the lengthening, welding details and a keel section. |
 | **Shell expansion** — `Shell Expansion Rev0`, 1:50 (details 1:25, keel 1:10) | [`polarkonsult/`](polarkonsult/) | 2026-08-31 | Shell plating developed over the ship's length, with plate thicknesses, seams and butts, tank boundaries, sea chest, HiPAP opening and knuckle lines. Two sheets: **1/2 starboard side, 2/2 port side**, despite the file name. |
 | **Engine room arrangement** — `Engine Room Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-08-31 | Machinery spaces as a centreline section, a plan under 1-deck, a plan of the engine room and three transverse sections, with a 43-item numbered equipment list. |
-| **Construction plan** — `Construction Plan Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | *not given* | Structural framing plan: frame elevation and plan views, deck framing, midship and end sections, and bow/stern/transom construction details. |
-| **Draught and hullmarks** — `Draught and Hullmarks Rev0`, 1:100 (details 1:10) | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | Draft mark positions and hull marking templates — name, homeport, bow, deck, bowthruster centre and underwater search-equipment markings — with cutting/welding notes. |
-| **Freeboard plan** — `Freeboard Plan Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | *not given* | Openings and closing appliances: air pipes, windows/scuttles, doors, hatches, ventilators, freeing ports, sea inlet/outlet and sanitary discharge, over the profile and deck plans. |
-| **Retractable telescopic diver's platform arrangement** — `Retractable Telescopic Diver's Platform Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | The stern diving platform in stored and launched position — side, plan and end views, frame details and a parts list. |
+| **Construction plan, deck and double bottom** — `Construction Plan Deck and Double Bottom Rev0`, 1:50 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | 1-deck, tanktop/single-bottom and A-deck framing plans, plus the wheelhouse top and superstructure top structure. |
+| **Construction plan, longitudinal section** — `Construction Plan Longitudinal Section Rev0`, 1:50 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-25 | Structural section at the centreline from keel to wheelhouse top, with scantling callouts and cross-references to the transverse-section detail sheet. |
+| **Construction plan, transverse section** — `Construction Plan Transverse Section Rev0`, 1:50 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-25 | Numbered transverse frame sections along the length (incl. the transom) plus stringer, floor and detail callouts. |
+| **Draught and hullmarks** — `Draught and Hullmarks Rev0`, 1:50 (details 1:10) | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | Draft mark positions and hull marking templates — name, homeport, bow, deck, bowthruster centre and underwater search-equipment markings — with cutting/welding notes. |
+| **Freeboard plan** — `Freeboard Plan Rev0`, 1:150 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-25 | Openings and closing appliances: air pipes, windows/scuttles, doors, hatches, ventilators, freeing ports, sea inlet/outlet and sanitary discharge, over the profile and deck plans. |
+| **Retractable telescopic diver's platform arrangement** — `Retractable Telescopic Diver's Platform Arrangement Rev0`, 1:25 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-25 | The stern diving platform in stored and launched position — side, plan and end views, frame details and a parts list. |
 | **Safety fire zone plan** — `Safety Fire Zone Plan Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | Fire-fighting equipment and escape routes over the profile and deck plans, with a numbered equipment/legend table. |
 | **Tank arrangement** — `Tank Arrangement Rev0`, 1:100 | [`extended/CJOB/`](extended/CJOB/) | 2026-09-11 | Tank arrangement and schedule (profile, below-1-deck and below-tank-top plans), separate from the polarkonsult tank plan above. |
 
-See [`extended/CJOB/README.md`](extended/CJOB/README.md) for a fuller description of each `extended/CJOB/` drawing, including two known data gaps in that batch (a couple of sheets missing their title-block date, and a built-year mismatch between two sheets).
+See [`extended/CJOB/README.md`](extended/CJOB/README.md) for a fuller description of each `extended/CJOB/` drawing, including a known built-year mismatch between two sheets in that batch.
 
-The drawing folders are named after the design office the material comes from. Per the title blocks, everything published here traces back to polarkonsult originals: the sheets in `polarkonsult/` are courtesy of **polarkonsult**, several of them marked as derivative works based on a named polarkonsult drawing, and the drawings in `extended/CJOB/` are derivative works made by **C-JOB** and NTNU from polarkonsult drawings. All of it is published by NTNU.
+The drawing folders are named after the design office the material comes from. Per the title blocks, everything published here traces back to polarkonsult originals: the sheets in `polarkonsult/` (see [`polarkonsult/README.md`](polarkonsult/README.md)) are courtesy of **polarkonsult**, several of them marked as derivative works based on a named polarkonsult drawing, and the drawings in `extended/CJOB/` are derivative works made by **C-JOB** and NTNU from polarkonsult drawings. All of it is published by NTNU.
 
-Two further folders hold material derived from the drawings rather than the drawings themselves:
+Beyond the drawings themselves:
 
 | Folder | Contents |
 | --- | --- |
+| [`extended/CJOB/3d models/`](<extended/CJOB/3d models/README.md>) | 3D CAD model of the hull/superstructure (Rhino `.3dm` and neutral `.stp`). ⚠️ Very large files — see that folder's README before cloning or pushing. |
+| [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | Supporting C-JOB engineering documents (weight calculation, tonnage calculation, specification, equipment and document lists). **Licensed CC BY-SA 4.0, not CC BY-NC 4.0** — see that folder's README. |
 | [`metadata/`](metadata/) | Machine-readable metadata extracted from the GA drawing — see below. |
-| [`docs/images/`](docs/images/) | Preview images used in this README. |
+| [`images/`](images/) | Preview images used in this README. |
 
 The CAD formats:
 
@@ -125,6 +129,10 @@ If you have modified the material, state that changes were made.
 ### Note on software
 
 CC BY-NC 4.0 is intended for data, drawings and documentation, not for source code. If scripts or software are added to this repository later, they should be placed in a clearly separated folder with their own software license.
+
+### Exception: `extended/CJOB/docs/`
+
+The supporting documents in [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) (weight calculation, tonnage calculation, specification, and the equipment/document lists) carry their own notice in each file: **© C-JOB & NTNU (2026), licensed CC BY-SA 4.0** (share-alike, not CC BY-NC), marked *preliminary* status and *"not certified or class-approved, not for construction, operation, or regulatory or safety-critical use."* Everything else in the repository remains CC BY-NC 4.0 as above.
 
 ## Contact
 
