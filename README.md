@@ -180,7 +180,7 @@ If you use this data set in a publication, please cite it. GitHub's **Cite this 
 
 ```bibtex
 @misc{gunnerus_open_data,
-  author       = {Gaspar, Henrique M. and {polarkonsult AS} and {C-JOB Naval Architects}},
+  author       = {Gaspar, Henrique M. and Ha, Jisang and {polarkonsult AS} and {C-JOB Naval Architects}},
   title        = {Gunnerus Open Data Set: drawings, 3D model and metadata of the research vessel R/V Gunnerus},
   publisher    = {Zenodo},
   year         = {2026},
