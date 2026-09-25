@@ -367,14 +367,14 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
       <div class="two">
         <div class="panel">
           <h3>3D CAD model</h3>
-          <p>Hull and superstructure modelled by C-JOB from the same source data as the drawings. The viewer above uses a simplified web copy.</p>
+          <p>Hull and superstructure modelled by C-JOB from the same source data as the drawings. The viewer above uses a simplified glTF copy made by NTNU, kept in <span class="mono">derived/</span>.</p>
           <div class="scroll">
           <table class="tbl">
             <thead><tr><th>File</th><th>Format</th><th>Size</th></tr></thead>
             <tbody>
               <tr><td><a href="https://github.com/shiplab/gunnerus/raw/main/extended/CJOB/3d%20models/Gunnerus%203D%20Model%20Rev0.3dm">Gunnerus 3D Model Rev0.3dm</a></td><td>Rhinoceros 3D</td><td class="num">396 MB</td></tr>
               <tr><td><a href="https://github.com/shiplab/gunnerus/raw/main/extended/CJOB/3d%20models/Gunnerus%203D%20Model%20STEP%20Rev0.stp">Gunnerus 3D Model STEP Rev0.stp</a></td><td>STEP (ISO 10303)</td><td class="num">728 MB</td></tr>
-              <tr><td><a href="assets/gunnerus.glb">gunnerus.glb</a></td><td>glTF, simplified</td><td class="num">3.5 MB</td></tr>
+              <tr><td><a href="https://github.com/shiplab/gunnerus/raw/main/derived/3d/gunnerus.glb">derived/3d/gunnerus.glb</a></td><td>glTF, simplified (NTNU)</td><td class="num">3.5 MB</td></tr>
             </tbody>
           </table>
           </div>
@@ -656,7 +656,12 @@ const spin=document.getElementById("spin");spin.onclick=()=>{controls.autoRotate
 function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==Math.round(w*renderer.getPixelRatio())||canvas.height!==Math.round(h*renderer.getPixelRatio())){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}}
 new ResizeObserver(()=>resize()).observe(canvas);
 
-new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load("assets/gunnerus.glb",g=>{
+const loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+// The deployed site has the model at assets/; a local preview from the repo root finds it in ../derived/3d/.
+const MODEL_URLS=["assets/gunnerus.glb","../derived/3d/gunnerus.glb"];
+function loadModel(i){loader.load(MODEL_URLS[i],onModel,onProgress,e=>{if(i+1<MODEL_URLS.length)loadModel(i+1);else{status.textContent="The 3D model could not be loaded. The model files are listed further down.";console.error(e)}});}
+const onProgress=p=>{if(p.total)status.textContent=`Loading 3D model… ${Math.round(p.loaded/p.total*100)}%`};
+function onModel(g){
   const ship=g.scene;let tris=0;
   ship.traverse(o=>{if(o.isMesh){tris+=o.geometry.index?o.geometry.index.count/3:o.geometry.attributes.position.count/3;o.material.side=THREE.DoubleSide;}});
   scene.add(ship);
@@ -665,8 +670,8 @@ new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).load("assets/gunnerus.glb",g=
   water.position.set(center.x,2.5,center.z);
   document.getElementById("triCount").textContent=`${Math.round(tris/1000)}k triangles`;
   status.hidden=true;resize();setView("iso",true);
-},p=>{if(p.total)status.textContent=`Loading 3D model… ${Math.round(p.loaded/p.total*100)}%`},
-e=>{status.textContent="The 3D model could not be loaded. The model files are listed further down.";console.error(e)});
+}
+loadModel(0);
 
 renderer.setAnimationLoop(t=>{resize();if(anim)anim(t);controls.update();renderer.render(scene,camera);});
 </script>
