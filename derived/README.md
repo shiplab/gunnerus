@@ -5,49 +5,98 @@ Files made by NTNU from the material in this repository, or brought in from earl
 > [!IMPORTANT]
 > The files come from two different sources, with different precision:
 >
-> - **Made from this data set:** `3d/gunnerus.glb` is converted directly from the C-JOB 3D model published here.
+> - **Made from this data set:** `3d/gunnerus.glb` and `3d/gunnerus-parts.json` are converted directly from the C-JOB 3D model published here, grouped by NTNU.
 > - **Older vessel.js material (2020):** `3d/gunnerus-visual.glb`, `3d/gunnerus-visual-preview.jpg`, `vesseljs/gunnerus.json` and `vesseljs/offsets.csv` were made for the vessel.js software examples, years before this data set. They were not made from the drawings published here and are approximate. Expect differences in dimensions, hull form, tanks and rooms. Use them for visualisation, software testing and teaching, not as reference data.
 
 | File | Made from | Purpose |
 | --- | --- | --- |
-| [`3d/gunnerus.glb`](3d/gunnerus.glb) | [`extended/CJOB/3d models/Gunnerus 3D Model Rev0.3dm`](<../extended/CJOB/3d models/README.md>) (C-JOB) | Lightweight 3D model for web viewers, visualisation and teaching. Used by the [website](https://shiplab.github.io/gunnerus/#model). |
+| [`3d/gunnerus.glb`](3d/gunnerus.glb) | [`extended/CJOB/3d models/Gunnerus 3D Model Rev0.3dm`](<../extended/CJOB/3d models/README.md>) (C-JOB) | Lightweight 3D model with parts grouped by SFI and equipment matched to the C-JOB list. Used by the [website](https://shiplab.github.io/gunnerus/#model). |
+| [`3d/gunnerus-parts.json`](3d/gunnerus-parts.json) | `3d/gunnerus.glb` | Group, SFI number and C-JOB item for each part of the model. |
 | [`3d/gunnerus-visual.glb`](3d/gunnerus-visual.glb) | The Gunnerus model in [vessel.js](https://github.com/shiplab/vesseljs) (2020) | Textured visual model in the vessel's paint scheme, with named parts. For rendering, simulators and presentations. |
 | [`3d/gunnerus-visual-preview.jpg`](3d/gunnerus-visual-preview.jpg) | `3d/gunnerus-visual.glb` | A render of the visual model at sea, from the vessel.js simulator examples. |
 | [`vesseljs/gunnerus.json`](vesseljs/gunnerus.json) | The Gunnerus ship specification in [vessel.js](https://github.com/shiplab/vesseljs) (2020) | Hull offsets, decks, bulkheads, compartments and tanks in the vessel.js format, for hydrostatics and design exercises. |
 | [`vesseljs/offsets.csv`](vesseljs/offsets.csv) | `vesseljs/gunnerus.json` | The same hull offsets in metres, as a plain table. |
 
-## 3d/gunnerus.glb
+## 3d/gunnerus.glb and 3d/gunnerus-parts.json
 
-A simplified glTF 2.0 binary of the C-JOB 3D model, **3.5 MB** instead of 396 MB.
+A simplified glTF 2.0 binary of the C-JOB 3D model, **3.6 MB** instead of 396 MB, with its parts grouped by SFI group and the visible equipment matched to the C-JOB [list of main equipment](<../extended/CJOB/docs/List of Main Equipment Rev0.pdf>) (080-309). `gunnerus-parts.json` describes each part. The [website viewer](https://shiplab.github.io/gunnerus/#model) uses both to colour, filter, cut and identify parts.
 
 | Property | Value |
 | --- | --- |
 | Format | glTF 2.0 binary (`.glb`) |
 | Triangles | ~1.59 million (source render meshes: ~3.98 million) |
+| Parts | 24 nodes, `part00` to `part23`, one per group or matched equipment item |
 | Units and axes | Metres, Y up (glTF convention). The source is in millimetres, Z up. |
 | Origin | Same as the source model. The keel is at y ≈ 0, so y = 2.50 is the operating draught. |
-| Materials | 21 flat colours, one per display colour in the source. No textures. |
+| Materials | One plain material, no textures. Colours are applied by the viewer. |
 | Required extensions | `EXT_meshopt_compression`, `KHR_mesh_quantization` |
+
+### Groups
+
+Each of the source model's 3,367 objects is assigned to one group, labelled by SFI group.
+
+| SFI | Group | Contents |
+| --- | --- | --- |
+| 2 | Hull and structure | Shell, decks, bulkheads, internal structure, bulwarks; side plating up to the A-deck |
+| 25 | Deckhouse and superstructure | Deckhouse and wheelhouse above the A-deck |
+| 3 | Deck handling and research equipment | Cranes, A-frames, net drum, ROV hangar, workboat |
+| 41–42 | Navigation and communication | Mast and lights, radar, antennas |
+| 43 | Anchoring, mooring and towing | Bollards, anchors, bow mooring gear |
+| 5 | Accommodation and outfitting | Doors, windows, stairs, ladders, railings, interior walls and fittings |
+| 50 | Lifesaving equipment | MOB boat and davit, life rafts, lifebuoys |
+| 6 | Propulsion and machinery | Azimuth drives, main engines, generators, bow thruster |
+
+SFI 3 for research handling gear, and SFI 6 for the bow thruster, are judgement calls. Groups 3 (systems) and 6 (electrical) of the C-JOB list are not shown: their pumps, tanks and cabinets could not be identified in the model.
+
+### Equipment matched to the C-JOB list
+
+| C-JOB item | Equipment | Note |
+| --- | --- | --- |
+| 1 | MOB boat (6 persons), with cradle | |
+| 2 / 79 | Rescue boat davit | |
+| 3 | Life rafts, 2 | |
+| 7 | Lifebuoys, 8 | Count matches the list |
+| 18 | Anchors, 2, stowed | Identification tentative |
+| 20 | Bollards, 8 | Count matches the list |
+| 47–51, 76 | PM azimuth drives, port and starboard | |
+| 72 | Main engines, 3 | |
+| 73 | Generators, 3 | |
+| 75 | Bow tunnel thruster 200 kW | |
+| 77 / 85 | Main deck crane (knuckle boom) | The list gives this crane twice |
+| 80 | Stern-mounted A-frame 6 t | |
+| 81 | Side-mounted A-frame 4 t SWL | |
+| 82 | ROV hangar | |
+| 84 | Net drum | |
+| 90 | Workboat 80 hp | Identification tentative; same boat model as the MOB boat |
+| 110 | Radar | |
+
+Not found in the model: CTD crane (78 / 86), trawl winches (83), diving platform (87), capstan (89), and the windlass and anchor winches (17, 19) as separate machines.
+
+### gunnerus-parts.json
+
+One entry per node: `node`, `sfi`, `group`, `group_key`, `item` (C-JOB list number, or `null`), `label` (or `null` for plain groups), `objects` (source objects in the part) and `source_triangles` (before simplification).
 
 ### How it was made
 
 1. Read the Rhino 8 file with [rhino3dm](https://github.com/mcneel/rhino3dm) and collected the render meshes stored on every surface and extrusion (about 3.98 million triangles). Curves and text were skipped. The one block instance sits at identity, so its members were taken once.
-2. Grouped the meshes by display colour. Three CAD highlight colours (black, magenta, pure green) were remapped to the hull grey (RGB 151, 170, 174).
-3. Converted millimetres to metres and Z-up to Y-up.
-4. Simplified to about 40 % of the triangles and compressed with [gltfpack](https://github.com/zeux/meshoptimizer) (`gltfpack -si 0.4 -cc`).
+2. Assigned every object to a group. The source has no usable names (its 776 layers are unnamed leftovers from an IGES import), so the assignment is NTNU's: equipment by position, size and shape, checked visually against the drawings; everything else by rules (below or above the 1-deck, plate or compact, inside or outside the deckhouse). Repeated identical parts helped: the model holds exactly eight lifebuoys and eight bollards, as the list does.
+3. Merged the objects of each group or equipment item into one node, converted millimetres to metres and Z-up to Y-up.
+4. Simplified to about 40 % of the triangles and compressed with [gltfpack](https://github.com/zeux/meshoptimizer) (`gltfpack -si 0.4 -cc -kn`).
 
 ### What is lost
 
 - Exact geometry. The source is NURBS surfaces; this file is a simplified triangle mesh with quantised vertex positions. Do not take dimensions from it.
-- Object structure. The source layers are unnamed leftovers from an IGES import, so the file carries no part names; parts are only grouped by colour.
+- Individual objects. Parts are merged per group or item; the source's own object boundaries are not kept.
 - Curves, text and hidden objects.
+
+The grouping and matches are an interpretation, not part of C-JOB's model. [Report a data error](https://github.com/shiplab/gunnerus/issues/new?template=data-error.yml) if a part is in the wrong group.
 
 ### Opening it
 
 Web viewers built on three.js or Babylon.js, and most online glTF viewers, read the compressed file directly. Some desktop tools do not support `EXT_meshopt_compression`. For those, make an uncompressed copy (about 21 MB) with gltfpack:
 
 ```sh
-gltfpack -i gunnerus.glb -o gunnerus-uncompressed.glb -noq
+gltfpack -i gunnerus.glb -o gunnerus-uncompressed.glb -noq -kn
 ```
 
 gltfpack re-optimises the mesh while doing this, so the triangle count drops slightly (merged duplicate vertices and degenerate triangles).

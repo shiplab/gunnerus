@@ -86,7 +86,7 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 | [`extended/CJOB/3d models/`](<extended/CJOB/3d models/README.md>) | 3D CAD model of the hull and superstructure: Rhino `.3dm` (~396 MB) and STEP `.stp` (~728 MB), stored with Git LFS. |
 | [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | C-JOB engineering documents: weight calculation (411.79 t light ship), gross and net tonnage calculation, specification, list of main equipment, list of project documents. **Licensed CC BY-SA 4.0.** |
 | [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON. See [Metadata](#metadata). |
-| [`derived/`](derived/README.md) | A 3.5 MB glTF of the C-JOB model, plus older, approximate material from vessel.js (2020): a textured visual model and a ship specification with hull offsets. For visualisation and teaching, not a source for dimensions. |
+| [`derived/`](derived/README.md) | A 3.6 MB glTF of the C-JOB model with parts grouped by SFI group and equipment matched to the C-JOB list, plus older, approximate material from vessel.js (2020): a textured visual model and a ship specification with hull offsets. For visualisation and teaching, not a source for dimensions. |
 | [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/). |
 | [`images/`](images/README.md) | Images used in this README. |
 
@@ -151,6 +151,8 @@ Values are kept as printed on each sheet, not silently corrected. Known differen
 | Tank list in the metadata | Does not reconcile with the capacity totals. Use `Tank Plan Rev1` (tanks 1–15, 202.42 m³ net) instead. |
 | Propulsion in the metadata | Inferred from geometry and wrong. The engine room arrangement identifies PM azimuth drives, port and starboard. |
 | Missing C-JOB deliverables | The C-JOB document list includes a freeboard calculation (`25.1142-000-020`) and a shell expansion drawing (`25.1142-100-123`) that are not in this repository. |
+| Main equipment list: duplicates | Items 77 and 85 are both a main deck crane, and items 78 and 86 both a CTD crane. Items 47 and 49 are both named "Port Side PM Azimuth Drive"; item 76 lists the same drives again as "Azipod 500 kW". |
+| Main engine rating | 450 kW in the list of main equipment (item 72); 475 kW on the engine room arrangement. |
 
 Found another one? [Report a data error](https://github.com/shiplab/gunnerus/issues/new?template=data-error.yml).
 

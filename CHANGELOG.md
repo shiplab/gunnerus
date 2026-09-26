@@ -7,7 +7,8 @@ Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [relea
 ### Added
 
 - `derived/`, a folder for files made by NTNU from the published material or brought in from earlier NTNU Shiplab projects, with a README giving source, method, limitations and licence for each file.
-- `derived/3d/gunnerus.glb`: a 3.5 MB simplified glTF of the C-JOB 3D model.
+- `derived/3d/gunnerus.glb`: a 3.6 MB simplified glTF of the C-JOB 3D model, with parts grouped by SFI group and 17 equipment items matched to the C-JOB list of main equipment; `derived/3d/gunnerus-parts.json` describes each part.
+- Website viewer: colour and filter by SFI group, presets, section cuts (from the bow, and at the centreline) and click-to-identify.
 - `derived/3d/gunnerus-visual.glb`: the textured visual model from vessel.js (2020), with textures compressed to WebP (31.8 MB → 10.9 MB).
 - `derived/vesseljs/gunnerus.json`: the vessel.js ship specification (hull offsets, decks, bulkheads, compartments and tanks), and `derived/vesseljs/offsets.csv` with the offsets in metres.
 - A *Related projects* section in the README, linking the vessel.js Gunnerus examples and the OpenBridge simulator demo.

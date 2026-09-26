@@ -103,6 +103,26 @@ p{margin:0}
 .stage canvas{display:block;width:100%;height:clamp(340px,56vw,600px);touch-action:none;cursor:grab}
 .stage canvas:active{cursor:grabbing}
 .stage .status{position:absolute;inset:0;display:grid;place-items:center;font:500 .85rem var(--mono);color:var(--ink-3);pointer-events:none;text-align:center;padding:24px}
+.explore{display:flex;flex-direction:column;gap:10px;padding:12px 14px 14px;border-top:1px solid var(--rule);background:var(--sheet)}
+.explore .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.explore .lbl{font:500 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-right:4px}
+.gchip{display:inline-flex;align-items:center;gap:7px;font:500 .82rem/1 var(--body);color:var(--ink-2);background:transparent;border:1px solid var(--rule);border-radius:999px;padding:6px 11px 6px 7px;cursor:pointer}
+.gchip:hover{border-color:var(--ink-3);color:var(--ink)}
+.gchip .sw{width:14px;height:14px;border-radius:50%;background:var(--c);border:1px solid rgba(0,0,0,.25);flex:none}
+.gchip b{font:600 .74rem/1 var(--mono);color:var(--ink)}
+.gchip[aria-pressed="false"]{opacity:.45}
+.gchip[aria-pressed="false"] .sw{background:transparent}
+.cut{display:inline-flex;align-items:center;gap:8px;font:500 .82rem var(--body);color:var(--ink-2)}
+.cut input[type=range]{width:min(260px,48vw);accent-color:var(--ntnu)}
+.cut output{font:500 .78rem var(--mono);color:var(--ink);min-width:6.5em}
+.pick{position:absolute;left:14px;top:14px;max-width:min(340px,calc(100% - 28px));background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:var(--shadow);padding:12px 34px 12px 14px;font-size:.9rem;display:grid;gap:4px}
+.pick .sfi{font:600 .72rem/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);display:flex;align-items:center;gap:6px}
+.pick .sfi i{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block}
+.pick b{font:600 1.1rem/1.2 var(--display)}
+.pick .it{font:.8rem var(--mono);color:var(--ink-2)}
+.pick .note{font-size:.78rem;color:var(--prop-ink)}
+.pick button{position:absolute;right:6px;top:6px;border:0;background:none;color:var(--ink-3);font-size:1.1rem;cursor:pointer;line-height:1;padding:4px}
+.explore .fine{font-size:.78rem;color:var(--ink-3)}
 .stage .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;border-top:1px solid var(--rule);background:var(--sheet)}
 .seg{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
 .seg button,.tog{font:500 .85rem/1 var(--body);color:var(--ink-2);background:transparent;border:0;padding:9px 12px;cursor:pointer}
@@ -113,7 +133,7 @@ p{margin:0}
 .bar .hint{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
 @media (max-width:640px){.bar .hint{display:none}}
 /* title block overlaid on viewer */
-.tblock{position:absolute;right:14px;top:14px;background:var(--sheet);border:1.5px solid var(--ink);font-family:var(--mono);font-size:.72rem;color:var(--ink);display:grid;grid-template-columns:auto auto;min-width:260px;box-shadow:var(--shadow)}
+.tblock{position:absolute;right:14px;top:14px;pointer-events:none;background:var(--sheet);border:1.5px solid var(--ink);font-family:var(--mono);font-size:.72rem;color:var(--ink);display:grid;grid-template-columns:auto auto;min-width:260px;box-shadow:var(--shadow)}
 .tblock div{padding:5px 9px;border-top:1px solid var(--ink)}
 .tblock div:nth-child(-n+2){border-top:0}
 .tblock div:nth-child(odd){border-right:1px solid var(--ink);color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-size:.66rem;display:flex;align-items:center}
@@ -289,7 +309,8 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
 
       <div class="stage" id="model">
         <canvas id="ship" aria-label="Interactive 3D model of R/V Gunnerus. Drag to rotate, scroll or pinch to zoom."></canvas>
-        <div class="status" id="status">Loading 3D model (3.5 MB)…</div>
+        <div class="status" id="status">Loading 3D model (3.6 MB)…</div>
+        <div class="pick" id="pick" hidden role="status" aria-live="polite"></div>
         <div class="tblock" aria-hidden="true">
           <div class="head">FF GUNNERUS · LNVZ</div>
           <div>Model</div><div>C-JOB 25.1142-000-113</div>
@@ -306,7 +327,22 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
           </div>
           <button type="button" class="tog" id="wl" aria-pressed="false">Waterline T = 2.50 m</button>
           <button type="button" class="tog" id="spin" aria-pressed="false">Rotate</button>
-          <span class="hint">Drag to orbit · scroll to zoom · right-drag to pan</span>
+          <span class="hint">Drag to orbit · scroll to zoom · right-drag to pan · click a part to identify it</span>
+        </div>
+        <div class="explore" aria-label="Explore the model">
+          <div class="row" id="groupChips" role="group" aria-label="Show or hide groups"><span class="lbl">SFI group</span></div>
+          <div class="row">
+            <span class="lbl">Show</span>
+            <div class="seg" role="group" aria-label="Presets">
+              <button type="button" data-preset="all" aria-pressed="true">Everything</button>
+              <button type="button" data-preset="equipment" aria-pressed="false">Equipment</button>
+              <button type="button" data-preset="structure" aria-pressed="false">Structure</button>
+            </div>
+            <button type="button" class="tog" id="colours" aria-pressed="true">SFI colours</button>
+            <button type="button" class="tog" id="half" aria-pressed="false">Cut at centreline</button>
+            <label class="cut">Cut from bow <input type="range" id="cutX" min="-1.2" max="35.4" step="0.1" value="35.4" aria-describedby="cutOut"> <output id="cutOut" for="cutX">off</output></label>
+          </div>
+          <p class="fine">Grouping and item numbers by NTNU, from the C-JOB <a href="https://github.com/shiplab/gunnerus/blob/main/extended/CJOB/docs/List%20of%20Main%20Equipment%20Rev0.pdf">list of main equipment</a>. <a href="https://github.com/shiplab/gunnerus/blob/main/derived/README.md">How the parts were grouped</a></p>
         </div>
       </div>
 
@@ -658,21 +694,69 @@ function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.wid
 new ResizeObserver(()=>resize()).observe(canvas);
 
 const loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-// The deployed site has the model at assets/; a local preview from the repo root finds it in ../derived/3d/.
+renderer.localClippingEnabled=true;
+// The deployed site has the files in assets/; a local preview from the repo root finds them in ../derived/3d/.
 const MODEL_URLS=["assets/gunnerus.glb","../derived/3d/gunnerus.glb"];
-function loadModel(i){loader.load(MODEL_URLS[i],onModel,onProgress,e=>{if(i+1<MODEL_URLS.length)loadModel(i+1);else{status.textContent="The 3D model could not be loaded. The model files are listed further down.";console.error(e)}});}
+const PARTS_URLS=["assets/gunnerus-parts.json","../derived/3d/gunnerus-parts.json"];
+const COLORS={hull:"#8fa3ad",super:"#eef1f3",g5:"#2f6fd0",g7:"#2ca58d",g2:"#7b5ea7",outfit:"#bfc6cc",g1:"#e4572e",g4:"#e0a526"};
+const PLAIN="#b9c3c8", STRUCTURE=["hull","super","outfit"];
+const parts={}, groups={}; let useColours=true, picked=null;
+const planeX=new THREE.Plane(new THREE.Vector3(-1,0,0),35.4), planeC=new THREE.Plane(new THREE.Vector3(0,0,-1),0);
+let planes=[];
+async function firstJson(urls){for(const u of urls){try{const r=await fetch(u);if(r.ok)return r.json()}catch(e){}}return null}
+function loadFirst(urls,i=0){return new Promise((res,rej)=>loader.load(urls[i],res,onProgress,e=>i+1<urls.length?loadFirst(urls,i+1).then(res,rej):rej(e)))}
 const onProgress=p=>{if(p.total)status.textContent=`Loading 3D model… ${Math.round(p.loaded/p.total*100)}%`};
-function onModel(g){
+function paint(){for(const p of Object.values(parts)){const base=useColours?COLORS[p.info.group_key]:PLAIN;p.mats.forEach(m=>{m.color.set(base);m.emissive.set(p===picked?"#f5c518":"#000000");m.emissiveIntensity=p===picked?0.55:0;})}}
+function applyVisibility(){for(const p of Object.values(parts))p.obj.visible=groups[p.info.group_key].on;
+  document.querySelectorAll(".gchip").forEach(b=>b.setAttribute("aria-pressed",groups[b.dataset.g].on));
+  if(picked&&!picked.obj.visible)pick(null);}
+function applyClip(){const x=+document.getElementById("cutX").value, on=x<35.35;planeX.constant=x;
+  document.getElementById("cutOut").textContent=on?`x = ${x.toFixed(1)} m`:"off";
+  planes=[...(on?[planeX]:[]),...(document.getElementById("half").getAttribute("aria-pressed")==="true"?[planeC]:[])];
+  for(const p of Object.values(parts))p.mats.forEach(m=>{m.clippingPlanes=planes;m.needsUpdate=true});}
+const pickEl=document.getElementById("pick");
+const esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function pick(p){picked=p;paint();
+  if(!p){pickEl.hidden=true;return}
+  const i=p.info, title=i.label?i.label.replace(" (identification tentative)",""):i.group;
+  pickEl.style.setProperty("--c",COLORS[i.group_key]);
+  pickEl.innerHTML=`<button type="button" aria-label="Close">×</button><span class="sfi"><i></i>SFI ${esc(i.sfi)} · ${esc(i.group)}</span><b>${esc(title)}</b>`+
+    (i.item?`<span class="it">C-JOB list item ${esc(i.item)}</span>`:"")+
+    (i.label&&i.label.includes("tentative")?`<span class="note">Identification tentative</span>`:"");
+  pickEl.hidden=false;pickEl.querySelector("button").onclick=()=>pick(null);}
+function preset(k){document.querySelectorAll("[data-preset]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.preset===k));
+  for(const g of Object.keys(groups))groups[g].on=k==="all"||(k==="equipment"?!STRUCTURE.includes(g):STRUCTURE.includes(g));applyVisibility();}
+// click (not drag) to identify
+const ray=new THREE.Raycaster(), ndc=new THREE.Vector2(); let down=null;
+canvas.addEventListener("pointerdown",e=>{down=[e.clientX,e.clientY]});
+canvas.addEventListener("pointerup",e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;
+  const r=canvas.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,camera);
+  const hits=ray.intersectObjects(Object.values(parts).filter(p=>p.obj.visible).map(p=>p.obj),true).filter(h=>planes.every(pl=>pl.distanceToPoint(h.point)>=0));
+  let o=hits[0]?.object;while(o&&!o.userData.part)o=o.parent;pick(o?o.userData.part:null);});
+
+Promise.all([loadFirst(MODEL_URLS),firstJson(PARTS_URLS)]).then(([g,table])=>{
   const ship=g.scene;let tris=0;
-  ship.traverse(o=>{if(o.isMesh){tris+=o.geometry.index?o.geometry.index.count/3:o.geometry.attributes.position.count/3;o.material.side=THREE.DoubleSide;}});
+  const byNode=Object.fromEntries((table||[]).map(t=>[t.node,t]));
+  ship.traverse(o=>{if(o.isMesh)tris+=o.geometry.index?o.geometry.index.count/3:o.geometry.attributes.position.count/3;
+    const info=byNode[o.name];
+    if(info&&!parts[o.name]){const mats=[];o.traverse(m=>{if(m.isMesh){m.material=m.material.clone();m.material.side=THREE.DoubleSide;mats.push(m.material)}});
+      o.userData.part=parts[o.name]={obj:o,info,mats};groups[info.group_key]??={on:true,sfi:info.sfi,name:info.group};}});
   scene.add(ship);
-  const box=new THREE.Box3().setFromObject(ship);box.getCenter(center);
-  const sph=box.getBoundingSphere(new THREE.Sphere());radius=sph.radius;
+  const box=new THREE.Box3().setFromObject(ship);box.getCenter(center);radius=box.getBoundingSphere(new THREE.Sphere()).radius;
   water.position.set(center.x,2.5,center.z);
   document.getElementById("triCount").textContent=`${Math.round(tris/1000)}k triangles`;
+  const chips=document.getElementById("groupChips");
+  if(!table){chips.closest(".explore").hidden=true}
+  for(const [k,gr] of Object.entries(groups)){const b=document.createElement("button");b.type="button";b.className="gchip";b.dataset.g=k;b.style.setProperty("--c",COLORS[k]);
+    b.innerHTML=`<span class="sw"></span><b>${esc(gr.sfi)}</b>${esc(gr.name)}`;b.setAttribute("aria-pressed","true");
+    b.onclick=()=>{gr.on=!gr.on;document.querySelectorAll("[data-preset]").forEach(x=>x.setAttribute("aria-pressed","false"));applyVisibility();};chips.appendChild(b);}
+  paint();applyClip();
   status.hidden=true;resize();setView("iso",true);
-}
-loadModel(0);
+}).catch(e=>{status.textContent="The 3D model could not be loaded. The model files are listed further down.";console.error(e)});
+document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>preset(b.dataset.preset));
+document.getElementById("colours").onclick=e=>{useColours=!useColours;e.currentTarget.setAttribute("aria-pressed",useColours);paint();};
+document.getElementById("half").onclick=e=>{const b=e.currentTarget;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");applyClip();};
+document.getElementById("cutX").oninput=applyClip;
 
 renderer.setAnimationLoop(t=>{resize();if(anim)anim(t);controls.update();renderer.render(scene,camera);});
 </script>
