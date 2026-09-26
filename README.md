@@ -159,6 +159,7 @@ Found another one? [Report a data error](https://github.com/shiplab/gunnerus/iss
 The Gunnerus data is used in [vessel.js](https://vesseljs.org/), NTNU Shiplab's open-source JavaScript library for ship design and simulation ([source](https://github.com/shiplab/vesseljs)). Its examples include:
 
 - [Gunnerus browser](https://github.com/shiplab/vesseljs/blob/dev/examples/Gunnerus_Browser.html) and [complete Gunnerus example](https://github.com/shiplab/vesseljs/blob/dev/examples/Gunnerus_Complete_Example.html): the 3D model with the ship specification
+- [**OpenBridge simulator demo**](https://shiplab.github.io/openbridge/index.html): pilot Gunnerus through Trondheim harbour from an OpenBridge bridge interface, with the WASD keys. Also for [Ålesund](https://shiplab.github.io/openbridge/alesund.html), and [Ålesund with AIS traffic](https://shiplab.github.io/openbridge/alesund_with_ais.html). By Felipe Ferrari, supervised by Henrique M. Gaspar and Ícaro A. Fonseca; interface by the Ocean Industries Concept Lab (OpenBridge); Gunnerus model by IHB NTNU; Trondheim terrain by Trondheim municipality ([source](https://github.com/shiplab/openbridge)).
 - [Manoeuvring](https://github.com/shiplab/vesseljs/blob/dev/examples/manoeuvring.html) and [Trondheim](https://github.com/shiplab/vesseljs/blob/dev/examples/trondheim.html) simulations
 - [From concept to simulation](https://github.com/shiplab/vesseljs/tree/dev/examples/observable_examples/from_concept_to_simulation_intro), a course that takes Gunnerus through each step of a digital design process
 

@@ -65,7 +65,7 @@ A visual 3D model of R/V Gunnerus, made in Blender, with textures in the vessel'
 | Units and axes | Metres, Y up. Length along Z, centred on the origin (about ±18.2 m). The origin differs from `gunnerus.glb`. |
 | Required extensions | `EXT_texture_webp` |
 
-**Origin.** Taken from the vessel.js repository (`examples/3D_models/GLTF/Gunnerus.glb`), where it was added by Felipe Ferrari in 2020. The original modeller is not recorded. Its length matches the ship after the lengthening.
+**Origin.** Made by [IHB NTNU](https://www.ntnu.edu/ihb) (Department of Ocean Operations and Civil Engineering), as credited in the [OpenBridge simulator demo](https://shiplab.github.io/openbridge/index.html). Taken from the vessel.js repository (`examples/3D_models/GLTF/Gunnerus.glb`), where it was added by Felipe Ferrari in 2020; the OpenBridge demo uses the same file. Its length matches the ship after the lengthening.
 
 **Changes made here.** Textures converted from PNG to WebP (quality 75) and unused data removed with [glTF-Transform](https://gltf-transform.dev/) (`dedup`, `prune`, `webp`). This takes the file from 31.8 MB to 10.9 MB. Geometry, materials and part names are unchanged.
 
@@ -108,5 +108,5 @@ Derivative works of the repository material, under the same terms: **CC BY-NC 4.
 
 For the vessel.js files, credit them as:
 
-> Gunnerus open data, published by NTNU. Visual model and ship specification from the vessel.js project (NTNU Shiplab), added by Felipe Ferrari, 2020.
+> Gunnerus open data, published by NTNU. Visual model by IHB NTNU; ship specification by Felipe Ferrari (vessel.js, NTNU Shiplab, 2020).
 > Licensed under CC BY-NC 4.0 — https://creativecommons.org/licenses/by-nc/4.0/
