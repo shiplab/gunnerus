@@ -46,7 +46,7 @@ jobs:
           mkdir -p _site/metadata
           cp metadata/gunnerus_metadata.json _site/metadata/
           mkdir -p _site/assets
-          cp derived/3d/gunnerus.glb _site/assets/gunnerus.glb
+          cp derived/3d/gunnerus.glb derived/3d/gunnerus-parts.json _site/assets/
           touch _site/.nojekyll
 
       - uses: actions/configure-pages@v5
