@@ -2,6 +2,20 @@
 
 Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [releases](https://github.com/shiplab/gunnerus/releases); each release is archived on Zenodo with its own DOI.
 
+## [Unreleased] – planned as 1.1.0
+
+### Added
+
+- `derived/`, a folder for files made by NTNU from the published material or brought in from earlier NTNU Shiplab projects, with a README giving source, method, limitations and licence for each file.
+- `derived/3d/gunnerus.glb`: a 3.5 MB simplified glTF of the C-JOB 3D model.
+- `derived/3d/gunnerus-visual.glb`: the textured visual model from vessel.js (2020), with textures compressed to WebP (31.8 MB → 10.9 MB).
+- `derived/vesseljs/gunnerus.json`: the vessel.js ship specification (hull offsets, decks, bulkheads, compartments and tanks), and `derived/vesseljs/offsets.csv` with the offsets in metres.
+- A *Related projects* section in the README, linking the vessel.js Gunnerus examples.
+
+### Changed
+
+- The website now takes its 3D model from `derived/3d/gunnerus.glb`; the duplicate `pages/assets/gunnerus.glb` was removed.
+
 ## [1.0.0] – unreleased
 
 First public release.
@@ -22,4 +36,5 @@ First public release.
 - Preview images moved from `docs/images/` to `images/`.
 - `Safety Fire Zone Plan Rev0.dwg` and `Construction Plan Deck and Double Bottom Rev0.dwg` were renamed to match their DXF and PDF siblings.
 
+[Unreleased]: https://github.com/shiplab/gunnerus/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/shiplab/gunnerus/releases/tag/v1.0.0

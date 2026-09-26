@@ -86,7 +86,7 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 | [`extended/CJOB/3d models/`](<extended/CJOB/3d models/README.md>) | 3D CAD model of the hull and superstructure: Rhino `.3dm` (~396 MB) and STEP `.stp` (~728 MB), stored with Git LFS. |
 | [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | C-JOB engineering documents: weight calculation (411.79 t light ship), gross and net tonnage calculation, specification, list of main equipment, list of project documents. **Licensed CC BY-SA 4.0.** |
 | [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON. See [Metadata](#metadata). |
-| [`derived/`](derived/README.md) | Files made by NTNU from the published material, such as a 3.5 MB glTF version of the 3D model for web viewers and teaching. Simplified, so not a source for dimensions. |
+| [`derived/`](derived/README.md) | Files made by NTNU from the published material or earlier Shiplab projects: a 3.5 MB glTF of the C-JOB model, a textured visual model, and the vessel.js ship specification with hull offsets as CSV. For visualisation and teaching, not a source for dimensions. |
 | [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/). |
 | [`images/`](images/README.md) | Images used in this README. |
 
@@ -149,6 +149,16 @@ Values are kept as printed on each sheet, not silently corrected. Known differen
 | Missing C-JOB deliverables | The C-JOB document list includes a freeboard calculation (`25.1142-000-020`) and a shell expansion drawing (`25.1142-100-123`) that are not in this repository. |
 
 Found another one? [Report a data error](https://github.com/shiplab/gunnerus/issues/new?template=data-error.yml).
+
+## Related projects
+
+The Gunnerus data is used in [vessel.js](https://vesseljs.org/), NTNU Shiplab's open-source JavaScript library for ship design and simulation ([source](https://github.com/shiplab/vesseljs)). Its examples include:
+
+- [Gunnerus browser](https://github.com/shiplab/vesseljs/blob/dev/examples/Gunnerus_Browser.html) and [complete Gunnerus example](https://github.com/shiplab/vesseljs/blob/dev/examples/Gunnerus_Complete_Example.html): the 3D model with the ship specification
+- [Manoeuvring](https://github.com/shiplab/vesseljs/blob/dev/examples/manoeuvring.html) and [Trondheim](https://github.com/shiplab/vesseljs/blob/dev/examples/trondheim.html) simulations
+- [From concept to simulation](https://github.com/shiplab/vesseljs/tree/dev/examples/observable_examples/from_concept_to_simulation_intro), a course that takes Gunnerus through each step of a digital design process
+
+The visual model and ship specification from those examples are also in [`derived/`](derived/README.md).
 
 ## Licence
 
