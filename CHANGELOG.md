@@ -11,6 +11,7 @@ Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [relea
 - `derived/3d/gunnerus-visual.glb`: the textured visual model from vessel.js (2020), with textures compressed to WebP (31.8 MB → 10.9 MB).
 - `derived/vesseljs/gunnerus.json`: the vessel.js ship specification (hull offsets, decks, bulkheads, compartments and tanks), and `derived/vesseljs/offsets.csv` with the offsets in metres.
 - A *Related projects* section in the README, linking the vessel.js Gunnerus examples.
+- A photo of the vessel (2014, Fredrik Skoglund) in the README, and a render of the visual model in `derived/3d/`.
 
 ### Changed
 

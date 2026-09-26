@@ -2,10 +2,17 @@
 
 Files made by NTNU from the material in this repository, or brought in from earlier NTNU Shiplab projects. They are conversions and simplifications, not new engineering data. For accurate values, always go back to the source files named below.
 
+> [!IMPORTANT]
+> The files come from two different sources, with different precision:
+>
+> - **Made from this data set:** `3d/gunnerus.glb` is converted directly from the C-JOB 3D model published here.
+> - **Older vessel.js material (2020):** `3d/gunnerus-visual.glb`, `3d/gunnerus-visual-preview.jpg`, `vesseljs/gunnerus.json` and `vesseljs/offsets.csv` were made for the vessel.js software examples, years before this data set. They were not made from the drawings published here and are approximate. Expect differences in dimensions, hull form, tanks and rooms. Use them for visualisation, software testing and teaching, not as reference data.
+
 | File | Made from | Purpose |
 | --- | --- | --- |
 | [`3d/gunnerus.glb`](3d/gunnerus.glb) | [`extended/CJOB/3d models/Gunnerus 3D Model Rev0.3dm`](<../extended/CJOB/3d models/README.md>) (C-JOB) | Lightweight 3D model for web viewers, visualisation and teaching. Used by the [website](https://shiplab.github.io/gunnerus/#model). |
 | [`3d/gunnerus-visual.glb`](3d/gunnerus-visual.glb) | The Gunnerus model in [vessel.js](https://github.com/shiplab/vesseljs) (2020) | Textured visual model in the vessel's paint scheme, with named parts. For rendering, simulators and presentations. |
+| [`3d/gunnerus-visual-preview.jpg`](3d/gunnerus-visual-preview.jpg) | `3d/gunnerus-visual.glb` | A render of the visual model at sea, from the vessel.js simulator examples. |
 | [`vesseljs/gunnerus.json`](vesseljs/gunnerus.json) | The Gunnerus ship specification in [vessel.js](https://github.com/shiplab/vesseljs) (2020) | Hull offsets, decks, bulkheads, compartments and tanks in the vessel.js format, for hydrostatics and design exercises. |
 | [`vesseljs/offsets.csv`](vesseljs/offsets.csv) | `vesseljs/gunnerus.json` | The same hull offsets in metres, as a plain table. |
 
@@ -61,6 +68,10 @@ A visual 3D model of R/V Gunnerus, made in Blender, with textures in the vessel'
 **Origin.** Taken from the vessel.js repository (`examples/3D_models/GLTF/Gunnerus.glb`), where it was added by Felipe Ferrari in 2020. The original modeller is not recorded. Its length matches the ship after the lengthening.
 
 **Changes made here.** Textures converted from PNG to WebP (quality 75) and unused data removed with [glTF-Transform](https://gltf-transform.dev/) (`dedup`, `prune`, `webp`). This takes the file from 31.8 MB to 10.9 MB. Geometry, materials and part names are unchanged.
+
+![The visual model rendered at sea in a vessel.js simulator scene](3d/gunnerus-visual-preview.jpg)
+
+*`gunnerus-visual-preview.jpg`: the model in a vessel.js simulator scene (from `images/Gunnerus.jpg` in vessel.js).*
 
 **Limitations.** This is an artist's model for visualisation. It is not built from the production drawings, so do not take dimensions or arrangements from it.
 

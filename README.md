@@ -86,7 +86,7 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 | [`extended/CJOB/3d models/`](<extended/CJOB/3d models/README.md>) | 3D CAD model of the hull and superstructure: Rhino `.3dm` (~396 MB) and STEP `.stp` (~728 MB), stored with Git LFS. |
 | [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | C-JOB engineering documents: weight calculation (411.79 t light ship), gross and net tonnage calculation, specification, list of main equipment, list of project documents. **Licensed CC BY-SA 4.0.** |
 | [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON. See [Metadata](#metadata). |
-| [`derived/`](derived/README.md) | Files made by NTNU from the published material or earlier Shiplab projects: a 3.5 MB glTF of the C-JOB model, a textured visual model, and the vessel.js ship specification with hull offsets as CSV. For visualisation and teaching, not a source for dimensions. |
+| [`derived/`](derived/README.md) | A 3.5 MB glTF of the C-JOB model, plus older, approximate material from vessel.js (2020): a textured visual model and a ship specification with hull offsets. For visualisation and teaching, not a source for dimensions. |
 | [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/). |
 | [`images/`](images/README.md) | Images used in this README. |
 
@@ -114,6 +114,10 @@ The file is derived from the general arrangement alone, not from class documents
 ## The vessel
 
 [R/V Gunnerus](https://www.ntnu.edu/gunnerus) is a research vessel owned and operated by the Norwegian University of Science and Technology (NTNU). In service since 2006 and based in Trondheim, she supports research and teaching in biology, technology, geology, archaeology, oceanography and fisheries, with dynamic positioning, cranes and winches for deploying sampling equipment and underwater robotics. NTNU's [vessel pages](https://www.ntnu.edu/gunnerus) carry booking information, technical specifications and live position tracking.
+
+![R/V Gunnerus at sea, seen from starboard](images/gunnerus-photo-2014.jpg)
+
+*R/V Gunnerus in 2014, before she was lengthened. Photo: Fredrik Skoglund.*
 
 Main particulars as stated on the lines plan:
 
@@ -158,13 +162,13 @@ The Gunnerus data is used in [vessel.js](https://vesseljs.org/), NTNU Shiplab's 
 - [Manoeuvring](https://github.com/shiplab/vesseljs/blob/dev/examples/manoeuvring.html) and [Trondheim](https://github.com/shiplab/vesseljs/blob/dev/examples/trondheim.html) simulations
 - [From concept to simulation](https://github.com/shiplab/vesseljs/tree/dev/examples/observable_examples/from_concept_to_simulation_intro), a course that takes Gunnerus through each step of a digital design process
 
-The visual model and ship specification from those examples are also in [`derived/`](derived/README.md).
+These examples date from 2020, before this data set was published. Their Gunnerus model and data are simplified approximations made for software demonstrations, and they do not match the drawings here precisely. The visual model and ship specification from those examples are also in [`derived/`](derived/README.md), marked as such.
 
 ## Licence
 
 The material in this repository is licensed under **[Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)**. The full text is in [LICENSE](LICENSE).
 
-**Exception:** the C-JOB engineering documents in [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) are licensed **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**.
+**Exceptions:** the photo `images/gunnerus-photo-2014.jpg` (Fredrik Skoglund) is not covered by the CC licence; credit the photographer. The C-JOB engineering documents in [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) are licensed **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**.
 
 - **Non-commercial use is open.** You may use, share and adapt the material for research, teaching and other non-commercial activities.
 - **Commercial use needs approval** from [polarkonsult](https://www.polarkonsult.com/).
