@@ -195,12 +195,6 @@ If you use this data set in a publication, please cite it. GitHub's **Cite this 
 
 Corrections are welcome. To report a wrong value, a mismatch between sheets or a broken file, [open a data error issue](https://github.com/shiplab/gunnerus/issues/new?template=data-error.yml) and say which drawing and which part of the sheet it concerns. Changes between releases are listed in [CHANGELOG.md](CHANGELOG.md).
 
-## Contact
-
-- Data set questions (NTNU): Henrique Gaspar, henrique.gaspar@ntnu.no
-- Commercial use requests: [polarkonsult](https://www.polarkonsult.com/)
-- C-JOB drawings and documents: [C-JOB](https://c-job.com/contact-us/nikolayev/)
-
 ## Acknowledgements
 
 The drawings and design data are courtesy of [polarkonsult](https://www.polarkonsult.com/), the designer of R/V Gunnerus. The derivative drawings, 3D model and engineering documents in `extended/CJOB/` were made by [C-JOB](https://c-job.com/) with NTNU. The data set is published by [NTNU](https://www.ntnu.edu/).
