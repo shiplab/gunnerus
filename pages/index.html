@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gunnerus Open Data</title>
-<meta name="description" content="Production drawings, a 3D model, engineering documents and structured metadata for the NTNU research vessel R/V Gunnerus, published openly for research and teaching.">
+<meta name="description" content="Production drawings, a 3D model, engineering documents, structured metadata and operational data for the NTNU research vessel R/V Gunnerus, published openly for research and teaching.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -68,7 +68,7 @@ p{margin:0}
 .brand .fallback{font:700 1.4rem/1 var(--body);letter-spacing:.02em;color:var(--ntnu)}
 .brand .sep{width:1px;height:26px;background:var(--rule)}
 .brand .name{font:600 1.1rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
-.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav{display:flex;gap:2px;margin-left:auto;flex-wrap:nowrap;white-space:nowrap}
 .nav a{font:500 .95rem/1 var(--body);color:var(--ink-2);text-decoration:none;padding:8px 10px;border-radius:6px}
 .nav a:hover{background:var(--rule-2);color:var(--ink)}
 .gh{display:inline-flex;align-items:center;gap:8px;font:600 .9rem/1 var(--body);color:#fff;background:var(--ntnu);padding:10px 14px;border-radius:6px;text-decoration:none;white-space:nowrap}
@@ -76,7 +76,7 @@ p{margin:0}
 :root[data-theme="dark"] .gh{color:#0c151d}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gh{color:#0c151d}}
 .gh svg{width:16px;height:16px;fill:currentColor}
-@media (max-width:860px){.nav{display:none}.top .gh{margin-left:auto}}
+@media (max-width:1040px){.nav{display:none}.top .gh{margin-left:auto}}
 @media (max-width:420px){.brand .sep,.brand .name{display:none}}
 
 /* hero */
@@ -253,6 +253,40 @@ dialog.lb::backdrop{background:rgba(8,16,24,.82)}
 .copy{margin-top:10px;font:600 .9rem var(--body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:6px;padding:9px 12px;cursor:pointer}
 .copy:hover{border-color:var(--ink-3)}
 
+/* operational */
+.op-card{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;margin-bottom:24px}
+@media (max-width:900px){.op-card{grid-template-columns:minmax(0,1fr)}}
+.op-card .facts{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-top:14px;font-size:.95rem}
+.op-card .facts dt{font:500 .68rem/1.9 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.op-card .facts dd{margin:0;color:var(--ink-2)}
+.op-card .find{border-left:3px solid var(--ntnu);padding:4px 0 4px 16px;font-size:1.05rem;color:var(--ink)}
+.op-card .find b{font-family:var(--display);font-size:1.35rem;font-weight:600}
+.op-card .cite{font:.8rem/1.5 var(--mono);color:var(--ink-3);margin-top:12px;overflow-wrap:anywhere}
+.chart{position:relative;padding:18px 18px 12px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .ax{font:500 11px var(--mono);fill:var(--ink-3)}
+.chart .lab{font:600 12px var(--body);fill:var(--ink-2)}
+.chart .cl{font:500 11px var(--mono);fill:var(--ink-2)}
+.chart .gl{stroke:var(--rule-2);stroke-width:1}
+.chart .band{fill:var(--rule-2)}
+.chart .band.on{fill:var(--ntnu-wash)}
+.chart .s1{fill:none;stroke:var(--ntnu);stroke-width:1.5;stroke-linejoin:round}
+.chart .s1.thin{stroke-width:.8}
+.chart .s2{stroke:var(--prop-ink);stroke-width:3;stroke-linecap:butt}
+.chart .dot{fill:var(--ntnu);stroke:var(--sheet);stroke-width:1.5}
+.chart .xh{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:3 3}
+.chart .tip{position:absolute;pointer-events:none;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:var(--shadow);padding:10px 12px;font-size:.85rem;min-width:180px;display:grid;gap:3px;z-index:2}
+.chart .tip .t{font:500 .72rem var(--mono);color:var(--ink-3)}
+.chart .tip .r{display:flex;justify-content:space-between;gap:14px}
+.chart .tip .r span{color:var(--ink-2)}
+.chart .tip .r b{font-variant-numeric:tabular-nums;font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.85rem;color:var(--ink-2);padding:0 18px 14px}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+#caseTbl tbody tr{cursor:pointer}
+#caseTbl tbody tr:hover td,#caseTbl tbody tr.on td{background:var(--ntnu-wash)}
+#caseTbl td:first-child{padding-left:8px}
+#caseTbl th:first-child{padding-left:8px}
+
 footer{margin-top:clamp(64px,9vw,110px);border-top:1px solid var(--rule);padding-block:28px 40px;background:var(--sheet)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;font-size:.9rem;color:var(--ink-2)}
 footer .brand img{height:22px}
@@ -277,6 +311,7 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
       <a href="#drawings">Drawings</a>
       <a href="#documents">Documents</a>
       <a href="#metadata">Metadata</a>
+      <a href="#operational">Operational</a>
       <a href="#licence">Licence</a>
     </nav>
     <a class="gh" href="https://github.com/shiplab/gunnerus">
@@ -293,7 +328,7 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
         <div>
           <p class="eyebrow">NTNU open ship data · CC BY-NC 4.0</p>
           <h1><span class="rv">R/V</span> Gunnerus</h1>
-          <p class="lede">A real, working research vessel, documented in full and published openly. Production drawings, a 3D model, engineering documents and structured metadata, ready for research, teaching and tool development.</p>
+          <p class="lede">A real, working research vessel, documented in full and published openly. Production drawings, a 3D model, engineering documents, structured metadata and data measured at sea, ready for research, teaching and tool development.</p>
           <div class="cta">
             <a class="btn primary" href="#drawings">Browse the drawings</a>
             <a class="btn" href="https://github.com/shiplab/gunnerus/archive/refs/heads/main.zip">Download the repository (.zip)</a>
@@ -483,6 +518,59 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
     </div>
   </section>
 
+  <section class="block" id="operational">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">operational/ · measured at sea</p>
+        <h2>Gunnerus at work</h2>
+        <p class="lede">Measurements from the vessel in service: ship motion, machinery, crane and the sea around her. Each case comes from a published study, and the study is the reference for how it was done and what it found.</p>
+      </div>
+
+      <div class="op-card">
+        <div class="panel">
+          <p class="role" style="font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-bottom:10px">Study · 31 October 2023</p>
+          <h3 style="font-size:1.6rem">Wave-shielding experiment</h3>
+          <p style="color:var(--ink-2);margin-top:8px">Holding position on DP in Breisundet, west of Ålesund, Gunnerus was turned in seven 15° steps between two wind seas nearly 90° apart, while a wave buoy measured the calmer water on her lee side and an accelerometer measured the crane hook.</p>
+          <dl class="facts">
+            <dt>Window</dt><dd>10:00–12:10 UTC, seven cases of about 15 minutes</dd>
+            <dt>Sensors</dt><dd>Seapath GNSS + MRU, DP wind, Palfinger crane angles, azimuth and tunnel thrusters, engines, Miros wave radar and RangeFinder, crane-hook accelerometer, LainePoiss wave buoy (50 Hz)</dd>
+            <dt>Data</dt><dd>Eight CSV files, about 16 MB, with a data dictionary and the extraction script</dd>
+          </dl>
+        </div>
+        <div class="panel" style="display:flex;flex-direction:column;gap:12px">
+          <p class="find"><b>165–180°</b> to the main wave gave the least crane motion and a reasonably calm lee. At 90–120° the shelter was most effective, but the crane moved more.</p>
+          <p class="cite" id="opCite">Wang, T., Skulstad, R., Holmeset, F.T., Halse, K.H., Hildre, H.P., Zhang, H. (2025). Full-scale experimental research on wave shielding effect of RV Gunnerus for offshore operations. <i>Ocean Engineering</i> 320, 120189. <a href="https://doi.org/10.1016/j.oceaneng.2024.120189">doi:10.1016/j.oceaneng.2024.120189</a></p>
+          <p style="font-size:.9rem;color:var(--ink-2)">Experiment, set-up and results: the paper above. Dataset organised by <b>Jisang Ha</b> and <b>Henrique M. Gaspar</b> (NTNU).</p>
+          <div class="cta" style="margin-top:auto">
+            <a class="btn primary" href="https://github.com/shiplab/gunnerus/tree/main/operational/wave-shielding-2023">Open the case on GitHub</a>
+            <a class="btn" href="https://doi.org/10.1016/j.oceaneng.2024.120189">Read the paper</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="padding:0">
+        <div class="chart" id="opChart"><p class="muted" id="opStatus" style="font:.85rem var(--mono)">Loading the operational data…</p></div>
+        <div class="legend" id="opLegend" hidden>
+          <span><i style="background:var(--ntnu)"></i>Measured on board</span>
+          <span><i style="background:var(--prop-ink);height:4px"></i>Sheltered side, per case (paper, Table 5)</span>
+          <span><i style="background:var(--rule-2);height:10px;width:14px"></i>Case windows; gaps are the turns</span>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:24px">
+        <h3>Seven headings, case by case</h3>
+        <p>Angles from the paper (Table 3). Motion statistics are standard deviations over each case, computed from the published files. Click a row to highlight the case above.</p>
+        <div class="scroll"><table class="tbl" id="caseTbl"></table></div>
+      </div>
+
+      <div class="panel" style="margin-top:24px">
+        <h3>Files</h3>
+        <p>All times UTC. Units and sources for every column are in <a href="https://github.com/shiplab/gunnerus/blob/main/operational/wave-shielding-2023/channels.csv"><span class="mono">channels.csv</span></a>; processing and known issues in the <a href="https://github.com/shiplab/gunnerus/blob/main/operational/wave-shielding-2023/README.md">case README</a>.</p>
+        <div class="scroll"><table class="tbl" id="opFiles"></table></div>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="licence">
     <div class="wrap">
       <div class="sec-head">
@@ -644,6 +732,108 @@ async function loadMeta(){
   showTab(tabs[0]);
 }
 loadMeta();
+</script>
+
+<script>
+/* operational: wave-shielding case (data: assets/operational/wave-shielding-2023.json, made by operational/wave-shielding-2023/scripts/extract.py web) */
+(()=>{
+const OPDIR="operational/wave-shielding-2023";
+const DESC={
+ "vessel_1hz.csv.gz":"Position, heading, roll, pitch, heave, speed, wind, crane angles, thrusters, engines · 1 Hz",
+ "seapath_2hz.csv.gz":"Seapath motion, velocities and position · 2 Hz",
+ "crane_tip_imu.csv.gz":"Crane-hook accelerometer, gyro and attitude · ~17 Hz",
+ "wave_buoy_50hz.csv.gz":"Wave buoy on the sheltered side · 50 Hz",
+ "wave_buoy_params.csv":"Buoy wave parameters, ~22-min blocks",
+ "wave_radar_params.csv":"Miros WaveX and RangeFinder wave parameters · ~1/min",
+ "wave_radar_spectra.csv.gz":"Miros directional spectra, 36 directions × 32 frequencies",
+ "air_gap_2hz.csv.gz":"RangeFinder air gap · 2 Hz"};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const size=b=>b<1e6?`${Math.max(1,Math.round(b/1e3))} kB`:`${(b/1e6).toFixed(1)} MB`;
+const NS="http://www.w3.org/2000/svg";
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+let sel=0, bands=[];
+
+async function load(){
+  const urls=["assets/operational/wave-shielding-2023.json","../pages/assets/operational/wave-shielding-2023.json"];
+  for(const u of urls){try{const r=await fetch(u);if(r.ok)return r.json()}catch(e){}}
+  return null;
+}
+function hhmm(t0,s){const d=new Date(Date.parse(t0)+s*1000);return d.toISOString().slice(11,16)}
+function hhmmss(t0,s){const d=new Date(Date.parse(t0)+s*1000);return d.toISOString().slice(11,19)}
+
+function draw(D){
+  const box=document.getElementById("opChart"); box.innerHTML="";
+  const W=Math.max(300,Math.round(box.clientWidth-36)), narrow=W<700, L=narrow?44:64, R=12, T=narrow?44:26, PH=narrow?96:110, GAP=26, N=3, H=T+N*PH+(N-1)*GAP+34;
+  const span=(Date.parse(D.t1)-Date.parse(D.t0))/1000, x=s=>L+(W-L-R)*s/span;
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":"Heading, roll and wave height over the seven cases, 31 October 2023, 10:00 to 12:10 UTC"},box);
+  const dt=D.series.dt_s, hd=D.series.heading_deg, rl=D.series.roll_deg;
+  const panels=[
+    {lab:"Heading (°)",lo:60,hi:180,ticks:[75,100,125,150,175]},
+    {lab:"Roll (°)",lo:-8,hi:8,ticks:[-5,0,5]},
+    {lab:"Hs (m)",lo:.6,hi:.8,ticks:[.6,.65,.7,.75,.8]}];
+  const y=(p,i,v)=>T+i*(PH+GAP)+PH*(1-(v-p.lo)/(p.hi-p.lo));
+  bands=[];
+  D.cases.forEach(c=>{bands.push(panels.map((p,i)=>el("rect",{class:"band",x:x(c.start_s),y:T+i*(PH+GAP),width:x(c.end_s)-x(c.start_s),height:PH},svg)));
+    const t=el("text",{class:"cl",x:(x(c.start_s)+x(c.end_s))/2,y:T-8,"text-anchor":"middle"},svg);t.textContent=narrow?c.case:`Case ${c.case}`;});
+  panels.forEach((p,i)=>{
+    p.ticks.forEach(v=>{el("line",{class:"gl",x1:L,x2:W-R,y1:y(p,i,v),y2:y(p,i,v)},svg);const t=el("text",{class:"ax",x:L-8,y:y(p,i,v)+4,"text-anchor":"end"},svg);t.textContent=v});
+    const lt=el("text",{class:"lab",x:0,y:T+i*(PH+GAP)-(i===0&&narrow?26:8)},svg);lt.textContent=p.lab;
+  });
+  const path=(arr,p,i)=>{let d="",pen=false;arr.forEach((v,k)=>{if(v==null){pen=false;return}const X=x(k*dt).toFixed(1),Y=y(p,i,Math.max(p.lo,Math.min(p.hi,v))).toFixed(1);d+=(pen?"L":"M")+X+" "+Y;pen=true});return d};
+  el("path",{class:"s1",d:path(hd,panels[0],0)},svg);
+  el("path",{class:"s1 thin",d:path(rl,panels[1],1)},svg);
+  const ih=D.incident_hs;
+  el("path",{class:"s1",d:ih.t_s.map((t,k)=>(k?"L":"M")+x(t).toFixed(1)+" "+y(panels[2],2,ih.hs_m[k]).toFixed(1)).join("")},svg);
+  ih.t_s.forEach((t,k)=>el("circle",{class:"dot",cx:x(t),cy:y(panels[2],2,ih.hs_m[k]),r:2.6},svg));
+  D.cases.forEach(c=>el("line",{class:"s2",x1:x(c.start_s),x2:x(c.end_s),y1:y(panels[2],2,c.sheltered_hs_m),y2:y(panels[2],2,c.sheltered_hs_m)},svg));
+  const yb=T+N*PH+(N-1)*GAP;
+  for(let s=0;s<=span;s+=narrow?1800:900){el("line",{class:"gl",x1:x(s),x2:x(s),y1:yb,y2:yb+5},svg);const t=el("text",{class:"ax",x:x(s),y:yb+20,"text-anchor":"middle"},svg);t.textContent=hhmm(D.t0,s)}
+  // hover
+  const xh=el("line",{class:"xh",y1:T,y2:yb,x1:-10,x2:-10,visibility:"hidden"},svg);
+  const hit=el("rect",{x:L,y:0,width:W-L-R,height:yb,fill:"transparent"},svg);
+  const tip=document.createElement("div");tip.className="tip";tip.hidden=true;box.appendChild(tip);
+  const near=s=>{let b=null,bd=1e9;ih.t_s.forEach((t,k)=>{const d=Math.abs(t-s);if(d<bd){bd=d;b=k}});return bd<90?ih.hs_m[b]:null};
+  function move(ev){
+    const pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+    const s=Math.max(0,Math.min(span,(p.x-L)/(W-L-R)*span)),k=Math.round(s/dt),c=D.cases.find(c=>s>=c.start_s&&s<c.end_s);
+    xh.setAttribute("x1",x(k*dt));xh.setAttribute("x2",x(k*dt));xh.setAttribute("visibility","visible");
+    const hs=near(s),f=(v,n,u)=>v==null?"–":`${v.toFixed(n)}${u}`,val=a=>{for(let j=0;j<4;j++){if(a[k+j]!=null)return a[k+j];if(a[k-j]!=null)return a[k-j]}return null};
+    tip.innerHTML=`<div class="t">${hhmmss(D.t0,k*dt)} UTC · ${c?`case ${c.case}`:"turning"}</div>
+      <div class="r"><span>Heading</span><b>${f(val(hd),1,"°")}</b></div>
+      <div class="r"><span>Roll</span><b>${f(val(rl),2,"°")}</b></div>
+      <div class="r"><span>Hs incident</span><b>${f(hs,2," m")}</b></div>
+      ${c?`<div class="r"><span>Hs sheltered (case)</span><b>${c.sheltered_hs_m.toFixed(2)} m</b></div>`:""}`;
+    tip.hidden=false;
+    const bx=box.getBoundingClientRect(),px=ev.clientX-bx.left,tw=tip.offsetWidth;
+    tip.style.left=(px+16+tw>bx.width?px-16-tw:px+16)+"px";tip.style.top=Math.max(8,ev.clientY-bx.top-40)+"px";
+  }
+  hit.addEventListener("pointermove",move);hit.addEventListener("pointerdown",move);
+  hit.addEventListener("pointerleave",()=>{tip.hidden=true;xh.setAttribute("visibility","hidden")});
+  hit.addEventListener("click",ev=>{const pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());const s=(p.x-L)/(W-L-R)*span;const c=D.cases.find(c=>s>=c.start_s&&s<c.end_s);highlight(c?c.case:0)});
+}
+function highlight(n){
+  sel=sel===n?0:n;
+  bands.forEach((b,i)=>b.forEach(r=>r.classList.toggle("on",sel===i+1)));
+  document.querySelectorAll("#caseTbl tbody tr").forEach((tr,i)=>tr.classList.toggle("on",sel===i+1));
+}
+function tables(D){
+  const f=(v,n)=>v==null?'<span class="muted">–</span>':v.toFixed(n);
+  document.getElementById("caseTbl").innerHTML=`<thead><tr><th>Case</th><th>UTC</th><th>Angle to wave 1</th><th>Angle to wave 2</th><th>Heading</th><th>Roll σ</th><th>Pitch σ</th><th>Heave σ</th><th>Crane hook σ</th><th>Sheltered Hs</th></tr></thead><tbody>`+
+   D.cases.map(c=>`<tr data-c="${c.case}"><td class="num"><b>${c.case}</b></td><td class="num mono">${hhmm(D.t0,c.start_s)}–${hhmm(D.t0,c.end_s)}</td><td class="num">${c.angle_wave1_deg}°</td><td class="num">${c.angle_wave2_deg}°</td><td class="num">${c.heading_deg.toFixed(1)}°</td><td class="num">${f(c.roll_std_deg,2)}°</td><td class="num">${f(c.pitch_std_deg,2)}°</td><td class="num">${f(c.heave_std_m,3)} m</td><td class="num">${f(c.crane_acc_std_ms2,2)} m/s²</td><td class="num">${f(c.sheltered_hs_m,3)} m${c.hs_reduction_pct!=null?` <span class="badge">−${c.hs_reduction_pct}%</span>`:""}</td></tr>`).join("")+`</tbody>`+
+   `<caption style="caption-side:bottom;text-align:left;padding-top:12px" class="muted"><span style="font-size:.86rem">Crane hook σ: vertical acceleration of the hook accelerometer. Sheltered Hs and the reductions (−%) are as reported in the paper (Table 5 and Section 3.3); the paper treats case 2 as an outlier.</span></caption>`;
+  document.querySelectorAll("#caseTbl tbody tr").forEach(tr=>tr.onclick=()=>highlight(+tr.dataset.c));
+  document.getElementById("opFiles").innerHTML=`<thead><tr><th>File</th><th>Contents</th><th>Size</th></tr></thead><tbody>`+
+   D.files.map(o=>{const n=o.name.split("/").pop(),p=`${OPDIR}/${o.name}`;return `<tr><td><a href="${raw(p)}">${esc(n)}</a></td><td class="muted">${esc(DESC[n]||"")}</td><td class="num">${size(o.bytes)}</td></tr>`}).join("")+
+   ["cases.csv","results.csv","channels.csv"].map(n=>`<tr><td><a href="${blob(OPDIR+"/"+n)}">${n}</a></td><td class="muted">${{"cases.csv":"The seven cases: times, angles, measured heading","results.csv":"Values as reported in the paper (Tables 3–5)","channels.csv":"Data dictionary: every column, unit and source"}[n]}</td><td class="num"></td></tr>`).join("")+`</tbody>`;
+}
+load().then(D=>{
+  const st=document.getElementById("opStatus");
+  if(!D){st.textContent="The operational data could not be loaded here. Open the case on GitHub with the link above.";return}
+  draw(D);tables(D);document.getElementById("opLegend").hidden=false;
+  let w=document.getElementById("opChart").clientWidth,rt;
+  addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{const n=document.getElementById("opChart").clientWidth;if(n!==w){w=n;draw(D);const c=sel;sel=0;if(c)highlight(c)}},150)});
+});
+})();
 </script>
 
 <script type="module">
