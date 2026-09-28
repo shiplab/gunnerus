@@ -1,0 +1,133 @@
+file,column,unit,description,source,rate
+*,time_utc,ISO 8601 UTC,Timestamp,,
+*,case,-,Experiment case 1-7 (see cases.csv); 0 = outside a case (turning),,
+vessel_1hz.csv.gz,crane_dp_main_cyl,as logged,Crane main cylinder differential pressure,"NUC logger, tag Gunnerus/Crane1/dp_main_cyl",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,crane_extension_outer_boom,as logged,"Crane outer boom extension (paper Table 1: extension length, m)","NUC logger, tag Gunnerus/Crane1/extension_length_outer_boom",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,crane_main_boom_angle_deg,deg,Crane main boom angle,"NUC logger, tag Gunnerus/Crane1/main_boom_angle",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,crane_outer_boom_angle_deg,deg,Crane outer boom angle,"NUC logger, tag Gunnerus/Crane1/outer_boom_angle",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,crane_slewing_angle_deg,deg,Crane slewing angle,"NUC logger, tag Gunnerus/Crane1/slewing_angle",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_boost_pressure,as logged,Engine1: boost pressure,"NUC logger, tag Gunnerus/Engine1/boost_pressure",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_coolant_temperature,as logged,Engine1: coolant temperature,"NUC logger, tag Gunnerus/Engine1/coolant_temperature",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_engine_load,as logged,Engine1: engine load,"NUC logger, tag Gunnerus/Engine1/engine_load",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_engine_speed,as logged,Engine1: engine speed,"NUC logger, tag Gunnerus/Engine1/engine_speed",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_exhaust_temperature1,as logged,Engine1: exhaust temperature1,"NUC logger, tag Gunnerus/Engine1/exhaust_temperature1",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_exhaust_temperature2,as logged,Engine1: exhaust temperature2,"NUC logger, tag Gunnerus/Engine1/exhaust_temperature2",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_fuel_consumption,as logged,Engine1: fuel consumption,"NUC logger, tag Gunnerus/Engine1/fuel_consumption",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_lube_oil_pressure,as logged,Engine1: lube oil pressure,"NUC logger, tag Gunnerus/Engine1/lube_oil_pressure",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine1_lube_oil_temperature,as logged,Engine1: lube oil temperature,"NUC logger, tag Gunnerus/Engine1/lube_oil_temperature",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_boost_pressure,as logged,Engine2: boost pressure,"NUC logger, tag Gunnerus/Engine2/boost_pressure",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_coolant_temperature,as logged,Engine2: coolant temperature,"NUC logger, tag Gunnerus/Engine2/coolant_temperature",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_engine_load,as logged,Engine2: engine load,"NUC logger, tag Gunnerus/Engine2/engine_load",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_engine_speed,as logged,Engine2: engine speed,"NUC logger, tag Gunnerus/Engine2/engine_speed",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_exhaust_temperature1,as logged,Engine2: exhaust temperature1,"NUC logger, tag Gunnerus/Engine2/exhaust_temperature1",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_exhaust_temperature2,as logged,Engine2: exhaust temperature2,"NUC logger, tag Gunnerus/Engine2/exhaust_temperature2",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_fuel_consumption,as logged,Engine2: fuel consumption,"NUC logger, tag Gunnerus/Engine2/fuel_consumption",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_lube_oil_pressure,as logged,Engine2: lube oil pressure,"NUC logger, tag Gunnerus/Engine2/lube_oil_pressure",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine2_lube_oil_temperature,as logged,Engine2: lube oil temperature,"NUC logger, tag Gunnerus/Engine2/lube_oil_temperature",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_boost_pressure,as logged,Engine3: boost pressure,"NUC logger, tag Gunnerus/Engine3/boost_pressure",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_coolant_temperature,as logged,Engine3: coolant temperature,"NUC logger, tag Gunnerus/Engine3/coolant_temperature",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_engine_load,as logged,Engine3: engine load,"NUC logger, tag Gunnerus/Engine3/engine_load",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_engine_speed,as logged,Engine3: engine speed,"NUC logger, tag Gunnerus/Engine3/engine_speed",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_exhaust_temperature1,as logged,Engine3: exhaust temperature1,"NUC logger, tag Gunnerus/Engine3/exhaust_temperature1",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_exhaust_temperature2,as logged,Engine3: exhaust temperature2,"NUC logger, tag Gunnerus/Engine3/exhaust_temperature2",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_fuel_consumption,as logged,Engine3: fuel consumption,"NUC logger, tag Gunnerus/Engine3/fuel_consumption",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_lube_oil_pressure,as logged,Engine3: lube oil pressure,"NUC logger, tag Gunnerus/Engine3/lube_oil_pressure",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,engine3_lube_oil_temperature,as logged,Engine3: lube oil temperature,"NUC logger, tag Gunnerus/Engine3/lube_oil_temperature",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,lat_deg,deg,Latitude (converted from ddmm.mmmm),"NUC logger, tag Gunnerus/SeapathGPSGga/Latitude",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,lon_deg,deg,Longitude (converted from dddmm.mmmm),"NUC logger, tag Gunnerus/SeapathGPSGga/Longitude",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,speed_long_kn,knots,Longitudinal ground speed,"NUC logger, tag Gunnerus/SeapathGPSVbw/LonGroundSpeed",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,speed_trans_kn,knots,Transverse ground speed,"NUC logger, tag Gunnerus/SeapathGPSVbw/TransGroundSpeed",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,cog_deg,deg,Course over ground,"NUC logger, tag Gunnerus/SeapathGPSVtg/CourseTrue",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,sog_kmh,km/h,Speed over ground,"NUC logger, tag Gunnerus/SeapathGPSVtg/SpeedKmHr",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,sog_kn,knots,Speed over ground,"NUC logger, tag Gunnerus/SeapathGPSVtg/SpeedKnots",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,heading_deg,deg,"Heading, true","NUC logger, tag Gunnerus/SeapathMRU/Heading",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,heave_m,m,Heave displacement,"NUC logger, tag Gunnerus/SeapathMRU/Heave",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,pitch_deg,deg,Pitch angle,"NUC logger, tag Gunnerus/SeapathMRU/Pitch",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,roll_deg,deg,Roll angle,"NUC logger, tag Gunnerus/SeapathMRU/Roll",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,pitch_rate_degs,deg/s,Pitch rate,"NUC logger, tag Gunnerus/SeapathMRU_rates/PitchRate",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,roll_rate_degs,deg/s,Roll rate,"NUC logger, tag Gunnerus/SeapathMRU_rates/RollRate",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,heave_rate_ms,m/s,Heave rate (vertical velocity),"NUC logger, tag Gunnerus/SeapathMRU_rates/VertVel",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,yaw_rate_degs,deg/s,Yaw (heading) rate,"NUC logger, tag Gunnerus/SeapathMRU_rates/YawRate",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,tunnel_thruster_feedback_pct,%,Tunnel thruster feedback,"NUC logger, tag Gunnerus/dpThruster/FeedbackProsent",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,tunnel_thruster_setpoint_pct,%,Tunnel thruster set point,"NUC logger, tag Gunnerus/dpThruster/ThrusterSetpunktProsent",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,wind_dir_deg,deg,Wind direction (DP wind sensor),"NUC logger, tag Gunnerus/dpWind/Wind_Direction",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,wind_speed_kn,knots,Wind speed (DP wind sensor),"NUC logger, tag Gunnerus/dpWind/Wind_Speed",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_azimuth_feedback,as logged,hcx port mp: AzimuthFeedback,"NUC logger, tag Gunnerus/hcx_port_mp/AzimuthFeedback",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_azimuth_order,as logged,hcx port mp: AzimuthOrder,"NUC logger, tag Gunnerus/hcx_port_mp/AzimuthOrder",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_level_order,as logged,hcx port mp: Level order,"NUC logger, tag Gunnerus/hcx_port_mp/Level_order",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_load_feedback,as logged,hcx port mp: LoadFeedback,"NUC logger, tag Gunnerus/hcx_port_mp/LoadFeedback",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_maneuver_transit_mode,as logged,hcx port mp: Maneuver Transit mode,"NUC logger, tag Gunnerus/hcx_port_mp/Maneuver_Transit_mode",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_power_mode_rpm_mode,as logged,hcx port mp: Power mode RPM Mode,"NUC logger, tag Gunnerus/hcx_port_mp/Power_mode_RPM_Mode",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_rpmfeedback,as logged,hcx port mp: RPMFeedback,"NUC logger, tag Gunnerus/hcx_port_mp/RPMFeedback",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_rpmorder,as logged,hcx port mp: RPMOrder,"NUC logger, tag Gunnerus/hcx_port_mp/RPMOrder",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_port_running,as logged,hcx port mp: Running,"NUC logger, tag Gunnerus/hcx_port_mp/Running",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_azimuth_feedback,as logged,hcx stbd mp: AzimuthFeedback,"NUC logger, tag Gunnerus/hcx_stbd_mp/AzimuthFeedback",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_azimuth_order,as logged,hcx stbd mp: AzimuthOrder,"NUC logger, tag Gunnerus/hcx_stbd_mp/AzimuthOrder",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_level_order,as logged,hcx stbd mp: Level order,"NUC logger, tag Gunnerus/hcx_stbd_mp/Level_order",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_load_feedback,as logged,hcx stbd mp: LoadFeedback,"NUC logger, tag Gunnerus/hcx_stbd_mp/LoadFeedback",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_maneuver_transit_mode,as logged,hcx stbd mp: Maneuver Transit mode,"NUC logger, tag Gunnerus/hcx_stbd_mp/Maneuver_Transit_mode",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_power_mode_rpm_mode,as logged,hcx stbd mp: Power mode RPM Mode,"NUC logger, tag Gunnerus/hcx_stbd_mp/Power_mode_RPM_Mode",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_rpmfeedback,as logged,hcx stbd mp: RPMFeedback,"NUC logger, tag Gunnerus/hcx_stbd_mp/RPMFeedback",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_rpmorder,as logged,hcx stbd mp: RPMOrder,"NUC logger, tag Gunnerus/hcx_stbd_mp/RPMOrder",1 Hz (last sample in each second)
+vessel_1hz.csv.gz,azi_stbd_running,as logged,hcx stbd mp: Running,"NUC logger, tag Gunnerus/hcx_stbd_mp/Running",1 Hz (last sample in each second)
+seapath_2hz.csv.gz,lat_deg,deg,Latitude,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,lon_deg,deg,Longitude,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,height_m,m,Height above ellipsoid,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,heave_down_m,m,"Heave, positive down",Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,vel_north_ms,m/s,Velocity north,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,vel_east_ms,m/s,Velocity east,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,vel_down_ms,m/s,Velocity down,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,roll_deg,deg,"Roll, positive port side up",Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,pitch_deg,deg,"Pitch, positive bow up",Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,heading_deg,deg,Heading,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,roll_rate_degs,deg/s,Roll rate,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,pitch_rate_degs,deg/s,Pitch rate,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+seapath_2hz.csv.gz,yaw_rate_degs,deg/s,Yaw rate,Kongsberg Seapath (time series motion prediction data/SeaPath/DP/2023_10_31_dp1.csv),2 Hz
+wave_buoy_50hz.csv.gz,acc_x_ms2,m/s2,Acceleration X,"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,acc_y_ms2,m/s2,Acceleration Y,"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,acc_z_ms2,m/s2,Acceleration Z,"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,pitch_deg,deg,Buoy pitch,"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,roll_deg,deg,Buoy roll,"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,yaw_deg,deg,Buoy yaw,"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,lat_deg,deg,GPS latitude (sparse),"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,lon_deg,deg,GPS longitude (sparse),"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,gps_hacc_mm,mm,GPS horizontal accuracy (sparse),"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,gps_satellites,-,GPS satellites (sparse),"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_50hz.csv.gz,temperature_c,degC,Temperature (sparse),"LainePoiss wave buoy, sheltered (starboard) side, 31oct_first_location/decompressed",50 Hz
+wave_buoy_params.csv,lat_deg,deg,Buoy position,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,lon_deg,deg,Buoy position,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,hm0_m,m,Significant wave height Hm0,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,hmax_m,m,Maximum wave height (up-crossing),"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,tp_s,s,Peak period,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,tm01_s,s,Mean period Tm01,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,tm02_s,s,Mean period Tm02,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,tm_10_s,s,Energy period Tm-10,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,peak_dir_deg,deg,Peak direction (nautical),"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,mean_dir_deg,deg,Mean direction,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+wave_buoy_params.csv,spread_deg,deg,Directional spread,"LainePoiss on-board processing (waveparam_lte, web_sent/web.txt); time = end of block",per ~22 min block
+crane_tip_imu.csv.gz,lat_deg,deg,Phone GPS latitude,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,lon_deg,deg,Phone GPS longitude,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,acc_x_g,g,Raw acceleration X (1 g = 9.81 m/s2),"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,acc_y_g,g,Raw acceleration Y,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,acc_z_g,g,Raw acceleration Z,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,gyro_x_rads,rad/s,Raw rotation rate X,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,gyro_y_rads,rad/s,Raw rotation rate Y,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,gyro_z_rads,rad/s,Raw rotation rate Z,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,att_roll_rad,rad,Attitude roll (device fusion),"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,att_pitch_rad,rad,Attitude pitch,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,att_yaw_rad,rad,Attitude yaw,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,user_acc_x_g,g,Acceleration without gravity X,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,user_acc_y_g,g,Acceleration without gravity Y,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,user_acc_z_g,g,Acceleration without gravity Z,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,gravity_x_g,g,Gravity vector X,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,gravity_y_g,g,Gravity vector Y,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+crane_tip_imu.csv.gz,gravity_z_g,g,Gravity vector Z,"iPhone IMU (SensorLog) on crane hook, Crane accelerometers data/2023-10-31_10_22_44_my_iOS_device.csv",~16.7 Hz
+wave_radar_params.csv,hm0_m,m,WaveX significant wave height,Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+wave_radar_params.csv,tp1_s,s,WaveX primary peak period,Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+wave_radar_params.csv,dp1_deg,deg,WaveX primary peak direction,Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+wave_radar_params.csv,tm01_s,s,WaveX mean period,Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+wave_radar_params.csv,rangefinder_hm0_m,m,"Miros RangeFinder SM-140 significant wave height (incident wave, paper Fig. 15a)",Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+wave_radar_params.csv,rangefinder_ts_s,s,RangeFinder significant period,Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+wave_radar_spectra.csv.gz,heading_deg,deg,Ship heading used by the radar,Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+wave_radar_spectra.csv.gz,S_dDDD_fF.FF,m2/Hz per 10 deg,"Directional spectrum: 36 directions (0-350 deg, relative to heading, direction waves approach from) x 32 frequencies (0-0.31 Hz); empty = no value (-999.99 in source)",Miros WaveX radar (miros wave data/wave parameters/miros_wave_params_31_oct.csv),~1/min
+air_gap_2hz.csv.gz,air_gap_m,m,Air gap from Miros RangeFinder SM-140,miros wave data/rangefinder_air_gap/miros_rangefinder_air_gap_31_oct.csv,2 Hz
