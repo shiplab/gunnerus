@@ -1,15 +1,14 @@
 # Gunnerus Open Data Set
 
-**Production drawings, a 3D model, engineering documents and structured metadata for the NTNU research vessel R/V Gunnerus, published openly for research and teaching.**
+**Production drawings, a 3D model, engineering documents, structured metadata and operational data for the NTNU research vessel R/V Gunnerus, published openly for research and teaching.**
 
 [![Licence: CC BY-NC 4.0](https://img.shields.io/badge/licence-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![Website](https://img.shields.io/badge/website-shiplab.github.io%2Fgunnerus-00509e.svg)](https://shiplab.github.io/gunnerus/)
-<!-- After the first Zenodo release, replace this comment with the concept-DOI badge Zenodo gives you, e.g.
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22983657.svg)](https://doi.org/10.5281/zenodo.22983657)
 
-[![3D model of R/V Gunnerus seen from the starboard bow](images/gunnerus-3d.png)](https://shiplab.github.io/gunnerus/#model)
+[![R/V Gunnerus three ways: the general arrangement drawing, the 3D model coloured by SFI group, and ship motion and wave height measured during the 2023 wave-shielding experiment](images/gunnerus-header.png)](https://shiplab.github.io/gunnerus/)
 
-*The C-JOB 3D model of R/V Gunnerus. [Rotate it in your browser](https://shiplab.github.io/gunnerus/#model).*
+*The same ship three ways: [drawings](#drawings), the [3D model](https://shiplab.github.io/gunnerus/#model) coloured by SFI group, and [operational data](#operational-data) measured at sea. Explore all three on the [website](https://shiplab.github.io/gunnerus/).*
 
 | At a glance | |
 | --- | --- |
@@ -17,8 +16,10 @@
 | 3D model | Rhino `.3dm` and STEP, hull and superstructure, plus a lightweight glTF in [`derived/`](derived/README.md) |
 | Documents | 5 engineering documents: weight, tonnage, specification, equipment and document lists |
 | Metadata | GA drawing as JSON, coded by SFI group and DNV VIS/GMOD |
+| Operational | 1 case: the 2023 wave-shielding experiment. Ship motion, crane, engines, thrusters, incident and sheltered waves, about 16 MB |
 | Licence | CC BY-NC 4.0 (engineering documents: CC BY-SA 4.0) |
 | Website | <https://shiplab.github.io/gunnerus/> |
+| DOI | [10.5281/zenodo.22983657](https://doi.org/10.5281/zenodo.22983657) (all versions) |
 
 ## About
 
@@ -51,7 +52,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/shiplab/gunnerus.git
 git lfs pull
 ```
 
-**Download a release.** Each tagged [release](https://github.com/shiplab/gunnerus/releases) is archived on Zenodo with its own DOI. Use a release when you need to cite a fixed version of the data.
+**Download a release.** Each tagged [release](https://github.com/shiplab/gunnerus/releases) is archived on [Zenodo](https://doi.org/10.5281/zenodo.22983657). The DOI [10.5281/zenodo.22983657](https://doi.org/10.5281/zenodo.22983657) always resolves to the latest version; each release also has its own version DOI, listed on the Zenodo page, for when you need to cite a fixed version of the data.
 
 ## Contents
 
@@ -86,6 +87,7 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 | [`extended/CJOB/3d models/`](<extended/CJOB/3d models/README.md>) | 3D CAD model of the hull and superstructure: Rhino `.3dm` (~396 MB) and STEP `.stp` (~728 MB), stored with Git LFS. |
 | [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | C-JOB engineering documents: weight calculation (411.79 t light ship), gross and net tonnage calculation, specification, list of main equipment, list of project documents. **Licensed CC BY-SA 4.0.** |
 | [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON. See [Metadata](#metadata). |
+| [`operational/`](operational/README.md) | Data measured on board in service, one folder per case, each tied to a published study. See [Operational data](#operational-data). |
 | [`derived/`](derived/README.md) | A 3.6 MB glTF of the C-JOB model with parts grouped by SFI group and equipment matched to the C-JOB list, plus older, approximate material from vessel.js (2020): a textured visual model and a ship specification with hull offsets. For visualisation and teaching, not a source for dimensions. |
 | [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/). |
 | [`images/`](images/README.md) | Images used in this README. |
@@ -110,6 +112,16 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 Entries are classified by **SFI group**, the standard maritime technical and cost classification. Where the mapping is unambiguous, they are cross-referenced to a **DNV VIS/GMOD v3.10a** top-level node, so the data can be joined against other SFI- or VIS-coded datasets. Every block records which part of the drawing it was read from.
 
 The file is derived from the general arrangement alone, not from class documents or the stability book. [`metadata/README.md`](metadata/README.md) documents the structure, units, the `null` convention and the known limitations.
+
+## Operational data
+
+[`operational/`](operational/README.md) holds measurements from Gunnerus in service: ship motion, position, machinery, crane and the sea around her. Each case is a folder tied to a published study, which is the reference for how the measurements were made and what they show. Times are UTC, units are in the column names, and every case has a data dictionary and the script that extracted it from the raw data.
+
+| Case | Date | Contents | Study |
+| --- | --- | --- | --- |
+| [Wave-shielding experiment](operational/wave-shielding-2023/README.md) | 31 Oct 2023 | Seven headings on DP in Breisundet: ship motion (1–2 Hz), crane angles and crane-hook accelerometer, azimuth and tunnel thrusters, engines, Miros wave radar spectra and air gap, and a 50 Hz wave buoy on the sheltered side. About 16 MB. | Wang et al. (2025), *Ocean Engineering* 320, 120189, [doi:10.1016/j.oceaneng.2024.120189](https://doi.org/10.1016/j.oceaneng.2024.120189) |
+
+The experiment, its set-up and its findings are those of the study; cite it when you use the data (see [How to cite](#how-to-cite)). The operational datasets are organised by Jisang Ha and Henrique M. Gaspar (NTNU). The [website](https://shiplab.github.io/gunnerus/#operational) shows the case as a chart and table.
 
 ## The vessel
 
@@ -194,17 +206,31 @@ If you modified the material, state that changes were made.
 
 ## How to cite
 
-If you use this data set in a publication, please cite it. GitHub's **Cite this repository** button (in the sidebar) gives APA and BibTeX entries from [`CITATION.cff`](CITATION.cff). To cite a fixed version, use the DOI of that release on Zenodo; replace `XXXXXXX` below with it.
+If you use this data set in a publication, please cite it. GitHub's **Cite this repository** button (in the sidebar) gives APA and BibTeX entries from [`CITATION.cff`](CITATION.cff). The DOI below always resolves to the latest version; to cite a fixed version, use that release's version DOI from the [Zenodo page](https://doi.org/10.5281/zenodo.22983657).
 
 ```bibtex
 @misc{gunnerus_open_data,
-  author       = {Gaspar, Henrique M. and Ha, Jisang and {polarkonsult AS} and {C-JOB Naval Architects}},
-  title        = {Gunnerus Open Data Set: drawings, 3D model and metadata of the research vessel R/V Gunnerus},
+  author       = {Ha, Jisang and Gaspar, Henrique M.},
+  title        = {Gunnerus Open Data Set: drawings, 3D model, metadata and operational data of the research vessel R/V Gunnerus},
   publisher    = {Zenodo},
   year         = {2026},
-  doi          = {10.5281/zenodo.XXXXXXX},
+  doi          = {10.5281/zenodo.22983657},
   howpublished = {\url{https://github.com/shiplab/gunnerus}},
-  note         = {Courtesy of polarkonsult, published by NTNU. CC BY-NC 4.0}
+  note         = {Drawings and design data courtesy of polarkonsult; derivative drawings, 3D model and engineering documents by C-JOB and NTNU; published by NTNU. CC BY-NC 4.0}
+}
+```
+
+**Operational data.** If you use a case from [`operational/`](operational/README.md), also cite the study it comes from. For the wave-shielding experiment:
+
+```bibtex
+@article{wang2025shielding,
+  author  = {Wang, Tongtong and Skulstad, Robert and Holmeset, Finn Tore and Halse, Karl Henning and Hildre, Hans Petter and Zhang, Houxiang},
+  title   = {Full-scale experimental research on wave shielding effect of {RV} {Gunnerus} for offshore operations},
+  journal = {Ocean Engineering},
+  volume  = {320},
+  pages   = {120189},
+  year    = {2025},
+  doi     = {10.1016/j.oceaneng.2024.120189}
 }
 ```
 
@@ -214,4 +240,6 @@ Corrections are welcome. To report a wrong value, a mismatch between sheets or a
 
 ## Acknowledgements
 
-The drawings and design data are courtesy of [polarkonsult](https://www.polarkonsult.com/), the designer of R/V Gunnerus. The derivative drawings, 3D model and engineering documents in `extended/CJOB/` were made by [C-JOB](https://c-job.com/) with NTNU. The data set is published by [NTNU](https://www.ntnu.edu/).
+The drawings and design data are courtesy of [polarkonsult](https://www.polarkonsult.com/), the designer of R/V Gunnerus. The derivative drawings, 3D model and engineering documents in `extended/CJOB/` were made by [C-JOB](https://c-job.com/) with NTNU. The data set is organised by Jisang Ha and Henrique M. Gaspar and published by [NTNU](https://www.ntnu.edu/).
+
+The wave-shielding experiment in `operational/` was carried out and published by Tongtong Wang, Robert Skulstad, Finn Tore Holmeset, Karl Henning Halse, Hans Petter Hildre and Houxiang Zhang (NTNU), with support from the Research Council of Norway through *The Digital Ocean Space – Møre Ocean Lab* (project 322535).
