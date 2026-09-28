@@ -1,16 +1,15 @@
 {
   "upload_type": "dataset",
-  "title": "Gunnerus Open Data Set: drawings, 3D model and metadata of the research vessel R/V Gunnerus",
-  "description": "<p>Production drawings (DWG, DXF and A0 PDF), a 3D CAD model, engineering documents and structured metadata for the NTNU research vessel R/V Gunnerus, published openly as a reference ship case for research, teaching, benchmarking and the development of digital shipbuilding tools.</p><p>Drawings and design data courtesy of polarkonsult. Derivative drawings, 3D model and engineering documents by C-JOB and NTNU. Published by NTNU.</p><p>Licence: CC BY-NC 4.0. The C-JOB engineering documents in <code>extended/CJOB/docs/</code> are CC BY-SA 4.0. Commercial use requires approval from polarkonsult.</p><p>Attribution: Gunnerus open data, courtesy of polarkonsult, published by NTNU. Licensed under CC BY-NC 4.0.</p>",
+  "title": "Gunnerus Open Data Set: drawings, 3D model, metadata and operational data of the research vessel R/V Gunnerus",
+  "description": "<p>Production drawings (DWG, DXF and A0 PDF), a 3D CAD model, engineering documents, structured metadata and operational data for the NTNU research vessel R/V Gunnerus, published openly as a reference ship case for research, teaching, benchmarking and the development of digital shipbuilding tools.</p><p>Data set organised by Jisang Ha and Henrique M. Gaspar (NTNU). Drawings and design data courtesy of polarkonsult. Derivative drawings, 3D model and engineering documents by C-JOB and NTNU. Published by NTNU.</p><p>Operational data: the wave-shielding case is from Wang, T., Skulstad, R., Holmeset, F.T., Halse, K.H., Hildre, H.P., Zhang, H. (2025), Full-scale experimental research on wave shielding effect of RV Gunnerus for offshore operations, Ocean Engineering 320, 120189, doi:10.1016/j.oceaneng.2024.120189. Cite the study when you use that data.</p><p>Licence: CC BY-NC 4.0. The C-JOB engineering documents in <code>extended/CJOB/docs/</code> are CC BY-SA 4.0. Commercial use requires approval from polarkonsult.</p><p>Attribution: Gunnerus open data, courtesy of polarkonsult, published by NTNU. Licensed under CC BY-NC 4.0.</p>",
   "creators": [
     {
-      "name": "Norwegian University of Science and Technology (NTNU)"
+      "name": "Ha, Jisang",
+      "affiliation": "Norwegian University of Science and Technology (NTNU)"
     },
     {
-      "name": "polarkonsult AS"
-    },
-    {
-      "name": "C-JOB Naval Architects"
+      "name": "Gaspar, Henrique M.",
+      "affiliation": "Norwegian University of Science and Technology (NTNU)"
     }
   ],
   "contributors": [
@@ -21,6 +20,10 @@
     {
       "name": "polarkonsult AS",
       "type": "RightsHolder"
+    },
+    {
+      "name": "C-JOB Naval Architects",
+      "type": "Producer"
     }
   ],
   "license": "cc-by-nc-4.0",
@@ -34,6 +37,8 @@
     "general arrangement",
     "SFI group system",
     "DNV VIS",
+    "operational data",
+    "wave shielding",
     "NTNU",
     "Gunnerus"
   ],
@@ -47,6 +52,12 @@
       "identifier": "https://shiplab.github.io/gunnerus/",
       "relation": "isDocumentedBy",
       "scheme": "url"
+    },
+    {
+      "identifier": "10.1016/j.oceaneng.2024.120189",
+      "relation": "isSupplementedBy",
+      "scheme": "doi",
+      "resource_type": "publication-article"
     }
   ],
   "language": "eng"
