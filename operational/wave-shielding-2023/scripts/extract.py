@@ -10,7 +10,8 @@ https://doi.org/10.1016/j.oceaneng.2024.120189
 Dataset organised by Jisang Ha and Henrique M. Gaspar (NTNU).
 
 Usage:  python3 extract.py <path to "Tokt uke 44 2023"> [step ...]
-Steps:  cases vessel seapath buoy crane radar airgap figure   (default: all)
+Steps:  vessel seapath buoy crane radar airgap cases figure web   (default: all)
+        web writes ../../../pages/assets/operational/wave-shielding-2023.json
 Needs:  python 3.9+, pandas, numpy, matplotlib
 """
 import sys, os, glob, json, math
@@ -329,11 +330,61 @@ def figure(src, cases):
     print("figures/overview.png written")
 
 
+# ------------------------------------------------ website summary (pages/)
+def web(src, cases):
+    """Small JSON for the Operational section of the showcase page."""
+    v = pd.read_csv(os.path.join(OUT, "vessel_1hz.csv.gz"), parse_dates=["time_utc"])
+    rp = pd.read_csv(os.path.join(OUT, "wave_radar_params.csv"), parse_dates=["time_utc"])
+    cr = pd.read_csv(os.path.join(OUT, "crane_tip_imu.csv.gz"), usecols=["case", "acc_z_g"])
+    res = pd.read_csv(os.path.join(HERE, "..", "results.csv"))
+    cs = pd.read_csv(os.path.join(HERE, "..", "cases.csv"))
+    sec = lambda t: (t - T0).dt.total_seconds()
+    two = v.iloc[::2]
+    r = lambda a, n: [None if pd.isna(x) else round(float(x), n) for x in a]
+    out = {
+        "title": "Wave-shielding experiment",
+        "date": "2023-10-31", "place": "Breisundet, west of Ålesund",
+        "t0": T0.strftime("%Y-%m-%dT%H:%M:%SZ"), "t1": T1.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "paper": {"authors": "Wang, T., Skulstad, R., Holmeset, F.T., Halse, K.H., Hildre, H.P., Zhang, H.",
+                  "year": 2025, "title": "Full-scale experimental research on wave shielding effect of RV Gunnerus for offshore operations",
+                  "journal": "Ocean Engineering 320, 120189", "doi": "10.1016/j.oceaneng.2024.120189"},
+        "organised_by": ["Jisang Ha", "Henrique M. Gaspar"],
+        "path": "operational/wave-shielding-2023",
+        "series": {"dt_s": 2, "heading_deg": r(two.heading_deg.interpolate(limit=2), 1),
+                   "roll_deg": r(two.roll_deg, 2)},
+        "incident_hs": {"t_s": r(sec(rp.dropna(subset=["rangefinder_hm0_m"]).time_utc), 0),
+                        "hs_m": r(rp.rangefinder_hm0_m.dropna(), 2)},
+        "cases": [],
+        "files": [],
+    }
+    for _, c in cs.iterrows():
+        i = int(c.case); m = v.case == i; q = res[res.case == i].iloc[0]
+        out["cases"].append({
+            "case": i, "start_s": (pd.Timestamp(c.start_utc) - T0).total_seconds(),
+            "end_s": (pd.Timestamp(c.end_utc) - T0).total_seconds(),
+            "angle_wave1_deg": int(c.angle_to_wave1_deg), "angle_wave2_deg": int(c.angle_to_wave2_deg),
+            "heading_deg": float(c.mean_heading_deg),
+            "roll_std_deg": round(float(v.roll_deg[m].std()), 2),
+            "pitch_std_deg": round(float(v.pitch_deg[m].std()), 2),
+            "heave_std_m": round(float(v.heave_m[m].std()), 3),
+            "crane_acc_std_ms2": round(float(cr.acc_z_g[cr.case == i].std()) * 9.81, 3),
+            "sheltered_hs_m": float(q.shielded_hs_m),
+            "hs_reduction_pct": None if pd.isna(q.hs_reduction_pct) else float(q.hs_reduction_pct)})
+    for f in sorted(os.listdir(OUT)):
+        out["files"].append({"name": "data/" + f, "bytes": os.path.getsize(os.path.join(OUT, f))})
+    dst = os.path.join(HERE, "..", "..", "..", "pages", "assets", "operational")
+    os.makedirs(dst, exist_ok=True)
+    path = os.path.join(dst, "wave-shielding-2023.json")
+    with open(path, "w") as fh:
+        json.dump(out, fh, separators=(",", ":"), ensure_ascii=False)
+    print(f"{os.path.relpath(path, os.path.join(HERE, '..', '..', '..'))}: {os.path.getsize(path)/1e3:.0f} kB")
+
+
 if __name__ == "__main__":
     src = sys.argv[1]
-    steps = sys.argv[2:] or ["vessel", "seapath", "buoy", "crane", "radar", "airgap", "cases", "figure"]
+    steps = sys.argv[2:] or ["vessel", "seapath", "buoy", "crane", "radar", "airgap", "cases", "figure", "web"]
     os.makedirs(OUT, exist_ok=True)
     cases = load_cases(src)
     for s in steps:
         {"vessel": vessel, "seapath": seapath, "buoy": buoy, "crane": crane, "radar": radar,
-         "airgap": airgap, "cases": write_cases, "figure": figure}[s](src, cases)
+         "airgap": airgap, "cases": write_cases, "figure": figure, "web": web}[s](src, cases)
