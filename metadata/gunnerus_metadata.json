@@ -1,5 +1,5 @@
 {
-  "_schema_note": "Metadata for RV Gunnerus derived from General Arrangement drawing 165821B7 (source: title block, deck plans, profile/section views). Primary classification hierarchy is the SFI Group System (Maingroup/Group/Subgroup). Where confident, a cross-reference to DNV VIS/GMOD (v3.10a) top-level node is added as vis_gmod_ref. Every data point is provenance-tagged via 'source'.",
+  "_schema_note": "Metadata for RV Gunnerus derived from General Arrangement drawing 165821B7 (source: title block, deck plans, profile/section views). Primary classification hierarchy is the SFI Group System (Maingroup/Group/Subgroup). Where confident, a cross-reference to DNV VIS/GMOD (v3.10a) top-level node is added as vis_gmod_ref. Every data point is provenance-tagged via 'source'. Where a value is superseded or corrected by another drawing/document in this repository, a 'path' field (relative to the repository root) points to it directly.",
   "vessel_identity": {
     "name": "RV Gunnerus",
     "hull_marking": [
@@ -21,8 +21,8 @@
       "latest_revision": "B7",
       "creator_software": "AutoCAD 2026",
       "source_files": [
-        "GA Gunnerus Rev1.dwg",
-        "GA Gunnerus Rev1.pdf"
+        "polarkonsult/GA Gunnerus Rev1.dwg",
+        "polarkonsult/GA Gunnerus Rev1.pdf"
       ]
     },
     "revision_history": [
@@ -284,7 +284,7 @@
       "location": "Inboard profile, amidships"
     }
   ],
-  "_tanks_note": "Tank numbering/capacities read from the TANK TOP plan and inboard profile. Some tanks appear twice (once numbered in tank-top plan, once generically in inboard profile) and could not be fully reconciled from the GA alone — flagged rather than merged silently. Capacities table in the title block gives rounded system totals (fuel 60.2 m3, fresh water 18.4 m3, ballast 62.3 m3); this itemised list won't sum exactly to those totals.",
+  "_tanks_note": "Tank numbering/capacities read from the TANK TOP plan and inboard profile. Some tanks appear twice (once numbered in tank-top plan, once generically in inboard profile) and could not be fully reconciled from the GA alone -- flagged rather than merged silently. Capacities table in the title block gives rounded system totals (fuel 60.2 m3, fresh water 18.4 m3, ballast 62.3 m3); this itemised list won't sum exactly to those totals. Superseded by the polarkonsult tank plan, which numbers every tank 1-15, gives frame range/net volume/mass per fluid type, and totals 202.42 m3 -- use that, not this array, when the tank data matters.",
   "general_arrangement": {
     "frame_orientation": "Frame 0 = Aft Perpendicular (stern); Frame 60 = Forward Perpendicular (bow)",
     "decks": [
@@ -631,9 +631,10 @@
       "vis_gmod_ref": "400",
       "vis_gmod_ref_desc": "Propulsion and steering arrangements",
       "location": "Stern, under slipway",
-      "notes": "Identification from characteristic circular wheel geometry in 'SEEN FROM AFT' view; NOT labelled by name on drawing — treat as inferred, not confirmed",
+      "notes": "Identification from characteristic circular wheel geometry in 'SEEN FROM AFT' view; NOT labelled by name on drawing -- treat as inferred, not confirmed. Corrected by the engine room arrangement: items 4, 31, 33 and 35 of its equipment list are PM azimuth drives, port and starboard, with their own steering gear and central shaft tanks -- disregard this inferred entry in favour of that one.",
       "confidence": "inferred_from_geometry",
-      "source": "Aft view (SEEN FROM AFT)"
+      "source": "Aft view (SEEN FROM AFT)",
+      "corrected_by_path": "extended/CJOB/Engine Room Arrangement Rev0.pdf"
     },
     {
       "item": "Main engines (3x, symmetric sets)",
@@ -716,5 +717,6 @@
     "1100": "Hydrocarbon production plant",
     "1200": "Drilling and well intervention arrangements",
     "_source": "https://docs.vista.dnv.com/docs/resources/vis/v3-10a (VIS/GMOD top-level nodes)"
-  }
+  },
+  "_tanks_superseded_by_path": "polarkonsult/Tank Plan Rev1.pdf"
 }

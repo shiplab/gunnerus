@@ -14,7 +14,7 @@ The drawings are derivative works made by **C-JOB (<https://c-job.com/contact-us
 | `Safety Fire Zone Plan Rev0` (`25.1142-570-100`) | 1:100 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
 | `Tank Arrangement Rev0` (`25.1142-000-009`) | 1:100 | 2026-09-11 | `.dwg`, `.dxf`, `.pdf` (A0) |
 
-Document numbers are C-JOB's own, per `25.1142-080-001-REV0-LIST OF PROJECT DOCUMENTS.pdf` in [`docs/`](docs/README.md).
+Document numbers are C-JOB's own, per `List of Project Documents Rev0.pdf` in [`docs/`](docs/README.md).
 
 ## Engine room arrangement
 

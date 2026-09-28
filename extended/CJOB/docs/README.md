@@ -2,13 +2,15 @@
 
 Supporting engineering documents from C-JOB's Gunnerus project (project number `25.1142`), complementing the drawings in [`../`](../README.md). All five are **Revision 0, status "preliminary"**, dated December 2025.
 
-| Document | Doc. no. | Date | Pages | Formats |
-| --- | --- | --- | --- | --- |
-| Weight calculation | `25.1142-000-002` | 2025-12-24 | 3 | `.pdf`, `.xlsx` |
-| Gross/net tonnage calculation | `25.1142-000-024` | 2025-12-24 | 2 | `.pdf`, `.xlsm` |
-| Specification | `25.1142-030-005` | 2025-12-18 | 12 | `.pdf` |
-| List of project documents | `25.1142-080-001` | 2025-12-24 | 3 | `.pdf` |
-| List of main equipment | `25.1142-080-309` | 2025-12-18 | 9 | `.pdf` |
+| Document | File | Doc. no. | Date | Pages | Formats |
+| --- | --- | --- | --- | --- | --- |
+| Weight calculation | `Weight Calculation Rev0` | `25.1142-000-002` | 2025-12-24 | 3 | `.pdf`, `.xlsx` |
+| Gross/net tonnage calculation | `Gross and Net Tonnage Calculation Rev0` | `25.1142-000-024` | 2025-12-24 | 2 | `.pdf`, `.xlsm` |
+| Specification | `Specification Rev0` | `25.1142-030-005` | 2025-12-18 | 12 | `.pdf` |
+| List of project documents | `List of Project Documents Rev0` | `25.1142-080-001` | 2025-12-24 | 3 | `.pdf` |
+| List of main equipment | `List of Main Equipment Rev0` | `25.1142-080-309` | 2025-12-18 | 9 | `.pdf` |
+
+Files were originally exported under their C-JOB document numbers (e.g. `25.1142-000-002-REV0-WEIGHT CALCULATION.pdf`) and have since been renamed to the friendly form above, matching the naming convention used elsewhere in this repository; the doc. no. is kept in this table for traceability back to the project document list.
 
 ## Weight calculation
 
