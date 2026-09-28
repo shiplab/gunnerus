@@ -77,8 +77,3 @@ Known gaps and inconsistencies in this batch, kept here for traceability rather 
 ## License
 
 Same terms as the rest of the repository — CC BY-NC 4.0, and the sheets themselves carry the wording *open use for research/teaching and other non-commercial activities, commercial use is not permitted without approval*. See the main [README](../../README.md#credit--license) and [LICENSE](../../LICENSE).
-
-## Contact
-
-- Data / dataset questions (NTNU): Henrique Gaspar (henrique.gaspar@ntnu.no)
-- C-Job (<https://c-job.com/contact-us/nikolayev/>)

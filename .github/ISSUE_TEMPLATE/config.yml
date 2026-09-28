@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Commercial use of the data
+    url: https://www.polarkonsult.com/
+    about: Commercial use requires approval from polarkonsult. Please contact them directly.
+  - name: R/V Gunnerus vessel information and booking
+    url: https://www.ntnu.edu/gunnerus
+    about: For questions about the vessel itself, see NTNU's Gunnerus pages.

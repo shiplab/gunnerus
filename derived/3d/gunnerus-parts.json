@@ -1,0 +1,242 @@
+[
+ {
+  "node": "part00",
+  "sfi": "2",
+  "group": "Hull and structure",
+  "group_key": "hull",
+  "item": null,
+  "label": null,
+  "objects": 561,
+  "source_triangles": 644264
+ },
+ {
+  "node": "part01",
+  "sfi": "25",
+  "group": "Deckhouse and superstructure",
+  "group_key": "super",
+  "item": null,
+  "label": null,
+  "objects": 243,
+  "source_triangles": 91112
+ },
+ {
+  "node": "part02",
+  "sfi": "3",
+  "group": "Deck handling and research equipment",
+  "group_key": "g5",
+  "item": "80",
+  "label": "Stern-mounted A-frame 6 t, hydraulic",
+  "objects": 188,
+  "source_triangles": 38370
+ },
+ {
+  "node": "part03",
+  "sfi": "3",
+  "group": "Deck handling and research equipment",
+  "group_key": "g5",
+  "item": "77 / 85",
+  "label": "Main deck crane (knuckle boom)",
+  "objects": 13,
+  "source_triangles": 199151
+ },
+ {
+  "node": "part04",
+  "sfi": "3",
+  "group": "Deck handling and research equipment",
+  "group_key": "g5",
+  "item": "84",
+  "label": "Net drum",
+  "objects": 2,
+  "source_triangles": 5378
+ },
+ {
+  "node": "part05",
+  "sfi": "3",
+  "group": "Deck handling and research equipment",
+  "group_key": "g5",
+  "item": "82",
+  "label": "ROV hangar",
+  "objects": 1,
+  "source_triangles": 450
+ },
+ {
+  "node": "part06",
+  "sfi": "3",
+  "group": "Deck handling and research equipment",
+  "group_key": "g5",
+  "item": "81",
+  "label": "Side-mounted A-frame 4 t SWL, hydraulic",
+  "objects": 76,
+  "source_triangles": 21801
+ },
+ {
+  "node": "part07",
+  "sfi": "3",
+  "group": "Deck handling and research equipment",
+  "group_key": "g5",
+  "item": "90",
+  "label": "Workboat 80 hp (identification tentative)",
+  "objects": 151,
+  "source_triangles": 125679
+ },
+ {
+  "node": "part08",
+  "sfi": "41–42",
+  "group": "Navigation and communication",
+  "group_key": "g7",
+  "item": null,
+  "label": "Mast, with lights",
+  "objects": 15,
+  "source_triangles": 7142
+ },
+ {
+  "node": "part09",
+  "sfi": "41–42",
+  "group": "Navigation and communication",
+  "group_key": "g7",
+  "item": "110",
+  "label": "Radar",
+  "objects": 5,
+  "source_triangles": 10552
+ },
+ {
+  "node": "part10",
+  "sfi": "41–42",
+  "group": "Navigation and communication",
+  "group_key": "g7",
+  "item": null,
+  "label": "Antennas",
+  "objects": 7,
+  "source_triangles": 6312
+ },
+ {
+  "node": "part11",
+  "sfi": "43",
+  "group": "Anchoring, mooring and towing",
+  "group_key": "g2",
+  "item": "20",
+  "label": "Bollard, one of eight",
+  "objects": 24,
+  "source_triangles": 188843
+ },
+ {
+  "node": "part12",
+  "sfi": "43",
+  "group": "Anchoring, mooring and towing",
+  "group_key": "g2",
+  "item": "18",
+  "label": "Anchor, stowed (identification tentative)",
+  "objects": 2,
+  "source_triangles": 22114
+ },
+ {
+  "node": "part13",
+  "sfi": "43",
+  "group": "Anchoring, mooring and towing",
+  "group_key": "g2",
+  "item": null,
+  "label": "Anchoring and mooring gear at the bow",
+  "objects": 13,
+  "source_triangles": 82872
+ },
+ {
+  "node": "part14",
+  "sfi": "5",
+  "group": "Accommodation and outfitting",
+  "group_key": "outfit",
+  "item": null,
+  "label": null,
+  "objects": 1706,
+  "source_triangles": 557957
+ },
+ {
+  "node": "part15",
+  "sfi": "50",
+  "group": "Lifesaving equipment",
+  "group_key": "g1",
+  "item": "1",
+  "label": "MOB boat (6 persons), with cradle",
+  "objects": 171,
+  "source_triangles": 158885
+ },
+ {
+  "node": "part16",
+  "sfi": "50",
+  "group": "Lifesaving equipment",
+  "group_key": "g1",
+  "item": "2 / 79",
+  "label": "Rescue boat davit",
+  "objects": 1,
+  "source_triangles": 18116
+ },
+ {
+  "node": "part17",
+  "sfi": "50",
+  "group": "Lifesaving equipment",
+  "group_key": "g1",
+  "item": "3",
+  "label": "Life raft (25 persons), one of two",
+  "objects": 4,
+  "source_triangles": 78317
+ },
+ {
+  "node": "part18",
+  "sfi": "50",
+  "group": "Lifesaving equipment",
+  "group_key": "g1",
+  "item": "7",
+  "label": "Lifebuoy, one of eight",
+  "objects": 96,
+  "source_triangles": 360445
+ },
+ {
+  "node": "part19",
+  "sfi": "6",
+  "group": "Propulsion and machinery",
+  "group_key": "g4",
+  "item": "47–51, 76",
+  "label": "PM azimuth drive, port",
+  "objects": 33,
+  "source_triangles": 441267
+ },
+ {
+  "node": "part20",
+  "sfi": "6",
+  "group": "Propulsion and machinery",
+  "group_key": "g4",
+  "item": "47–51, 76",
+  "label": "PM azimuth drive, starboard",
+  "objects": 35,
+  "source_triangles": 446858
+ },
+ {
+  "node": "part21",
+  "sfi": "6",
+  "group": "Propulsion and machinery",
+  "group_key": "g4",
+  "item": "72",
+  "label": "Main engine (diesel), one of three",
+  "objects": 3,
+  "source_triangles": 414473
+ },
+ {
+  "node": "part22",
+  "sfi": "6",
+  "group": "Propulsion and machinery",
+  "group_key": "g4",
+  "item": "73",
+  "label": "Generator, one of three",
+  "objects": 3,
+  "source_triangles": 18062
+ },
+ {
+  "node": "part23",
+  "sfi": "6",
+  "group": "Propulsion and machinery",
+  "group_key": "g4",
+  "item": "75",
+  "label": "Bow tunnel thruster 200 kW",
+  "objects": 14,
+  "source_triangles": 45046
+ }
+]

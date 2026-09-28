@@ -14,8 +14,3 @@ Both files are far past GitHub's plain-git limits: GitHub **blocks any push cont
 ## License
 
 Same terms as the rest of the repository — CC BY-NC 4.0 — unless a licence notice embedded in the model itself says otherwise (not machine-checked here, since these are binary CAD formats). See the main [README](../../../README.md#credit--license) and [LICENSE](../../../LICENSE).
-
-## Contact
-
-- Data / dataset questions (NTNU): Henrique Gaspar (henrique.gaspar@ntnu.no)
-- C-Job (<https://c-job.com/contact-us/nikolayev/>)

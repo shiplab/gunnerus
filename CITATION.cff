@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: >-
+  If you use this data set, please cite it as below. To cite a specific
+  version, use the DOI of that release on Zenodo.
+type: dataset
+title: >-
+  Gunnerus Open Data Set: drawings, 3D model and metadata of the
+  research vessel R/V Gunnerus
+abstract: >-
+  Production drawings (DWG, DXF and A0 PDF), a 3D CAD model, engineering
+  documents and structured metadata for the NTNU research vessel R/V
+  Gunnerus, published openly as a reference ship case for research,
+  teaching, benchmarking and the development of digital shipbuilding tools.
+  Drawings and design data courtesy of polarkonsult; derivative drawings,
+  3D model and engineering documents by C-JOB and NTNU; published by NTNU.
+authors:
+  - family-names: Gaspar
+    given-names: Henrique M.
+    email: henrique.gaspar@ntnu.no
+    affiliation: Norwegian University of Science and Technology (NTNU)
+    # orcid: https://orcid.org/0000-0000-0000-0000
+  - name: polarkonsult AS
+    website: https://www.polarkonsult.com/
+  - name: C-JOB Naval Architects
+    website: https://c-job.com/
+contact:
+  - family-names: Gaspar
+    given-names: Henrique M.
+    email: henrique.gaspar@ntnu.no
+repository-code: https://github.com/shiplab/gunnerus
+url: https://shiplab.github.io/gunnerus/
+license: CC-BY-NC-4.0
+version: 1.0.0
+# date-released: 2026-MM-DD   # set when you publish the release
+# doi: 10.5281/zenodo.XXXXXXX  # concept DOI, after the first Zenodo release
+keywords:
+  - naval architecture
+  - ship design
+  - research vessel
+  - open data
+  - CAD
+  - general arrangement
+  - SFI group system
+  - DNV VIS
+  - NTNU
+  - Gunnerus

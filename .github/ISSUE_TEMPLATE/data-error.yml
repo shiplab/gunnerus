@@ -1,0 +1,63 @@
+name: Data error
+description: Report a wrong value, a mismatch between sheets, or a broken or missing file.
+title: "[Data error] "
+labels: ["data error"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the Gunnerus data set. Check the **Known issues** section of the README first; those are already recorded.
+  - type: dropdown
+    id: source
+    attributes:
+      label: Where is the problem?
+      options:
+        - General arrangement (GA Gunnerus Rev1)
+        - Tank plan (Tank Plan Rev1)
+        - Lines plan
+        - Profile and plan
+        - Midship section
+        - Shell expansion
+        - Engine room arrangement
+        - Construction plan, deck and double bottom
+        - Construction plan, longitudinal section
+        - Construction plan, transverse section
+        - Draught and hullmarks
+        - Freeboard plan
+        - Diver's platform arrangement
+        - Safety fire zone plan
+        - Tank arrangement
+        - 3D model
+        - Engineering documents (extended/CJOB/docs)
+        - Metadata (gunnerus_metadata.json)
+        - README or website
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: formats
+    attributes:
+      label: Which file formats are affected?
+      options:
+        - label: DWG
+        - label: DXF
+        - label: PDF
+        - label: Other (3D model, JSON, spreadsheet)
+  - type: input
+    id: location
+    attributes:
+      label: Location on the sheet or in the file
+      description: View, frame number, table name, JSON key, or similar.
+      placeholder: "e.g. MAIN DIMENSIONS table, title block; or tanks[12].capacity_m3"
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      description: What the file says, and what you believe is correct.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Source for the correct value
+      description: Another sheet, a document, a measurement or a publication. Screenshots welcome.
