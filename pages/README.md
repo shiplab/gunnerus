@@ -12,7 +12,8 @@ Source for the GitHub Pages site that presents this repository, <https://shiplab
 
 | Path | Contents |
 | --- | --- |
-| `index.html` | The page itself: 3D viewer, drawing gallery, documents, metadata explorer, credits and licence. Loads three.js from jsDelivr and fonts from Google Fonts. |
+| `index.html` | The page itself: 3D viewer, drawing gallery, documents, metadata explorer, operational data, credits and licence. Loads three.js from jsDelivr and fonts from Google Fonts. |
+| `assets/operational/wave-shielding-2023.json` | Summary of the [wave-shielding case](../operational/wave-shielding-2023/README.md) for the Operational section (46 kB): heading and roll every 2 s, incident wave height, per-case statistics and the file list. Made by `operational/wave-shielding-2023/scripts/extract.py … web`; rerun it when the case data changes. |
 | `assets/thumbs/*.webp` | First-sheet previews of the 15 drawings, rendered from the PDFs and trimmed. |
 | `assets/ntnu-logo.svg` | NTNU logo (colour, horizontal). |
 
