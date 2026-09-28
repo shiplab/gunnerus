@@ -14,6 +14,9 @@ Source for the GitHub Pages site that presents this repository, <https://shiplab
 | --- | --- |
 | `index.html` | The page itself: 3D viewer, drawing gallery, documents, metadata explorer, operational data, credits and licence. Loads three.js from jsDelivr and fonts from Google Fonts. |
 | `assets/operational/wave-shielding-2023.json` | Summary of the [wave-shielding case](../operational/wave-shielding-2023/README.md) for the Operational section (46 kB): heading and roll every 2 s, incident wave height, per-case statistics and the file list. Made by `operational/wave-shielding-2023/scripts/extract.py … web`; rerun it when the case data changes. |
+| `explorer.html` | The ship explorer: pick a part of the 3D model to see its equipment-list items, specification lines, drawings, GA metadata, weight group and measured data; a *Coverage* view lists all 127 items of the C-JOB list of main equipment and where each appears. Links such as `explorer.html#part=part03` or `#item=72` open a part or item directly. |
+| `assets/explorer/explorer.json` | The cross-reference index behind the explorer (about 330 kB). Made by `tools/build_explorer_data.py` from files in this repository; rerun it when the drawings, documents, metadata, 3D parts or operational case change. |
+| `tools/build_explorer_data.py` | Builds `assets/explorer/explorer.json`. Needs pandas, numpy and `pdftotext` (poppler). Explains how each kind of link is made; the keyword patterns for drawing labels and the hand-made links are at the top of the script. |
 | `assets/thumbs/*.webp` | First-sheet previews of the 15 drawings, rendered from the PDFs and trimmed. |
 | `assets/ntnu-logo.svg` | NTNU logo (colour, horizontal). |
 

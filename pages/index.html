@@ -331,6 +331,7 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
           <p class="lede">A real, working research vessel, documented in full and published openly. Production drawings, a 3D model, engineering documents, structured metadata and data measured at sea, ready for research, teaching and tool development.</p>
           <div class="cta">
             <a class="btn primary" href="#drawings">Browse the drawings</a>
+            <a class="btn" href="explorer.html">Open the ship explorer</a>
             <a class="btn" href="https://github.com/shiplab/gunnerus/archive/refs/heads/main.zip">Download the repository (.zip)</a>
           </div>
         </div>
@@ -377,7 +378,7 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
             <button type="button" class="tog" id="half" aria-pressed="false">Cut at centreline</button>
             <label class="cut">Cut from bow <input type="range" id="cutX" min="-1.2" max="35.4" step="0.1" value="35.4" aria-describedby="cutOut"> <output id="cutOut" for="cutX">off</output></label>
           </div>
-          <p class="fine">Grouping and item numbers by NTNU, from the C-JOB <a href="https://github.com/shiplab/gunnerus/blob/main/extended/CJOB/docs/List%20of%20Main%20Equipment%20Rev0.pdf">list of main equipment</a>. <a href="https://github.com/shiplab/gunnerus/blob/main/derived/README.md">How the parts were grouped</a></p>
+          <p class="fine">Grouping and item numbers by NTNU, from the C-JOB <a href="https://github.com/shiplab/gunnerus/blob/main/extended/CJOB/docs/List%20of%20Main%20Equipment%20Rev0.pdf">list of main equipment</a>. <a href="https://github.com/shiplab/gunnerus/blob/main/derived/README.md">How the parts were grouped</a> · <a href="explorer.html">Ship explorer: every part linked to the drawings, documents and measured data</a></p>
         </div>
       </div>
 
@@ -911,7 +912,8 @@ function pick(p){picked=p;paint();
   pickEl.style.setProperty("--c",COLORS[i.group_key]);
   pickEl.innerHTML=`<button type="button" aria-label="Close">×</button><span class="sfi"><i></i>SFI ${esc(i.sfi)} · ${esc(i.group)}</span><b>${esc(title)}</b>`+
     (i.item?`<span class="it">C-JOB list item ${esc(i.item)}</span>`:"")+
-    (i.label&&i.label.includes("tentative")?`<span class="note">Identification tentative</span>`:"");
+    (i.label&&i.label.includes("tentative")?`<span class="note">Identification tentative</span>`:"")+
+    `<a class="it" href="explorer.html#part=${encodeURIComponent(i.node)}">Open in the ship explorer →</a>`;
   pickEl.hidden=false;pickEl.querySelector("button").onclick=()=>pick(null);}
 function preset(k){document.querySelectorAll("[data-preset]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.preset===k));
   for(const g of Object.keys(groups))groups[g].on=k==="all"||(k==="equipment"?!STRUCTURE.includes(g):STRUCTURE.includes(g));applyVisibility();}
