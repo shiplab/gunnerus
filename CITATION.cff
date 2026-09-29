@@ -1,38 +1,46 @@
 cff-version: 1.2.0
 message: >-
-  If you use this data set, please cite it as below. To cite a specific
-  version, use the DOI of that release on Zenodo.
+  If you use this data set, please cite it as below. The DOI always resolves
+  to the latest version; to cite a fixed version, use that release's version
+  DOI from the Zenodo page. If you use operational data, also cite the study
+  listed under references.
 type: dataset
 title: >-
-  Gunnerus Open Data Set: drawings, 3D model and metadata of the
-  research vessel R/V Gunnerus
+  Gunnerus Open Data Set: drawings, 3D model, metadata and operational data
+  of the research vessel R/V Gunnerus
 abstract: >-
   Production drawings (DWG, DXF and A0 PDF), a 3D CAD model, engineering
-  documents and structured metadata for the NTNU research vessel R/V
-  Gunnerus, published openly as a reference ship case for research,
-  teaching, benchmarking and the development of digital shipbuilding tools.
-  Drawings and design data courtesy of polarkonsult; derivative drawings,
-  3D model and engineering documents by C-JOB and NTNU; published by NTNU.
+  documents, structured metadata and operational data for the NTNU research
+  vessel R/V Gunnerus, published openly as a reference ship case for
+  research, teaching, benchmarking and the development of digital
+  shipbuilding tools. Drawings and design data courtesy of polarkonsult;
+  derivative drawings, 3D model and engineering documents by C-JOB and NTNU;
+  published by NTNU. The operational wave-shielding case is from Wang et al.
+  (2025), Ocean Engineering 320, 120189.
 authors:
+  - family-names: Ha
+    given-names: Jisang
+    email: jisang.ha@ntnu.no
+    affiliation: Norwegian University of Science and Technology (NTNU)
   - family-names: Gaspar
     given-names: Henrique M.
     email: henrique.gaspar@ntnu.no
     affiliation: Norwegian University of Science and Technology (NTNU)
     # orcid: https://orcid.org/0000-0000-0000-0000
-  - name: polarkonsult AS
-    website: https://www.polarkonsult.com/
-  - name: C-JOB Naval Architects
-    website: https://c-job.com/
 contact:
   - family-names: Gaspar
     given-names: Henrique M.
     email: henrique.gaspar@ntnu.no
+doi: 10.5281/zenodo.22983657
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22983657
+    description: Concept DOI, all versions (resolves to the latest)
 repository-code: https://github.com/shiplab/gunnerus
 url: https://shiplab.github.io/gunnerus/
 license: CC-BY-NC-4.0
 version: 1.0.0
-# date-released: 2026-MM-DD   # set when you publish the release
-# doi: 10.5281/zenodo.XXXXXXX  # concept DOI, after the first Zenodo release
+date-released: 2026-09-28
 keywords:
   - naval architecture
   - ship design
@@ -42,5 +50,30 @@ keywords:
   - general arrangement
   - SFI group system
   - DNV VIS
+  - operational data
+  - wave shielding
   - NTNU
   - Gunnerus
+references:
+  - type: article
+    title: >-
+      Full-scale experimental research on wave shielding effect of RV
+      Gunnerus for offshore operations
+    authors:
+      - family-names: Wang
+        given-names: Tongtong
+      - family-names: Skulstad
+        given-names: Robert
+      - family-names: Holmeset
+        given-names: Finn Tore
+      - family-names: Halse
+        given-names: Karl Henning
+      - family-names: Hildre
+        given-names: Hans Petter
+      - family-names: Zhang
+        given-names: Houxiang
+    journal: Ocean Engineering
+    volume: 320
+    start: 120189
+    year: 2025
+    doi: 10.1016/j.oceaneng.2024.120189

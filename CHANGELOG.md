@@ -1,6 +1,6 @@
 # Changelog
 
-Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [releases](https://github.com/shiplab/gunnerus/releases); each release is archived on Zenodo with its own DOI.
+Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [releases](https://github.com/shiplab/gunnerus/releases); each release is archived on [Zenodo](https://doi.org/10.5281/zenodo.22983657) (concept DOI 10.5281/zenodo.22983657, all versions) with its own version DOI.
 
 ## [Unreleased] – planned as 1.1.0
 
@@ -13,14 +13,19 @@ Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [relea
 - `derived/vesseljs/gunnerus.json`: the vessel.js ship specification (hull offsets, decks, bulkheads, compartments and tanks), and `derived/vesseljs/offsets.csv` with the offsets in metres.
 - A *Related projects* section in the README, linking the vessel.js Gunnerus examples and the OpenBridge simulator demo.
 - A photo of the vessel (2014, Fredrik Skoglund) in the README, and a render of the visual model in `derived/3d/`.
+- `operational/`, for data measured on board in service, one folder per case tied to a published study.
+- `operational/wave-shielding-2023/`: the wave-shielding experiment of 31 October 2023 from Wang et al. (2025), *Ocean Engineering* 320, 120189. Ship motion, crane, thrusters, engines, wave radar and a 50 Hz wave buoy for the seven heading cases, with a data dictionary, the paper's reported values and the extraction script.
+- Website: an *Operational* section with a chart, a case table and the data files.
+- README: an *Operational data* section, a DOI badge, and a new header image showing drawings, 3D model and operational data (`images/gunnerus-header.png`, built by `images/make_header.py`).
 
 ### Changed
 
 - The website now takes its 3D model from `derived/3d/gunnerus.glb`; the duplicate `pages/assets/gunnerus.glb` was removed.
+- Citation: the data set is cited as Ha, J. and Gaspar, H.M.; polarkonsult, C-JOB and NTNU are credited in the README and on Zenodo as rights holder, producer and hosting institution. `CITATION.cff` and `.zenodo.json` updated to match, and the title now includes operational data.
 
-## [1.0.0] – unreleased
+## [1.0.0] – 2026-09-28
 
-First public release.
+First public release. Archived on Zenodo: [10.5281/zenodo.22983657](https://doi.org/10.5281/zenodo.22983657).
 
 ### Added
 
