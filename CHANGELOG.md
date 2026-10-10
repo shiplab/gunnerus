@@ -2,7 +2,30 @@
 
 Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [releases](https://github.com/shiplab/gunnerus/releases); each release is archived on [Zenodo](https://doi.org/10.5281/zenodo.22983657) (concept DOI 10.5281/zenodo.22983657, all versions) with its own version DOI.
 
-## [Unreleased] – planned as 1.1.0
+## [Unreleased]
+
+Nothing yet.
+
+## [1.0.2] – 2026-10-10
+
+Adds operational data measured at sea, a ship explorer page, and a citable DOI.
+
+### Added
+
+- `operational/`, for data measured on board in service: one folder per case, each tied to a published study, with UTC times, units in the column names, a data dictionary and the extraction script.
+- `operational/wave-shielding-2023/`: the wave-shielding experiment of 31 October 2023 in Breisundet, from Wang et al. (2025), *Ocean Engineering* 320, 120189, [doi:10.1016/j.oceaneng.2024.120189](https://doi.org/10.1016/j.oceaneng.2024.120189). Seven heading cases (10:00–12:10 UTC) with ship motion and position (1 and 2 Hz), crane angles and a crane-hook accelerometer, azimuth and tunnel thrusters, engines, Miros wave radar spectra, air gap and a 50 Hz wave buoy on the sheltered side. Includes `cases.csv`, the paper's reported values (`results.csv`), `channels.csv` (132 columns) and an overview figure. About 16 MB. Data set organised by Jisang Ha and Henrique M. Gaspar.
+- Website: an *Operational* section with a chart of the seven cases, a case table and the data files (`pages/assets/operational/wave-shielding-2023.json`, made by the case's `extract.py web`).
+- Website: a ship explorer, `pages/explorer.html`. *Ship* view: the 3D model with a detail panel per part, SFI group, equipment item or weight group (equipment-list rows with the matching specification line, drawing evidence, GA metadata, measured channels from the wave-shielding case, known issues), weight centres from the C-JOB weight calculation, and deep links (`#part=`, `#group=`, `#item=`, `#weight=`). *Coverage* view: all 127 items of the C-JOB list of main equipment against 3D model, specification, drawings, GA metadata and measurements. Data in `pages/assets/explorer/explorer.json`, built by `pages/tools/build_explorer_data.py`.
+- Website: a *Cite* panel with the data set citation and BibTeX, and the citation for the operational study.
+- README: an *Operational data* section, a DOI badge, and a header image showing drawings, 3D model and operational data (`images/gunnerus-header.png`, built by `images/make_header.py`).
+- Concept DOI [10.5281/zenodo.22983657](https://doi.org/10.5281/zenodo.22983657) in the README, `CITATION.cff` and `.zenodo.json`.
+
+### Changed
+
+- Citation: the data set is cited as Ha, J. and Gaspar, H. M. polarkonsult, C-JOB and NTNU are credited in the README and on Zenodo as rights holder, producer and hosting institution. The title now includes operational data.
+- `polarkonsult/Profile and Plan Rev0.pdf` re-issued.
+
+## [1.0.1] – 2026-09-27
 
 ### Added
 
@@ -13,19 +36,14 @@ Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [relea
 - `derived/vesseljs/gunnerus.json`: the vessel.js ship specification (hull offsets, decks, bulkheads, compartments and tanks), and `derived/vesseljs/offsets.csv` with the offsets in metres.
 - A *Related projects* section in the README, linking the vessel.js Gunnerus examples and the OpenBridge simulator demo.
 - A photo of the vessel (2014, Fredrik Skoglund) in the README, and a render of the visual model in `derived/3d/`.
-- `operational/`, for data measured on board in service, one folder per case tied to a published study.
-- `operational/wave-shielding-2023/`: the wave-shielding experiment of 31 October 2023 from Wang et al. (2025), *Ocean Engineering* 320, 120189. Ship motion, crane, thrusters, engines, wave radar and a 50 Hz wave buoy for the seven heading cases, with a data dictionary, the paper's reported values and the extraction script.
-- Website: an *Operational* section with a chart, a case table and the data files.
-- README: an *Operational data* section, a DOI badge, and a new header image showing drawings, 3D model and operational data (`images/gunnerus-header.png`, built by `images/make_header.py`).
 
 ### Changed
 
 - The website now takes its 3D model from `derived/3d/gunnerus.glb`; the duplicate `pages/assets/gunnerus.glb` was removed.
-- Citation: the data set is cited as Ha, J. and Gaspar, H.M.; polarkonsult, C-JOB and NTNU are credited in the README and on Zenodo as rights holder, producer and hosting institution. `CITATION.cff` and `.zenodo.json` updated to match, and the title now includes operational data.
 
-## [1.0.0] – 2026-09-28
+## [1.0.0] – 2026-09-26
 
-First public release. Archived on Zenodo: [10.5281/zenodo.22983657](https://doi.org/10.5281/zenodo.22983657).
+First public release.
 
 ### Added
 
@@ -43,5 +61,7 @@ First public release. Archived on Zenodo: [10.5281/zenodo.22983657](https://doi.
 - Preview images moved from `docs/images/` to `images/`.
 - `Safety Fire Zone Plan Rev0.dwg` and `Construction Plan Deck and Double Bottom Rev0.dwg` were renamed to match their DXF and PDF siblings.
 
-[Unreleased]: https://github.com/shiplab/gunnerus/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/shiplab/gunnerus/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/shiplab/gunnerus/compare/V1.0.1...v1.0.2
+[1.0.1]: https://github.com/shiplab/gunnerus/compare/v1.0.0...V1.0.1
 [1.0.0]: https://github.com/shiplab/gunnerus/releases/tag/v1.0.0
