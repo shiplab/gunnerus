@@ -250,6 +250,14 @@ dialog.lb::backdrop{background:rgba(8,16,24,.82)}
 .lic ul{margin:10px 0 0;padding-left:18px;color:var(--ink-2)}
 .lic li{margin-bottom:6px}
 .attr{font:.9rem/1.55 var(--mono);background:var(--paper);border:1px dashed var(--ink-3);border-radius:6px;padding:14px 16px;margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;user-select:all}
+.cite{margin-top:24px}
+.cite .head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:baseline;justify-content:space-between}
+.cite .doi{font:500 .85rem var(--mono)}
+.cite .ref{font-size:1rem;line-height:1.6;margin-top:12px;max-width:80ch;overflow-wrap:anywhere}
+.cite .doi{overflow-wrap:anywhere}
+.cite pre{font:.82rem/1.5 var(--mono);background:var(--paper);border:1px dashed var(--ink-3);border-radius:6px;padding:14px 16px;margin:10px 0 0;overflow-x:auto;white-space:pre}
+.cite .acts{display:flex;flex-wrap:wrap;gap:8px}
+.cite h4{font:600 1.05rem var(--display);letter-spacing:.02em;margin:22px 0 0}
 .copy{margin-top:10px;font:600 .9rem var(--body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:6px;padding:9px 12px;cursor:pointer}
 .copy:hover{border-color:var(--ink-3)}
 
@@ -313,6 +321,7 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
       <a href="#metadata">Metadata</a>
       <a href="#operational">Operational</a>
       <a href="#licence">Licence</a>
+      <a href="#cite">Cite</a>
     </nav>
     <a class="gh" href="https://github.com/shiplab/gunnerus">
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -605,7 +614,7 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
             <li><b>Open for non-commercial use.</b> Use, share and adapt the material for research, teaching and other non-commercial work.</li>
             <li><b>No commercial use</b> without approval from polarkonsult.</li>
             <li><b>As is.</b> Provided without warranty, responsibility or liability of any kind.</li>
-          
+          </ul>
           <p style="margin-top:12px"><a href="https://creativecommons.org/licenses/by-nc/4.0/">Licence summary</a> · <a href="https://github.com/shiplab/gunnerus/blob/main/LICENSE">Full text</a></p>
         </div>
         <div class="panel">
@@ -614,6 +623,33 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
 Licensed under CC BY-NC 4.0 — https://creativecommons.org/licenses/by-nc/4.0/</div>
           <button type="button" class="copy" id="copyAttr">Copy attribution</button>
           <p class="muted" style="margin-top:14px;font-size:.92rem">If you modified the material, say that changes were made. Dataset authors: Jisang Ha  <span class="mono">jisang.ha@ntnu.no</span> & Henrique Gaspar, <span class="mono">henrique.gaspar@ntnu.no</span> - September 2026.</p>
+        </div>
+      </div>
+      <div class="panel cite" id="cite">
+        <div class="head">
+          <h3>How to cite</h3>
+          <a class="doi" href="https://doi.org/10.5281/zenodo.22983657">doi:10.5281/zenodo.22983657</a>
+        </div>
+        <p class="muted" style="margin-top:6px;font-size:.92rem">If you use the data set in a publication, please cite it. This DOI always resolves to the latest version; for a fixed version, use that release's DOI on Zenodo.</p>
+        <p class="ref" id="citeText">Ha, J., &amp; Gaspar, H. M. (2026). <i>Gunnerus Open Data Set: drawings, 3D model, metadata and operational data of the research vessel R/V Gunnerus</i> [Data set]. Zenodo. https://doi.org/10.5281/zenodo.22983657</p>
+        <pre id="citeBib">@misc{gunnerus_open_data,
+  author       = {Ha, Jisang and Gaspar, Henrique M.},
+  title        = {Gunnerus Open Data Set: drawings, 3D model, metadata and operational data of the research vessel R/V Gunnerus},
+  publisher    = {Zenodo},
+  year         = {2026},
+  doi          = {10.5281/zenodo.22983657},
+  howpublished = {\url{https://github.com/shiplab/gunnerus}},
+  note         = {Drawings and design data courtesy of polarkonsult; derivative drawings, 3D model and engineering documents by C-JOB and NTNU; published by NTNU. CC BY-NC 4.0}
+}</pre>
+        <div class="acts">
+          <button type="button" class="copy" data-copy="citeText" data-label="Copy citation">Copy citation</button>
+          <button type="button" class="copy" data-copy="citeBib" data-label="Copy BibTeX">Copy BibTeX</button>
+        </div>
+        <h4>Using the operational data?</h4>
+        <p class="muted" style="margin-top:6px;font-size:.92rem">Also cite the study each case comes from. For the wave-shielding experiment:</p>
+        <p class="ref" id="citeWang">Wang, T., Skulstad, R., Holmeset, F. T., Halse, K. H., Hildre, H. P., &amp; Zhang, H. (2025). Full-scale experimental research on wave shielding effect of RV Gunnerus for offshore operations. <i>Ocean Engineering</i>, 320, 120189. https://doi.org/10.1016/j.oceaneng.2024.120189</p>
+        <div class="acts" style="margin-top:10px">
+          <button type="button" class="copy" data-copy="citeWang" data-label="Copy citation">Copy citation</button>
         </div>
       </div>
     </div>
@@ -705,6 +741,10 @@ document.getElementById("docs").innerHTML=`<thead><tr><th>Document</th><th>Doc. 
 
 const at=document.getElementById("attr"),cb=document.getElementById("copyAttr");
 cb.onclick=async()=>{try{await navigator.clipboard.writeText(at.textContent);cb.textContent="Copied";}catch(e){const r=document.createRange();r.selectNodeContents(at);const s=getSelection();s.removeAllRanges();s.addRange(r);cb.textContent="Selected. Press Ctrl+C to copy";}setTimeout(()=>cb.textContent="Copy attribution",2500)};
+
+document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{const el=document.getElementById(b.dataset.copy),t=el.textContent.replace(/\s+\n/g,"\n").trim();
+  try{await navigator.clipboard.writeText(t);b.textContent="Copied";}catch(e){const r=document.createRange();r.selectNodeContents(el);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);b.textContent="Selected. Press Ctrl+C to copy";}
+  setTimeout(()=>b.textContent=b.dataset.label,2500)});
 
 /* metadata */
 const tabs=[...document.querySelectorAll('[role="tab"]')];
