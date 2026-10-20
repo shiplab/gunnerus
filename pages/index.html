@@ -578,6 +578,27 @@ footer .end{margin-left:auto;font:.78rem var(--mono);color:var(--ink-3)}
         <p>All times UTC. Units and sources for every column are in <a href="https://github.com/shiplab/gunnerus/blob/main/operational/wave-shielding-2023/channels.csv"><span class="mono">channels.csv</span></a>; processing and known issues in the <a href="https://github.com/shiplab/gunnerus/blob/main/operational/wave-shielding-2023/README.md">case README</a>.</p>
         <div class="scroll"><table class="tbl" id="opFiles"></table></div>
       </div>
+
+      <div class="op-card" style="margin-top:24px;margin-bottom:0">
+        <div class="panel">
+          <p class="role" style="font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);margin-bottom:10px">Operating profile · 30 October – 3 November 2023</p>
+          <h3 style="font-size:1.6rem">Power and energy profile</h3>
+          <p style="color:var(--ink-2);margin-top:8px">Five days of the ship's own machinery log: when the three engines ran, how they shared the load, what the azimuth drives did, and where the fuel went, split into stationary, station-keeping, manoeuvring and transit, with the track on a map. Every number is marked as measured, derived or assumed.</p>
+          <dl class="facts">
+            <dt>Data</dt><dd>7,200 one-minute rows: speed, GPS position, three engines (load, fuel, speed), two azimuth drives</dd>
+            <dt>Not measured</dt><dd>Electrical power, generators, switchboard, batteries, tank levels</dd>
+            <dt>Study</dt><dd>None yet: the classification and the page are ours, the measurements are the ship's logger data</dd>
+          </dl>
+        </div>
+        <div class="panel" style="display:flex;flex-direction:column;gap:12px">
+          <p class="find"><b>About half</b> of the week's fuel was burned in the roughly 12 % of the time spent in transit at about 10 knots.</p>
+          <p style="font-size:.9rem;color:var(--ink-2)">Data from <b><a href="https://www.ntnu.edu/employees/robert.skulstad">Robert Skulstad</a></b> (NTNU), organised by <b>Henrique M. Gaspar</b> (NTNU). Fuel is the logger's value and looks computed from engine load.</p>
+          <div class="cta" style="margin-top:auto">
+            <a class="btn primary" href="power-energy.html">Open the power and energy page</a>
+            <a class="btn" href="https://github.com/shiplab/gunnerus/tree/main/operational/power-energy-2023">Open the case on GitHub</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -651,6 +672,7 @@ Licensed under CC BY-NC 4.0 — https://creativecommons.org/licenses/by-nc/4.0/<
         <div class="acts" style="margin-top:10px">
           <button type="button" class="copy" data-copy="citeWang" data-label="Copy citation">Copy citation</button>
         </div>
+        <p class="muted" style="margin-top:10px;font-size:.92rem">The power and energy profile has no study of its own yet: cite this repository and name <a href="https://www.ntnu.edu/employees/robert.skulstad">Robert Skulstad</a> as the provider of the data.</p>
       </div>
     </div>
   </section>

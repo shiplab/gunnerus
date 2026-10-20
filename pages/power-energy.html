@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gunnerus Power and Energy</title>
+<meta name="description" content="Operating profile of the power and energy system of the NTNU research vessel R/V Gunnerus over five days at sea and in port, 30 October to 3 November 2023: engine load sharing, fuel, azimuth drives, and what is measured, derived or assumed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root{
+  --paper:#f4f6f7; --sheet:#ffffff; --ink:#0f1d2a; --ink-2:#44545f; --ink-3:#6b7a84;
+  --rule:#d3dbdf; --rule-2:#e5eaec;
+  --ntnu:#00509e; --ntnu-ink:#003a73; --ntnu-wash:#e3edf7;
+  --hull:#97aaae; --prop:#d9b646; --prop-wash:#f7efd2; --prop-ink:#6b5410;
+  --viewer:#e9eef0; --shadow:0 1px 2px rgba(15,29,42,.06),0 8px 24px rgba(15,29,42,.06);
+  --logo-filter:none;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c151d; --sheet:#121e28; --ink:#e6edf1; --ink-2:#aebbc4; --ink-3:#8494a0;
+    --rule:#26343f; --rule-2:#1b2833;
+    --ntnu:#6aa8e8; --ntnu-ink:#9cc6f2; --ntnu-wash:#132a42;
+    --hull:#7d8f94; --prop:#e2c25a; --prop-wash:#2d2710; --prop-ink:#ecd488;
+    --viewer:#101b24; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    --logo-filter:brightness(0) invert(1);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c151d; --sheet:#121e28; --ink:#e6edf1; --ink-2:#aebbc4; --ink-3:#8494a0;
+  --rule:#26343f; --rule-2:#1b2833;
+  --ntnu:#6aa8e8; --ntnu-ink:#9cc6f2; --ntnu-wash:#132a42;
+  --hull:#7d8f94; --prop:#e2c25a; --prop-wash:#2d2710; --prop-ink:#ecd488;
+  --viewer:#101b24; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  --logo-filter:brightness(0) invert(1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:var(--ntnu)}
+a:hover{color:var(--ntnu-ink)}
+:focus-visible{outline:2px solid var(--ntnu);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono);font-size:.82em;letter-spacing:0}
+.tnum{font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.05;letter-spacing:.005em;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4vw,2.75rem)}
+h3{font-size:1.35rem;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 .78rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3)}
+.lede{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:64px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+.brand img{height:26px;width:auto;filter:var(--logo-filter)}
+.brand .fallback{font:700 1.4rem/1 var(--body);letter-spacing:.02em;color:var(--ntnu)}
+.brand .sep{width:1px;height:26px;background:var(--rule)}
+.brand .name{font:600 1.1rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.nav{display:flex;gap:2px;margin-left:auto;flex-wrap:nowrap;white-space:nowrap}
+.nav a{font:500 .95rem/1 var(--body);color:var(--ink-2);text-decoration:none;padding:8px 10px;border-radius:6px}
+.nav a:hover{background:var(--rule-2);color:var(--ink)}
+.gh{display:inline-flex;align-items:center;gap:8px;font:600 .9rem/1 var(--body);color:#fff;background:var(--ntnu);padding:10px 14px;border-radius:6px;text-decoration:none;white-space:nowrap}
+.gh:hover{color:#fff;background:var(--ntnu-ink)}
+:root[data-theme="dark"] .gh{color:#0c151d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gh{color:#0c151d}}
+.gh svg{width:16px;height:16px;fill:currentColor}
+@media (max-width:1040px){.nav{display:none}.top .gh{margin-left:auto}}
+@media (max-width:420px){.brand .sep,.brand .name{display:none}}
+
+
+
+/* power and energy page */
+:root{
+  --m0:#9aa7ae; --m1:#2ca58d; --m2:#d9a21f; --m3:#2f6fd0;
+  --e1:#8a5fb8; --e2:#d9822b; --e3:#3f9c8f;
+  --warn:#9a5b00; --warn-wash:#fbefd9;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--m0:#7d8c94;--m1:#3fc2a6;--m2:#e6b53a;--m3:#6aa8e8;--e1:#a98ad2;--e2:#e69a52;--e3:#5fc0b2;--warn:#f0c57a;--warn-wash:#2d2410}}
+:root[data-theme="dark"]{--m0:#7d8c94;--m1:#3fc2a6;--m2:#e6b53a;--m3:#6aa8e8;--e1:#a98ad2;--e2:#e69a52;--e3:#5fc0b2;--warn:#f0c57a;--warn-wash:#2d2410}
+.page-head{padding-block:clamp(28px,5vw,56px) 8px}
+.page-head h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700;line-height:.95;margin-block:12px 14px}
+.block{padding-block:clamp(26px,4vw,44px)}
+.sec-head{margin-bottom:18px}
+.sec-head h2{font-size:clamp(1.7rem,3vw,2.2rem)}
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .95rem/1 var(--body);padding:11px 15px;border-radius:6px;text-decoration:none;border:1px solid var(--rule);color:var(--ink);background:var(--sheet)}
+.btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+
+/* the three labels */
+.tag{display:inline-block;font:500 .66rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:3px 6px;border-radius:4px;vertical-align:middle;white-space:nowrap}
+.tag.measured{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+.tag.derived{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.tag.assumed{background:var(--warn-wash);color:var(--warn);border:1px dashed var(--warn)}
+.key{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;font-size:.92rem;color:var(--ink-2)}
+.key span{display:inline-flex;align-items:center;gap:8px}
+
+/* controls */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
+.chip{font:500 .9rem/1 var(--body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2);padding:9px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--ink-3);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.kpis{grid-template-columns:minmax(0,1fr)}}
+.kpi{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}
+.kpi .v{font:600 2.3rem/1 var(--display);letter-spacing:.01em;margin:8px 0 4px;font-variant-numeric:tabular-nums}
+.kpi .v small{font:500 .95rem var(--body);color:var(--ink-3);margin-left:4px}
+.kpi p{font-size:.84rem;color:var(--ink-3);line-height:1.35}
+
+/* charts */
+.charts{position:relative}
+.charts svg{display:block;width:100%;height:auto;overflow:visible}
+.charts text{font:400 11px var(--mono);fill:var(--ink-3)}
+.charts .grid line{stroke:var(--rule-2);stroke-width:1}
+.charts .axis line{stroke:var(--rule)}
+.charts .cursor{stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3;pointer-events:none;visibility:hidden}
+.chart-title{display:flex;align-items:baseline;gap:10px;font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:14px 0 2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;color:var(--ink-2);margin:2px 0 6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--sheet);border:1px solid var(--ink);border-radius:6px;box-shadow:var(--shadow);padding:8px 10px;font:400 .78rem/1.45 var(--mono);color:var(--ink);min-width:200px;display:none}
+.tip b{font-weight:500;color:var(--ink-3)}
+
+/* tables */
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;min-width:760px}
+.tbl th{text-align:right;font:500 .66rem/1.25 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:bottom}
+.tbl th:first-child,.tbl td:first-child{text-align:left;white-space:nowrap}
+.tbl th .tag{display:block;margin:6px 0 0 auto;width:max-content}
+.tbl td{padding:10px;border-bottom:1px solid var(--rule-2);text-align:right;font-variant-numeric:tabular-nums}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tr.total td{font-weight:600;border-top:1px solid var(--rule)}
+.dot{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:minmax(0,1fr)}}
+.bars .row{display:grid;grid-template-columns:130px minmax(0,1fr) 70px;gap:10px;align-items:center;margin:10px 0;font-size:.9rem}
+.bars .track{display:flex;height:22px;background:var(--rule-2);border-radius:4px;overflow:hidden}
+.bars .track span{display:block;height:100%}
+.bars .row .n{font:400 .78rem var(--mono);color:var(--ink-3);text-align:right}
+@media (max-width:520px){.bars .row{grid-template-columns:90px minmax(0,1fr) 54px}}
+.note{font-size:.9rem;color:var(--ink-2);margin-top:12px}
+.note b{font-weight:600;color:var(--ink)}
+.callout{border-left:3px solid var(--warn);background:var(--warn-wash);color:var(--ink);padding:10px 14px;border-radius:0 6px 6px 0;font-size:.92rem;margin-top:14px}
+
+/* mission to performance */
+:root{--bt:#5b6b78;--bf:#b5476b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bt:#9fb0bd;--bf:#e07a9c}}
+:root[data-theme="dark"]{--bt:#9fb0bd;--bf:#e07a9c}
+.fw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;margin-bottom:18px}
+.fw .card{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.fw .card:not(:last-child)::after{content:"\2192";position:absolute;right:-21px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:1.1rem}
+.fw .card h3{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fw .card p{font-size:.86rem;color:var(--ink-2);line-height:1.4;margin:0}
+.fw .card p b{color:var(--ink)}
+.tag.none{background:transparent;color:var(--ink-3);border:1px dotted var(--ink-3)}
+@media (max-width:900px){.fw{grid-template-columns:minmax(0,1fr);gap:22px}.fw .card:not(:last-child)::after{content:"\2193";right:auto;left:50%;top:auto;bottom:-20px;transform:translateX(-50%)}}
+.sbar{margin:12px 0}
+.sbar .lab{display:flex;justify-content:space-between;font-size:.86rem;color:var(--ink-2);margin-bottom:4px}
+.sbar .lab span:last-child{font:400 .74rem var(--mono);color:var(--ink-3)}
+.sbar .track{display:flex;height:30px;gap:2px;border-radius:5px;overflow:hidden}
+.sbar .track span{display:flex;align-items:center;justify-content:center;font:500 .72rem var(--mono);min-width:0;overflow:hidden;white-space:nowrap;cursor:default}
+.sbar .track span:first-child{border-radius:5px 0 0 5px}
+.sbar .track span:last-child{border-radius:0 5px 5px 0}
+.sbar.sm .track{height:22px}
+.sbar.sm{margin:7px 0}
+.hist text{font:400 11px var(--mono);fill:var(--ink-3)}
+.hist .v{fill:var(--ink-2)}
+.gtip{position:fixed;z-index:50;pointer-events:none;background:var(--sheet);border:1px solid var(--ink);border-radius:6px;box-shadow:var(--shadow);padding:8px 10px;font:400 .78rem/1.45 var(--mono);color:var(--ink);max-width:260px;display:none}
+.gtip b{font-weight:500;color:var(--ink-3)}
+.mini{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:12px}
+.mini th{font:500 .62rem/1.25 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);text-align:right;padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:bottom}
+.mini td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--rule-2);font-variant-numeric:tabular-nums}
+.mini th:first-child,.mini td:first-child{text-align:left;white-space:nowrap}
+.mini tr:last-child td{border-bottom:0}
+.sub-h{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 4px}
+
+/* map */
+.mapbox{height:clamp(360px,62vh,620px);border:1px solid var(--rule);border-radius:8px;background:var(--rule-2);position:relative;z-index:0}
+.mapbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 10px}
+.mapbar .chip{padding:7px 12px;font-size:.84rem}
+.mapbar .lbl{font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-right:2px}
+.endmk{border:2px solid var(--ink);background:transparent;box-sizing:border-box}
+.leaflet-container{font-family:var(--body)}
+.maptip{position:absolute;z-index:1000;pointer-events:none;background:var(--sheet);border:1px solid var(--ink);border-radius:6px;box-shadow:var(--shadow);padding:8px 10px;font:400 .78rem/1.45 var(--mono);color:var(--ink);display:none;min-width:190px}
+.maptip b{font-weight:500;color:var(--ink-3)}
+.leaflet-tooltip.maptip-static{background:var(--sheet);color:var(--ink);border:1px solid var(--rule);font:500 .72rem var(--mono);box-shadow:none;padding:2px 6px}
+.leaflet-tooltip-right.maptip-static::before{display:none}
+/* schematic */
+.schem svg{display:block;width:100%;height:auto}
+.schem text{font:400 12px var(--body);fill:var(--ink)}
+.schem .sub{font:400 10.5px var(--mono);fill:var(--ink-3)}
+.schem .live{font:500 11px var(--mono);fill:var(--ink)}
+.schem .node rect{fill:var(--sheet);stroke:var(--ink);stroke-width:1.6}
+.schem .node.none rect{stroke:var(--ink-3);stroke-dasharray:5 4;fill:transparent}
+.schem .node.none text{fill:var(--ink-2)}
+.schem .edge{stroke:var(--warn);stroke-width:1.4;stroke-dasharray:5 4;fill:none}
+.schem .edge.solid{stroke:var(--ink);stroke-dasharray:none}
+.schem .arrow{fill:var(--warn)}
+.schem .colhead{font:500 10px var(--mono);fill:var(--ink-3);text-transform:uppercase;letter-spacing:.08em}
+
+.list{margin:8px 0 0;padding-left:1.1em;color:var(--ink-2);font-size:.95rem}
+.list li{margin:7px 0}
+.list li .tag{margin-right:6px}
+footer{border-top:1px solid var(--rule);margin-top:40px;padding-block:26px;color:var(--ink-3);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.loading{padding:40px 0;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Gunnerus Open Data, home">
+      <img src="assets/ntnu-logo.svg" alt="NTNU" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span class="fallback" hidden>NTNU</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="name">Gunnerus Open Data</span>
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="index.html#operational">Operational</a>
+      <a href="explorer.html">Ship explorer</a>
+      <a href="#assumptions">Assumptions</a>
+      <a href="#files">Files</a>
+    </nav>
+    <a class="gh" href="https://github.com/shiplab/gunnerus/tree/main/operational/power-energy-2023">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      Case on GitHub
+    </a>
+  </div>
+</header>
+
+<main id="top">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">operational/power-energy-2023 · measured at sea and in port</p>
+    <h1>Power and energy profile</h1>
+    <p class="lede">The operating profile of the power and energy system of RV Gunnerus over five days, 30 October to 3 November 2023: when the engines ran, how they shared the load, what the azimuth drives did, and how much fuel went where. Everything on this page is marked as <span class="tag measured">measured</span>, <span class="tag derived">derived</span> or <span class="tag assumed">assumed</span>.</p>
+    <div class="key">
+      <span><span class="tag measured">measured</span> a logged channel, as logged (1-minute mean)</span>
+      <span><span class="tag derived">derived</span> computed from measured data by a stated rule</span>
+      <span><span class="tag assumed">assumed</span> our choice: a threshold, a constant, a link</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="profile" style="padding-top:12px">
+  <div class="wrap">
+    <noscript><p class="callout">This page needs JavaScript to draw the charts. The data is in <a href="https://github.com/shiplab/gunnerus/tree/main/operational/power-energy-2023">operational/power-energy-2023</a>.</p></noscript>
+    <div class="filters" id="days" role="group" aria-label="Period"></div>
+    <div id="app"><p class="loading">Loading the data…</p></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Gunnerus open data · <a href="https://github.com/shiplab/gunnerus">github.com/shiplab/gunnerus</a></span>
+    <span>Data from Robert Skulstad (NTNU), organised by Henrique M. Gaspar (NTNU). Licence CC BY-NC 4.0.</span>
+  </div>
+</footer>
+
+<script>
+"use strict";
+const DATA_URLS = ["assets/operational/power-energy-2023.json", "../pages/assets/operational/power-energy-2023.json",
+  "https://raw.githubusercontent.com/shiplab/gunnerus/main/pages/assets/operational/power-energy-2023.json"];
+const REPO = "https://github.com/shiplab/gunnerus/blob/main/operational/power-energy-2023/";
+const MODE_LABEL = {stationary:"Stationary", station_keeping:"Station-keeping", manoeuvring:"Manoeuvring", transit:"Transit"};
+const MODE_RULE = {stationary:"under 0.5 kn, azimuth drives idle", station_keeping:"under 0.5 kn, azimuth drives running", manoeuvring:"0.5 to 8 kn", transit:"8 kn and above"};
+const TAG = {m:'<span class="tag measured">measured</span>', d:'<span class="tag derived">derived</span>', a:'<span class="tag assumed">assumed</span>'};
+const NS = "http://www.w3.org/2000/svg";
+let D, SEL = {key:"week", a:0, b:0}, W = 1000;
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt = (x, d=0) => x == null || isNaN(x) ? "–" : x.toLocaleString("en-GB", {minimumFractionDigits:d, maximumFractionDigits:d});
+const el = (tag, attrs={}, html="") => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (html) e.innerHTML = html; return e; };
+const mean = a => { let s = 0, n = 0; for (const v of a) if (v != null) { s += v; n++; } return n ? s / n : null; };
+const T = i => new Date(Date.parse(D.t0) + i * D.dt * 1000);
+const hhmm = d => d.toISOString().slice(11, 16);
+const dmon = d => d.toLocaleDateString("en-GB", {day:"2-digit", month:"short", timeZone:"UTC"});
+
+async function load() {
+  for (const u of DATA_URLS) {
+    try { const r = await fetch(u); if (r.ok) return await r.json(); } catch (e) {}
+  }
+  throw new Error("Could not load the data file.");
+}
+
+function dayRanges() {
+  const out = [{key:"week", label:"Whole week", a:0, b:D.n}];
+  const t0 = Date.parse(D.t0), step = D.dt * 1000, perDay = 86400000 / step;
+  for (let k = 0; k * perDay < D.n; k++) {
+    const d = new Date(t0 + k * 86400000);
+    out.push({key:d.toISOString().slice(0, 10), label:dmon(d), a:k * perDay, b:Math.min(D.n, (k + 1) * perDay)});
+  }
+  return out;
+}
+
+/* ---------- aggregation for the selected range ---------- */
+function agg() {
+  const {a, b} = SEL, M = D.modes.length, out = {hours:Array(M).fill(0), load:D.modes.map(() => [0,0,0]), cnt:Array(M).fill(0)};
+  for (let i = a; i < b; i++) {
+    const m = D.mode[i]; if (m < 0) continue;
+    out.hours[m] += D.dt / 3600; out.cnt[m]++;
+    for (let e = 0; e < 3; e++) out.load[m][e] += D.load[e][i] || 0;
+  }
+  for (let m = 0; m < M; m++) for (let e = 0; e < 3; e++) out.load[m][e] = out.cnt[m] ? out.load[m][e] / out.cnt[m] : 0;
+  return out;
+}
+function summaryRows() {
+  const scope = SEL.key === "week" ? "week" : "day", period = SEL.key === "week" ? "all" : SEL.key;
+  const rows = D.summary.filter(r => r.scope === scope && r.period === period);
+  const all = rows.find(r => r.mode === "all");
+  return {rows, all};
+}
+
+/* ---------- KPIs ---------- */
+function kpis() {
+  const {all} = summaryRows();
+  const co2 = all.co2_t_assumed;
+  return `<div class="kpis">
+    <div class="kpi">${TAG.d}<div class="v">${fmt(all.hours, 1)}<small>h</small></div><p>logged in the period; 1-minute data, ${fmt(100 * D.mode.slice(SEL.a, SEL.b).filter(m => m >= 0).length / (SEL.b - SEL.a), 1)} % of it complete</p></div>
+    <div class="kpi">${TAG.d}<div class="v">${fmt(all.energy_kwh / 1000, 2)}<small>MWh</small></div><p>engine output: the three engine loads (kW) integrated over time. Not shaft power, not electrical power.</p></div>
+    <div class="kpi">${TAG.d}<div class="v">${fmt(all.fuel_l)}<small>L</small></div><p>fuel, summed from the logged consumption (L/h). The logger value looks computed from load, not metered.</p></div>
+    <div class="kpi">${TAG.a}<div class="v">${fmt(co2, 1)}<small>t CO<sub>2</sub></div><p>tank-to-wake CO<sub>2</sub> from that fuel, using ${D.assumptions.fuel_density_kg_per_l} kg/L and ${D.assumptions.co2_t_per_t_fuel} t CO<sub>2</sub> per t fuel (assumed). Well-to-tank is not included.</p></div>
+  </div>`;
+}
+
+/* ---------- time-series charts ---------- */
+function buckets() {
+  const len = SEL.b - SEL.a, nb = Math.min(len, 900), out = {n:nb, t:[], mode:[], sog:[], lat:[], lon:[], load:[[],[],[]], azi:[[],[]], fuel:[[],[],[]], i0:[], i1:[]};
+  for (let k = 0; k < nb; k++) {
+    const i0 = SEL.a + Math.floor(k * len / nb), i1 = SEL.a + Math.floor((k + 1) * len / nb), idx = [];
+    for (let i = i0; i < i1; i++) idx.push(i);
+    out.i0.push(i0); out.i1.push(i1);
+    const cnt = {}; let best = -1, bc = 0;
+    for (const i of idx) { const m = D.mode[i]; cnt[m] = (cnt[m] || 0) + 1; if (cnt[m] > bc) { bc = cnt[m]; best = m; } }
+    out.mode.push(best);
+    out.sog.push(mean(idx.map(i => D.sog[i])));
+    out.lat.push(D.lat ? mean(idx.map(i => D.lat[i])) : null); out.lon.push(D.lon ? mean(idx.map(i => D.lon[i])) : null);
+    for (let e = 0; e < 3; e++) { out.load[e].push(mean(idx.map(i => D.load[e][i]))); out.fuel[e].push(mean(idx.map(i => D.fuel[e][i]))); }
+    for (let e = 0; e < 2; e++) out.azi[e].push(mean(idx.map(i => D.azi_rpm[e][i])));
+  }
+  return out;
+}
+function niceMax(v) { const p = Math.pow(10, Math.floor(Math.log10(v))); for (const s of [1, 2, 2.5, 5, 10]) if (v <= s * p) return s * p; return 10 * p; }
+const MAXLOAD = () => niceMax(Math.max(...D.load[0].map((_, i) => (D.load[0][i] || 0) + (D.load[1][i] || 0) + (D.load[2][i] || 0))));
+const MAXAZI = () => niceMax(Math.max(...D.azi_rpm.flat().filter(v => v != null)));
+
+function chart(h, ymax, unit, ticks) {
+  const ml = 54, mr = 10, svg = el("svg", {viewBox:`0 0 ${W} ${h + 6}`, role:"img"});
+  const g = el("g", {class:"grid"});
+  for (let k = 0; k <= ticks; k++) {
+    const y = 4 + h - h * k / ticks;
+    g.appendChild(el("line", {x1:ml, x2:W - mr, y1:y, y2:y}));
+    svg.appendChild(el("text", {x:ml - 8, y:y + 4, "text-anchor":"end"}, fmt(ymax * k / ticks, ymax < 20 ? 0 : 0)));
+  }
+  svg.prepend(g);
+  svg.ml = ml; svg.mr = mr; svg.h = h; svg.ymax = ymax;
+  svg.X = k => ml + (W - ml - mr) * (k + 0.5) / BK.n;
+  svg.Y = v => 4 + h - h * Math.min(v, ymax) / ymax;
+  return svg;
+}
+function path(svg, arr, stroke, wdt = 1.4) {
+  let d = "", pen = false;
+  arr.forEach((v, k) => { if (v == null) { pen = false; return; } d += (pen ? "L" : "M") + svg.X(k).toFixed(1) + " " + svg.Y(v).toFixed(1); pen = true; });
+  svg.appendChild(el("path", {d, fill:"none", stroke, "stroke-width":wdt, "stroke-linejoin":"round"}));
+}
+function xAxis(svg) {
+  const len = SEL.b - SEL.a, step = D.dt * 1000, t0 = Date.parse(D.t0) + SEL.a * step, span = len * step;
+  const every = span > 2 * 86400000 ? 12 : span > 86400000 / 2 ? 3 : 1;   // hours between labels
+  const ax = el("g", {class:"axis"});
+  const first = Math.ceil(t0 / (every * 3600000)) * every * 3600000;
+  for (let t = first; t < t0 + span; t += every * 3600000) {
+    const k = ((t - t0) / step) * BK.n / len, x = svg.ml + (W - svg.ml - svg.mr) * k / BK.n;
+    const d = new Date(t), mid = d.getUTCHours() === 0;
+    ax.appendChild(el("line", {x1:x, x2:x, y1:4 + svg.h, y2:4 + svg.h + 5}));
+    ax.appendChild(el("text", {x, y:4 + svg.h + 19, "text-anchor":"middle"}, mid ? dmon(d) : hhmm(d)));
+    if (mid && t > t0) svg.prepend(el("line", {x1:x, x2:x, y1:4, y2:4 + svg.h, stroke:"var(--rule)", "stroke-width":1}));
+  }
+  svg.appendChild(ax);
+}
+let BK, CURSORS = [];
+function charts() {
+  BK = buckets(); CURSORS = [];
+  const wrap = document.createElement("div"); wrap.className = "charts";
+
+  const title = (t, tag, legend = "") => `<div class="chart-title">${t} ${tag}</div>${legend}`;
+  // mode strip
+  const strip = el("svg", {viewBox:`0 0 ${W} 28`, role:"img", "aria-label":"Operating mode over time"});
+  const ml = 54, mr = 10, bw = (W - ml - mr) / BK.n;
+  BK.mode.forEach((m, k) => { if (m >= 0) strip.appendChild(el("rect", {x:(ml + k * bw).toFixed(2), y:2, width:(bw + 0.6).toFixed(2), height:24, fill:`var(--m${m})`})); });
+  strip.ml = ml; strip.mr = mr;
+  const legend = D.modes.map((m, i) => `<span><i style="background:var(--m${i})"></i>${MODE_LABEL[m]} <span style="color:var(--ink-3)">(${MODE_RULE[m]})</span></span>`).join("");
+  wrap.insertAdjacentHTML("beforeend", title("Operating mode", TAG.d, `<div class="legend">${legend}</div>`));
+  wrap.appendChild(strip);
+
+  const sp = chart(110, 12, "kn", 4);
+  wrap.insertAdjacentHTML("beforeend", title("Speed over ground, kn", TAG.m));
+  path(sp, BK.sog, "var(--ink)", 1.3); wrap.appendChild(sp);
+
+  const ym = MAXLOAD(), ld = chart(170, ym, "kW", 4);
+  wrap.insertAdjacentHTML("beforeend", title("Engine load, kW, stacked", TAG.m, `<div class="legend">${[1,2,3].map(e => `<span><i style="background:var(--e${e})"></i>Engine ${e}</span>`).join("")}</div>`));
+  const cum = BK.load[0].map(() => 0);
+  for (let e = 0; e < 3; e++) {
+    const lo = cum.slice(), hi = BK.load[e].map((v, k) => { cum[k] += v || 0; return cum[k]; });
+    let dpath = hi.map((v, k) => (k ? "L" : "M") + ld.X(k).toFixed(1) + " " + ld.Y(v).toFixed(1)).join("");
+    dpath += lo.map((v, k) => "L" + ld.X(BK.n - 1 - k).toFixed(1) + " " + ld.Y(lo[BK.n - 1 - k]).toFixed(1)).join("") + "Z";
+    ld.appendChild(el("path", {d:dpath, fill:`var(--e${e + 1})`, "fill-opacity":.85, stroke:"none"}));
+  }
+  wrap.appendChild(ld);
+
+  const ya = MAXAZI(), az = chart(110, ya, "rpm", 3);
+  wrap.insertAdjacentHTML("beforeend", title("Azimuth drives, rpm feedback (as logged)", TAG.m, `<div class="legend"><span><i style="background:var(--m1)"></i>Port</span><span><i style="background:var(--m3)"></i>Starboard</span></div>`));
+  path(az, BK.azi[0], "var(--m1)", 1.4); path(az, BK.azi[1], "var(--m3)", 1.4); xAxis(az); wrap.appendChild(az);
+
+  [strip, sp, ld, az].forEach(s => { const c = el("line", {class:"cursor", y1:2, y2:s.h ? s.h + 4 : 26, x1:-10, x2:-10}); s.appendChild(c); CURSORS.push(c); });
+  const tip = document.createElement("div"); tip.className = "tip"; wrap.appendChild(tip);
+  wrap.addEventListener("pointermove", ev => hover(ev, wrap, tip));
+  wrap.addEventListener("pointerleave", () => { tip.style.display = "none"; hideAt(); });
+  return wrap;
+}
+function hover(ev, wrap, tip) {
+  const r = wrap.querySelector("svg").getBoundingClientRect(), sc = W / r.width, x = (ev.clientX - r.left) * sc, ml = 54, mr = 10;
+  const k = Math.round((x - ml) / (W - ml - mr) * BK.n - 0.5);
+  if (k < 0 || k >= BK.n) { tip.style.display = "none"; return; }
+  const xp = ml + (W - ml - mr) * (k + 0.5) / BK.n;
+  showAt(k);
+  const i = BK.i0[k], d = T(i), tot = [0,1,2].reduce((s, e) => s + (BK.load[e][k] || 0), 0);
+  tip.innerHTML = `<b>${dmon(d)} ${hhmm(d)} UTC</b><br>${BK.mode[k] >= 0 ? MODE_LABEL[D.modes[BK.mode[k]]] : "no data"}<br>speed ${fmt(BK.sog[k], 1)} kn<br>load E1/E2/E3 ${[0,1,2].map(e => fmt(BK.load[e][k])).join(" / ")} kW (${fmt(tot)})<br>fuel E1/E2/E3 ${[0,1,2].map(e => fmt(BK.fuel[e][k], 1)).join(" / ")} L/h<br>azimuth P/S ${fmt(BK.azi[0][k])} / ${fmt(BK.azi[1][k])} rpm`;
+  tip.style.display = "block";
+  const wr = wrap.getBoundingClientRect(); let lx = ev.clientX - wr.left + 14; if (lx + 230 > wr.width) lx = ev.clientX - wr.left - 244;
+  tip.style.left = Math.max(0, lx) + "px"; tip.style.top = Math.max(0, ev.clientY - wr.top - 20) + "px";
+}
+
+
+
+/* ---------- mission to performance: states, speed, engines ---------- */
+function PR(kind, group = "") {
+  const scope = SEL.key === "week" ? "week" : "day", period = SEL.key === "week" ? "all" : SEL.key;
+  return (D.profile || []).filter(r => r.scope === scope && r.period === period && r.kind === kind && (r.group || "") === group);
+}
+const num = (v, d = 0) => v == null ? 0 : v;
+function inkOn(varName) {
+  const c = css(varName).replace("#", ""); if (c.length !== 6) return "#fff";
+  const [r, g, b] = [0, 2, 4].map(i => parseInt(c.slice(i, i + 2), 16) / 255).map(v => v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4));
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) > 0.28 ? "#10202b" : "#fff";
+}
+const esc = t => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+/* a 100 % bar made of segments; segs: [{pct, color(var name), label, tip}] */
+function sbar(title, right, segs, cls = "") {
+  const tot = segs.reduce((a, g) => a + g.pct, 0) || 1;
+  const html = segs.filter(g => g.pct > 0.05).map(g => {
+    const w = 100 * g.pct / tot;
+    return `<span data-tip="${esc(g.tip)}" style="flex:${w} 1 0;background:var(${g.color});color:${inkOn(g.color)}">${w >= 7 ? fmt(g.pct, w >= 12 ? 0 : 0) + " %" : ""}</span>`;
+  }).join("");
+  return `<div class="sbar ${cls}"><div class="lab"><span>${title}</span><span>${right || ""}</span></div><div class="track" role="img" aria-label="${esc(title)}: ${segs.filter(g => g.pct > 0.05).map(g => g.label + " " + fmt(g.pct, 1) + " %").join(", ")}">${html}</div></div>`;
+}
+const MODE_VAR = ["--m0", "--m1", "--m2", "--m3"];
+function framework() {
+  const card = (h, tag, body) => `<div class="card"><h3>${h} ${tag}</h3><p>${body}</p></div>`;
+  return `<div class="fw">
+    ${card("Mission", '<span class="tag none">not in the data</span>', "Why the ship is operated. Gunnerus is a research vessel; the logger does not say what this cruise was for.")}
+    ${card("Operational profile", '<span class="tag none">not in the data</span>', "How the ship is used over time. Here the period is the <b>cruise week</b>, or one day of it. The data does not say which minutes belong to which task; the wave-shielding experiment of 31 October is a separate case.")}
+    ${card("Operational states", TAG.d + " " + TAG.a, "Power demand in each kind of activity. Four <b>states</b> from speed and azimuth drives. They describe motion, not tasks: <i>in port</i>, <i>stand-by</i> and <i>idle</i> all fall under stationary.")}
+    ${card("Performance", TAG.d + " " + TAG.a, "<b>Fuel</b>, <b>engine energy</b>, tank-to-wake <b>CO<sub>2</sub></b> (assumed factors) and how the engines <b>share the load</b>, per state.")}
+  </div>`;
+}
+function statesPanel() {
+  const rows = PR("mode"), by = Object.fromEntries(rows.map(r => [r.category, r]));
+  const seg = (key, unit) => D.modes.map((m, i) => { const r = by[m] || {}; return {pct: num(r[key]), color: MODE_VAR[i], label: MODE_LABEL[m], tip: `<b>${MODE_LABEL[m]}</b><br>${fmt(num(r.hours), 1)} h · ${fmt(num(r.energy_kwh))} kWh · ${fmt(num(r.fuel_l))} L<br>${fmt(num(r[key]), 1)} % of ${unit}`}; });
+  const tr = by.transit || {};
+  const legend = `<div class="legend">${D.modes.map((m, i) => `<span><i style="background:var(${MODE_VAR[i]})"></i>${MODE_LABEL[m]}</span>`).join("")}</div>`;
+  return `<div class="panel"><div class="chart-title">Operational states: share of time, energy and fuel ${TAG.d}</div>${legend}
+    ${sbar("Time", "", seg("share_time_pct", "the time"))}
+    ${sbar("Engine energy", "sum of the three engine loads", seg("share_energy_pct", "the engine energy"))}
+    ${sbar("Fuel", "logged consumption", seg("share_fuel_pct", "the fuel"))}
+    <p class="note">${tr.hours ? `Transit is <b>${fmt(num(tr.share_time_pct), 0)} %</b> of the time and <b>${fmt(num(tr.share_fuel_pct), 0)} %</b> of the fuel.` : "No transit in this period."} Energy is the three engine loads integrated over time (engine output). Fuel is the logger's value and looks computed from load.</p></div>`;
+}
+function histPanel() {
+  const rows = PR("speed_band"); if (!rows.length) return "";
+  const vmax = niceMax(Math.max(10, ...rows.map(r => Math.max(num(r.share_time_pct), num(r.share_fuel_pct))))), Wd = 560, H = 230, ml = 34, mb = 44, mt = 14, bw = (Wd - ml - 6) / rows.length;
+  const Y = v => mt + (H - mt - mb) * (1 - v / vmax);
+  let g = "", ticks = 4;
+  for (let k = 0; k <= ticks; k++) { const y = Y(vmax * k / ticks); g += `<line x1="${ml}" x2="${Wd}" y1="${y}" y2="${y}" stroke="var(--rule-2)"/><text x="${ml - 6}" y="${y + 4}" text-anchor="end">${fmt(vmax * k / ticks)}</text>`; }
+  rows.forEach((r, i) => {
+    const x0 = ml + i * bw + bw * 0.14, w = bw * 0.34, tip = e => `data-tip="${esc(`<b>${r.category}</b><br>${e}`)}"`;
+    const t = num(r.share_time_pct), f = num(r.share_fuel_pct);
+    const bar = (x, v, col, what) => `<rect x="${x}" y="${Y(v)}" width="${w}" height="${Math.max(0, Y(0) - Y(v))}" rx="3" fill="var(${col})" ${tip(`${what}: ${fmt(v, 1)} %<br>${fmt(num(r.hours), 1)} h · ${fmt(num(r.energy_kwh))} kWh · ${fmt(num(r.fuel_l))} L`)}/><text class="v" x="${x + w / 2}" y="${Y(v) - 4}" text-anchor="middle">${v >= 0.05 ? fmt(v, v < 10 ? 1 : 0) : ""}</text>`;
+    g += bar(x0, t, "--bt", "Time") + bar(x0 + w + 3, f, "--bf", "Fuel");
+    g += `<text x="${ml + i * bw + bw / 2}" y="${H - mb + 16}" text-anchor="middle">${r.category.replace(" and above", "+").replace(" kn", "").replace("under ", "<").replace(" to ", "–")}</text>`;
+  });
+  g += `<text x="${(ml + Wd) / 2}" y="${H - 6}" text-anchor="middle">speed over ground, kn</text>`;
+  const lo = rows[0], hi = rows[rows.length - 1];
+  return `<div class="panel"><div class="chart-title">Speed over ground: share of time and of fuel ${TAG.d}</div>
+    <div class="legend"><span><i style="background:var(--bt)"></i>Time</span><span><i style="background:var(--bf)"></i>Fuel</span><span style="color:var(--ink-3)">y axis: % of the period</span></div>
+    <svg class="hist" viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Share of time and fuel by speed band" style="display:block;width:100%;height:auto">${g}</svg>
+    <p class="note">${fmt(num(lo.share_time_pct), 0)} % of the time is below 0.5 kn (${fmt(num(lo.share_fuel_pct), 0)} % of the fuel). ${fmt(num(hi.share_time_pct), 1)} % is at 10 kn and above, with <b>${fmt(num(hi.share_fuel_pct), 0)} %</b> of the fuel. The speed bands are our choice ${TAG.a}</p></div>`;
+}
+const COMBO_STYLE = {"E3": {c: "--e3", n: "Engine 3 alone"}, "E1+E2": {c: "--e1", n: "Engines 1 and 2"}, "E1+E2+E3": {c: "--ink-2", n: "All three"}};
+function enginesPanel() {
+  const rows = PR("engine_combination"); if (!rows.length) return "";
+  const grp = k => COMBO_STYLE[k] ? k : "other";
+  const agg2 = {}; rows.forEach(r => { const k = grp(r.category), a = agg2[k] || (agg2[k] = {t: 0, e: 0, h: 0, kwh: 0}); a.t += num(r.share_time_pct); a.e += num(r.share_energy_pct); a.h += num(r.hours); a.kwh += num(r.energy_kwh); });
+  const order = ["E3", "E1+E2", "E1+E2+E3", "other"], nm = k => k === "other" ? "Other combinations" : COMBO_STYLE[k].n, col = k => k === "other" ? "--m0" : COMBO_STYLE[k].c;
+  const seg = key => order.filter(k => agg2[k]).map(k => ({pct: agg2[k][key], color: col(k), label: nm(k), tip: `<b>${nm(k)}</b><br>${fmt(agg2[k].h, 1)} h · ${fmt(agg2[k].kwh)} kWh<br>${fmt(agg2[k][key], 1)} % of the ${key === "t" ? "time" : "engine energy"}`}));
+  const cnt = Object.fromEntries(PR("engines_running").map(r => [r.category, num(r.share_time_pct)]));
+  const legend = `<div class="legend">${order.filter(k => agg2[k]).map(k => `<span><i style="background:var(${col(k)})"></i>${nm(k)}</span>`).join("")}</div>`;
+  return `<div class="panel"><div class="chart-title">Engines: which ones run ${TAG.d}</div>${legend}
+    ${sbar("Time", "", seg("t"))}${sbar("Engine energy", "", seg("e"))}
+    <p class="note">One engine runs <b>${fmt(cnt["1"], 0)} %</b> of the time, two <b>${fmt(cnt["2"], 0)} %</b>, three <b>${fmt(cnt["3"], 0)} %</b>. An engine counts as running above ${D.thresholds.eng_on_kw} kW ${TAG.a}</p></div>`;
+}
+function engineSharePanel() {
+  const ENG = [1, 2, 3], ev = n => `--e${n}`;
+  const all = Object.fromEntries(PR("engine").map(r => [r.category, r]));
+  const segE = (src, label) => ENG.map(n => { const r = src[`engine${n}`] || {}; return {pct: num(r.share_energy_pct), color: ev(n), label: `Engine ${n}`, tip: `<b>${label}, engine ${n}</b><br>${fmt(num(r.energy_kwh))} kWh = ${fmt(num(r.share_energy_pct), 1)} % of the engine energy<br>running ${fmt(num(r.share_time_pct), 0)} % of the time<br>${r.mean_load_running_kw != null ? "mean load while running " + fmt(r.mean_load_running_kw) + " kW (" + fmt(r.load_factor_running_pct_assumed, 0) + " % of rated)" : "not running"}`}; });
+  const legend = `<div class="legend">${ENG.map(n => `<span><i style="background:var(${ev(n)})"></i>Engine ${n}</span>`).join("")}</div>`;
+  let bars = sbar("All states", "", segE(all, "All states"));
+  D.modes.forEach((m, i) => {
+    const src = Object.fromEntries(PR("engine_by_mode", m).map(r => [r.category, r]));
+    if (Object.keys(src).length) bars += sbar(MODE_LABEL[m], "", segE(src, MODE_LABEL[m]), "sm");
+  });
+  const rated = D.assumptions.engine_rated_kw;
+  const tbl = `<table class="mini"><thead><tr><th>Engine</th><th>Running<br>% of time</th><th>Share of<br>energy %</th><th>Mean load<br>running, kW</th><th>% of rated<br>${rated} kW</th></tr></thead><tbody>${ENG.map(n => { const r = all[`engine${n}`] || {}; return `<tr><td><i class="dot" style="background:var(${ev(n)})"></i>Engine ${n}</td><td>${fmt(num(r.share_time_pct), 0)}</td><td>${fmt(num(r.share_energy_pct), 0)}</td><td>${r.mean_load_running_kw != null ? fmt(r.mean_load_running_kw) : "–"}</td><td>${r.load_factor_running_pct_assumed != null ? fmt(r.load_factor_running_pct_assumed, 0) : "–"}</td></tr>`; }).join("")}</tbody></table>`;
+  return `<div class="panel"><div class="chart-title">Share of engine output, per engine ${TAG.d}</div>${legend}${bars}${tbl}
+    <p class="note">Each bar is 100 % of the engine energy of that state. <b>% of rated</b> uses the engine rating in the list of main equipment, ${rated} kW ${TAG.a} (475 kW on the engine room arrangement), and the mean load only over the minutes the engine runs.</p></div>`;
+}
+function summarySection() {
+  return section("states", "mission to performance", "Operational states and performance",
+    "The ship's use broken down the way a concept of operations does it: from the mission, through the operational profile and the operational states, to the performance. Only the last two levels can be read from the data.",
+    `${framework()}<div class="two">${statesPanel()}${histPanel()}</div><div class="two" style="margin-top:20px">${enginesPanel()}${engineSharePanel()}</div>
+     <p class="note" style="margin-top:14px">Framework: Gaspar, H. M., Hagen, A. and Erikstad, S. O. (2016), <a href="https://doi.org/10.1080/09377255.2015.1119923"><i>On designing a ship for complex value robustness</i></a>, Ship Technology Research 63(1), 14–25, Fig. 7. The paper's states are tasks (sailing, in port, towing, stand-by, idle); the four states here are inferred from motion.</p>`);
+}
+let GTIP = null;
+function tips(root) {
+  if (root.__tips) return; root.__tips = true;
+  if (!GTIP) { GTIP = document.createElement("div"); GTIP.className = "gtip"; document.body.appendChild(GTIP); }
+  root.addEventListener("pointermove", ev => {
+    const t = ev.target.closest && ev.target.closest("[data-tip]");
+    if (!t) { GTIP.style.display = "none"; return; }
+    GTIP.innerHTML = t.getAttribute("data-tip"); GTIP.style.display = "block";
+    let x = ev.clientX + 14, y = ev.clientY + 14; const w = GTIP.offsetWidth, h = GTIP.offsetHeight;
+    if (x + w > innerWidth - 8) x = ev.clientX - w - 14; if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
+    GTIP.style.left = Math.max(4, x) + "px"; GTIP.style.top = Math.max(4, y) + "px";
+  });
+  root.addEventListener("pointerleave", () => { GTIP.style.display = "none"; });
+}
+
+/* ---------- track map (GPS position, linked to the charts) ---------- */
+let MAPX = null;
+function showAt(k, exact) {
+  const xp = 54 + (W - 54 - 10) * (k + 0.5) / BK.n;
+  CURSORS.forEach(c => { c.setAttribute("x1", xp); c.setAttribute("x2", xp); c.style.visibility = "visible"; });
+  if (MAPX) {
+    const la = exact ? D.lat[exact] : BK.lat[k], lo = exact ? D.lon[exact] : BK.lon[k];
+    if (la != null && lo != null) MAPX.move(la, lo); else MAPX.hide();
+  }
+}
+function hideAt() { CURSORS.forEach(c => { c.style.visibility = "hidden"; }); if (MAPX) MAPX.hide(); }
+
+function trackSvg() {
+  MAPX = null;
+  const wrap = document.createElement("div"); wrap.className = "charts"; wrap.style.position = "relative";
+  if (!D.lat || !D.lon) { wrap.innerHTML = `<p class="note">This data file has no position channels.</p>`; return wrap; }
+  const idx = []; for (let i = 0; i < D.n; i++) if (D.lat[i] != null && D.lon[i] != null) idx.push(i);
+  const inSel = idx.filter(i => i >= SEL.a && i < SEL.b);
+  if (!inSel.length) { wrap.innerHTML = `<p class="note">No position data in this period.</p>`; return wrap; }
+  const lat0 = mean(inSel.map(i => D.lat[i])), kx = Math.cos(lat0 * Math.PI / 180), KM = 111.19;   // km per degree of latitude; longitude scaled by cos(lat)
+  const xs = inSel.map(i => D.lon[i] * kx), ys = inSel.map(i => D.lat[i]);
+  let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const minSpan = 0.6 / KM;                                        // never zoom closer than a 600 m box
+  if (x1 - x0 < minSpan) { const c = (x0 + x1) / 2; x0 = c - minSpan / 2; x1 = c + minSpan / 2; }
+  if (y1 - y0 < minSpan) { const c = (y0 + y1) / 2; y0 = c - minSpan / 2; y1 = c + minSpan / 2; }
+  const pad = 0.06 * Math.max(x1 - x0, y1 - y0); x0 -= pad; x1 += pad; y0 -= pad; y1 += pad;
+  const ar = Math.min(Math.max((y1 - y0) / (x1 - x0), 0.28), 0.62), Hh = Math.round(W * ar);
+  // keep the aspect ratio true: fit the box into W x Hh
+  const sc = Math.min(W / (x1 - x0), Hh / (y1 - y0)), ox = (W - sc * (x1 - x0)) / 2, oy = (Hh - sc * (y1 - y0)) / 2;
+  const xy = (la, lo) => [ox + sc * (lo * kx - x0), oy + sc * (y1 - la)];
+  const svg = el("svg", {viewBox:`0 0 ${W} ${Hh}`, style:"overflow:hidden", role:"img", "aria-label":"GPS track of the ship, coloured by operating mode, north up"});
+  svg.appendChild(el("rect", {x:0, y:0, width:W, height:Hh, fill:"none", stroke:"var(--rule)"}));
+  // context: the rest of the week, faint
+  if (SEL.key !== "week") {
+    let d = ""; idx.forEach(i => { if (i >= SEL.a && i < SEL.b) return; const [x, y] = xy(D.lat[i], D.lon[i]); d += `M${x.toFixed(1)} ${y.toFixed(1)}h0.01`; });
+    svg.appendChild(el("path", {d, fill:"none", stroke:"var(--ink-3)", "stroke-opacity":.35, "stroke-width":3, "stroke-linecap":"round"}));
+  }
+  // track, one path per mode (stationary first, transit on top)
+  const order = [0, 1, 2, 3], dpm = order.map(() => ""), ptm = order.map(() => "");
+  let prev = null;
+  for (const i of inSel) {
+    const [x, y] = xy(D.lat[i], D.lon[i]), m = D.mode[i];
+    if (m >= 0) {
+      if (prev && i - prev.i <= 3) dpm[m] += `M${prev.x.toFixed(1)} ${prev.y.toFixed(1)}L${x.toFixed(1)} ${y.toFixed(1)}`;
+      ptm[m] += `M${x.toFixed(1)} ${y.toFixed(1)}h0.01`;
+    }
+    prev = {i, x, y};
+  }
+  order.forEach(m => {
+    svg.appendChild(el("path", {d:ptm[m], fill:"none", stroke:`var(--m${m})`, "stroke-width":m === 0 ? 7 : 5, "stroke-linecap":"round", "stroke-opacity":m === 0 ? .55 : .9}));
+    svg.appendChild(el("path", {d:dpm[m], fill:"none", stroke:`var(--m${m})`, "stroke-width":m === 0 ? 2 : 2.6, "stroke-linejoin":"round", "stroke-opacity":m === 0 ? .55 : .95}));
+  });
+  // start and end of the period
+  const [sx, sy] = xy(D.lat[inSel[0]], D.lon[inSel[0]]), [ex, ey] = xy(D.lat[inSel[inSel.length - 1]], D.lon[inSel[inSel.length - 1]]);
+  svg.appendChild(el("circle", {cx:sx, cy:sy, r:9, fill:"none", stroke:"var(--ink)", "stroke-width":2}));
+  svg.appendChild(el("text", {x:sx + 13, y:sy - 9, fill:"var(--ink-2)", "font-size":13,"font-family":"var(--mono)"}, "start"));
+  svg.appendChild(el("rect", {x:ex - 6, y:ey - 6, width:12, height:12, fill:"none", stroke:"var(--ink)", "stroke-width":2}));
+  svg.appendChild(el("text", {x:ex + 13, y:ey + 18, fill:"var(--ink-2)", "font-size":13,"font-family":"var(--mono)"}, "end"));
+  // scale bar and north
+  const kmPerUnit = KM / sc, target = 150 * kmPerUnit, nice = [0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20].filter(v => v <= target).pop() || 0.05, bar = nice / kmPerUnit;
+  const g = el("g", {class:"axis"});
+  g.appendChild(el("line", {x1:18, x2:18 + bar, y1:Hh - 20, y2:Hh - 20, stroke:"var(--ink)", "stroke-width":2}));
+  g.appendChild(el("text", {x:18, y:Hh - 28, "text-anchor":"start"}, nice < 1 ? `${Math.round(nice * 1000)} m` : `${nice} km`));
+  g.appendChild(el("text", {x:W - 18, y:28, "text-anchor":"end"}, "N ↑"));
+  svg.appendChild(g);
+  const marker = el("circle", {r:8, fill:"var(--paper)", stroke:"var(--ink)", "stroke-width":3, style:"visibility:hidden;pointer-events:none"});
+  svg.appendChild(marker);
+  MAPX = {move(la, lo) { const [x, y] = xy(la, lo); marker.setAttribute("cx", x.toFixed(1)); marker.setAttribute("cy", y.toFixed(1)); marker.style.visibility = "visible"; }, hide() { marker.style.visibility = "hidden"; }};
+  const tip = document.createElement("div"); tip.className = "tip";
+  svg.addEventListener("pointermove", ev => {
+    const r = svg.getBoundingClientRect(), f = W / r.width, px = (ev.clientX - r.left) * f, py = (ev.clientY - r.top) * f;
+    let best = -1, bd = 1e12;
+    for (const i of inSel) { const [x, y] = xy(D.lat[i], D.lon[i]), dd = (x - px) ** 2 + (y - py) ** 2; if (dd < bd) { bd = dd; best = i; } }
+    if (best < 0 || bd > (28 * 28)) { tip.style.display = "none"; hideAt(); return; }
+    const len = SEL.b - SEL.a, k = Math.min(BK.n - 1, Math.floor((best - SEL.a) * BK.n / len));
+    showAt(k, best);
+    const d = T(best), tot = [0,1,2].reduce((s, e) => s + (D.load[e][best] || 0), 0);
+    tip.innerHTML = `<b>${dmon(d)} ${hhmm(d)} UTC</b><br>${D.mode[best] >= 0 ? MODE_LABEL[D.modes[D.mode[best]]] : "no mode"}<br>speed ${fmt(D.sog[best], 1)} kn<br>engine load ${fmt(tot)} kW<br>${D.lat[best].toFixed(4)} °N, ${D.lon[best].toFixed(4)} °E`;
+    tip.style.display = "block";
+    const wr = wrap.getBoundingClientRect(); let lx = ev.clientX - wr.left + 14; if (lx + 230 > wr.width) lx = ev.clientX - wr.left - 244;
+    tip.style.left = Math.max(0, lx) + "px"; tip.style.top = Math.max(0, ev.clientY - wr.top - 20) + "px";
+  });
+  svg.addEventListener("pointerleave", () => { tip.style.display = "none"; hideAt(); });
+  wrap.appendChild(svg); wrap.appendChild(tip);
+  const km = (() => { let s = 0; for (let j = 1; j < inSel.length; j++) { const a = inSel[j - 1], b = inSel[j]; if (b - a <= 3) s += Math.hypot((D.lat[b] - D.lat[a]) * KM, (D.lon[b] - D.lon[a]) * KM * kx); } return s; })();
+  wrap.insertAdjacentHTML("beforeend", `<p class="note">${TAG.m} Position from the GPS (GGA), 1-minute mean, drawn on a plain equal-scale grid: <b>there is no coastline or chart behind it</b>, only the track. Colours are the operating modes above. Distance sailed in this period, summed along the 1-minute positions ${TAG.d}: ${fmt(km, 0)} km, which cuts corners and therefore underestimates. Move the pointer over the map to see the same minute in the charts, and over the charts to see where the ship was.</p>`);
+  return wrap;
+}
+
+
+let LMAP = null;
+const BASES = [["topograatone", "Grey"], ["topo", "Topo"], ["sjokartraster", "Sea chart"], [null, "No map"]];
+function track() { return window.L ? trackLeaflet() : trackSvg(); }
+function trackLeaflet() {
+  if (LMAP) { LMAP.remove(); LMAP = null; }
+  MAPX = null;
+  const wrap = document.createElement("div"); wrap.className = "charts"; wrap.style.position = "relative";
+  if (!D.lat || !D.lon) { wrap.innerHTML = `<p class="note">This data file has no position channels.</p>`; return wrap; }
+  const idx = []; for (let i = 0; i < D.n; i++) if (D.lat[i] != null && D.lon[i] != null) idx.push(i);
+  const inSel = idx.filter(i => i >= SEL.a && i < SEL.b);
+  if (!inSel.length) { wrap.innerHTML = `<p class="note">No position data in this period.</p>`; return wrap; }
+  const bar = document.createElement("div"); bar.className = "mapbar"; bar.innerHTML = `<span class="lbl">Base map</span>`;
+  const box = document.createElement("div"); box.className = "mapbox"; box.setAttribute("role", "region"); box.setAttribute("aria-label", "Map with the GPS track of the ship");
+  const tip = document.createElement("div"); tip.className = "maptip";
+  wrap.appendChild(bar); wrap.appendChild(box); box.appendChild(tip);
+  const KM = 111.19, kx = Math.cos(mean(inSel.map(i => D.lat[i])) * Math.PI / 180);
+  let km = 0; for (let j = 1; j < inSel.length; j++) { const a = inSel[j - 1], b = inSel[j]; if (b - a <= 3) km += Math.hypot((D.lat[b] - D.lat[a]) * KM, (D.lon[b] - D.lon[a]) * KM * kx); }
+  wrap.insertAdjacentHTML("beforeend", `<p class="note">${TAG.m} Position from the GPS (GGA), 1-minute mean; colours are the operating modes. The base map is <b>Kartverket</b>'s open map, loaded from their servers when the page is opened (nothing is stored in this repository); the track is ours. Drag to pan; use the buttons or double-click to zoom. Distance sailed in this period, summed along the 1-minute positions ${TAG.d}: ${fmt(km, 0)} km, which cuts corners and so underestimates. Move the pointer over the map to see the same minute in the charts, and over the charts to see where the ship was.</p>`);
+  requestAnimationFrame(() => {
+    const map = L.map(box, {preferCanvas: true, zoomSnap: 0.5, scrollWheelZoom: false, dragging: !L.Browser.mobile, maxZoom: 16, minZoom: 5, attributionControl: true});
+    LMAP = map; map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
+    const layers = {}; let cur = null;
+    const setBase = key => {
+      if (cur) map.removeLayer(cur); cur = null;
+      if (key) { layers[key] = layers[key] || L.tileLayer(`https://cache.kartverket.no/v1/wmts/1.0.0/${key}/default/webmercator/{z}/{y}/{x}.png`, {maxZoom: 16, attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>'}); cur = layers[key].addTo(map); cur.bringToBack(); }
+      bar.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.k === String(key))));
+    };
+    BASES.forEach(([k, label]) => { const c = document.createElement("button"); c.type = "button"; c.className = "chip"; c.textContent = label; c.dataset.k = String(k); c.addEventListener("click", () => setBase(k)); bar.appendChild(c); });
+    setBase("topograatone");
+    const ll = i => [D.lat[i], D.lon[i]], col = m => m >= 0 ? css(MODE_VAR[m]) : css("--ink-3");
+    // the rest of the week, faint
+    if (SEL.key !== "week") { const g = L.layerGroup(); idx.forEach(i => { if (i < SEL.a || i >= SEL.b) L.circleMarker(ll(i), {radius: 2, stroke: false, fillColor: css("--ink-3"), fillOpacity: .5, interactive: false}).addTo(g); }); g.addTo(map); }
+    // track: stationary first, transit on top
+    [0, 1, 2, 3].forEach(m => {
+      const lines = []; let run = null, prev = null;
+      for (const i of inSel) { if (D.mode[i] === m) { if (!run || (prev !== null && i - prev > 3)) { run = []; lines.push(run); if (prev !== null && i - prev <= 3) run.push(ll(prev)); } run.push(ll(i)); } else run = null; prev = i; }
+      if (lines.length) L.polyline(lines, {color: col(m), weight: m === 0 ? 3 : 4, opacity: m === 0 ? .6 : .95, interactive: false}).addTo(map);
+      const g = []; inSel.forEach(i => { if (D.mode[i] === m) g.push(i); });
+      g.forEach(i => L.circleMarker(ll(i), {radius: m === 0 ? 3 : 3.5, stroke: false, fillColor: col(m), fillOpacity: m === 0 ? .6 : .95, interactive: false}).addTo(map));
+    });
+    const first = inSel[0], last = inSel[inSel.length - 1];
+    L.circleMarker(ll(first), {radius: 10, weight: 2.5, color: css("--ink"), fill: false, interactive: false}).addTo(map).bindTooltip("start", {permanent: true, direction: "right", offset: [8, 0], className: "maptip-static"});
+    L.marker(ll(last), {icon: L.divIcon({className: "endmk", iconSize: [14, 14]}), interactive: false}).addTo(map).bindTooltip("end", {permanent: true, direction: "right", offset: [10, 14], className: "maptip-static"});
+    L.control.scale({imperial: false, position: "bottomleft"}).addTo(map);
+    const b = L.latLngBounds(inSel.map(ll)); map.fitBounds(b, {padding: [34, 34], maxZoom: 15});
+    // hover marker, linked to the charts
+    const hm = L.circleMarker([0, 0], {radius: 9, weight: 3, color: css("--ink"), fillColor: css("--paper"), fillOpacity: 1, interactive: false});
+    MAPX = {move(la, lo) { hm.setLatLng([la, lo]); if (!map.hasLayer(hm)) hm.addTo(map); }, hide() { if (map.hasLayer(hm)) map.removeLayer(hm); }};
+    // nearest minute, in world pixels at the current zoom
+    let cache = null;
+    const pts = () => { const z = map.getZoom(); if (!cache || cache.z !== z) cache = {z, p: inSel.map(i => map.project(ll(i), z))}; return cache; };
+    let raf = 0;
+    map.on("mousemove", ev => {
+      if (raf) return; raf = requestAnimationFrame(() => {
+        raf = 0; const c = pts(), q = map.project(ev.latlng, c.z); let best = -1, bd = 1e12;
+        for (let j = 0; j < c.p.length; j++) { const dx = c.p[j].x - q.x, dy = c.p[j].y - q.y, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
+        if (best < 0 || bd > 24 * 24) { tip.style.display = "none"; hideAt(); return; }
+        const i = inSel[best], len = SEL.b - SEL.a, k = Math.min(BK.n - 1, Math.floor((i - SEL.a) * BK.n / len));
+        showAt(k, i);
+        const d = T(i), tot = [0, 1, 2].reduce((a, e) => a + (D.load[e][i] || 0), 0);
+        tip.innerHTML = `<b>${dmon(d)} ${hhmm(d)} UTC</b><br>${D.mode[i] >= 0 ? MODE_LABEL[D.modes[D.mode[i]]] : "no mode"}<br>speed ${fmt(D.sog[i], 1)} kn<br>engine load ${fmt(tot)} kW<br>${D.lat[i].toFixed(4)} °N, ${D.lon[i].toFixed(4)} °E`;
+        tip.style.display = "block";
+        let x = ev.containerPoint.x + 14, y = ev.containerPoint.y + 14; if (x + 220 > box.clientWidth) x = ev.containerPoint.x - 224; if (y + 110 > box.clientHeight) y = ev.containerPoint.y - 120;
+        tip.style.left = Math.max(4, x) + "px"; tip.style.top = Math.max(4, y) + "px";
+      });
+    });
+    map.on("mouseout", () => { tip.style.display = "none"; hideAt(); });
+  });
+  return wrap;
+}
+
+/* ---------- table ---------- */
+function modeTable() {
+  const {rows, all} = summaryRows(), dens = D.assumptions.fuel_density_kg_per_l;
+  const body = D.modes.map((m, i) => {
+    const r = rows.find(x => x.mode === m); if (!r) return "";
+    return `<tr><td><span class="dot" style="background:var(--m${i})"></span>${MODE_LABEL[m]}</td><td>${fmt(r.hours, 1)}</td><td>${fmt(100 * r.hours / all.hours, 0)}</td><td>${fmt(r.mean_load_total_kw)}</td><td>${fmt(r.mean_engines_running, 1)}</td><td>${fmt(r.energy_kwh)}</td><td>${fmt(r.fuel_l)}</td><td>${fmt(r.fuel_share_pct, 0)}</td><td>${fmt(r.fuel_l_per_kwh, 3)}</td><td>${fmt(r.fuel_l_per_kwh * dens * 1000)}</td><td>${fmt(r.co2_t_assumed, 2)}</td></tr>`;
+  }).join("");
+  const tot = `<tr class="total"><td>All</td><td>${fmt(all.hours, 1)}</td><td>100</td><td>${fmt(all.mean_load_total_kw)}</td><td>${fmt(all.mean_engines_running, 1)}</td><td>${fmt(all.energy_kwh)}</td><td>${fmt(all.fuel_l)}</td><td>100</td><td>${fmt(all.fuel_l_per_kwh, 3)}</td><td>${fmt(all.fuel_l_per_kwh * dens * 1000)}</td><td>${fmt(all.co2_t_assumed, 2)}</td></tr>`;
+  const th = (t, tg, u) => `<th>${t}${u ? "<br>" + u : ""}<span class="tag ${tg}">${tg}</span></th>`;
+  return `<div class="tbl-wrap"><table class="tbl"><caption class="sr" style="position:absolute;left:-9999px">Operating modes: time, load, energy, fuel and CO2</caption><thead><tr><th>Mode ${TAG.d}</th>${th("Hours", "derived")}${th("Share of time", "derived", "%")}${th("Mean load", "derived", "kW, 3 engines")}${th("Engines running", "derived", "mean")}${th("Energy", "derived", "kWh")}${th("Fuel", "derived", "L")}${th("Share of fuel", "derived", "%")}${th("Fuel per energy", "derived", "L/kWh")}${th("Fuel per energy", "assumed", "g/kWh")}${th("CO₂ tank-to-wake", "assumed", "t")}</tr></thead><tbody>${body}${tot}</tbody></table></div>
+  <p class="note">Modes are our classification of each minute from measured speed and azimuth rpm (rules in the key above). Specific fuel per energy rises at low load; because the logged fuel looks computed from load, this is the logger's relation between load and fuel, not a measured engine efficiency.</p>`;
+}
+
+/* ---------- load sharing ---------- */
+function sharing() {
+  const g = agg(), mx = Math.max(...g.load.map(l => l[0] + l[1] + l[2]), 1);
+  const rows = D.modes.map((m, i) => {
+    if (!g.cnt[i]) return "";
+    const tot = g.load[i].reduce((s, v) => s + v, 0);
+    return `<div class="row"><span><span class="dot" style="background:var(--m${i})"></span>${MODE_LABEL[m]}</span><span class="track" title="mean load per engine">${g.load[i].map((v, e) => `<span style="width:${100 * v / mx}%;background:var(--e${e + 1})"></span>`).join("")}</span><span class="n">${fmt(tot)} kW</span></div>`;
+  }).join("");
+  return `<div class="bars">${rows}</div><div class="legend" style="margin-top:10px">${[1,2,3].map(e => `<span><i style="background:var(--e${e})"></i>Engine ${e}</span>`).join("")}</div>
+  <p class="note">Mean engine load in each mode, split by engine. ${TAG.d} from ${TAG.m} load. Engines are rated 450 kW each (equipment list, item 72). Which engines carry the load changes between modes and between days.</p>`;
+}
+
+/* ---------- fuel against load ---------- */
+function scatter() {
+  const h = 280, ml = 54, mr = 10, svg = el("svg", {viewBox:`0 -14 ${W * 0.62} ${h + 54}`, role:"img", "aria-label":"Fuel consumption against engine load"}), w = W * 0.62;
+  const on = D.thresholds.eng_on_kw, pts = [[], [], []];
+  for (let e = 0; e < 3; e++) for (let i = SEL.a; i < SEL.b; i++) { const x = D.load[e][i], y = D.fuel[e][i]; if (x != null && y != null && x > on) pts[e].push([x, y]); }
+  const all = pts.flat(); const xm = niceMax(Math.max(...all.map(p => p[0]), 100)), ym = niceMax(Math.max(...all.map(p => p[1]), 10));
+  const X = v => ml + (w - ml - mr) * v / xm, Y = v => 4 + h - h * v / ym;
+  for (let k = 0; k <= 4; k++) {
+    svg.appendChild(el("line", {x1:ml, x2:w - mr, y1:Y(ym * k / 4), y2:Y(ym * k / 4), stroke:"var(--rule-2)"}));
+    svg.appendChild(el("text", {x:ml - 8, y:Y(ym * k / 4) + 4, "text-anchor":"end", style:"font:400 11px var(--mono);fill:var(--ink-3)"}, fmt(ym * k / 4)));
+    svg.appendChild(el("text", {x:X(xm * k / 4), y:h + 22, "text-anchor":"middle", style:"font:400 11px var(--mono);fill:var(--ink-3)"}, fmt(xm * k / 4)));
+  }
+  svg.appendChild(el("text", {x:ml, y:h + 38, style:"font:400 11px var(--mono);fill:var(--ink-3)"}, "engine load, kW"));
+  svg.appendChild(el("text", {x:ml, y:-2, style:"font:400 11px var(--mono);fill:var(--ink-3)"}, "fuel, L/h"));
+  const stats = [];
+  pts.forEach((p, e) => {
+    const step = Math.max(1, Math.floor(p.length / 500));
+    for (let k = 0; k < p.length; k += step) svg.appendChild(el("circle", {cx:X(p[k][0]).toFixed(1), cy:Y(p[k][1]).toFixed(1), r:2.4, fill:`var(--e${e + 1})`, "fill-opacity":.55}));
+    if (p.length > 20) {
+      const n = p.length, sx = p.reduce((s, q) => s + q[0], 0), sy = p.reduce((s, q) => s + q[1], 0), sxx = p.reduce((s, q) => s + q[0] * q[0], 0), syy = p.reduce((s, q) => s + q[1] * q[1], 0), sxy = p.reduce((s, q) => s + q[0] * q[1], 0);
+      const r = (n * sxy - sx * sy) / Math.sqrt((n * sxx - sx * sx) * (n * syy - sy * sy));
+      stats.push({e:e + 1, n, r, slope:sxy / sxx});
+    }
+  });
+  const dens = D.assumptions.fuel_density_kg_per_l;
+  const txt = stats.map(s => `<li><b>Engine ${s.e}</b>: r = ${fmt(s.r, 3)}, ${fmt(s.slope, 3)} L/kWh through the origin, or ${fmt(s.slope * dens * 1000)} g/kWh with the density of ${dens} kg/L ${TAG.a}; ${fmt(s.n)} minutes with the engine running.</li>`).join("");
+  const rmin = stats.length ? Math.min(...stats.map(s => s.r)) : 0;
+  const warn = rmin > 0.98
+    ? `<p class="callout">A correlation this close to 1 means fuel consumption is almost a straight function of load. A fuel flow meter would show scatter, from temperature, transients and meter error. We therefore treat the logged fuel as <b>computed by the logger from load</b> until the supplier confirms otherwise. Fuel totals and tank-to-wake figures inherit that uncertainty.</p>`
+    : `<p class="note">Fuel follows load less tightly in this period (lowest r = ${fmt(rmin, 3)}). Over the whole week the two are almost perfectly correlated, which suggests the logger computes fuel from load.</p>`;
+  return `<div style="max-width:620px">${svg.outerHTML}</div><div class="legend">${[1,2,3].map(e => `<span><i style="background:var(--e${e})"></i>Engine ${e}</span>`).join("")}</div><ul class="list">${txt || "<li>Not enough running minutes in this period.</li>"}</ul>${warn}`;
+}
+
+/* ---------- power chain ---------- */
+function chain() {
+  const mE = [0, 1, 2].map(e => mean(D.load[e].slice(SEL.a, SEL.b))), mA = [0, 1].map(e => mean(D.azi_rpm[e].slice(SEL.a, SEL.b)));
+  const nd = (x, y, w, h, cls, lines, sub, live, href) => {
+    const a = `<g class="node ${cls}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6"/>`;
+    const t = lines.map((l, i) => `<text x="${x + 10}" y="${y + 20 + i * 15}" style="font-weight:${i ? 400 : 600}">${l}</text>`).join("");
+    const s = sub ? `<text class="sub" x="${x + 10}" y="${y + h - (live ? 24 : 10)}">${sub}</text>` : "", l = live ? `<text class="live" x="${x + 10}" y="${y + h - 9}">${live}</text>` : "";
+    const body = a + t + s + l + "</g>";
+    return href ? `<a href="${href}">${body}</a>` : body;
+  };
+  const ar = pts => `<polyline class="edge" points="${pts}" marker-end="url(#ah)"/>`;
+  const head = (x, t) => `<text class="colhead" x="${x}" y="14">${t}</text>`;
+  const svg = `<svg viewBox="0 0 1000 330" role="img" aria-label="Power chain from fuel to propulsion and hotel loads, showing which parts are measured"><defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow" d="M0 0 L8 4 L0 8 z"/></marker></defs>
+    ${head(4, "fuel")}${head(160, "prime movers")}${head(340, "generation")}${head(510, "distribution")}${head(680, "conversion")}${head(830, "consumers")}
+    ${nd(4, 90, 130, 100, "none", ["Fuel oil tanks", "no level or flow", "channel in this set"], "see tank plan")}
+    ${nd(160, 40, 150, 200, "", ["Main engines 1–3", "3 × 450 kW (item 72)"], "load · fuel · speed", `E1/E2/E3 ${fmt(mE[0])}/${fmt(mE[1])}/${fmt(mE[2])} kW`, "explorer.html#item=72")}
+    ${nd(340, 40, 140, 200, "none", ["Generators ×3", "(item 73)", "", "no electrical", "measurement"], "")}
+    ${nd(510, 40, 140, 100, "none", ["Main switchboard", "(item 93)", "Transformers (92)"], "no data")}
+    ${nd(510, 160, 140, 100, "none", ["Battery box ×3", "(item 91)", "no battery data"], "")}
+    ${nd(680, 40, 120, 100, "none", ["Frequency", "converters ×2", "+ bow thruster", "(items 94, 95)"], "")}
+    ${nd(830, 40, 166, 100, "", ["PM azimuth drives,", "port and starboard"], "rpm · load as logged", `rpm P/S ${fmt(mA[0])} / ${fmt(mA[1])}`, "explorer.html#item=76")}
+    ${nd(830, 150, 166, 72, "", ["Bow tunnel thruster", "200 kW (item 75)"], "feedback % (0 all week)", "", "explorer.html#item=75")}
+    ${nd(680, 238, 316, 78, "none", ["Hotel, hydraulics, deck equipment", "cranes, A-frames, winches, pumps", "not separated from the total engine load"], "")}
+    ${ar("134,140 160,140")}${ar("310,140 340,140")}${ar("480,90 510,90")}${ar("480,210 510,210")}${ar("650,90 680,90")}${ar("800,80 830,80")}${ar("800,120 815,120 815,186 830,186")}${ar("650,128 665,128 665,277 680,277")}
+  </svg>`;
+  return `<div class="schem">${svg}</div><p class="note">${TAG.a} <b>The links are our reading</b> of the equipment list and the engine room arrangement: this repository has no single-line diagram. Dashed boxes have no measurement in this data set. Solid boxes are measured, as logged; the live line shows the mean over the period selected above. Gunnerus is diesel-electric, with three diesel generator sets and two permanent-magnet azimuth drives, and no battery data. The split of load between propulsion and hotel and deck loads cannot be measured from these channels.</p>`;
+}
+
+/* ---------- assumptions ---------- */
+function assumptions() {
+  const t = D.thresholds;
+  return `<ul class="list">
+    <li>${TAG.a} <b>Mode thresholds.</b> Speed under ${t.v_still_kn} kn is stationary (GPS noise floor: 5,945 of 7,195 minutes of the week are under 0.3 kn). Speed of ${t.v_transit_kn} kn and above is transit, the edge of the cruise cluster at 8–12 kn. Azimuth drives count as running above ${t.azi_on_rpm} rpm (idle is under 0.5, running above 8, nothing between). Engines count as running above ${t.eng_on_kw} kW (off is under 1 kW, running above 20). We placed them in the gaps of the 1-minute histograms; other choices are possible and change the mode table.</li>
+    <li>${TAG.a} <b>Fuel density and CO₂ factor.</b> ${D.assumptions.fuel_density_kg_per_l} kg/L and ${D.assumptions.co2_t_per_t_fuel} t CO₂ per t fuel, for marine gas oil, assumed; the fuel grade is not recorded in this data set. Only tank-to-wake CO₂ is estimated; no methane, nitrous oxide or upstream (well-to-tank) emissions.</li>
+    <li>${TAG.m} <b>Units.</b> Engine load in kW and fuel consumption in L/h are given on the <a href="https://www.ntnu.edu/gunnerus/e-infrastructure">NTNU e-infrastructure page</a>, which lists the same tag names. Azimuth drive rpm and load feedback are not documented there and are shown as logged.</li>
+    <li>${TAG.m} <b>Fuel looks computed.</b> Logged fuel consumption and engine load correlate at about 1.00 (chart above). Treat fuel as the logger's value.</li>
+    <li>${TAG.d} <b>Energy is engine output</b>: engine load in kW times time. It is neither shaft power nor electrical power; generator and drive losses are not measured.</li>
+    <li>${TAG.m} <b>Resolution.</b> Each point is the mean of the logged samples in one minute (the engine data is logged at up to 10 Hz). Peaks and short transients are averaged out. Coverage is 99.9 % of the minutes of the five days.</li>
+    <li>${TAG.m} <b>Not available in this data set:</b> electrical power, generator or switchboard data, battery state, fuel tank levels, and anything about shore power. The tunnel thruster channel is zero all week, so it either was not used or was not logged.</li>
+    <li>${TAG.d} <b>Not a representative year.</b> Five days in autumn 2023 on one research vessel, including a wave-shielding experiment on 31 October. No study anchors this case yet.</li>
+  </ul>`;
+}
+
+function files() {
+  const f = [["README.md", "What the case is, the rules and the caveats"], ["data/power_1min.csv.gz", "7,200 one-minute rows: mode, speed, engines, fuel, azimuth drives"], ["cases.csv", "Consecutive operating periods by mode (start, end, load, fuel)"], ["summary.csv", "Derived totals per mode, per day and for the week"], ["channels.csv", "Data dictionary with measured/derived status"], ["scripts/extract.py", "Rebuilds all of this from the raw cruise data"]];
+  return `<ul class="list">${f.map(([p, d]) => `<li><a href="${REPO}${p}">${p}</a>: ${d}</li>`).join("")}</ul>`;
+}
+
+/* ---------- render ---------- */
+function section(id, eyebrow, h, lede, inner) { return `<section class="block" id="${id}"><div><p class="eyebrow">${eyebrow}</p><div class="sec-head"><h2>${h}</h2>${lede ? `<p class="lede" style="margin-top:8px">${lede}</p>` : ""}</div>${inner}</div></section>`; }
+function render() {
+  const app = document.getElementById("app");
+  app.innerHTML = kpis();
+  app.insertAdjacentHTML("beforeend", `<div style="margin-top:34px">${summarySection()}</div>`);
+  tips(app);
+  const c = document.createElement("div"); c.className = "panel"; c.style.marginTop = "18px"; c.appendChild(charts()); app.appendChild(c);
+  app.insertAdjacentHTML("beforeend", `<div style="margin-top:18px" id="trackwrap"></div>`);
+  const tp = document.createElement("div"); tp.className = "panel"; tp.insertAdjacentHTML("beforeend", `<div class="chart-title">Track over ground, north up ${TAG.m}</div>`); tp.insertAdjacentHTML("beforeend", `<div class="legend">${D.modes.map((m, i) => `<span><i style="background:var(--m${i})"></i>${MODE_LABEL[m]}</span>`).join("")}</div>`); tp.appendChild(track()); document.getElementById("trackwrap").appendChild(tp);
+  app.insertAdjacentHTML("beforeend", `<div style="margin-top:34px">${section("modes", "operating profile", "Where the energy and fuel go", "The week split into four operating modes, the way a concept of operations would describe it: lying still, holding position, manoeuvring and transiting.", `<div class="panel">${modeTable()}</div>`)}</div>`);
+  app.insertAdjacentHTML("beforeend", `<div class="two" style="margin-top:6px"><div class="panel"><h3>Load sharing between engines</h3>${sharing()}</div><div class="panel"><h3>Fuel against load</h3>${scatter()}</div></div>`);
+  app.insertAdjacentHTML("beforeend", `<div style="margin-top:34px">${section("chain", "power chain", "What is measured along the chain", "From fuel to propulsion and hotel loads. Only the engines and the azimuth drives have measurements in this data set.", `<div class="panel">${chain()}</div>`)}</div>`);
+  app.insertAdjacentHTML("beforeend", `<div style="margin-top:34px">${section("assumptions", "read this before using a number", "Assumptions and limits", "", `<div class="panel">${assumptions()}</div>`)}</div>`);
+  app.insertAdjacentHTML("beforeend", `<div style="margin-top:34px">${section("files", "open data", "Files and credit", "", `<div class="panel">${files()}<p class="note">No published study anchors this case: the measurements are the ship's own logger data from the October 2023 cruise week, and the dataset description, classification and this page are ours. The wave-shielding experiment on 31 October is a separate case (<a href="index.html#operational">Operational</a>). Data provided by <b><a href="https://www.ntnu.edu/employees/robert.skulstad">Robert Skulstad</a></b> (NTNU); part of the same week was used for the wave-shielding experiment. Dataset organised by <b>Henrique M. Gaspar</b> (NTNU), based on that data. Cite the repository as given in its <a href="https://github.com/shiplab/gunnerus#how-to-cite">README</a>. Licence CC BY-NC 4.0.</p></div>`)}</div>`);
+}
+function buildDays() {
+  const box = document.getElementById("days"); box.innerHTML = "";
+  for (const r of D.ranges) {
+    const b = document.createElement("button"); b.className = "chip"; b.type = "button"; b.textContent = r.label; b.setAttribute("aria-pressed", r.key === SEL.key);
+    b.onclick = () => { SEL = {key:r.key, a:r.a, b:r.b}; history.replaceState(null, "", r.key === "week" ? "#" : "#day=" + r.key); buildDays(); render(); };
+    box.appendChild(b);
+  }
+}
+(async () => {
+  try {
+    D = await load(); D.ranges = dayRanges();
+    const m = location.hash.match(/day=(\d{4}-\d\d-\d\d)/), r = m && D.ranges.find(x => x.key === m[1]) || D.ranges[0];
+    SEL = {key:r.key, a:r.a, b:r.b}; buildDays(); render();
+    matchMedia("(prefers-color-scheme:dark)").addEventListener("change", render);
+    try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => render()); } catch (e) {}
+    window.addEventListener("hashchange", () => { const m = location.hash.match(/day=(\d{4}-\d\d-\d\d)/), r = m && D.ranges.find(x => x.key === m[1]) || D.ranges[0]; if (r.key !== SEL.key) { SEL = {key:r.key, a:r.a, b:r.b}; buildDays(); render(); } });
+  } catch (e) { document.getElementById("app").innerHTML = `<p class="callout">${e.message} The data is in <a href="https://github.com/shiplab/gunnerus/tree/main/operational/power-energy-2023">operational/power-energy-2023</a>.</p>`; }
+})();
+</script>
+</body>
+</html>

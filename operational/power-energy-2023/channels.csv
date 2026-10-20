@@ -1,0 +1,23 @@
+file,column,unit,description,source,rate,status
+power_1min.csv.gz,time_utc,ISO 8601 UTC,Start of the minute,,,-
+power_1min.csv.gz,mode,-,"Operating mode of the minute: stationary, station_keeping, manoeuvring, transit (rules in README); empty if speed or azimuth rpm is missing",derived: sog_kn >= 8.0 -> transit; >= 0.5 -> manoeuvring; else station_keeping if max(azimuth rpm) > 5.0 else stationary,1 min (mean of the logged samples in the minute),derived
+power_1min.csv.gz,sog_kn,knots,Speed over ground,"NUC logger, tag Gunnerus/SeapathGPSVtg/SpeedKnots",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,latitude_deg,degrees N,"Position latitude (GPS GGA); logged as ddmm.mmmm, converted to decimal degrees; mean of the minute","NUC logger, tag Gunnerus/SeapathGPSGga/Latitude",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,longitude_deg,degrees E,"Position longitude (GPS GGA); logged as dddmm.mmmm, converted to decimal degrees; mean of the minute","NUC logger, tag Gunnerus/SeapathGPSGga/Longitude",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,azi_port_rpmfeedback,as logged,"Port azimuth drive, rpm feedback (rpm assumed)","NUC logger, tag Gunnerus/hcx_port_mp/RPMFeedback",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,azi_port_load_feedback,as logged,"Port azimuth drive, load feedback","NUC logger, tag Gunnerus/hcx_port_mp/LoadFeedback",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,azi_stbd_rpmfeedback,as logged,"Starboard azimuth drive, rpm feedback (rpm assumed)","NUC logger, tag Gunnerus/hcx_stbd_mp/RPMFeedback",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,azi_stbd_load_feedback,as logged,"Starboard azimuth drive, load feedback","NUC logger, tag Gunnerus/hcx_stbd_mp/LoadFeedback",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,tunnel_thruster_feedback_pct,%,Tunnel thruster feedback (zero all week),"NUC logger, tag Gunnerus/dpThruster/FeedbackProsent",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,engine1_load_kw,kW,Engine 1 load (kW per NTNU e-infrastructure page),"NUC logger, tag Gunnerus/Engine1/engine_load",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,engine1_fuel_lph,L/h,"Engine 1 fuel consumption; correlates 1.00 with load, so probably computed from load by the logger, not metered","NUC logger, tag Gunnerus/Engine1/fuel_consumption",1 min (mean of the logged samples in the minute),measured (logged)
+power_1min.csv.gz,engine1_speed_rpm,rpm,Engine 1 speed,"NUC logger, tag Gunnerus/Engine1/engine_speed",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,engine2_load_kw,kW,Engine 2 load (kW per NTNU e-infrastructure page),"NUC logger, tag Gunnerus/Engine2/engine_load",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,engine2_fuel_lph,L/h,"Engine 2 fuel consumption; correlates 1.00 with load, so probably computed from load by the logger, not metered","NUC logger, tag Gunnerus/Engine2/fuel_consumption",1 min (mean of the logged samples in the minute),measured (logged)
+power_1min.csv.gz,engine2_speed_rpm,rpm,Engine 2 speed,"NUC logger, tag Gunnerus/Engine2/engine_speed",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,engine3_load_kw,kW,Engine 3 load (kW per NTNU e-infrastructure page),"NUC logger, tag Gunnerus/Engine3/engine_load",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,engine3_fuel_lph,L/h,"Engine 3 fuel consumption; correlates 1.00 with load, so probably computed from load by the logger, not metered","NUC logger, tag Gunnerus/Engine3/fuel_consumption",1 min (mean of the logged samples in the minute),measured (logged)
+power_1min.csv.gz,engine3_speed_rpm,rpm,Engine 3 speed,"NUC logger, tag Gunnerus/Engine3/engine_speed",1 min (mean of the logged samples in the minute),measured
+power_1min.csv.gz,engines_running,count,Engines with load above 5 kW,derived: count of engineN_load_kw > threshold,1 min (mean of the logged samples in the minute),derived
+power_1min.csv.gz,load_total_kw,kW,Sum of the three engine loads,derived: engine1+2+3 load,1 min (mean of the logged samples in the minute),derived
+power_1min.csv.gz,fuel_total_lph,L/h,Sum of the three engine fuel consumptions,derived: engine1+2+3 fuel,1 min (mean of the logged samples in the minute),derived

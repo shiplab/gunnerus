@@ -4,7 +4,10 @@ Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [relea
 
 ## [Unreleased]
 
-Nothing yet.
+### Added
+
+- `operational/power-energy-2023/`: a power and energy profile of the cruise week, 30 October – 3 November 2023, from the ship's own NUC logger. One row per minute (7,200) with speed over ground, GPS position, the three main engines (load in kW, fuel consumption in L/h, speed), the two azimuth drives and the tunnel thruster, and an operating mode (stationary, station-keeping, manoeuvring, transit) set by documented thresholds. Includes `cases.csv` (consecutive operating periods), `profile.csv` (shares of time, energy and fuel), `summary.csv` (hours, energy, fuel and a tank-to-wake CO₂ estimate per mode, day and week), `channels.csv` with a measured / derived / assumed label for every column, an overview figure, and the extraction script. Under 1 MB. No published study anchors this case; the README says what is ours. Data from Robert Skulstad (NTNU), organised by Henrique M. Gaspar.
+- Website: a power and energy page, `pages/power-energy.html` (data in `pages/assets/operational/power-energy-2023.json`, made by the case's `extract.py web`): operating-mode timeline by day, load sharing between engines, fuel against load, a summary by mission, operational profile, operational states and performance (time, energy and fuel by state, speed band and engine combination; each engine's share of the output and load factor), a GPS track on Kartverket's open map linked to the charts (the track alone if the map cannot be loaded), a power-chain diagram that marks what is measured, and the assumptions. A card in the *Operational* section links to it.
 
 ## [1.0.2] – 2026-10-10
 

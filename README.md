@@ -16,7 +16,7 @@
 | 3D model | Rhino `.3dm` and STEP, hull and superstructure, plus a lightweight glTF in [`derived/`](derived/README.md) |
 | Documents | 5 engineering documents: weight, tonnage, specification, equipment and document lists |
 | Metadata | GA drawing as JSON, coded by SFI group and DNV VIS/GMOD |
-| Operational | 1 case: the 2023 wave-shielding experiment. Ship motion, crane, engines, thrusters, incident and sheltered waves, about 16 MB |
+| Operational | 2 cases: the 2023 wave-shielding experiment (ship motion, crane, engines, thrusters, incident and sheltered waves, about 16 MB) and a power and energy profile of the cruise week (engines, azimuth drives, fuel, operating modes, under 1 MB) |
 | Licence | CC BY-NC 4.0 (engineering documents: CC BY-SA 4.0) |
 | Website | <https://shiplab.github.io/gunnerus/> |
 | DOI | [10.5281/zenodo.22983657](https://doi.org/10.5281/zenodo.22983657) (all versions) |
@@ -120,8 +120,9 @@ The file is derived from the general arrangement alone, not from class documents
 | Case | Date | Contents | Study |
 | --- | --- | --- | --- |
 | [Wave-shielding experiment](operational/wave-shielding-2023/README.md) | 31 Oct 2023 | Seven headings on DP in Breisundet: ship motion (1–2 Hz), crane angles and crane-hook accelerometer, azimuth and tunnel thrusters, engines, Miros wave radar spectra and air gap, and a 50 Hz wave buoy on the sheltered side. About 16 MB. | Wang et al. (2025), *Ocean Engineering* 320, 120189, [doi:10.1016/j.oceaneng.2024.120189](https://doi.org/10.1016/j.oceaneng.2024.120189) |
+| [Power and energy profile](operational/power-energy-2023/README.md) | 30 Oct – 3 Nov 2023 | Operating profile of the power and energy system over five days, one row per minute: speed, GPS position, the three engines (load, fuel consumption, speed), the two azimuth drives, and four operating states, with shares of time, energy and fuel by state, speed and engine. Every column is marked measured, derived or assumed. Under 1 MB. Data from [Robert Skulstad](https://www.ntnu.edu/employees/robert.skulstad), organised by Henrique M. Gaspar. | None yet: the case README says what is ours |
 
-The experiment, its set-up and its findings are those of the study; cite it when you use the data (see [How to cite](#how-to-cite)). The operational datasets are organised by Jisang Ha and Henrique M. Gaspar (NTNU). The [website](https://shiplab.github.io/gunnerus/#operational) shows the case as a chart and table.
+For a case with a study, the experiment, its set-up and its findings are those of the study; cite it when you use the data (see [How to cite](#how-to-cite)). The wave-shielding dataset is organised by Jisang Ha and Henrique M. Gaspar (NTNU); the power and energy dataset holds data provided by Robert Skulstad (NTNU), organised by Henrique M. Gaspar. The [website](https://shiplab.github.io/gunnerus/#operational) shows the wave-shielding case as a chart and table, and the [power and energy page](https://shiplab.github.io/gunnerus/power-energy.html) shows the operating profile, with a track on the open map of Kartverket.
 
 ## The vessel
 
@@ -234,6 +235,8 @@ If you use this data set in a publication, please cite it. GitHub's **Cite this 
 }
 ```
 
+The power and energy profile has no study of its own yet: cite this repository and name [Robert Skulstad](https://www.ntnu.edu/employees/robert.skulstad) as the provider of the data.
+
 ## Contributing and reporting errors
 
 Corrections are welcome. To report a wrong value, a mismatch between sheets or a broken file, [open a data error issue](https://github.com/shiplab/gunnerus/issues/new?template=data-error.yml) and say which drawing and which part of the sheet it concerns. Changes between releases are listed in [CHANGELOG.md](CHANGELOG.md).
@@ -243,3 +246,5 @@ Corrections are welcome. To report a wrong value, a mismatch between sheets or a
 The drawings and design data are courtesy of [polarkonsult](https://www.polarkonsult.com/), the designer of R/V Gunnerus. The derivative drawings, 3D model and engineering documents in `extended/CJOB/` were made by [C-JOB](https://c-job.com/) with NTNU. The data set is organised by Jisang Ha and Henrique M. Gaspar and published by [NTNU](https://www.ntnu.edu/).
 
 The wave-shielding experiment in `operational/` was carried out and published by Tongtong Wang, Robert Skulstad, Finn Tore Holmeset, Karl Henning Halse, Hans Petter Hildre and Houxiang Zhang (NTNU), with support from the Research Council of Norway through *The Digital Ocean Space – Møre Ocean Lab* (project 322535).
+
+The raw measurements of the October 2023 cruise week, including those behind the power and energy profile, were provided by [Robert Skulstad](https://www.ntnu.edu/employees/robert.skulstad) (NTNU). The base map on the power and energy page is © [Kartverket](https://www.kartverket.no/), loaded from their open service.
