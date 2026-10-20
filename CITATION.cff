@@ -39,8 +39,8 @@ identifiers:
 repository-code: https://github.com/shiplab/gunnerus
 url: https://shiplab.github.io/gunnerus/
 license: CC-BY-NC-4.0
-version: 1.0.2
-date-released: 2026-10-10
+version: 1.0.3
+date-released: 2026-10-20
 keywords:
   - naval architecture
   - ship design

@@ -4,6 +4,10 @@ Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [relea
 
 ## [Unreleased]
 
+## [1.0.3] – 2026-10-20
+
+Adds a second operational case, a power and energy profile of the cruise week.
+
 ### Added
 
 - `operational/power-energy-2023/`: a power and energy profile of the cruise week, 30 October – 3 November 2023, from the ship's own NUC logger. One row per minute (7,200) with speed over ground, GPS position, the three main engines (load in kW, fuel consumption in L/h, speed), the two azimuth drives and the tunnel thruster, and an operating mode (stationary, station-keeping, manoeuvring, transit) set by documented thresholds. Includes `cases.csv` (consecutive operating periods), `profile.csv` (shares of time, energy and fuel), `summary.csv` (hours, energy, fuel and a tank-to-wake CO₂ estimate per mode, day and week), `channels.csv` with a measured / derived / assumed label for every column, an overview figure, and the extraction script. Under 1 MB. No published study anchors this case; the README says what is ours. Data from Robert Skulstad (NTNU), organised by Henrique M. Gaspar.
@@ -64,7 +68,8 @@ First public release.
 - Preview images moved from `docs/images/` to `images/`.
 - `Safety Fire Zone Plan Rev0.dwg` and `Construction Plan Deck and Double Bottom Rev0.dwg` were renamed to match their DXF and PDF siblings.
 
-[Unreleased]: https://github.com/shiplab/gunnerus/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/shiplab/gunnerus/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/shiplab/gunnerus/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/shiplab/gunnerus/compare/V1.0.1...v1.0.2
 [1.0.1]: https://github.com/shiplab/gunnerus/compare/v1.0.0...V1.0.1
 [1.0.0]: https://github.com/shiplab/gunnerus/releases/tag/v1.0.0
