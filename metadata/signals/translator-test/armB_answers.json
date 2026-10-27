@@ -1,0 +1,532 @@
+[
+ {
+  "item": "X01",
+  "quantity_kind": "Frequency",
+  "canonical_unit": "Hz",
+  "sfi_code": "436.01",
+  "component": "Genset 1 switchboard bus frequency",
+  "confidence": 0.4,
+  "needs_human": true,
+  "question": "What is the scaling of the INT value (e.g. x0.01 Hz or x0.1 Hz) for DG1 bus frequency?"
+ },
+ {
+  "item": "X02",
+  "quantity_kind": "Power",
+  "canonical_unit": "kW",
+  "sfi_code": "432.01",
+  "component": "Genset 1 active power",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit (kW or W) and scaling of the INT DG1 active power value?"
+ },
+ {
+  "item": "X03",
+  "quantity_kind": "Load",
+  "canonical_unit": "%",
+  "sfi_code": "261.01",
+  "component": "Port azimuth thruster motor load feedback",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "Is LoadFeedback a percentage of rated power, or kW (0-500)? The note gives both."
+ },
+ {
+  "item": "X04",
+  "quantity_kind": "Duration",
+  "canonical_unit": "h",
+  "sfi_code": "411.01",
+  "component": "Genset 1 engine running hours",
+  "confidence": 0.7,
+  "needs_human": true,
+  "question": "Is the value in hours with no scaling, or in some other unit (note says 't', scaling 0)?"
+ },
+ {
+  "item": "X05",
+  "quantity_kind": "Power",
+  "canonical_unit": "kW",
+  "sfi_code": "261.02",
+  "component": "Port azimuth thruster drive motor power",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit and scaling of Drive_Motor_Power? Vendor does not state them."
+ },
+ {
+  "item": "X06",
+  "quantity_kind": "Voltage",
+  "canonical_unit": "V",
+  "sfi_code": "412.05",
+  "component": "Genset 1 backup battery",
+  "confidence": 0.7,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X07",
+  "quantity_kind": "Speed",
+  "canonical_unit": "rpm",
+  "sfi_code": "411.01",
+  "component": "Genset 1 engine speed",
+  "confidence": 0.95,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X08",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "724.01",
+  "component": "Vessel heading (true, Seapath MRU)",
+  "confidence": 0.95,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X09",
+  "quantity_kind": "Length",
+  "canonical_unit": "m",
+  "sfi_code": "586.01",
+  "component": "Crane outer boom extension length",
+  "confidence": 0.7,
+  "needs_human": true,
+  "question": "Is the Palfinger register raw in metres, or a scaled integer (e.g. cm or mm)?"
+ },
+ {
+  "item": "X10",
+  "quantity_kind": "Current",
+  "canonical_unit": "A",
+  "sfi_code": "432.01",
+  "component": "Genset 1 generator current",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit (A) and scaling of the INT DG1 current value?"
+ },
+ {
+  "item": "X11",
+  "quantity_kind": "Length",
+  "canonical_unit": "m",
+  "sfi_code": "728.01",
+  "component": "Significant wave height",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X12",
+  "quantity_kind": "Voltage",
+  "canonical_unit": "V",
+  "sfi_code": "432.01",
+  "component": "Genset 1 generator voltage",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit (V) and scaling of the INT DG1 voltage value?"
+ },
+ {
+  "item": "X13",
+  "quantity_kind": "Temperature",
+  "canonical_unit": "degC",
+  "sfi_code": "411.31",
+  "component": "Genset 1 exhaust gas temperature, right bank (cyl. group 2)",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "Is the x10 scaling to be divided by 10, and does 'HS = right side' map to exhaust temperature 2 as bank B?"
+ },
+ {
+  "item": "X14",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "724.02",
+  "component": "Course over ground (true)",
+  "confidence": 0.95,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X15",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "728.02",
+  "component": "Relative wind direction",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X16",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "586.02",
+  "component": "Crane slewing angle",
+  "confidence": 0.85,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X17",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "724.03",
+  "component": "Latitude",
+  "confidence": 0.6,
+  "needs_human": true,
+  "question": "Is the logged latitude in decimal degrees or in ddmm.mmmm NMEA format, and what is the sign convention for S?"
+ },
+ {
+  "item": "X18",
+  "quantity_kind": "Dimensionless",
+  "canonical_unit": "1",
+  "sfi_code": "432.01",
+  "component": "Genset 1 power factor",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What is the scaling of the INT power factor (x0.01, x0.001) and sign convention?"
+ },
+ {
+  "item": "X19",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "586.03",
+  "component": "Crane outer boom angle",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "What is the zero reference of the outer boom angle (relative to main boom or horizontal) and its sign?"
+ },
+ {
+  "item": "X20",
+  "quantity_kind": "Speed",
+  "canonical_unit": "kn",
+  "sfi_code": "728.03",
+  "component": "Relative wind speed",
+  "confidence": 0.95,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X21",
+  "quantity_kind": "Temperature",
+  "canonical_unit": "degC",
+  "sfi_code": "411.90",
+  "component": "Genset 2 cabinet temperature",
+  "confidence": 0.7,
+  "needs_human": true,
+  "question": "Is the item for engine 2 only (name m2) and is x10 scaling to be divided by 10? Which engine's enclosure is measured?"
+ },
+ {
+  "item": "X22",
+  "quantity_kind": "Power",
+  "canonical_unit": "kW",
+  "sfi_code": "436.02",
+  "component": "Total power of switchboard (bus 1)",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit and scaling of TotalPower1, and which bus/generators are summed?"
+ },
+ {
+  "item": "X23",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "261.03",
+  "component": "Port azimuth thruster actual azimuth angle",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "What is the zero reference and sign convention of the azimuth angle (0 = astern/forward, positive clockwise?)?"
+ },
+ {
+  "item": "X24",
+  "quantity_kind": "Power",
+  "canonical_unit": "kW",
+  "sfi_code": "411.01",
+  "component": "Genset 1 engine power output",
+  "confidence": 0.6,
+  "needs_human": true,
+  "question": "Logger name says engine_load: is the value kW (divide by 10) or percent load? Note says kW 0-500."
+ },
+ {
+  "item": "X25",
+  "quantity_kind": "State",
+  "canonical_unit": "bool",
+  "sfi_code": "261.04",
+  "component": "Port azimuth thruster running status",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X26",
+  "quantity_kind": "State",
+  "canonical_unit": "enum",
+  "sfi_code": "261.05",
+  "component": "Port thruster maneuver/transit mode",
+  "confidence": 0.4,
+  "needs_human": true,
+  "question": "What do the status codes (e.g. 5) mean in the maneuver/transit mode enumeration?"
+ },
+ {
+  "item": "X27",
+  "quantity_kind": "State",
+  "canonical_unit": "bitfield",
+  "sfi_code": "586.04",
+  "component": "Crane error word",
+  "confidence": 0.6,
+  "needs_human": true,
+  "question": "What does each of the 12 error bits mean?"
+ },
+ {
+  "item": "X28",
+  "quantity_kind": "Temperature",
+  "canonical_unit": "degC",
+  "sfi_code": "411.31",
+  "component": "Genset 1 exhaust gas temperature, left bank (cyl. group 1)",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "Is the x10 scaling to be divided by 10, and does 'VS = left side' map to exhaust temperature 1 as bank A?"
+ },
+ {
+  "item": "X29",
+  "quantity_kind": "Temperature",
+  "canonical_unit": "degC",
+  "sfi_code": "261.06",
+  "component": "Port azimuth thruster temperature sensor TS31",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "What medium or location does sensor TS31 measure (gear oil, hydraulic oil, bearing)?"
+ },
+ {
+  "item": "X30",
+  "quantity_kind": "Frequency",
+  "canonical_unit": "Hz",
+  "sfi_code": "432.01",
+  "component": "Genset 1 generator frequency",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit (Hz) and scaling of the INT DG1 frequency value?"
+ },
+ {
+  "item": "X31",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "724.04",
+  "component": "Longitude",
+  "confidence": 0.6,
+  "needs_human": true,
+  "question": "Is the logged longitude in decimal degrees or in dddmm.mmmm NMEA format, and what is the sign convention for W?"
+ },
+ {
+  "item": "X32",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "724.05",
+  "component": "Vessel pitch",
+  "confidence": 0.85,
+  "needs_human": true,
+  "question": "What is the sign convention of pitch (bow up positive?)?"
+ },
+ {
+  "item": "X33",
+  "quantity_kind": "Length",
+  "canonical_unit": "m",
+  "sfi_code": "724.06",
+  "component": "Vessel heave",
+  "confidence": 0.6,
+  "needs_human": true,
+  "question": "Is the logged value in metres or cm, and is positive down as the raw output?"
+ },
+ {
+  "item": "X34",
+  "quantity_kind": "Speed",
+  "canonical_unit": "kn",
+  "sfi_code": "724.07",
+  "component": "Longitudinal speed over ground (VBW)",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X35",
+  "quantity_kind": "Reactive power",
+  "canonical_unit": "kvar",
+  "sfi_code": "432.01",
+  "component": "Genset 1 reactive power",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit (kvar or var) and scaling of the INT value, and sign convention?"
+ },
+ {
+  "item": "X36",
+  "quantity_kind": "Pressure",
+  "canonical_unit": "bar",
+  "sfi_code": "586.05",
+  "component": "Crane main cylinder pressure",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "Is the Modbus register raw in bar or scaled (e.g. x10)?"
+ },
+ {
+  "item": "X37",
+  "quantity_kind": "Speed",
+  "canonical_unit": "rpm",
+  "sfi_code": "261.07",
+  "component": "Port azimuth thruster propeller speed feedback",
+  "confidence": 0.4,
+  "needs_human": true,
+  "question": "Is RPMFeedback percent of max or rpm (+/-203)? Note is contradictory."
+ },
+ {
+  "item": "X38",
+  "quantity_kind": "Speed",
+  "canonical_unit": "rpm",
+  "sfi_code": "261.08",
+  "component": "Port azimuth thruster propeller speed order",
+  "confidence": 0.4,
+  "needs_human": true,
+  "question": "Is RPMOrder percent of max or rpm (+/-203)? Same ambiguity as feedback."
+ },
+ {
+  "item": "X39",
+  "quantity_kind": "Temperature",
+  "canonical_unit": "degC",
+  "sfi_code": "411.21",
+  "component": "Genset 1 coolant temperature",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X40",
+  "quantity_kind": "Volume flow",
+  "canonical_unit": "L/h",
+  "sfi_code": "411.61",
+  "component": "Genset 1 fuel consumption rate",
+  "confidence": 0.85,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X41",
+  "quantity_kind": "State",
+  "canonical_unit": "bool",
+  "sfi_code": "411.01",
+  "component": "Genset 1 engine running",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X42",
+  "quantity_kind": "Pressure",
+  "canonical_unit": "bar",
+  "sfi_code": "261.09",
+  "component": "Port azimuth thruster pressure sensor PT31",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "What medium or location does PT31 measure (lube oil, hydraulic)?"
+ },
+ {
+  "item": "X43",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "586.06",
+  "component": "Crane main boom angle",
+  "confidence": 0.75,
+  "needs_human": true,
+  "question": "What are the zero reference and sign of the main boom angle (opposite sign to outer boom)?"
+ },
+ {
+  "item": "X44",
+  "quantity_kind": "Speed",
+  "canonical_unit": "kn",
+  "sfi_code": "724.08",
+  "component": "Speed over ground (VTG)",
+  "confidence": 0.6,
+  "needs_human": true,
+  "question": "The log mixes knots and km/h: which channel is kept, and is the value in kn?"
+ },
+ {
+  "item": "X45",
+  "quantity_kind": "State",
+  "canonical_unit": "bool",
+  "sfi_code": "436.03",
+  "component": "Genset 1 breaker state (open/closed)",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "Which of BreakerOpen / BreakerClosed is used, and are they inverted to each other?"
+ },
+ {
+  "item": "X46",
+  "quantity_kind": "Pressure",
+  "canonical_unit": "bar",
+  "sfi_code": "411.41",
+  "component": "Genset 1 charge air (boost) pressure",
+  "confidence": 0.5,
+  "needs_human": true,
+  "question": "Is scaling x10 or x100 for boost pressure? Vendor lists differ."
+ },
+ {
+  "item": "X47",
+  "quantity_kind": "Thrust",
+  "canonical_unit": "%",
+  "sfi_code": "261.10",
+  "component": "Azimuth thruster thrust feedback",
+  "confidence": 0.7,
+  "needs_human": true,
+  "question": "Which thruster does the signal belong to, and is thrust percent of 31.4 kN or percent of rpm?"
+ },
+ {
+  "item": "X48",
+  "quantity_kind": "Temperature",
+  "canonical_unit": "degC",
+  "sfi_code": "411.22",
+  "component": "Genset 1 lubricating oil temperature",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X49",
+  "quantity_kind": "Pressure",
+  "canonical_unit": "bar",
+  "sfi_code": "411.23",
+  "component": "Genset 1 lubricating oil pressure",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X50",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "724.09",
+  "component": "Vessel roll",
+  "confidence": 0.85,
+  "needs_human": true,
+  "question": "What is the sign convention of roll (starboard down positive?)?"
+ },
+ {
+  "item": "X51",
+  "quantity_kind": "Angle",
+  "canonical_unit": "deg",
+  "sfi_code": "261.11",
+  "component": "Port azimuth thruster azimuth order",
+  "confidence": 0.8,
+  "needs_human": true,
+  "question": "What is the zero reference and sign convention of the azimuth order?"
+ },
+ {
+  "item": "X52",
+  "quantity_kind": "Voltage",
+  "canonical_unit": "V",
+  "sfi_code": "412.04",
+  "component": "Genset 1 starter battery",
+  "confidence": 0.9,
+  "needs_human": false,
+  "question": ""
+ },
+ {
+  "item": "X53",
+  "quantity_kind": "Voltage",
+  "canonical_unit": "V",
+  "sfi_code": "436.01",
+  "component": "Genset 1 switchboard bus voltage",
+  "confidence": 0.3,
+  "needs_human": true,
+  "question": "What are the unit (V) and scaling of the INT bus voltage value?"
+ }
+]

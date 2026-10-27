@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gunnerus Signals and Metadata</title>
+<meta name="description" content="53 signals of the NTNU research vessel R/V Gunnerus followed across vendors, logger and asset model: what is logged, how names, units and conventions differ, where documents and data disagree, and a blind test of an AI translator.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#f4f6f7; --sheet:#ffffff; --ink:#0f1d2a; --ink-2:#44545f; --ink-3:#6b7a84;
+  --rule:#d3dbdf; --rule-2:#e5eaec;
+  --ntnu:#00509e; --ntnu-ink:#003a73; --ntnu-wash:#e3edf7;
+  --hull:#97aaae; --prop:#d9b646; --prop-wash:#f7efd2; --prop-ink:#6b5410;
+  --viewer:#e9eef0; --shadow:0 1px 2px rgba(15,29,42,.06),0 8px 24px rgba(15,29,42,.06);
+  --logo-filter:none;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c151d; --sheet:#121e28; --ink:#e6edf1; --ink-2:#aebbc4; --ink-3:#8494a0;
+    --rule:#26343f; --rule-2:#1b2833;
+    --ntnu:#6aa8e8; --ntnu-ink:#9cc6f2; --ntnu-wash:#132a42;
+    --hull:#7d8f94; --prop:#e2c25a; --prop-wash:#2d2710; --prop-ink:#ecd488;
+    --viewer:#101b24; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    --logo-filter:brightness(0) invert(1);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c151d; --sheet:#121e28; --ink:#e6edf1; --ink-2:#aebbc4; --ink-3:#8494a0;
+  --rule:#26343f; --rule-2:#1b2833;
+  --ntnu:#6aa8e8; --ntnu-ink:#9cc6f2; --ntnu-wash:#132a42;
+  --hull:#7d8f94; --prop:#e2c25a; --prop-wash:#2d2710; --prop-ink:#ecd488;
+  --viewer:#101b24; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  --logo-filter:brightness(0) invert(1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:var(--ntnu)}
+a:hover{color:var(--ntnu-ink)}
+:focus-visible{outline:2px solid var(--ntnu);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.mono{font-family:var(--mono);font-size:.82em;letter-spacing:0}
+.tnum{font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.05;letter-spacing:.005em;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4vw,2.75rem)}
+h3{font-size:1.35rem;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 .78rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3)}
+.lede{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:64px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink)}
+.brand img{height:26px;width:auto;filter:var(--logo-filter)}
+.brand .fallback{font:700 1.4rem/1 var(--body);letter-spacing:.02em;color:var(--ntnu)}
+.brand .sep{width:1px;height:26px;background:var(--rule)}
+.brand .name{font:600 1.1rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.nav{display:flex;gap:2px;margin-left:auto;flex-wrap:nowrap;white-space:nowrap}
+.nav a{font:500 .95rem/1 var(--body);color:var(--ink-2);text-decoration:none;padding:8px 10px;border-radius:6px}
+.nav a:hover{background:var(--rule-2);color:var(--ink)}
+.gh{display:inline-flex;align-items:center;gap:8px;font:600 .9rem/1 var(--body);color:#fff;background:var(--ntnu);padding:10px 14px;border-radius:6px;text-decoration:none;white-space:nowrap}
+.gh:hover{color:#fff;background:var(--ntnu-ink)}
+:root[data-theme="dark"] .gh{color:#0c151d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gh{color:#0c151d}}
+.gh svg{width:16px;height:16px;fill:currentColor}
+@media (max-width:1040px){.nav{display:none}.top .gh{margin-left:auto}}
+@media (max-width:420px){.brand .sep,.brand .name{display:none}}
+
+
+
+/* power and energy page */
+:root{
+  --m0:#9aa7ae; --m1:#2ca58d; --m2:#d9a21f; --m3:#2f6fd0;
+  --e1:#8a5fb8; --e2:#d9822b; --e3:#3f9c8f;
+  --warn:#9a5b00; --warn-wash:#fbefd9;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--m0:#7d8c94;--m1:#3fc2a6;--m2:#e6b53a;--m3:#6aa8e8;--e1:#a98ad2;--e2:#e69a52;--e3:#5fc0b2;--warn:#f0c57a;--warn-wash:#2d2410}}
+:root[data-theme="dark"]{--m0:#7d8c94;--m1:#3fc2a6;--m2:#e6b53a;--m3:#6aa8e8;--e1:#a98ad2;--e2:#e69a52;--e3:#5fc0b2;--warn:#f0c57a;--warn-wash:#2d2410}
+.page-head{padding-block:clamp(28px,5vw,56px) 8px}
+.page-head h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700;line-height:.95;margin-block:12px 14px}
+.block{padding-block:clamp(26px,4vw,44px)}
+.sec-head{margin-bottom:18px}
+.sec-head h2{font-size:clamp(1.7rem,3vw,2.2rem)}
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .95rem/1 var(--body);padding:11px 15px;border-radius:6px;text-decoration:none;border:1px solid var(--rule);color:var(--ink);background:var(--sheet)}
+.btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+
+/* the three labels */
+.tag{display:inline-block;font:500 .66rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:3px 6px;border-radius:4px;vertical-align:middle;white-space:nowrap}
+.tag.measured{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+.tag.derived{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.tag.assumed{background:var(--warn-wash);color:var(--warn);border:1px dashed var(--warn)}
+.key{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;font-size:.92rem;color:var(--ink-2)}
+.key span{display:inline-flex;align-items:center;gap:8px}
+
+/* controls */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
+.chip{font:500 .9rem/1 var(--body);border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2);padding:9px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--ink-3);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.kpis{grid-template-columns:minmax(0,1fr)}}
+.kpi{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}
+.kpi .v{font:600 2.3rem/1 var(--display);letter-spacing:.01em;margin:8px 0 4px;font-variant-numeric:tabular-nums}
+.kpi .v small{font:500 .95rem var(--body);color:var(--ink-3);margin-left:4px}
+.kpi p{font-size:.84rem;color:var(--ink-3);line-height:1.35}
+
+/* charts */
+.charts{position:relative}
+.charts svg{display:block;width:100%;height:auto;overflow:visible}
+.charts text{font:400 11px var(--mono);fill:var(--ink-3)}
+.charts .grid line{stroke:var(--rule-2);stroke-width:1}
+.charts .axis line{stroke:var(--rule)}
+.charts .cursor{stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3;pointer-events:none;visibility:hidden}
+.chart-title{display:flex;align-items:baseline;gap:10px;font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:14px 0 2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;color:var(--ink-2);margin:2px 0 6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--sheet);border:1px solid var(--ink);border-radius:6px;box-shadow:var(--shadow);padding:8px 10px;font:400 .78rem/1.45 var(--mono);color:var(--ink);min-width:200px;display:none}
+.tip b{font-weight:500;color:var(--ink-3)}
+
+/* tables */
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;min-width:760px}
+.tbl th{text-align:right;font:500 .66rem/1.25 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:bottom}
+.tbl th:first-child,.tbl td:first-child{text-align:left;white-space:nowrap}
+.tbl th .tag{display:block;margin:6px 0 0 auto;width:max-content}
+.tbl td{padding:10px;border-bottom:1px solid var(--rule-2);text-align:right;font-variant-numeric:tabular-nums}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tr.total td{font-weight:600;border-top:1px solid var(--rule)}
+.dot{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.two{grid-template-columns:minmax(0,1fr)}}
+.bars .row{display:grid;grid-template-columns:130px minmax(0,1fr) 70px;gap:10px;align-items:center;margin:10px 0;font-size:.9rem}
+.bars .track{display:flex;height:22px;background:var(--rule-2);border-radius:4px;overflow:hidden}
+.bars .track span{display:block;height:100%}
+.bars .row .n{font:400 .78rem var(--mono);color:var(--ink-3);text-align:right}
+@media (max-width:520px){.bars .row{grid-template-columns:90px minmax(0,1fr) 54px}}
+.note{font-size:.9rem;color:var(--ink-2);margin-top:12px}
+.note b{font-weight:600;color:var(--ink)}
+.callout{border-left:3px solid var(--warn);background:var(--warn-wash);color:var(--ink);padding:10px 14px;border-radius:0 6px 6px 0;font-size:.92rem;margin-top:14px}
+
+/* mission to performance */
+:root{--bt:#5b6b78;--bf:#b5476b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bt:#9fb0bd;--bf:#e07a9c}}
+:root[data-theme="dark"]{--bt:#9fb0bd;--bf:#e07a9c}
+.fw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;margin-bottom:18px}
+.fw .card{position:relative;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.fw .card:not(:last-child)::after{content:"\2192";position:absolute;right:-21px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:1.1rem}
+.fw .card h3{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fw .card p{font-size:.86rem;color:var(--ink-2);line-height:1.4;margin:0}
+.fw .card p b{color:var(--ink)}
+.tag.none{background:transparent;color:var(--ink-3);border:1px dotted var(--ink-3)}
+@media (max-width:900px){.fw{grid-template-columns:minmax(0,1fr);gap:22px}.fw .card:not(:last-child)::after{content:"\2193";right:auto;left:50%;top:auto;bottom:-20px;transform:translateX(-50%)}}
+.sbar{margin:12px 0}
+.sbar .lab{display:flex;justify-content:space-between;font-size:.86rem;color:var(--ink-2);margin-bottom:4px}
+.sbar .lab span:last-child{font:400 .74rem var(--mono);color:var(--ink-3)}
+.sbar .track{display:flex;height:30px;gap:2px;border-radius:5px;overflow:hidden}
+.sbar .track span{display:flex;align-items:center;justify-content:center;font:500 .72rem var(--mono);min-width:0;overflow:hidden;white-space:nowrap;cursor:default}
+.sbar .track span:first-child{border-radius:5px 0 0 5px}
+.sbar .track span:last-child{border-radius:0 5px 5px 0}
+.sbar.sm .track{height:22px}
+.sbar.sm{margin:7px 0}
+.hist text{font:400 11px var(--mono);fill:var(--ink-3)}
+.hist .v{fill:var(--ink-2)}
+.gtip{position:fixed;z-index:50;pointer-events:none;background:var(--sheet);border:1px solid var(--ink);border-radius:6px;box-shadow:var(--shadow);padding:8px 10px;font:400 .78rem/1.45 var(--mono);color:var(--ink);max-width:260px;display:none}
+.gtip b{font-weight:500;color:var(--ink-3)}
+.mini{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:12px}
+.mini th{font:500 .62rem/1.25 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);text-align:right;padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:bottom}
+.mini td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--rule-2);font-variant-numeric:tabular-nums}
+.mini th:first-child,.mini td:first-child{text-align:left;white-space:nowrap}
+.mini tr:last-child td{border-bottom:0}
+.sub-h{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 4px}
+
+/* map */
+.mapbox{height:clamp(360px,62vh,620px);border:1px solid var(--rule);border-radius:8px;background:var(--rule-2);position:relative;z-index:0}
+.mapbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 10px}
+.mapbar .chip{padding:7px 12px;font-size:.84rem}
+.mapbar .lbl{font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-right:2px}
+.endmk{border:2px solid var(--ink);background:transparent;box-sizing:border-box}
+.leaflet-container{font-family:var(--body)}
+.maptip{position:absolute;z-index:1000;pointer-events:none;background:var(--sheet);border:1px solid var(--ink);border-radius:6px;box-shadow:var(--shadow);padding:8px 10px;font:400 .78rem/1.45 var(--mono);color:var(--ink);display:none;min-width:190px}
+.maptip b{font-weight:500;color:var(--ink-3)}
+.leaflet-tooltip.maptip-static{background:var(--sheet);color:var(--ink);border:1px solid var(--rule);font:500 .72rem var(--mono);box-shadow:none;padding:2px 6px}
+.leaflet-tooltip-right.maptip-static::before{display:none}
+/* schematic */
+.schem svg{display:block;width:100%;height:auto}
+.schem text{font:400 12px var(--body);fill:var(--ink)}
+.schem .sub{font:400 10.5px var(--mono);fill:var(--ink-3)}
+.schem .live{font:500 11px var(--mono);fill:var(--ink)}
+.schem .node rect{fill:var(--sheet);stroke:var(--ink);stroke-width:1.6}
+.schem .node.none rect{stroke:var(--ink-3);stroke-dasharray:5 4;fill:transparent}
+.schem .node.none text{fill:var(--ink-2)}
+.schem .edge{stroke:var(--warn);stroke-width:1.4;stroke-dasharray:5 4;fill:none}
+.schem .edge.solid{stroke:var(--ink);stroke-dasharray:none}
+.schem .arrow{fill:var(--warn)}
+.schem .colhead{font:500 10px var(--mono);fill:var(--ink-3);text-transform:uppercase;letter-spacing:.08em}
+
+.list{margin:8px 0 0;padding-left:1.1em;color:var(--ink-2);font-size:.95rem}
+.list li{margin:7px 0}
+.list li .tag{margin-right:6px}
+footer{border-top:1px solid var(--rule);margin-top:40px;padding-block:26px;color:var(--ink-3);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.loading{padding:40px 0;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Gunnerus Open Data, home">
+      <img src="assets/ntnu-logo.svg" alt="NTNU" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span class="fallback" hidden>NTNU</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="name">Gunnerus Open Data</span>
+    </a>
+    <nav class="nav" aria-label="Pages">
+      <a href="index.html#operational">Operational</a>
+      <a href="power-energy.html">Energy</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#inspector">Inspector</a>
+      <a href="#conventions">Conventions</a>
+      <a href="#translator">Translator</a>
+    </nav>
+    <a class="gh" href="https://github.com/shiplab/gunnerus/tree/main/metadata/signals">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      Signals on GitHub
+    </a>
+  </div>
+</header>
+
+<style>
+/* signals page */
+.sgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.sgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.sgrid{grid-template-columns:minmax(0,1fr)}}
+.gcard{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.gcard h3{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:0 0 4px}
+.gcard .big{font:600 2rem/1 var(--display);margin:6px 0 8px}
+.gcard .big small{font:500 .9rem var(--body);color:var(--ink-3)}
+.gcard .badges{display:flex;flex-wrap:wrap;gap:5px}
+.tag.logged{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+.tag.listed{background:transparent;color:var(--ink);border:1px dashed var(--ink)}
+.tag.nodata{background:transparent;color:var(--ink-3);border:1px dotted var(--ink-3)}
+.vrow{display:grid;grid-template-columns:minmax(150px,230px) minmax(0,1fr) 120px;gap:12px;align-items:center;margin:12px 0;font-size:.92rem}
+.vrow .track{position:relative;height:24px;background:var(--rule-2);border-radius:4px;overflow:hidden}
+.vrow .track span{position:absolute;left:0;top:0;bottom:0;background:var(--ink);border-radius:4px 0 0 4px}
+.vrow .n{font:400 .8rem var(--mono);color:var(--ink-2);text-align:right}
+@media (max-width:620px){.vrow{grid-template-columns:minmax(0,1fr) 90px}.vrow .track{grid-column:1/-1;order:3}}
+.heat td.c{text-align:center;font:400 .8rem var(--mono);padding:9px 6px}
+.heat td.c i{display:block;font-style:normal}
+.insp{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px;align-items:start}
+@media (max-width:900px){.insp{grid-template-columns:minmax(0,1fr)}}
+.pick{width:100%;font:500 1rem var(--body);padding:10px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink)}
+.rec{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:12px}
+.rec th{width:34%;text-align:left;vertical-align:top;font:500 .66rem/1.35 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);padding:8px 8px 8px 0;border-bottom:1px solid var(--rule-2)}
+.rec td{padding:7px 0;border-bottom:1px solid var(--rule-2);overflow-wrap:anywhere}
+.rec tr:last-child th,.rec tr:last-child td{border-bottom:0}
+.rec .src{display:block;font:500 .62rem var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-top:6px}
+.rec .missing{color:var(--warn)}
+.dls{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.dls .btn{cursor:pointer;background:var(--sheet);font-size:.88rem;padding:9px 12px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+@media (max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stats div{border:1px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--sheet)}
+.stats b{display:block;font:500 .62rem var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3)}
+.stats span{font:600 1.35rem/1.2 var(--display);font-variant-numeric:tabular-nums}
+.empty{border:1px dashed var(--ink-3);border-radius:8px;padding:22px;color:var(--ink-2);background:transparent}
+.conv{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+@media (max-width:900px){.conv{grid-template-columns:minmax(0,1fr)}}
+.eq{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:12px 0}
+.eq .box{border:1px solid var(--ink);border-radius:8px;padding:10px 14px;background:var(--sheet)}
+.eq .box b{display:block;font:500 .62rem var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);font-weight:500}
+.eq .box span{font:500 1.15rem var(--mono)}
+.eq .arrow{font-size:1.4rem;color:var(--ink-3)}
+.dvd svg{width:100%;height:auto;display:block}
+.dvd text{font:400 11px var(--mono);fill:var(--ink-3)}
+.dvd .lab{font:400 12.5px var(--body);fill:var(--ink)}
+.verdict{display:inline-block;font:500 .64rem var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:2px 6px;border-radius:4px;border:1px solid var(--ink);margin-left:6px}
+.verdict.out{background:var(--warn-wash);border-color:var(--warn);color:var(--warn)}
+.sum{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:900px){.sum{grid-template-columns:minmax(0,1fr)}}
+.mk{display:inline-block;min-width:1.6em;text-align:center;font:500 .8rem var(--mono)}
+.mk.y{color:var(--ink)}
+.mk.n{color:var(--warn);font-weight:600}
+.mk.na{color:var(--ink-3)}
+.tt td,.tt th{text-align:center}
+.tt td:nth-child(1),.tt td:nth-child(2){text-align:left}
+.tt tr{cursor:pointer}
+.tt tr:hover td{background:var(--ntnu-wash)}
+.tt .grp td{background:var(--rule-2);font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);text-align:left;cursor:default}
+.tt .sm{display:block;font:400 .72rem var(--mono);color:var(--ink-3)}
+</style>
+<main id="top">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">metadata/signals · the ship as a set of sensors</p>
+    <h1>One quantity, many names</h1>
+    <p class="lede">RV Gunnerus has 53 signals we followed across the engine vendor, the power management system, HEMOS, the 2023 logger and the 2019 asset model. The same quantity is named differently in each, units and scaling live in separate documents, and some documents disagree with the logged data. This page shows what is logged, what each signal means, where the conventions clash, and what happens when an AI model is asked to translate the names.</p>
+    <div class="key">
+      <span><span class="tag logged">logged</span> recorded in the 2023 cruise-week logger</span>
+      <span><span class="tag listed">listed, not logged</span> exists in a vendor signal list, never recorded</span>
+      <span><span class="tag nodata">no data here</span> no values in this page's files</span>
+    </div>
+  </div>
+</section>
+<section class="block" id="coverage"><div class="wrap"><div id="v1"><p class="loading">Loading…</p></div></div></section>
+<section class="block" id="inspector"><div class="wrap"><div id="v2"></div></div></section>
+<section class="block" id="conventions"><div class="wrap"><div id="v3"></div></div></section>
+<section class="block" id="translator"><div class="wrap"><div id="v4"></div></div></section>
+<section class="block" id="files"><div class="wrap">
+  <p class="eyebrow">Files</p>
+  <div class="sec-head"><h2>What is behind this page</h2></div>
+  <ul class="list">
+    <li><a href="https://github.com/shiplab/gunnerus/blob/main/metadata/signals/gunnerus-signal-crosswalk.csv">metadata/signals/gunnerus-signal-crosswalk.csv</a>: the 53-signal crosswalk (names in each source, quantity, unit, SFI code, status).</li>
+    <li><a href="https://github.com/shiplab/gunnerus/tree/main/metadata/signals/translator-test">metadata/signals/translator-test</a>: the blind inputs, the answers of both arms, the key and the grading script.</li>
+    <li><a href="https://github.com/shiplab/gunnerus/tree/main/metadata/signals/data">metadata/signals/data</a>: the two 2019 extracts (engine log 1-minute, docking log 10-second).</li>
+    <li><a href="https://github.com/shiplab/gunnerus/blob/main/pages/assets/signals/signals.json">pages/assets/signals/signals.json</a>: what this page reads, built by <span class="mono">metadata/signals/scripts/build_page_data.py</span>.</li>
+  </ul>
+  <p class="note">Only our own crosswalk is published here: names, meaning in our words, units and status. Vendor documents and PLC dumps are not republished.</p>
+</div></section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>Gunnerus open data · <a href="https://github.com/shiplab/gunnerus">github.com/shiplab/gunnerus</a></span>
+    <span>2023 data: Robert Skulstad (NTNU). 2019 engine and docking logs: NTNU Gunnerus dashboard project 2019–2020. Organised by Henrique M. Gaspar (NTNU). Licence CC BY-NC 4.0.</span>
+  </div>
+</footer>
+<div class="gtip" id="gtip" hidden></div>
+<script>
+"use strict";
+const URLS=["assets/signals/signals.json","../pages/assets/signals/signals.json","https://raw.githubusercontent.com/shiplab/gunnerus/main/pages/assets/signals/signals.json"];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=(v,d)=>v==null?"–":(Math.abs(v)>=1000?v.toLocaleString("en",{maximumFractionDigits:Math.abs(v)<10000?4:1}):(+v.toPrecision(d||4)).toString());
+let D,SEL="E04",DSI=0;
+async function load(){for(const u of URLS){try{const r=await fetch(u);if(r.ok)return await r.json();}catch(e){}}throw new Error("signals.json not found")}
+const byId=id=>D.signals.find(s=>s.id===id);
+const SRC=[["nogva","Nogva engine list"],["hemos","Rolls-Royce HEMOS"],["nuc","2023 logger"],["asset2019","2019 asset model"],["other","Other source"]];
+const status=s=>s.logged_2023?"logged":(s.derived?"derived":"listed");
+const badge=s=>s.logged_2023?'<span class="tag logged">logged</span>':(s.derived?'<span class="tag derived">derived</span>':'<span class="tag listed">listed, not logged</span>');
+
+function view1(){
+  const G=Object.keys(D.groups);
+  const cards=G.map(g=>{const S=D.signals.filter(s=>s.group===g),lg=S.filter(s=>s.logged_2023).length,dv=S.filter(s=>s.derived).length,nl=S.length-lg-dv;
+    return `<div class="gcard"><h3>${esc(D.groups[g])}</h3><div class="big">${S.length}<small> signals</small></div><div class="badges">${lg?`<span class="tag logged">${lg} logged</span>`:""}${dv?`<span class="tag derived">${dv} derived</span>`:""}${nl?`<span class="tag listed">${nl} listed, not logged</span>`:""}</div></div>`}).join("");
+  const vend=D.vendors.map(v=>`<div class="vrow"><div>${esc(v.name)}</div><div class="track" title="${v.logged} of ${v.listed}"><span style="width:${(100*v.logged/v.listed).toFixed(1)}%"></span></div><div class="n tnum">${v.logged} of ${v.listed} logged</div></div>`).join("");
+  const rows=G.map(g=>{const S=D.signals.filter(s=>s.group===g);return `<tr><td>${esc(D.groups[g])}</td>`+SRC.map(([k])=>{const n=S.filter(s=>s.native[k]).length;return `<td class="c" style="background:color-mix(in srgb,var(--ntnu) ${Math.round(70*n/S.length)}%,transparent)"><i>${n}/${S.length}</i></td>`}).join("")+`</tr>`}).join("");
+  const eng=D.signals.filter(s=>s.group==="E"&&s.native.nogva&&s.native.hemos&&s.native.nuc&&s.native.asset2019)[0];
+  $("#v1").innerHTML=`<p class="eyebrow">1 · Coverage</p><div class="sec-head"><h2>What is listed, and what is actually logged</h2><p class="lede" style="margin-top:8px">The vendors list ${D.vendors.reduce((a,v)=>a+v.listed,0).toLocaleString("en")} signals. The 2023 logger records ${D.logger_tags} tags. The power management system, which is the heart of the power chain, contributes none of them.</p></div>
+  <div class="panel"><div class="chart-title">Listed by the vendor against logged</div>${vend}</div>
+  <div class="chart-title" style="margin-top:22px">The 53 signals followed, by part of the ship</div><div class="sgrid">${cards}</div>
+  <div class="panel" style="margin-top:20px"><div class="chart-title" style="margin-top:0">How many of them carry a name in each source</div><div class="tbl-wrap"><table class="tbl heat"><thead><tr><th>Part of the ship</th>${SRC.map(x=>`<th style="text-align:center">${x[1]}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>
+  <p class="note">${eng?`Example: engine speed is <span class="mono">${esc(eng.native.nogva)}</span> in the engine list, <span class="mono">${esc(eng.native.hemos)}</span> in HEMOS, <span class="mono">${esc(eng.native.nuc)}</span> in the 2023 logger and <span class="mono">${esc(eng.native.asset2019)}</span> in the 2019 asset model: one quantity, four names.`:""}</p></div>`;
+}
+
+function opts(){return Object.keys(D.groups).map(g=>`<optgroup label="${esc(D.groups[g])}">`+D.signals.filter(s=>s.group===g).map(s=>`<option value="${s.id}"${s.id===SEL?" selected":""}>${s.id} · ${esc(s.concept)} (${esc(s.system)})</option>`).join("")+`</optgroup>`).join("")}
+function view2(){
+  $("#v2").innerHTML=`<p class="eyebrow">2 · Signal inspector</p><div class="sec-head"><h2>Pick a signal</h2><p class="lede" style="margin-top:8px">Its record, as we would send it next to the data, and the real values behind it where the files hold them.</p></div>
+  <div class="insp"><div class="panel"><label class="eyebrow" for="pick">Signal</label><select class="pick" id="pick" style="margin-top:6px">${opts()}</select><div id="rec"></div></div><div class="panel" id="plot"></div></div>`;
+  $("#pick").addEventListener("change",e=>{pick(e.target.value,false)});
+  drawRec();drawPlot();
+}
+function pick(id,scroll){SEL=id;DSI=0;const p=$("#pick");if(p)p.value=id;drawRec();drawPlot();if(scroll!==false)$("#inspector").scrollIntoView({behavior:"smooth"})}
+function regOf(s){const m=/reg (\d+)/.exec(s.native.nogva||"")||/(4\d{4})/.exec(s.native.other||"");return m?m[1]:null}
+function drawRec(){
+  const s=byId(SEL);
+  const nat=SRC.map(([k,l])=>`<span class="src">${l}</span>${s.native[k]?`<span class="mono">${esc(s.native[k])}</span>`:'<span class="missing">no name</span>'}`).join("");
+  const rows=[["Quantity",`${esc(s.quantity_kind)} · <b>${esc(s.unit)}</b>`],["Part of the ship",`${esc(s.system)}`],["SFI code",s.sfi_code?`<span class="mono">${esc(s.sfi_code)}</span> ${esc(s.sfi_name)}`:'<span class="missing">no code in the tree</span>'],["Names in each source",nat],["Written down about it",esc(s.documented)||"–"],["Status in 2023",badge(s)+(s.mean_interval_s?` <span class="mono">every ${s.mean_interval_s} s</span>`:"")],["Range, cruise week",s.logged_range_5d?`<span class="mono">${esc(s.logged_range_5d)}</span>`:"–"],["Note",esc(s.note)||"–"],["Not recorded today",'<span class="missing">who owns the definition · who approved this mapping · when it changed</span>']];
+  const reg=regOf(s);
+  $("#rec").innerHTML=`<table class="rec"><tbody>${rows.map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join("")}</tbody></table><div class="dls"><button class="btn" id="dj">Record (JSON)</button><button class="btn" id="dl">JSON-LD (SOSA)</button>${reg?`<button class="btn" id="dt">Thing Description (draft)</button>`:""}</div>${reg?`<p class="note">The draft Thing Description is offered because this signal has a register address (${reg}). Host, function code, data type and byte order are placeholders or unconfirmed.</p>`:""}`;
+  $("#dj").onclick=()=>save(`${s.id}.json`,recordJSON(s));$("#dl").onclick=()=>save(`${s.id}.jsonld`,ldJSON(s));if(reg)$("#dt").onclick=()=>save(`${s.id}.td.json`,tdJSON(s,reg));
+}
+function recordJSON(s){const o={id:s.id,concept:s.concept,system:s.system,quantity_kind:s.quantity_kind,canonical_unit:s.unit,sfi:{code:s.sfi_code,name:s.sfi_name,scheme:"SFI, 2019 TM Master tree"},names_in_sources:Object.fromEntries(SRC.filter(([k])=>s.native[k]).map(([k,l])=>[l,s.native[k]])),documented_unit_or_scaling:s.documented,logged_in_2023_cruise_week:s.logged_2023,note:s.note};return JSON.stringify(o,null,2)}
+function ldJSON(s){const o={"@context":{sosa:"http://www.w3.org/ns/sosa/",rdfs:"http://www.w3.org/2000/01/rdf-schema#",gx:"https://github.com/shiplab/gunnerus/tree/main/metadata/signals#"},"@id":"gx:"+s.id,"@type":"sosa:ObservableProperty","rdfs:label":s.concept+" ("+s.system+")","rdfs:comment":s.note||"",
+ "gx:quantityKind":s.quantity_kind,"gx:canonicalUnit":s.unit,"gx:sfiCode":s.sfi_code,"gx:sfiScheme":"SFI, 2019 TM Master tree","gx:nativeNames":SRC.filter(([k])=>s.native[k]).map(([k,l])=>l+": "+s.native[k]),"gx:documentedUnitOrScaling":s.documented,"gx:note":"Project-local terms in the gx: namespace are not a published vocabulary."};return JSON.stringify(o,null,2)}
+function tdJSON(s,reg){const o={"@context":"https://www.w3.org/2022/wot/td/v1.1",title:"DRAFT "+s.concept+" ("+s.system+")",description:"Draft only. Host is a placeholder. Register "+reg+" from the vendor list; function code, data type and byte order are not confirmed. Documented: "+s.documented,securityDefinitions:{nosec_sc:{scheme:"nosec"}},security:"nosec_sc",
+ properties:{[s.concept.replace(/\W+/g,"_")]:{title:s.concept,type:"number",unit:s.unit,readOnly:true,forms:[{href:"modbus+tcp://HOST-PLACEHOLDER:502/?register="+reg}]}}};return JSON.stringify(o,null,2)}
+function save(name,text){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:"application/json"}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+
+function nice(lo,hi){if(lo===hi){lo-=1;hi+=1}const span=hi-lo,st=Math.pow(10,Math.floor(Math.log10(span/4))),m=span/4/st,step=(m<1.5?1:m<3?2:m<7?5:10)*st;const a=Math.floor(lo/step)*step,b=Math.ceil(hi/step)*step,t=[];for(let v=a;v<=b+step/2;v+=step)t.push(+v.toPrecision(10));return{a,b,t,step}}
+function drawPlot(){
+  const s=byId(SEL),el=$("#plot");
+  if(!s.data.length){
+    const why=s.id==="N12"?"This is data from a third-party sensor that is not for publication.":(s.logged_2023||s.derived?"It was logged in the cruise week, but the values are not included in this page's files.":"It is listed in a vendor signal list and was never recorded, so there are no values anywhere.");
+    el.innerHTML=`<div class="chart-title" style="margin-top:0">${esc(s.concept)}</div><div class="empty"><span class="tag nodata">no data here</span><p style="margin-top:10px">${why}</p></div>`;return}
+  if(DSI>=s.data.length)DSI=0;
+  const d=s.data[DSI],ds=D.datasets[d.dataset],ser=ds.series[d.col],step=ds.step_s,t0=new Date(ds.start+"Z").getTime();
+  const W=720,H=250,L=52,R=14,T=12,B=28,px=(i)=>L+(W-L-R)*i/Math.max(1,ser.length-1);
+  const vals=ser.filter(v=>v!=null),band=s.normal_band&&d.dataset==="engine2019"?s.normal_band:null;
+  let lo=Math.min(...vals),hi=Math.max(...vals);if(band){lo=Math.min(lo,band[0]);hi=Math.max(hi,band[1])}
+  const sc=nice(lo,hi),py=v=>T+(H-T-B)*(1-(v-sc.a)/(sc.b-sc.a));
+  let path="",pen=false;ser.forEach((v,i)=>{if(v==null){pen=false;return}path+=(pen?"L":"M")+px(i).toFixed(1)+" "+py(v).toFixed(1);pen=true});
+  const grid=sc.t.map(v=>`<line x1="${L}" x2="${W-R}" y1="${py(v)}" y2="${py(v)}" stroke="var(--rule-2)"/><text x="${L-6}" y="${py(v)+4}" text-anchor="end">${(sc.step<1?v.toFixed(Math.min(4,Math.ceil(-Math.log10(sc.step)))):v.toLocaleString("en"))}</text>`).join("");
+  const nT=5,xt=Array.from({length:nT},(_,k)=>{const i=Math.round((ser.length-1)*k/(nT-1));const dt=new Date(t0+i*step*1000);const txt=ds.step_s>=600?dt.toISOString().slice(5,10)+" "+dt.toISOString().slice(11,16):dt.toISOString().slice(11,16);return `<text x="${px(i)}" y="${H-8}" text-anchor="${k==0?"start":k==nT-1?"end":"middle"}">${txt}</text>`}).join("");
+  const bandSvg=band?`<rect x="${L}" width="${W-L-R}" y="${py(band[1])}" height="${py(band[0])-py(band[1])}" fill="var(--ntnu)" opacity=".13"/><text x="${W-R-4}" y="${py(band[1])+12}" text-anchor="end">documented normal ${band[0]}–${band[1]}</text>`:"";
+  const btns=s.data.map((x,i)=>`<button class="chip" data-i="${i}" aria-pressed="${i===DSI}">${esc(D.datasets[x.dataset].label.split(",")[0])}</button>`).join("");
+  el.innerHTML=`<div class="filters">${btns}</div><div class="chart-title" style="margin-top:0">${esc(s.concept)} · ${esc(s.unit)} · column <span class="mono">${esc(d.col)}</span></div><div class="charts" id="pc"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(s.concept)} over time">${grid}${bandSvg}<path d="${path}" fill="none" stroke="var(--ntnu)" stroke-width="1.6" stroke-linejoin="round"/><line class="cursor" id="cur" y1="${T}" y2="${H-B}"/>${xt}<rect id="hit" x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent"/></svg><div class="tip" id="tip" hidden></div></div>
+  <div class="stats"><div><b>min</b><span>${fmt(d.min,5)}</span></div><div><b>mean</b><span>${fmt(d.mean,5)}</span></div><div><b>max</b><span>${fmt(d.max,5)}</span></div><div><b>samples</b><span>${d.n.toLocaleString("en")}</span></div></div>
+  <p class="note">${esc(ds.label)}. Drawn from ${esc(ds.how)}; min, mean and max are over all ${ds.n_full.toLocaleString("en")} rows of the file.${d.dataset==="docking2019"&&/itude/.test(d.col)?" Values are in the logged format ddmm.mmmm, not decimal degrees.":""}</p>`;
+  el.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{DSI=+b.dataset.i;drawPlot()});
+  const hit=$("#hit"),cur=$("#cur"),tip=$("#tip"),pc=$("#pc");
+  const mv=e=>{const r=hit.getBoundingClientRect(),f=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),i=Math.round(f*(ser.length-1)),v=ser[i];const x=px(i);cur.setAttribute("x1",x);cur.setAttribute("x2",x);cur.style.visibility="visible";const dt=new Date(t0+i*step*1000).toISOString().replace("T"," ").slice(0,16);tip.hidden=false;tip.innerHTML=`<b>${dt}</b><br>${fmt(v,6)} ${esc(s.unit)}`;const pr=pc.getBoundingClientRect();tip.style.left=Math.min(pr.width-130,Math.max(0,e.clientX-pr.left+12))+"px";tip.style.top=Math.max(0,e.clientY-pr.top-40)+"px"};
+  hit.addEventListener("mousemove",mv);hit.addEventListener("touchmove",e=>mv(e.touches[0]),{passive:true});hit.addEventListener("mouseleave",()=>{cur.style.visibility="hidden";tip.hidden=true});
+}
+
+function view3(){
+  const lat=byId("N01"),dk=lat.data.find(x=>x.dataset==="docking2019"),pw=lat.data.find(x=>x.dataset==="power2023");
+  const raw=D.datasets.docking2019.series[dk.col][0],deg=Math.floor(raw/100),mn=raw-deg*100,dec=deg+mn/60,p23=D.datasets.power2023.series[pw.col][0];
+  const A=`<div class="panel"><div class="chart-title" style="margin-top:0">Latitude: two files, two conventions</div>
+  <div class="eq"><div class="box"><b>2019 docking log</b><span>${raw.toFixed(6)}</span></div><span class="arrow">→</span><div class="box"><b>degrees + decimal minutes</b><span>${deg}° ${mn.toFixed(6)}′</span></div><span class="arrow">→</span><div class="box"><b>decimal degrees</b><span>${dec.toFixed(5)}°</span></div></div>
+  <div class="eq"><div class="box"><b>2023 cruise week</b><span>${p23.toFixed(5)}</span></div><span class="arrow">→</span><div class="box"><b>already decimal degrees</b><span>${p23.toFixed(5)}°</span></div></div>
+  <p class="note">Read as decimal degrees, the 2019 number would be ${Math.round(raw).toLocaleString("en")}°, which is impossible, and a machine reading only the numbers would not know. The unit has to travel with the value. Longitude (N02) has the same issue.</p></div>`;
+  const rowsDef=[["E04","ME1","engine2019","ME1_LOPress"],["E04","ME2","engine2019","ME2_LOPress"],["E05","ME1","engine2019","ME1_LubOilTemp"],["E05","ME2","engine2019","ME2_LubOilTemp"],["E06","ME1","engine2019","ME1_coolantTemp"],["E06","ME2","engine2019","ME2_coolantTemp"],["E10","ME1","engine2019","ME1_StartBatt"],["E10","ME2","engine2019","ME2_StartBatt"]];
+  const items=rowsDef.map(([id,eng,ds,col])=>{const s=byId(id),st=(s.data.find(x=>x.col===col))||D.extra_stats[ds+":"+col];return{s,eng,st,band:s.normal_band}});
+  const rh=46,Wd=720,Lm=250,Rm=16,h=items.length*rh+26;
+  const svg=items.map((it,i)=>{const y=i*rh+8,b=it.band,st=it.st,lo=Math.min(b[0],st.min),hi=Math.max(b[1],st.max),pad=(hi-lo)*.15||1,a=lo-pad,z=hi+pad,x=v=>Lm+(Wd-Lm-Rm)*(v-a)/(z-a);
+    const out=st.max<b[0]?"entirely below the band":st.min>b[1]?"entirely above the band":(st.min<b[0]&&st.max>b[1])?"on both sides of the band":st.min<b[0]?"dips below the band":st.max>b[1]?"rises above the band":"inside";
+    return `<g><text class="lab" x="0" y="${y+14}">${esc(it.s.concept)}, ${it.eng}</text><text x="0" y="${y+28}">${b[0]}–${b[1]} documented · ${fmt(st.min,4)}–${fmt(st.max,4)} logged</text><line x1="${Lm}" x2="${Wd-Rm}" y1="${y+16}" y2="${y+16}" stroke="var(--rule-2)"/><rect x="${x(b[0])}" y="${y+6}" width="${x(b[1])-x(b[0])}" height="20" fill="var(--ntnu)" opacity=".16" stroke="var(--ntnu)" stroke-dasharray="3 2"/><rect x="${x(st.min)}" y="${y+11}" width="${Math.max(3,x(st.max)-x(st.min))}" height="10" rx="2" fill="var(--ink)"/><text x="${Wd-Rm}" y="${y+4}" text-anchor="end" fill="${out==="inside"?"var(--ink-3)":"var(--warn)"}" style="fill:${out==="inside"?"var(--ink-3)":"var(--warn)"}">${out==="inside"?"inside the band":out}</text></g>`}).join("");
+  const B=`<div class="panel dvd"><div class="chart-title" style="margin-top:0">Documents against data: engine "normal" bands</div><svg viewBox="0 0 ${Wd} ${h}" role="img" aria-label="Documented normal bands against logged ranges">${svg}</svg><p class="note"><span class="verdict" style="margin:0">band</span> documented normal, <b>black bar</b> logged range, 21 Nov 2019, 08:30–14:10. A 3.5-hour window of one day is not proof of a fault: the document may refer to another load. The point is that nothing in the data says which one is right.</p></div>`;
+  const T3=byId("T03"),T4=byId("T04"),N4=byId("N04");
+  const wr=[[T3,T3.data[0]],[T4,T4.data[0]],[N4,N4.data[0]]].map(([s,d])=>`<tr><td>${esc(s.concept)}</td><td style="text-align:left">${esc(s.documented)}</td><td>${fmt(d.min,4)} to ${fmt(d.max,4)}</td></tr>`).join("");
+  const C=`<div class="panel" style="margin-top:20px"><div class="chart-title" style="margin-top:0">Written down against logged: thrusters and speed</div><div class="tbl-wrap"><table class="mini" style="min-width:560px"><thead><tr><th>Signal</th><th style="text-align:left">What the document says</th><th>Logged, 9 Nov 2019 docking</th></tr></thead><tbody>${wr}</tbody></table></div><p class="note">The thruster feedback is described both as a percentage with limits ±203 and as ±203 rpm, while the logged values stay within about ±70. The surge speed is documented in knots; the logged range is not confirmed to be knots. Each is a question for the owner, which is why the record has a place for it.</p></div>`;
+  $("#v3").innerHTML=`<p class="eyebrow">3 · Same quantity, different conventions</p><div class="sec-head"><h2>Where the documents and the data disagree</h2></div><div class="conv">${A}${B}</div>${C}`;
+}
+
+function view4(){
+  const S=D.signals,n=a=>S.filter(s=>s.translator[a].ok.trap!==null).length;
+  const M=a=>({kind:S.filter(s=>s.translator[a].ok.kind).length,unit:S.filter(s=>s.translator[a].ok.unit).length,unitN:S.filter(s=>s.translator[a].ok.unit!==null).length,trap:S.filter(s=>s.translator[a].ok.trap).length,trapN:n(a),sfi:S.filter(s=>s.translator[a].ok.sfi).length,sfiN:S.filter(s=>s.translator[a].ok.sfi!==null).length,flag:S.filter(s=>s.translator[a].flag).length});
+  const m={A:M("A"),B:M("B")};
+  const bar=(lab,key,nk,tot)=>["A","B"].map(a=>{const v=m[a][key],N=nk?m[a][nk]:tot;return `<div class="vrow" style="grid-template-columns:minmax(120px,200px) minmax(0,1fr) 70px;margin:6px 0"><div>${a==="A"?lab:""}<span class="mono" style="color:var(--ink-3)"> ${a==="A"?"names only":"names + vendor note"}</span></div><div class="track" title="${v} of ${N}"><span style="width:${(100*v/N).toFixed(1)}%;${a==="B"?"background:var(--ntnu)":""}"></span></div><div class="n tnum">${v}/${N}</div></div>`}).join("");
+  const sum=`<div class="panel"><div class="chart-title" style="margin-top:0">Blind translator test, 53 signals</div><div style="margin-bottom:6px">Arm A gets only the native names. Arm B also gets the source device and the vendor's documentation note. Both are asked for quantity, unit, SFI code and whether a human must check.</div>
+  <div class="sub-h">Quantity kind right</div>${bar("Quantity","kind",null,53)}<div class="sub-h">Unit right (clear cases)</div>${bar("Unit","unit","unitN")}<div class="sub-h">Contradictions and format traps flagged</div>${bar("Traps","trap","trapN")}<div class="sub-h">SFI main group right</div>${bar("SFI","sfi","sfiN")}</div>`;
+  const read=`<div class="panel"><div class="chart-title" style="margin-top:0">What it says</div><ul class="list"><li><b>Units and quantity kinds are easy.</b> Both arms get them almost always right.</li><li><b>Traps are not.</b> Names alone gave 3 of 15 flagged; with the vendor's note, 15 of 15. The metadata made the contradictions visible.</li><li><b>Classification codes are guesses.</b> Neither arm placed the signals in the right SFI main group, and each picked different wrong codes. The scheme and its version have to be sent, not assumed.</li><li>Arm B raised ${m.B.flag} flags against ${m.A.flag} for arm A, so more of the output goes to a person, which is the intended behaviour.</li></ul><div class="callout"><b>Read with care.</b> One run per arm, 53 signals, graded against our own crosswalk, which is not independent ground truth. It shows a pattern, not a measured accuracy.</div></div>`;
+  let rows="",last="";
+  const mk=(v)=>v===null?'<span class="mk na">–</span>':v?'<span class="mk y">✓</span>':'<span class="mk n">✗</span>';
+  const fl=(a)=>a.flag?'<span class="mk y" title="asks a human">?</span>':'<span class="mk na" title="no flag">·</span>';
+  S.forEach(s=>{if(s.group!==last){last=s.group;rows+=`<tr class="grp" data-g="1"><td colspan="10">${esc(D.groups[s.group])}</td></tr>`}
+    const A=s.translator.A,B=s.translator.B;
+    rows+=`<tr data-id="${s.id}" data-trap="${s.trap?1:0}" data-diff="${(A.ok.kind!==B.ok.kind||A.ok.unit!==B.ok.unit||A.flag!==B.flag)?1:0}"><td><b>${s.id}</b> ${esc(s.concept)}${s.trap?' <span class="tag assumed">trap</span>':""}</td><td>${esc(s.unit)}<span class="sm">${esc(s.sfi_code||"no code")}</span></td><td>${mk(A.ok.kind)}</td><td>${mk(A.ok.unit)}</td><td>${mk(A.ok.sfi)}</td><td>${fl(A)}</td><td>${mk(B.ok.kind)}</td><td>${mk(B.ok.unit)}</td><td>${mk(B.ok.sfi)}</td><td>${fl(B)}</td></tr>`});
+  $("#v4").innerHTML=`<p class="eyebrow">4 · Translator test</p><div class="sec-head"><h2>Can an AI translate the names?</h2></div><div class="sum">${sum}${read}</div>
+  <div class="panel" style="margin-top:20px"><div class="filters" id="tf"><button class="chip" data-f="all" aria-pressed="true">All 53</button><button class="chip" data-f="trap" aria-pressed="false">Traps only</button><button class="chip" data-f="diff" aria-pressed="false">Arms differ</button></div>
+  <div class="tbl-wrap"><table class="tbl tt" style="min-width:820px"><thead><tr><th>Signal</th><th>Our record<span class="sm" style="font-weight:400">unit · SFI</span></th><th colspan="4" style="border-left:1px solid var(--rule)">A · names only</th><th colspan="4" style="border-left:1px solid var(--rule)">B · names + vendor note</th></tr><tr><th></th><th></th><th>kind</th><th>unit</th><th>SFI</th><th>asks</th><th>kind</th><th>unit</th><th>SFI</th><th>asks</th></tr></thead><tbody id="tb">${rows}</tbody></table></div><p class="note">✓ right, ✗ wrong, – not graded, ? the model asked for a human check. SFI is graded on the three-digit main group where we have a code. Click a row to open the signal.</p></div>`;
+  $("#tb").addEventListener("click",e=>{const tr=e.target.closest("tr[data-id]");if(tr)pick(tr.dataset.id)});
+  $("#tf").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const f=b.dataset.f;$("#tf").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("#tb").querySelectorAll("tr").forEach(tr=>{tr.hidden=tr.dataset.g?f!=="all":(f==="trap"&&tr.dataset.trap!=="1")||(f==="diff"&&tr.dataset.diff!=="1")})});
+}
+load().then(d=>{D=d;view1();view2();view3();view4()}).catch(e=>{$("#v1").innerHTML=`<p class="callout">Could not load the data (${esc(e.message)}). Serve the repository over HTTP (python3 -m http.server) and open /pages/signals.html.</p>`});
+</script>
+
+</body>
+</html>

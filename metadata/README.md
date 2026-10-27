@@ -5,6 +5,7 @@ Machine-readable metadata for R/V Gunnerus, extracted from the general arrangeme
 | File | Contents |
 | --- | --- |
 | [`gunnerus_metadata.json`](gunnerus_metadata.json) | Vessel identity, main dimensions, capacities, tank list, deck-by-deck space list and equipment inventory, each entry classified by SFI group and where possible cross-referenced to DNV VIS/GMOD |
+| [`signals/`](signals/README.md) | The ship as a set of 53 signals: a crosswalk of their names, units and classification across sources, two 2019 data extracts, and a blind AI translator test. |
 
 ## Where the data comes from
 

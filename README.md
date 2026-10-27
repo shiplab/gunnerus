@@ -15,7 +15,7 @@
 | Drawings | 15 production drawings, each as DWG, DXF and A0 PDF |
 | 3D model | Rhino `.3dm` and STEP, hull and superstructure, plus a lightweight glTF in [`derived/`](derived/README.md) |
 | Documents | 5 engineering documents: weight, tonnage, specification, equipment and document lists |
-| Metadata | GA drawing as JSON, coded by SFI group and DNV VIS/GMOD |
+| Metadata | GA drawing as JSON, coded by SFI group and DNV VIS/GMOD; a crosswalk of 53 ship signals across vendors, logger and asset model, with two 2019 log extracts and a blind AI translator test |
 | Operational | 2 cases: the 2023 wave-shielding experiment (ship motion, crane, engines, thrusters, incident and sheltered waves, about 16 MB) and a power and energy profile of the cruise week (engines, azimuth drives, fuel, operating modes, under 1 MB) |
 | Licence | CC BY-NC 4.0 (engineering documents: CC BY-SA 4.0) |
 | Website | <https://shiplab.github.io/gunnerus/> |
@@ -86,7 +86,7 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 | --- | --- |
 | [`extended/CJOB/3d models/`](<extended/CJOB/3d models/README.md>) | 3D CAD model of the hull and superstructure: Rhino `.3dm` (~396 MB) and STEP `.stp` (~728 MB), stored with Git LFS. |
 | [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | C-JOB engineering documents: weight calculation (411.79 t light ship), gross and net tonnage calculation, specification, list of main equipment, list of project documents. **Licensed CC BY-SA 4.0.** |
-| [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON. See [Metadata](#metadata). |
+| [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON, and [`metadata/signals/`](metadata/signals/README.md): the ship as a set of 53 signals. See [Metadata](#metadata). |
 | [`operational/`](operational/README.md) | Data measured on board in service, one folder per case, each tied to a published study. See [Operational data](#operational-data). |
 | [`derived/`](derived/README.md) | A 3.6 MB glTF of the C-JOB model with parts grouped by SFI group and equipment matched to the C-JOB list, plus older, approximate material from vessel.js (2020): a textured visual model and a ship specification with hull offsets. For visualisation and teaching, not a source for dimensions. |
 | [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/). |
@@ -112,6 +112,8 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 Entries are classified by **SFI group**, the standard maritime technical and cost classification. Where the mapping is unambiguous, they are cross-referenced to a **DNV VIS/GMOD v3.10a** top-level node, so the data can be joined against other SFI- or VIS-coded datasets. Every block records which part of the drawing it was read from.
 
 The file is derived from the general arrangement alone, not from class documents or the stability book. [`metadata/README.md`](metadata/README.md) documents the structure, units, the `null` convention and the known limitations.
+
+**The ship as a set of signals.** [`metadata/signals/`](metadata/signals/README.md) follows 53 signals (engine 1, power management, thrusters, navigation, crane) across the engine vendor's list, HEMOS, the 2023 logger and the 2019 asset model. The crosswalk gives each signal's names in every source, quantity, canonical unit, SFI code and status; two extracts from the 2019 engine and docking logs show where documents and data disagree; and a blind test records how well an AI model translates the names with and without the vendor's note. The [Sensors page](https://shiplab.github.io/gunnerus/signals.html) shows it, and the [ship explorer](https://shiplab.github.io/gunnerus/explorer.html) links the model to the equipment list.
 
 ## Operational data
 

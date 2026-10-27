@@ -4,6 +4,13 @@ Notable changes to the Gunnerus Open Data Set. Versions follow the tagged [relea
 
 ## [Unreleased]
 
+### Added
+
+- `metadata/signals/`: a crosswalk of 53 signals of the ship (engine 1, power management, thrusters, navigation, crane) across the engine vendor list, HEMOS, the 2023 logger and the 2019 asset model, with quantity, canonical unit, SFI code and status; two extracts from the 2019 logs (engine, 1-minute; docking, 10-second); and the inputs, answers, key and grading script of a blind translator test.
+- Website: a signals page, `pages/signals.html` (data in `pages/assets/signals/signals.json`, made by `metadata/signals/scripts/build_page_data.py`): coverage, signal inspector, conventions and documents against data, translator test.
+- README: the signals folder in At a glance, Other material and Metadata; link to the ship explorer.
+- Website: the top menu of the main page now links to the Energy and Sensors pages (the Licence and Cite links are removed from the menu; the sections stay on the page), and the two pages link to each other.
+
 ## [1.0.3] – 2026-10-20
 
 Adds a second operational case, a power and energy profile of the cruise week.

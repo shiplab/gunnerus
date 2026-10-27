@@ -1,0 +1,377 @@
+[
+{
+"item": "X01",
+"native_names": [
+"Siemens PMS: DG1DP.Data.BusFrequency"
+]
+},
+{
+"item": "X02",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Power"
+]
+},
+{
+"item": "X03",
+"native_names": [
+"hcx_port_mp / LoadFeedback",
+"Gunnerus/hcx_port_mp/LoadFeedback"
+]
+},
+{
+"item": "X04",
+"native_names": [
+"hours[1]",
+"ME1_Hours"
+]
+},
+{
+"item": "X05",
+"native_names": [
+"drive_ps / Drive_Motor_Power"
+]
+},
+{
+"item": "X06",
+"native_names": [
+"backupBatt[1]",
+"ME1_BackupBatt"
+]
+},
+{
+"item": "X07",
+"native_names": [
+"rpm[1]",
+"ME1_EngineSpeed",
+"Gunnerus/Engine1/engine_speed"
+]
+},
+{
+"item": "X08",
+"native_names": [
+"SeapathMRU / Heading",
+"dpHeading / HeadingDeg",
+"Gunnerus/SeapathMRU/Heading",
+"OLEX: NMEA HDT"
+]
+},
+{
+"item": "X09",
+"native_names": [
+"Gunnerus/Crane1/extension_length_outer_boom",
+"Palfinger register 40071"
+]
+},
+{
+"item": "X10",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Current"
+]
+},
+{
+"item": "X11",
+"native_names": [
+"Gunnerus/WaveRadar/Significant_wave_height",
+"Miros data block (WaveX / RangeFinder)"
+]
+},
+{
+"item": "X12",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Voltage"
+]
+},
+{
+"item": "X13",
+"native_names": [
+"exhaustTemp2[1]",
+"ME1_ExhaustTemp2",
+"Gunnerus/Engine1/exhaust_temperature2"
+]
+},
+{
+"item": "X14",
+"native_names": [
+"SeapathGPSVtg / CourseTrue",
+"Gunnerus/SeapathGPSVtg/CourseTrue",
+"OLEX: NMEA VTG"
+]
+},
+{
+"item": "X15",
+"native_names": [
+"dpWind / Wind_Direction",
+"Gunnerus/dpWind/Wind_Direction",
+"OLEX: NMEA MWV"
+]
+},
+{
+"item": "X16",
+"native_names": [
+"Gunnerus/Crane1/slewing_angle",
+"Palfinger register 40072"
+]
+},
+{
+"item": "X17",
+"native_names": [
+"SeapathGPSGga / Latitude",
+"Gunnerus/SeapathGPSGga/Latitude",
+"OLEX: NMEA GGA"
+]
+},
+{
+"item": "X18",
+"native_names": [
+"Siemens PMS: DG1DP.Data.PowerFactor"
+]
+},
+{
+"item": "X19",
+"native_names": [
+"Gunnerus/Crane1/outer_boom_angle",
+"Palfinger register 40070"
+]
+},
+{
+"item": "X20",
+"native_names": [
+"dpWind / Wind_Speed",
+"Gunnerus/dpWind/Wind_Speed",
+"OLEX: NMEA MWV"
+]
+},
+{
+"item": "X21",
+"native_names": [
+"m2InsideTemp"
+]
+},
+{
+"item": "X22",
+"native_names": [
+"Siemens PMS: CommonData.TotalPower1"
+]
+},
+{
+"item": "X23",
+"native_names": [
+"hcx_port_mp / AzimuthFeedback",
+"Gunnerus/hcx_port_mp/AzimuthFeedback"
+]
+},
+{
+"item": "X24",
+"native_names": [
+"enginePower[1]",
+"ME1_POWER",
+"Gunnerus/Engine1/engine_load"
+]
+},
+{
+"item": "X25",
+"native_names": [
+"hcx_port_mp / Running",
+"Gunnerus/hcx_port_mp/Running"
+]
+},
+{
+"item": "X26",
+"native_names": [
+"hcx_port_mp / Maneuver_Transit_mode",
+"Gunnerus/hcx_port_mp/Maneuver_Transit_mode"
+]
+},
+{
+"item": "X27",
+"native_names": [
+"Palfinger register 40073"
+]
+},
+{
+"item": "X28",
+"native_names": [
+"exhaustTemp1[1]",
+"ME1_ExhaustTemp1",
+"Gunnerus/Engine1/exhaust_temperature1"
+]
+},
+{
+"item": "X29",
+"native_names": [
+"hcx_port_mp / TS31"
+]
+},
+{
+"item": "X30",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Frequency"
+]
+},
+{
+"item": "X31",
+"native_names": [
+"SeapathGPSGga / Longitude",
+"Gunnerus/SeapathGPSGga/Longitude",
+"OLEX: NMEA GGA"
+]
+},
+{
+"item": "X32",
+"native_names": [
+"SeapathMRU / Pitch",
+"Gunnerus/SeapathMRU/Pitch"
+]
+},
+{
+"item": "X33",
+"native_names": [
+"SeapathMRU / Heave",
+"Gunnerus/SeapathMRU/Heave"
+]
+},
+{
+"item": "X34",
+"native_names": [
+"SeapathGPSVbw / LonGroundSpeed",
+"Gunnerus/SeapathGPSVbw/LonGroundSpeed",
+"OLEX: NMEA VBW"
+]
+},
+{
+"item": "X35",
+"native_names": [
+"Siemens PMS: DG1DP.Data.ReactivePower"
+]
+},
+{
+"item": "X36",
+"native_names": [
+"Gunnerus/Crane1/dp_main_cyl",
+"Palfinger Modbus register 40068"
+]
+},
+{
+"item": "X37",
+"native_names": [
+"hcx_port_mp / RPMFeedback",
+"Gunnerus/hcx_port_mp/RPMFeedback"
+]
+},
+{
+"item": "X38",
+"native_names": [
+"hcx_port_mp / RPMOrder",
+"Gunnerus/hcx_port_mp/RPMOrder"
+]
+},
+{
+"item": "X39",
+"native_names": [
+"coolantTemp[1]",
+"ME1_coolantTemp",
+"Gunnerus/Engine1/coolant_temperature"
+]
+},
+{
+"item": "X40",
+"native_names": [
+"fuelRate[1]",
+"ME1_FuelRate",
+"Gunnerus/Engine1/fuel_consumption"
+]
+},
+{
+"item": "X41",
+"native_names": [
+"GENSET OUTPUTS / OUT - ENGINE RUNNING (coil)",
+"Siemens PMS: DG1DP.States.EngineRunning"
+]
+},
+{
+"item": "X42",
+"native_names": [
+"hcx_port_mp / PT31"
+]
+},
+{
+"item": "X43",
+"native_names": [
+"Gunnerus/Crane1/main_boom_angle",
+"Palfinger register 40069"
+]
+},
+{
+"item": "X44",
+"native_names": [
+"SeapathGPSVtg / SpeedKnots",
+"SeapathGPSVtg / SpeedKmHr",
+"Gunnerus/SeapathGPSVtg/SpeedKnots",
+"OLEX: NMEA VTG"
+]
+},
+{
+"item": "X45",
+"native_names": [
+"Siemens PMS: DG1DP.States.BreakerOpen / BreakerClosed"
+]
+},
+{
+"item": "X46",
+"native_names": [
+"boostPress[1]",
+"ME1_Boostpress",
+"Gunnerus/Engine1/boost_pressure"
+]
+},
+{
+"item": "X47",
+"native_names": [
+"dpThruster / FeedbackProsent",
+"Gunnerus/dpThruster/FeedbackProsent"
+]
+},
+{
+"item": "X48",
+"native_names": [
+"lubOilTemp[1]",
+"ME1_LubOilTemp",
+"Gunnerus/Engine1/lube_oil_temperature"
+]
+},
+{
+"item": "X49",
+"native_names": [
+"lubOilPress[1]",
+"ME1_LOPress",
+"Gunnerus/Engine1/lube_oil_pressure"
+]
+},
+{
+"item": "X50",
+"native_names": [
+"SeapathMRU / Roll",
+"Gunnerus/SeapathMRU/Roll"
+]
+},
+{
+"item": "X51",
+"native_names": [
+"hcx_port_mp / AzimuthOrder",
+"Gunnerus/hcx_port_mp/AzimuthOrder"
+]
+},
+{
+"item": "X52",
+"native_names": [
+"startBatt[1]",
+"ME1_StartBatt"
+]
+},
+{
+"item": "X53",
+"native_names": [
+"Siemens PMS: DG1DP.Data.BusVoltage"
+]
+}
+]

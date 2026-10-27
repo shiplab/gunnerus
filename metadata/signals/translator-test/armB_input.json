@@ -1,0 +1,624 @@
+[
+{
+"item": "X01",
+"native_names": [
+"Siemens PMS: DG1DP.Data.BusFrequency"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+},
+{
+"item": "X02",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Power"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT, no unit or scaling in the dump"
+},
+{
+"item": "X03",
+"native_names": [
+"hcx_port_mp / LoadFeedback",
+"Gunnerus/hcx_port_mp/LoadFeedback"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "HEMOS note: \"% (0-500 kW)\""
+},
+{
+"item": "X04",
+"native_names": [
+"hours[1]",
+"ME1_Hours"
+],
+"source_devices": [
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "\"t\" (hours); scaling 0"
+},
+{
+"item": "X05",
+"native_names": [
+"drive_ps / Drive_Motor_Power"
+],
+"source_devices": [
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "not stated"
+},
+{
+"item": "X06",
+"native_names": [
+"backupBatt[1]",
+"ME1_BackupBatt"
+],
+"source_devices": [
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "V; scaling x10"
+},
+{
+"item": "X07",
+"native_names": [
+"rpm[1]",
+"ME1_EngineSpeed",
+"Gunnerus/Engine1/engine_speed"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "rpm; scaling 0 (none)"
+},
+{
+"item": "X08",
+"native_names": [
+"SeapathMRU / Heading",
+"dpHeading / HeadingDeg",
+"Gunnerus/SeapathMRU/Heading",
+"OLEX: NMEA HDT"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "degrees from north"
+},
+{
+"item": "X09",
+"native_names": [
+"Gunnerus/Crane1/extension_length_outer_boom",
+"Palfinger register 40071"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Palfinger crane gateway (Modbus TCP)"
+],
+"vendor_documentation_note": "\"metre\" in the Palfinger note"
+},
+{
+"item": "X10",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Current"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+},
+{
+"item": "X11",
+"native_names": [
+"Gunnerus/WaveRadar/Significant_wave_height",
+"Miros data block (WaveX / RangeFinder)"
+],
+"source_devices": [
+"Miros wave radar",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "metres"
+},
+{
+"item": "X12",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Voltage"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+},
+{
+"item": "X13",
+"native_names": [
+"exhaustTemp2[1]",
+"ME1_ExhaustTemp2",
+"Gunnerus/Engine1/exhaust_temperature2"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "\"grC\"; scaling x10; HS = right side"
+},
+{
+"item": "X14",
+"native_names": [
+"SeapathGPSVtg / CourseTrue",
+"Gunnerus/SeapathGPSVtg/CourseTrue",
+"OLEX: NMEA VTG"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "degrees true"
+},
+{
+"item": "X15",
+"native_names": [
+"dpWind / Wind_Direction",
+"Gunnerus/dpWind/Wind_Direction",
+"OLEX: NMEA MWV"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "degrees from bow, clockwise (relative)"
+},
+{
+"item": "X16",
+"native_names": [
+"Gunnerus/Crane1/slewing_angle",
+"Palfinger register 40072"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Palfinger crane gateway (Modbus TCP)"
+],
+"vendor_documentation_note": "degrees, 0-360, wraps"
+},
+{
+"item": "X17",
+"native_names": [
+"SeapathGPSGga / Latitude",
+"Gunnerus/SeapathGPSGga/Latitude",
+"OLEX: NMEA GGA"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "degrees and decimal minutes"
+},
+{
+"item": "X18",
+"native_names": [
+"Siemens PMS: DG1DP.Data.PowerFactor"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+},
+{
+"item": "X19",
+"native_names": [
+"Gunnerus/Crane1/outer_boom_angle",
+"Palfinger register 40070"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Palfinger crane gateway (Modbus TCP)"
+],
+"vendor_documentation_note": "degrees"
+},
+{
+"item": "X20",
+"native_names": [
+"dpWind / Wind_Speed",
+"Gunnerus/dpWind/Wind_Speed",
+"OLEX: NMEA MWV"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "knots"
+},
+{
+"item": "X21",
+"native_names": [
+"m2InsideTemp"
+],
+"source_devices": [
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "Nogva description (Norwegian): \"Kabinett temperatur motor nr. 2\"; unit \"grC\"; scaling x10"
+},
+{
+"item": "X22",
+"native_names": [
+"Siemens PMS: CommonData.TotalPower1"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+},
+{
+"item": "X23",
+"native_names": [
+"hcx_port_mp / AzimuthFeedback",
+"Gunnerus/hcx_port_mp/AzimuthFeedback"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "degrees"
+},
+{
+"item": "X24",
+"native_names": [
+"enginePower[1]",
+"ME1_POWER",
+"Gunnerus/Engine1/engine_load"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "kW, normal 0-500; scaling x10"
+},
+{
+"item": "X25",
+"native_names": [
+"hcx_port_mp / Running",
+"Gunnerus/hcx_port_mp/Running"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "boolean"
+},
+{
+"item": "X26",
+"native_names": [
+"hcx_port_mp / Maneuver_Transit_mode",
+"Gunnerus/hcx_port_mp/Maneuver_Transit_mode"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "status code (value 5 seen)"
+},
+{
+"item": "X27",
+"native_names": [
+"Palfinger register 40073"
+],
+"source_devices": [
+"Palfinger crane gateway (Modbus TCP)"
+],
+"vendor_documentation_note": "12 error bits"
+},
+{
+"item": "X28",
+"native_names": [
+"exhaustTemp1[1]",
+"ME1_ExhaustTemp1",
+"Gunnerus/Engine1/exhaust_temperature1"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "\"grC\"; scaling x10; VS = left side"
+},
+{
+"item": "X29",
+"native_names": [
+"hcx_port_mp / TS31"
+],
+"source_devices": [
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "degC"
+},
+{
+"item": "X30",
+"native_names": [
+"Siemens PMS: DG1DP.Data.Frequency"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+},
+{
+"item": "X31",
+"native_names": [
+"SeapathGPSGga / Longitude",
+"Gunnerus/SeapathGPSGga/Longitude",
+"OLEX: NMEA GGA"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "degrees and decimal minutes"
+},
+{
+"item": "X32",
+"native_names": [
+"SeapathMRU / Pitch",
+"Gunnerus/SeapathMRU/Pitch"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "degrees"
+},
+{
+"item": "X33",
+"native_names": [
+"SeapathMRU / Heave",
+"Gunnerus/SeapathMRU/Heave"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "metres; raw Seapath output is cm, positive down"
+},
+{
+"item": "X34",
+"native_names": [
+"SeapathGPSVbw / LonGroundSpeed",
+"Gunnerus/SeapathGPSVbw/LonGroundSpeed",
+"OLEX: NMEA VBW"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "knots"
+},
+{
+"item": "X35",
+"native_names": [
+"Siemens PMS: DG1DP.Data.ReactivePower"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+},
+{
+"item": "X36",
+"native_names": [
+"Gunnerus/Crane1/dp_main_cyl",
+"Palfinger Modbus register 40068"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Palfinger crane gateway (Modbus TCP)"
+],
+"vendor_documentation_note": "bar"
+},
+{
+"item": "X37",
+"native_names": [
+"hcx_port_mp / RPMFeedback",
+"Gunnerus/hcx_port_mp/RPMFeedback"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "HEMOS note says both \"percent (max/min 203/-203)\" and \"+/-203 rpm\""
+},
+{
+"item": "X38",
+"native_names": [
+"hcx_port_mp / RPMOrder",
+"Gunnerus/hcx_port_mp/RPMOrder"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "as RPMFeedback"
+},
+{
+"item": "X39",
+"native_names": [
+"coolantTemp[1]",
+"ME1_coolantTemp",
+"Gunnerus/Engine1/coolant_temperature"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "\"grC\"; scaling x10; normal 85-90"
+},
+{
+"item": "X40",
+"native_names": [
+"fuelRate[1]",
+"ME1_FuelRate",
+"Gunnerus/Engine1/fuel_consumption"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "L/h (\"l/h\"); scaling x10"
+},
+{
+"item": "X41",
+"native_names": [
+"GENSET OUTPUTS / OUT - ENGINE RUNNING (coil)",
+"Siemens PMS: DG1DP.States.EngineRunning"
+],
+"source_devices": [
+"Nogva genset controller via Modbus TCP",
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "boolean"
+},
+{
+"item": "X42",
+"native_names": [
+"hcx_port_mp / PT31"
+],
+"source_devices": [
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "bar"
+},
+{
+"item": "X43",
+"native_names": [
+"Gunnerus/Crane1/main_boom_angle",
+"Palfinger register 40069"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Palfinger crane gateway (Modbus TCP)"
+],
+"vendor_documentation_note": "degrees; sign opposite to the outer boom"
+},
+{
+"item": "X44",
+"native_names": [
+"SeapathGPSVtg / SpeedKnots",
+"SeapathGPSVtg / SpeedKmHr",
+"Gunnerus/SeapathGPSVtg/SpeedKnots",
+"OLEX: NMEA VTG"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "knots and km/h in the same log"
+},
+{
+"item": "X45",
+"native_names": [
+"Siemens PMS: DG1DP.States.BreakerOpen / BreakerClosed"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "boolean"
+},
+{
+"item": "X46",
+"native_names": [
+"boostPress[1]",
+"ME1_Boostpress",
+"Gunnerus/Engine1/boost_pressure"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "bar; scaling x10 (2018 list, Embicon code) but x100 (2020 list)"
+},
+{
+"item": "X47",
+"native_names": [
+"dpThruster / FeedbackProsent",
+"Gunnerus/dpThruster/FeedbackProsent"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "percent of max 31.4 kN; linear in rpm"
+},
+{
+"item": "X48",
+"native_names": [
+"lubOilTemp[1]",
+"ME1_LubOilTemp",
+"Gunnerus/Engine1/lube_oil_temperature"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "\"grC\"; scaling x10; normal 80-90"
+},
+{
+"item": "X49",
+"native_names": [
+"lubOilPress[1]",
+"ME1_LOPress",
+"Gunnerus/Engine1/lube_oil_pressure"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "bar; scaling x10; normal 4.5-5.0"
+},
+{
+"item": "X50",
+"native_names": [
+"SeapathMRU / Roll",
+"Gunnerus/SeapathMRU/Roll"
+],
+"source_devices": [
+"HEMOS / Seapath navigation (NMEA)",
+"NUC logger tag (ship data logger)"
+],
+"vendor_documentation_note": "degrees"
+},
+{
+"item": "X51",
+"native_names": [
+"hcx_port_mp / AzimuthOrder",
+"Gunnerus/hcx_port_mp/AzimuthOrder"
+],
+"source_devices": [
+"NUC logger tag (ship data logger)",
+"Rolls-Royce HEMOS (MQTT/UDP)"
+],
+"vendor_documentation_note": "degrees"
+},
+{
+"item": "X52",
+"native_names": [
+"startBatt[1]",
+"ME1_StartBatt"
+],
+"source_devices": [
+"Nogva genset controller via Modbus TCP"
+],
+"vendor_documentation_note": "V; scaling x10; normal 26-27"
+},
+{
+"item": "X53",
+"native_names": [
+"Siemens PMS: DG1DP.Data.BusVoltage"
+],
+"source_devices": [
+"Siemens PMS (PROFIBUS DP)"
+],
+"vendor_documentation_note": "INT"
+}
+]
