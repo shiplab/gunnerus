@@ -66,6 +66,20 @@ def check(sid, a):
     return dict(kind=kind, unit=unit, sfi=sfi, trap=trap)
 
 
+RAW = "The dump gives a raw integer and no unit or scaling."
+TRAP_WHY = {
+    "E07": "Two versions of the vendor list give different scaling: x10 and x100.",
+    "P01": RAW, "P02": RAW + " Sign convention also unstated.", "P03": RAW, "P04": RAW, "P05": RAW,
+    "P06": RAW + " Scaling and sign convention unstated.", "P07": RAW, "P08": RAW,
+    "P09": RAW + " Unclear whether it totals all generators or one switchboard section.",
+    "T03": "The documentation says both percent (limits 203 and -203) and plus or minus 203 rpm.",
+    "T05": "The documentation gives percent and kW (0-500) at once; not decidable from the documents.",
+    "T10": "The vendor states no unit or scaling.",
+    "N01": "Logged as degrees and decimal minutes (ddmm.mmmm), not decimal degrees. Averaging across a degree boundary gives false positions.",
+    "N02": "Logged as degrees and decimal minutes (dddmm.mmmm), not decimal degrees.",
+}
+
+
 def sig(x, n=4):
     return None if x is None or pd.isna(x) else float(f"{x:.{n}g}")
 
@@ -119,6 +133,7 @@ def main():
         if m:
             rec["normal_band"] = [float(m.group(1)), float(m.group(2))]
         rec["trap"] = "should_flag" if sid in G.SHOULD else ("format" if sid in G.FORMAT else "")
+        rec["trap_why"] = TRAP_WHY.get(sid, "")
         rec["data"] = [dict(dataset=ds, col=col, **stats[(ds, col)]) for ds, col in DATA.get(sid, [])]
         rec["translator"] = {arm: dict(kind=a[x]["quantity_kind"], unit=a[x]["canonical_unit"], sfi=str(a[x]["sfi_code"]), flag=bool(a[x]["needs_human"]), ok=check(sid, a[x]), confidence=a[x].get("confidence"), question=a[x].get("question", "")) for arm, a in (("A", A), ("B", B))}
         signals.append(rec)
