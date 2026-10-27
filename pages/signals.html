@@ -306,6 +306,21 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
 .tt tr:hover td{background:var(--ntnu-wash)}
 .tt .grp td{background:var(--rule-2);font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);text-align:left;cursor:default}
 .tree,.tree ul{list-style:none;margin:0;padding-left:1.1em;font-size:.92rem}.tree{padding-left:0}.tree li{margin:4px 0}.tree li.leaf{border-left:3px solid var(--ntnu);padding-left:8px;margin-left:-4px}.code{margin:0;background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px;font:400 .76rem/1.5 var(--mono);overflow:auto;max-height:420px;white-space:pre}
+.gd{display:block;width:100%;height:auto}.gd .s{fill:none;stroke:var(--ink);stroke-opacity:.8;stroke-linecap:round;stroke-linejoin:round}.gd .f{fill:var(--ink);fill-opacity:.85}
+.hot{cursor:pointer;outline:none}.hot circle{stroke:var(--sheet);stroke-width:5;paint-order:stroke}
+.hot .m{fill:var(--ntnu)}.hot.part .m{fill:var(--ntnu);fill-opacity:.55}.hot.part .rg{fill:none;stroke:var(--ntnu);stroke-width:4}
+.hot.none .m{fill:var(--sheet);stroke:var(--ink);stroke-width:4;stroke-dasharray:9 6}.hot.nolist .m{fill:var(--sheet);stroke:var(--ink-3);stroke-width:4;stroke-dasharray:2 6}
+.hot text{font:600 26px var(--body);fill:#fff;text-anchor:middle;pointer-events:none}.hot.none text,.hot.nolist text{fill:var(--ink)}
+.hot .ring{fill:none;stroke:var(--ink);stroke-width:4;opacity:0}.hot:hover .ring,.hot:focus-visible .ring,.hot.on .ring{opacity:1}
+.hbtns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:900px){.hbtns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.hb{display:flex;gap:10px;align-items:flex-start;text-align:left;font:400 .88rem/1.3 var(--body);background:var(--sheet);color:var(--ink);border:1px solid var(--rule);border-radius:8px;padding:10px 12px;cursor:pointer}
+.hb:hover,.hb.on{border-color:var(--ink)}.hb.on{box-shadow:0 0 0 1px var(--ink)}
+.hb .n{flex:none;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ntnu);color:#fff;font:600 .85rem var(--body)}
+.hb.none .n,.hb.nolist .n{background:var(--sheet);color:var(--ink);border:1px dashed var(--ink)}.hb.part .n{opacity:.7}
+.hb b{display:block;font-weight:600}.hb small{display:block;color:var(--ink-3);font:400 .74rem var(--mono)}
+.hsig{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.hsig .chip{font-size:.8rem;padding:6px 10px}.hsig .chip i{font-style:normal;font:500 .62rem var(--mono);margin-left:6px;opacity:.8}
 .tt .sm{display:block;font:400 .72rem var(--mono);color:var(--ink-3)}
 </style>
 <main id="top">
@@ -321,6 +336,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
     </div>
   </div>
 </section>
+<section class="block" id="ship" style="padding-top:12px"><div class="wrap"><div id="v0"></div></div></section>
 <section class="block" id="coverage"><div class="wrap"><div id="v1"><p class="loading">Loading…</p></div></div></section>
 <section class="block" id="inspector"><div class="wrap"><div id="v2"></div></div></section>
 <section class="block" id="conventions"><div class="wrap"><div id="v3"></div></div></section>
@@ -497,7 +513,41 @@ function view5(){
   <div class="callout" style="margin-top:16px"><b>An illustration of shapes.</b> Built from our crosswalk and the real files. Nothing is loaded into a database, and none of these is recommended over the others. The point is that the metadata should travel with the data, whichever shape is used.</div>`;
   $("#sf").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;SHAPE=b.dataset.s;$("#sf").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));$("#sv").innerHTML=V[SHAPE]});
 }
-load().then(d=>{D=d;view1();view2();view3();view4();view5()}).catch(e=>{$("#v1").innerHTML=`<p class="callout">Could not load the data (${esc(e.message)}). Serve the repository over HTTP (python3 -m http.server) and open /pages/signals.html.</p>`});
+
+/* 0 · where the data come from */
+const HOT=[
+ {n:1,name:"Azimuth drives",src:"Rolls-Royce · MQTT",ids:"T01 T02 T03 T04 T05 T06 T07 T08 T09 T10",x:515,y:1950,note:"Port and starboard azimuth drives and their frequency converters."},
+ {n:2,name:"Gensets",src:"Nogva / Scania · Modbus",ids:"E01 E02 E03 E04 E05 E06 E07 E08 E09 E10 E11 E12 E13 E14",x:950,y:1890,note:"Engine 1 is followed here; engines 2 and 3 repeat the same pattern."},
+ {n:3,name:"Power management",src:"Siemens · PROFIBUS list",ids:"P01 P02 P03 P04 P05 P06 P07 P08 P09 P10",x:1085,y:1895,note:"686 signals listed by the vendor; none is in the logger."},
+ {n:4,name:"Crane",src:"Palfinger · Modbus",ids:"C01 C02 C03 C04 C05 C06",x:915,y:1765,note:"Six values from register addresses 40068 to 40073."},
+ {n:5,name:"Winches",src:"MB Hydraulikk · manual",ids:"",x:610,y:1790,note:"Only a scanned manual. No signal list was found, so nothing is followed here."},
+ {n:6,name:"Bridge: DP wind",src:"OLEX, DP · NMEA",ids:"N10 N11",x:1210,y:1570,note:"Wind speed and direction from the DP wind sensor, also seen in OLEX NMEA."},
+ {n:7,name:"Mast: Seapath",src:"Seapath · NMEA",ids:"N01 N02 N03 N04 N05 N06 N07 N08 N09",x:1232,y:1415,note:"Position, speed, course, heading, roll, pitch and heave."},
+ {n:8,name:"Tunnel thruster",src:"Brunvoll · via DP",ids:"T11",x:1740,y:1930,note:"One value: thrust feedback in percent, through the DP system."}];
+let HSEL=null;
+async function loadSvg(){for(const u of ["assets/signals/profile.svg","../pages/assets/signals/profile.svg","https://raw.githubusercontent.com/shiplab/gunnerus/main/pages/assets/signals/profile.svg"]){try{const r=await fetch(u);if(r.ok)return await r.text();}catch(e){}}return null}
+function hstat(h){const S=h.ids?h.ids.split(" ").map(byId):[];const lg=S.filter(s=>s.logged_2023).length;h.S=S;h.lg=lg;h.cls=!S.length?"nolist":lg===0?"none":lg===S.length?"full":"part";h.txt=!S.length?"no signal list":lg===0?`0 of ${S.length} logged`:`${lg} of ${S.length} logged`;return h}
+async function view0(){
+  HOT.forEach(hstat);const svg=await loadSvg();
+  const NS="http://www.w3.org/2000/svg";
+  $("#v0").innerHTML=`<p class="eyebrow">Where the data come from</p><div class="sec-head"><h2>Eight places on the ship, 53 signals</h2><p class="lede" style="margin-top:8px">Each numbered place is a source with its own supplier and its own way of naming data. Filled: logged. Faded: partly logged. Dashed: listed but never logged. Dotted: no signal list. Click one to see its signals.</p></div>
+  <div class="panel"><div class="charts" id="hero">${svg||'<p class="note">The drawing could not be loaded.</p>'}</div><div class="hbtns" id="hb">${HOT.map(h=>`<button class="hb ${h.cls}" data-n="${h.n}"><span class="n">${h.n}</span><span><b>${esc(h.name)}</b><small>${esc(h.src)}</small><small>${h.txt}</small></span></button>`).join("")}</div><div id="hdet"></div>
+  <p class="note">Inboard profile from the general arrangement drawing by Polarkonsult AS, published by NTNU, CC BY-NC 4.0. Positions are approximate.</p></div>`;
+  const el=$("#hero svg");
+  if(el){const g=document.createElementNS(NS,"g");g.setAttribute("class","hotg");
+    g.innerHTML=HOT.map(h=>`<g class="hot ${h.cls}" data-n="${h.n}" tabindex="0" role="button" aria-label="${h.n} ${esc(h.name)}, ${h.txt}"><circle class="ring" cx="${h.x}" cy="${h.y}" r="34"/><circle class="m" cx="${h.x}" cy="${h.y}" r="24"/>${h.cls==="part"?`<circle class="rg" cx="${h.x}" cy="${h.y}" r="24"/>`:""}<text x="${h.x}" y="${h.y+9}">${h.n}</text></g>`).join("");
+    el.appendChild(g);}
+  const tip=$("#gtip");
+  const on=(n,v)=>{document.querySelectorAll(`.hot[data-n="${n}"],.hb[data-n="${n}"]`).forEach(x=>x.classList.toggle("on",v))};
+  const over=e=>{const t=e.target.closest("[data-n]");if(!t)return;const h=HOT[+t.dataset.n-1];on(h.n,true);tip.hidden=false;tip.innerHTML=`<b>${h.n} · ${esc(h.src)}</b><br>${esc(h.name)}: ${h.txt}`;const x=e.clientX||t.getBoundingClientRect().left,y=e.clientY||t.getBoundingClientRect().top;tip.style.left=Math.min(innerWidth-230,x+14)+"px";tip.style.top=(y+14)+"px"};
+  const out=e=>{const t=e.target.closest("[data-n]");if(t&&+t.dataset.n!==HSEL)on(+t.dataset.n,false);tip.hidden=true};
+  const sel=e=>{const t=e.target.closest("[data-n]");if(t)hpick(+t.dataset.n)};
+  ["#hero","#hb"].forEach(s=>{const c=$(s);c.addEventListener("mousemove",over);c.addEventListener("mouseover",over);c.addEventListener("mouseout",out);c.addEventListener("click",sel);c.addEventListener("focusin",over);c.addEventListener("focusout",out);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();sel(e)}})});
+}
+function hpick(n){HSEL=n;document.querySelectorAll(".hot,.hb").forEach(x=>x.classList.toggle("on",+x.dataset.n===n));const h=HOT[n-1];
+  $("#hdet").innerHTML=`<div class="sub-h">${h.n} · ${esc(h.name)} · ${esc(h.src)}</div><p class="note" style="margin-top:0">${esc(h.note)}</p>${h.S.length?`<div class="hsig">${h.S.map(s=>`<button class="chip" data-id="${s.id}">${s.id} ${esc(s.concept)}<i>${s.logged_2023?"logged":s.derived?"derived":"not logged"}</i></button>`).join("")}</div>`:""}`;
+  $("#hdet").onclick=e=>{const b=e.target.closest("[data-id]");if(b)pick(b.dataset.id)};}
+load().then(d=>{D=d;view0();view1();view2();view3();view4();view5()}).catch(e=>{$("#v1").innerHTML=`<p class="callout">Could not load the data (${esc(e.message)}). Serve the repository over HTTP (python3 -m http.server) and open /pages/signals.html.</p>`});
 </script>
 
 </body>
