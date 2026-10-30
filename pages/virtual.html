@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gunnerus Virtual Bridge</title>
+<meta name="description" content="Replay of R/V Gunnerus in operation, 30 October to 3 November 2023, shown as a bridge display: chart, heading, speed, azimuth drives and generator sets, from the logged data in the Gunnerus repository.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+/* Leaflet 1.9.4 stylesheet (BSD-2-Clause), inlined */
+.leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer { position: absolute; left: 0; top: 0; } .leaflet-container { overflow: hidden; } .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-user-drag: none; } .leaflet-tile::selection { background: transparent; } .leaflet-safari .leaflet-tile { image-rendering: -webkit-optimize-contrast; } .leaflet-safari .leaflet-tile-container { width: 1600px; height: 1600px; -webkit-transform-origin: 0 0; } .leaflet-marker-icon, .leaflet-marker-shadow { display: block; } .leaflet-container .leaflet-overlay-pane svg { max-width: none !important; max-height: none !important; } .leaflet-container .leaflet-marker-pane img, .leaflet-container .leaflet-shadow-pane img, .leaflet-container .leaflet-tile-pane img, .leaflet-container img.leaflet-image-layer, .leaflet-container .leaflet-tile { max-width: none !important; max-height: none !important; width: auto; padding: 0; } .leaflet-container img.leaflet-tile { mix-blend-mode: plus-lighter; } .leaflet-container.leaflet-touch-zoom { -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; } .leaflet-container.leaflet-touch-drag { -ms-touch-action: pinch-zoom; touch-action: none; touch-action: pinch-zoom; } .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom { -ms-touch-action: none; touch-action: none; } .leaflet-container { -webkit-tap-highlight-color: transparent; } .leaflet-container a { -webkit-tap-highlight-color: rgba(51, 181, 229, 0.4); } .leaflet-tile { filter: inherit; visibility: hidden; } .leaflet-tile-loaded { visibility: inherit; } .leaflet-zoom-box { width: 0; height: 0; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 800; } .leaflet-overlay-pane svg { -moz-user-select: none; } .leaflet-pane { z-index: 400; } .leaflet-tile-pane { z-index: 200; } .leaflet-overlay-pane { z-index: 400; } .leaflet-shadow-pane { z-index: 500; } .leaflet-marker-pane { z-index: 600; } .leaflet-tooltip-pane { z-index: 650; } .leaflet-popup-pane { z-index: 700; } .leaflet-map-pane canvas { z-index: 100; } .leaflet-map-pane svg { z-index: 200; } .leaflet-vml-shape { width: 1px; height: 1px; } .leaflet-control { position: relative; z-index: 800; pointer-events: visiblePainted; pointer-events: auto; } .leaflet-top, .leaflet-bottom { position: absolute; z-index: 1000; pointer-events: none; } .leaflet-top { top: 0; } .leaflet-right { right: 0; } .leaflet-bottom { bottom: 0; } .leaflet-left { left: 0; } .leaflet-control { float: left; clear: both; } .leaflet-right .leaflet-control { float: right; } .leaflet-top .leaflet-control { margin-top: 10px; } .leaflet-bottom .leaflet-control { margin-bottom: 10px; } .leaflet-left .leaflet-control { margin-left: 10px; } .leaflet-right .leaflet-control { margin-right: 10px; } .leaflet-fade-anim .leaflet-popup { opacity: 0; -webkit-transition: opacity 0.2s linear; -moz-transition: opacity 0.2s linear; transition: opacity 0.2s linear; } .leaflet-fade-anim .leaflet-map-pane .leaflet-popup { opacity: 1; } .leaflet-zoom-animated { -webkit-transform-origin: 0 0; -ms-transform-origin: 0 0; transform-origin: 0 0; } svg.leaflet-zoom-animated { will-change: transform; } .leaflet-zoom-anim .leaflet-zoom-animated { -webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1); -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1); transition: transform 0.25s cubic-bezier(0,0,0.25,1); } .leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile { -webkit-transition: none; -moz-transition: none; transition: none; } .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; } .leaflet-interactive { cursor: pointer; } .leaflet-grab { cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; } .leaflet-crosshair, .leaflet-crosshair .leaflet-interactive { cursor: crosshair; } .leaflet-popup-pane, .leaflet-control { cursor: auto; } .leaflet-dragging .leaflet-grab, .leaflet-dragging .leaflet-grab .leaflet-interactive, .leaflet-dragging .leaflet-marker-draggable { cursor: move; cursor: -webkit-grabbing; cursor: -moz-grabbing; cursor: grabbing; } .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container { pointer-events: none; } .leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path { pointer-events: visiblePainted; pointer-events: auto; } .leaflet-container { background: #ddd; outline-offset: 1px; } .leaflet-container a { color: #0078A8; } .leaflet-zoom-box { border: 2px dotted #38f; background: rgba(255,255,255,0.5); } .leaflet-container { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-size: 12px; font-size: 0.75rem; line-height: 1.5; } .leaflet-bar { box-shadow: 0 1px 5px rgba(0,0,0,0.65); border-radius: 4px; } .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; width: 26px; height: 26px; line-height: 26px; display: block; text-align: center; text-decoration: none; color: black; } .leaflet-bar a, .leaflet-control-layers-toggle { background-position: 50% 50%; background-repeat: no-repeat; display: block; } .leaflet-bar a:hover, .leaflet-bar a:focus { background-color: #f4f4f4; } .leaflet-bar a:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; } .leaflet-bar a:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; } .leaflet-bar a.leaflet-disabled { cursor: default; background-color: #f4f4f4; color: #bbb; } .leaflet-touch .leaflet-bar a { width: 30px; height: 30px; line-height: 30px; } .leaflet-touch .leaflet-bar a:first-child { border-top-left-radius: 2px; border-top-right-radius: 2px; } .leaflet-touch .leaflet-bar a:last-child { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; } .leaflet-control-zoom-in, .leaflet-control-zoom-out { font: bold 18px 'Lucida Console', Monaco, monospace; text-indent: 1px; } .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out { font-size: 22px; } .leaflet-control-layers { box-shadow: 0 1px 5px rgba(0,0,0,0.4); background: #fff; border-radius: 5px; } .leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; } .leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle { display: none; } .leaflet-control-layers-expanded .leaflet-control-layers-list { display: block; position: relative; } .leaflet-control-layers-expanded { padding: 6px 10px 6px 6px; color: #333; background: #fff; } .leaflet-control-layers-scrollbar { overflow-y: scroll; overflow-x: hidden; padding-right: 5px; } .leaflet-control-layers-selector { margin-top: 2px; position: relative; top: 1px; } .leaflet-control-layers label { display: block; font-size: 13px; font-size: 1.08333em; } .leaflet-control-layers-separator { height: 0; border-top: 1px solid #ddd; margin: 5px -10px 5px -6px; } .leaflet-container .leaflet-control-attribution { background: #fff; background: rgba(255, 255, 255, 0.8); margin: 0; } .leaflet-control-attribution, .leaflet-control-scale-line { padding: 0 5px; color: #333; line-height: 1.4; } .leaflet-control-attribution a { text-decoration: none; } .leaflet-control-attribution a:hover, .leaflet-control-attribution a:focus { text-decoration: underline; } .leaflet-attribution-flag { display: inline !important; vertical-align: baseline !important; width: 1em; height: 0.6669em; } .leaflet-left .leaflet-control-scale { margin-left: 5px; } .leaflet-bottom .leaflet-control-scale { margin-bottom: 5px; } .leaflet-control-scale-line { border: 2px solid #777; border-top: none; line-height: 1.1; padding: 2px 5px 1px; white-space: nowrap; -moz-box-sizing: border-box; box-sizing: border-box; background: rgba(255, 255, 255, 0.8); text-shadow: 1px 1px #fff; } .leaflet-control-scale-line:not(:first-child) { border-top: 2px solid #777; border-bottom: none; margin-top: -2px; } .leaflet-control-scale-line:not(:first-child):not(:last-child) { border-bottom: 2px solid #777; } .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { box-shadow: none; } .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box; } .leaflet-popup { position: absolute; text-align: center; margin-bottom: 20px; } .leaflet-popup-content-wrapper { padding: 1px; text-align: left; border-radius: 12px; } .leaflet-popup-content { margin: 13px 24px 13px 20px; line-height: 1.3; font-size: 13px; font-size: 1.08333em; min-height: 1px; } .leaflet-popup-content p { margin: 17px 0; margin: 1.3em 0; } .leaflet-popup-tip-container { width: 40px; height: 20px; position: absolute; left: 50%; margin-top: -1px; margin-left: -20px; overflow: hidden; pointer-events: none; } .leaflet-popup-tip { width: 17px; height: 17px; padding: 1px; margin: -10px auto 0; pointer-events: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); } .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #333; box-shadow: 0 3px 14px rgba(0,0,0,0.4); } .leaflet-container a.leaflet-popup-close-button { position: absolute; top: 0; right: 0; border: none; text-align: center; width: 24px; height: 24px; font: 16px/24px Tahoma, Verdana, sans-serif; color: #757575; text-decoration: none; background: transparent; } .leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus { color: #585858; } .leaflet-popup-scrolled { overflow: auto; } .leaflet-oldie .leaflet-popup-content-wrapper { -ms-zoom: 1; } .leaflet-oldie .leaflet-popup-tip { width: 24px; margin: 0 auto; -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"; filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); } .leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip { border: 1px solid #999; } .leaflet-div-icon { background: #fff; border: 1px solid #666; } .leaflet-tooltip { position: absolute; padding: 6px; background-color: #fff; border: 1px solid #fff; border-radius: 3px; color: #222; white-space: nowrap; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; box-shadow: 0 1px 3px rgba(0,0,0,0.4); } .leaflet-tooltip.leaflet-interactive { cursor: pointer; pointer-events: auto; } .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { position: absolute; pointer-events: none; border: 6px solid transparent; background: transparent; content: ""; } .leaflet-tooltip-bottom { margin-top: 6px; } .leaflet-tooltip-top { margin-top: -6px; } .leaflet-tooltip-bottom:before, .leaflet-tooltip-top:before { left: 50%; margin-left: -6px; } .leaflet-tooltip-top:before { bottom: 0; margin-bottom: -12px; border-top-color: #fff; } .leaflet-tooltip-bottom:before { top: 0; margin-top: -12px; margin-left: -6px; border-bottom-color: #fff; } .leaflet-tooltip-left { margin-left: -6px; } .leaflet-tooltip-right { margin-left: 6px; } .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { top: 50%; margin-top: -6px; } .leaflet-tooltip-left:before { right: 0; margin-right: -12px; border-left-color: #fff; } .leaflet-tooltip-right:before { left: 0; margin-left: -12px; border-right-color: #fff; } @media print { .leaflet-control { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+/* Layout: a bridge console. Header bar, then three columns (conning | chart | propulsion and power), timeline under the chart,
+   signal list below. Night palette by default; Day is chosen on the page (data-bridge), not taken from the host theme. */
+:root{
+  color-scheme:dark;
+  --bg:#060c11; --panel:#0c151d; --panel-2:#101c26; --rule:#1c2a35; --rule-2:#273846;
+  --ink:#d6e1e8; --ink-2:#8fa2ae; --ink-3:#5d707c; --read:#f2f7fa;
+  --accent:#6aa8e8; --own:#f2b84b; --sea:#0a1822; --land:#16232c;
+  --m0:#7d8c94; --m1:#3fc2a6; --m2:#e6b53a; --m3:#6aa8e8;
+  --e1:#a98ad2; --e2:#e69a52; --e3:#5fc0b2;
+  --ok:#4fc28a; --warn:#f0c57a; --off:#3a4a56;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow","Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+:root[data-bridge="day"]{
+  color-scheme:light;
+  --bg:#e8edf0; --panel:#ffffff; --panel-2:#f3f6f8; --rule:#d0d9de; --rule-2:#bcc8cf;
+  --ink:#14222d; --ink-2:#4a5b67; --ink-3:#7a8a95; --read:#0b1620;
+  --accent:#00509e; --own:#c46a00; --sea:#dfe9ef; --land:#cfd8d2;
+  --m0:#6b7a84; --m1:#16927a; --m2:#b8860b; --m3:#2a6fc0;
+  --e1:#7a5bb0; --e2:#c06a1e; --e3:#2b8f84;
+  --ok:#1f8a55; --warn:#9a5b00; --off:#c3cdd3;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font:15px/1.45 var(--body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:1000;background:var(--panel)}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent)}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lbl{font:600 .72rem/1.2 var(--display);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* header bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:900;background:var(--panel);border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;padding-block:10px}
+.brand{display:flex;align-items:baseline;gap:10px;min-width:0}
+.brand b{font:700 1.35rem/1 var(--display);letter-spacing:.02em;color:var(--read)}
+.brand span{font:500 1rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.badge{font:600 .72rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border:1px solid currentColor;border-radius:3px}
+.badge.replay{color:var(--own)}
+.badge.rate{color:var(--ink-2)}
+.badge.rate.fine{color:var(--ok)}
+.clock{display:flex;gap:18px;margin-left:auto;align-items:baseline}
+.clock div{display:flex;flex-direction:column;gap:2px}
+.clock .num{font-size:1.15rem;color:var(--read)}
+.seg{display:inline-flex;border:1px solid var(--rule-2);border-radius:4px;overflow:hidden}
+.seg button{background:transparent;border:0;padding:5px 10px;cursor:pointer;font:600 .78rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.seg button+button{border-left:1px solid var(--rule-2)}
+.seg button[aria-pressed="true"]{background:var(--rule-2);color:var(--read)}
+.back{font:500 .85rem var(--body);white-space:nowrap}
+
+/* console grid */
+.console{display:grid;grid-template-columns:290px minmax(0,1fr) 330px;gap:12px;padding-block:12px}
+.col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:12px 14px;min-width:0}
+.panel h2{margin:0 0 10px;display:flex;align-items:center;gap:8px;justify-content:space-between}
+.panel h2 .lbl{color:var(--ink)}
+.only{font:600 .66rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);border:1px dashed var(--ink-3);padding:3px 6px;border-radius:3px;white-space:nowrap}
+.dim .val,.dim svg .live{opacity:.35}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.read{display:flex;flex-direction:column;gap:1px;min-width:0}
+.read .val{font:500 1.55rem/1.1 var(--mono);font-variant-numeric:tabular-nums;color:var(--read);white-space:nowrap}
+.read .val small{font-size:.62em;color:var(--ink-2);margin-left:3px}
+.read.big .val{font-size:2.3rem}
+.read .sub{font:400 .74rem var(--mono);color:var(--ink-3)}
+.compass{display:block;width:100%;max-width:240px;margin:0 auto 8px;aspect-ratio:1}
+.state{display:flex;align-items:center;gap:10px}
+.chip{font:700 .95rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:3px;color:var(--bg)}
+.state .rule{font-size:.8rem;color:var(--ink-2)}
+.pos{font:500 1.05rem/1.35 var(--mono);color:var(--read)}
+
+/* chart */
+.chartwrap{position:relative;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--sea);min-height:380px;height:min(62vh,640px)}
+#map{position:absolute;inset:0;background:var(--sea)}
+.maptools{position:absolute;top:10px;left:10px;z-index:500;display:flex;flex-wrap:wrap;gap:8px;max-width:calc(100% - 20px)}
+.maptools .seg{background:var(--panel)}
+.mapnote{position:absolute;left:10px;bottom:10px;z-index:500;max-width:min(420px,calc(100% - 20px));background:var(--panel);border:1px solid var(--rule-2);border-radius:4px;padding:8px 10px;font-size:.8rem;color:var(--ink-2)}
+.leaflet-container{background:var(--sea);font-family:var(--body)}
+.leaflet-control-attribution{background:var(--panel)!important;color:var(--ink-2)!important}
+.leaflet-control-attribution a{color:var(--accent)!important}
+.leaflet-bar a{background:var(--panel)!important;color:var(--ink)!important;border-color:var(--rule)!important}
+.ownship{pointer-events:none}
+
+/* timeline */
+.tl{display:flex;flex-direction:column;gap:10px}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.btn{background:var(--panel-2);border:1px solid var(--rule-2);border-radius:4px;padding:6px 12px;cursor:pointer;font:600 .82rem/1.1 var(--display);letter-spacing:.07em;text-transform:uppercase;color:var(--ink)}
+.btn:hover{border-color:var(--accent)}
+.btn.play{min-width:84px;color:var(--read)}
+.goto{display:flex;gap:6px;align-items:center}
+.goto select,.goto input{background:var(--panel-2);border:1px solid var(--rule-2);border-radius:4px;padding:5px 6px;font:500 .85rem var(--mono)}
+#tl{display:block;width:100%;height:78px;cursor:pointer;touch-action:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+
+/* propulsion */
+.pods{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pod svg{display:block;width:100%;max-width:130px;margin:0 auto;aspect-ratio:1}
+.pod h3{margin:0 0 4px;text-align:center}
+.meter{display:grid;grid-template-columns:44px 1fr 54px;align-items:center;gap:6px;font-size:.78rem;margin-top:5px}
+.meter .track{height:8px;background:var(--panel-2);border:1px solid var(--rule);border-radius:2px;position:relative;overflow:hidden}
+.meter .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--accent)}
+.meter .num{text-align:right;color:var(--read)}
+.thr{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:8px;border-top:1px solid var(--rule);font-size:.85rem}
+
+/* single-line view */
+.sld{display:flex;flex-direction:column}
+.sld-row{display:grid;gap:12px}
+.sld-row.gens{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sld-row.loads{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cell{display:flex;flex-direction:column;min-width:0}
+.node{border:1px solid var(--rule-2);border-radius:4px;background:var(--panel-2);padding:8px 10px;min-width:0}
+.node.on{border-color:var(--ok)}
+.node.nl{border-style:dashed;background:transparent;color:var(--ink-3)}
+.node h3{margin:0 0 6px;display:flex;align-items:center;gap:6px;justify-content:space-between;font:700 .95rem/1.1 var(--display);letter-spacing:.04em;color:var(--read)}
+.node h3 .nm{display:flex;align-items:center;gap:6px;min-width:0}
+.sym{flex:none;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--ink-3);display:grid;place-items:center;font:600 .7rem/1 var(--mono);color:var(--ink-2)}
+.node.on .sym{border-color:var(--ok);color:var(--ok)}
+.node .kv{display:grid;grid-template-columns:1fr 1fr;gap:1px 8px;font:400 .78rem var(--mono);color:var(--ink-2)}
+.node .kv b{font-weight:500;color:var(--read)}
+.node .nlx{font-size:.74rem;color:var(--ink-3);margin-top:4px}
+.wire{height:24px;width:2px;margin:0 auto;background:var(--off);position:relative;flex:none}
+.wire.on{background:repeating-linear-gradient(to bottom,var(--accent) 0 6px,transparent 6px 10px);background-size:2px 10px;animation:flow .9s linear infinite}
+@keyframes flow{to{background-position:0 10px}}
+.brk{position:absolute;left:50%;top:50%;width:11px;height:11px;transform:translate(-50%,-50%);border:2px solid var(--off);background:var(--panel)}
+.wire.on .brk{background:var(--accent);border-color:var(--accent)}
+.bus{height:6px;background:var(--off);border-radius:3px;position:relative;margin:0 4px}
+.bus.on{background:var(--accent)}
+.bus span{position:absolute;right:0;top:9px;font:600 .66rem/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.note{font-size:.76rem;color:var(--ink-3);margin:10px 0 0;max-width:90ch}
+/* events */
+.events{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;max-height:290px;overflow:auto}
+.events li{display:grid;grid-template-columns:auto auto 1fr;gap:8px;align-items:baseline;padding:5px 2px;border-top:1px solid var(--rule);font-size:.82rem;cursor:pointer}
+.events li:first-child{border-top:0}
+.events li:hover{background:var(--panel-2)}
+.events time{font:400 .74rem var(--mono);color:var(--ink-2);white-space:nowrap}
+.events .cat{font:600 .62rem/1 var(--display);letter-spacing:.1em;padding:2px 4px;border-radius:2px;border:1px solid currentColor;color:var(--ink-2)}
+.events .cat.ENGINE{color:var(--e2)} .events .cat.PROP{color:var(--accent)} .events .cat.NAV{color:var(--m1)} .events .cat.DATA{color:var(--ok)}
+.events li.new{animation:flash 2.4s ease-out}
+@keyframes flash{from{background:var(--rule-2)}to{background:transparent}}
+.events .empty{color:var(--ink-3);cursor:default}
+/* gensets */
+.gen{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:8px 0;border-top:1px solid var(--rule)}
+.gen:first-of-type{border-top:0;padding-top:0}
+.gen .name{display:flex;align-items:center;gap:7px;font:700 1rem/1 var(--display);letter-spacing:.05em}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--off);flex:none}
+.run{font:600 .66rem/1 var(--display);letter-spacing:.1em;padding:3px 5px;border-radius:2px;background:var(--off);color:var(--bg)}
+.run.on{background:var(--ok)}
+.gen .bar2{grid-column:1/-1;height:12px;background:var(--panel-2);border:1px solid var(--rule);border-radius:2px;position:relative;overflow:hidden}
+.gen .bar2 .fill{position:absolute;inset:0 auto 0 0;width:0}
+.gen .bar2 .mark{position:absolute;top:-2px;bottom:-2px;width:1px;background:var(--ink-3)}
+.gen .nums{grid-column:1/-1;display:flex;justify-content:space-between;gap:8px;font:400 .8rem var(--mono);color:var(--ink-2)}
+.gen .nums b{font-weight:500;color:var(--read)}
+.gen .detail{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:2px 8px;font:400 .72rem var(--mono);color:var(--ink-3)}
+.gen .detail b{color:var(--ink-2);font-weight:500}
+.tot{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)}
+.notlogged{display:flex;justify-content:space-between;gap:10px;font-size:.8rem;color:var(--ink-3);border:1px dashed var(--rule-2);border-radius:3px;padding:6px 8px;margin-top:10px}
+
+/* motion */
+.incl{display:grid;grid-template-columns:1fr 1fr 64px;gap:8px;align-items:end}
+.incl svg{display:block;width:100%;aspect-ratio:1.5}
+.heave{height:76px;width:14px;margin:0 auto;border:1px solid var(--rule-2);border-radius:2px;position:relative;background:var(--panel-2)}
+.heave i{position:absolute;left:-4px;right:-4px;height:3px;background:var(--own);top:50%}
+.heave::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--ink-3)}
+
+/* lower area */
+.lower{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px;padding-block:0 28px}
+.tablewrap{overflow:auto;max-height:440px;border-top:1px solid var(--rule)}
+thead th{position:sticky;top:0;background:var(--panel);z-index:1}
+table{border-collapse:collapse;width:100%;font-size:.82rem}
+th{font:600 .7rem var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-align:left;padding:6px 8px;border-bottom:1px solid var(--rule-2);white-space:nowrap}
+td{padding:5px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+td.t{font-family:var(--mono);font-size:.78rem;white-space:nowrap;color:var(--read)}
+td.v{font-family:var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.sel td{background:var(--panel-2)}
+tbody tr{cursor:pointer}
+tr.nl td{color:var(--ink-3);cursor:default}
+.st{font:600 .66rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:2px 5px;border-radius:2px;border:1px solid currentColor;white-space:nowrap}
+.st.measured{color:var(--ok)} .st.derived{color:var(--accent)} .st.nl{color:var(--ink-3)}
+pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid var(--rule);border-radius:4px;font:400 .78rem/1.5 var(--mono);color:var(--read);overflow-x:auto;white-space:pre}
+.about p{margin:0 0 10px;max-width:68ch;font-size:.9rem;color:var(--ink-2)}
+.about p b{color:var(--ink)}
+.loading{padding:40px 0;text-align:center;color:var(--ink-2)}
+
+@media (max-width:1180px){
+  .console{grid-template-columns:270px minmax(0,1fr)}
+  .console .right{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
+}
+@media (max-width:760px){
+  .console{grid-template-columns:minmax(0,1fr)}
+  .console .center{order:-1}
+  .chartwrap{height:58vh;min-height:320px}
+  .sld-row.loads{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sld-row.loads .wire{display:none}
+  .sld-row.gens{gap:6px}
+  .node{padding:6px}
+  .node .kv{grid-template-columns:1fr}
+  .node h3{flex-wrap:wrap;font-size:.85rem}
+  .lower{grid-template-columns:minmax(0,1fr)}
+  .clock{margin-left:0}
+  .bar{position:static}
+  .brand b{font-size:1.15rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <div class="brand"><b>R/V Gunnerus</b><span>Virtual bridge</span></div>
+    <span class="badge replay" title="These are logged values from 30 Oct to 3 Nov 2023, replayed. Nothing here is live.">Replay · Oct 2023</span>
+    <span class="badge rate" id="rateBadge">1-min data</span>
+    <div class="clock">
+      <div><span class="lbl">UTC</span><span class="num" id="clkUtc">--:--:--</span></div>
+      <div><span class="lbl">Ship time (UTC+1)</span><span class="num" id="clkLt">--:--:--</span></div>
+      <div><span class="lbl">Date</span><span class="num" id="clkDate">---</span></div>
+    </div>
+    <div class="seg" role="group" aria-label="Display palette">
+      <button type="button" id="palNight" aria-pressed="true">Night</button>
+      <button type="button" id="palDay" aria-pressed="false">Day</button>
+    </div>
+    <a class="back" href="https://shiplab.github.io/gunnerus/#operational">Repository site</a>
+  </div>
+</header>
+
+<main>
+<div class="wrap console" id="console">
+  <!-- conning -->
+  <div class="col left">
+    <section class="panel" aria-labelledby="hHead">
+      <h2><span class="lbl" id="hHead">Heading and course</span><span class="only" id="hdgOnly">Waiting for 1 Hz data</span></h2>
+      <svg class="compass" id="compass" viewBox="-110 -110 220 220" role="img" aria-label="Compass card"></svg>
+      <div class="grid2">
+        <div class="read" id="rdHdg"><span class="lbl">HDG true</span><span class="val">---<small>°</small></span><span class="sub">Seapath MRU</span></div>
+        <div class="read" id="rdCog"><span class="lbl">COG</span><span class="val">---<small>°</small></span><span class="sub">from track</span></div>
+        <div class="read big" id="rdSog"><span class="lbl">SOG</span><span class="val">--.-<small>kn</small></span><span class="sub">GPS</span></div>
+        <div class="read" id="rdRot"><span class="lbl">ROT</span><span class="val">---<small>°/min</small></span><span class="sub">Seapath MRU</span></div>
+      </div>
+    </section>
+    <section class="panel" aria-labelledby="hPos">
+      <h2><span class="lbl" id="hPos">Position and state</span></h2>
+      <div class="pos" id="pos">--°--.---' N<br>---°--.---' E</div>
+      <div class="state" style="margin-top:10px"><span class="chip" id="stateChip">----</span><span class="rule" id="stateRule"></span></div>
+    </section>
+    <section class="panel" id="pMotion" aria-labelledby="hMot">
+      <h2><span class="lbl" id="hMot">Motion and wind</span><span class="only" id="motOnly">Waiting for 1 Hz data</span></h2>
+      <div class="incl">
+        <div class="read"><span class="lbl">Roll</span><svg id="svRoll" viewBox="-60 -40 120 80" aria-hidden="true"></svg><span class="val num" id="vRoll" style="font-size:1.05rem">--.-°</span></div>
+        <div class="read"><span class="lbl">Pitch</span><svg id="svPitch" viewBox="-60 -40 120 80" aria-hidden="true"></svg><span class="val num" id="vPitch" style="font-size:1.05rem">--.-°</span></div>
+        <div class="read" style="align-items:center"><span class="lbl">Heave</span><div class="heave"><i id="heaveMark"></i></div><span class="val num" id="vHeave" style="font-size:1.05rem">-.--</span></div>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="read" id="rdWs"><span class="lbl">Wind speed</span><span class="val">--.-<small>kn</small></span><span class="sub">DP wind sensor</span></div>
+        <div class="read" id="rdWd"><span class="lbl">Wind from</span><span class="val">---<small>°</small></span><span class="sub">reference not documented</span></div>
+        <div class="read" id="rdHs"><span class="lbl">Wave height Hs</span><span class="val">-.--<small>m</small></span><span class="sub" id="hsSub">wave radar, RangeFinder</span></div>
+        <div class="read" id="rdTs"><span class="lbl">Wave period</span><span class="val">-.-<small>s</small></span><span class="sub" id="tsSub">RangeFinder Ts</span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- chart and timeline -->
+  <div class="col center">
+    <div class="chartwrap">
+      <div id="map" aria-label="Chart with own ship"></div>
+      <div class="maptools">
+        <div class="seg" role="group" aria-label="Base map" id="baseSeg">
+          <button type="button" data-layer="sjokartraster" aria-pressed="true">Sea chart</button>
+          <button type="button" data-layer="topograatone" aria-pressed="false">Grey</button>
+          <button type="button" data-layer="topo" aria-pressed="false">Topo</button>
+          <button type="button" data-layer="" aria-pressed="false">None</button>
+        </div>
+        <div class="seg" role="group" aria-label="Chart orientation and follow">
+          <button type="button" id="followBtn" aria-pressed="true">Follow ship</button>
+        </div>
+      </div>
+      <div class="mapnote" id="mapNote" hidden></div>
+    </div>
+    <section class="panel tl" aria-labelledby="hTl">
+      <div class="ctrl">
+        <button type="button" class="btn play" id="playBtn">Pause</button>
+        <div class="seg" role="group" aria-label="Replay speed" id="speedSeg">
+          <button type="button" data-speed="1" aria-pressed="false">1×</button>
+          <button type="button" data-speed="10" aria-pressed="false">10×</button>
+          <button type="button" data-speed="60" aria-pressed="true">60×</button>
+          <button type="button" data-speed="600" aria-pressed="false">600×</button>
+        </div>
+        <button type="button" class="btn" id="randBtn">Random sailing</button>
+        <button type="button" class="btn" id="nextBtn">Next departure</button>
+        <form class="goto" id="gotoForm">
+          <label class="lbl" for="gotoDay">Go to</label>
+          <select id="gotoDay"></select>
+          <input id="gotoTime" type="time" value="10:00" aria-label="Time, UTC">
+          <span class="lbl">UTC</span>
+          <button type="submit" class="btn">Go</button>
+        </form>
+        <button type="button" class="btn" id="fineBtn" title="31 Oct 2023, 10:00 to 12:10 UTC: the wave-shielding experiment, the only time with wave radar values">Wave-shielding test</button>
+      </div>
+      <h2 style="margin:0" class="lbl" id="hTl">Cruise week 44 · state and total engine load · drag to move</h2>
+      <canvas id="tl" aria-label="Timeline of the week. Click or drag to move the replay."></canvas>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="panel" aria-labelledby="hPow">
+      <h2><span class="lbl" id="hPow">Power plant · simplified single-line view</span><span class="lbl" style="color:var(--ink-3)" id="engCount"></span></h2>
+      <div class="sld">
+        <div class="sld-row gens" id="gens"></div>
+        <div class="bus" id="bus" title="Main switchboard (simplified; not logged)"></div>
+        <div class="sld-row loads" id="loads"></div>
+      </div>
+      <div class="tot">
+        <div class="read"><span class="lbl">Total engine load</span><span class="val" id="vLoad">---<small>kW</small></span></div>
+        <div class="read"><span class="lbl">Fuel rate</span><span class="val" id="vFuel">--.-<small>L/h</small></span></div>
+        <div class="read"><span class="lbl">Fuel since 00:00 ship time</span><span class="val" id="vFuelDay">---<small>L</small></span><span class="sub" id="dayNote"></span></div>
+        <div class="read"><span class="lbl">Energy since 00:00</span><span class="val" id="vEnDay">---<small>kWh</small></span><span class="sub">engine output</span></div>
+      </div>
+      <p class="note">Gunnerus is diesel-electric. Breakers, busbar, frequency converters and generator electrical power are not logged, and the real switchboard layout is not in the repository. A genset is drawn connected when its engine carries more than 5 kW, and a consumer when it runs (derived). Engine bars show load against 450 kW (rated power, list of main equipment).</p>
+    </section>
+  </div>
+
+  <!-- propulsion and power -->
+  <div class="col right">
+    <section class="panel" aria-labelledby="hProp">
+      <h2><span class="lbl" id="hProp">Propulsion</span><span class="only" id="angOnly">Waiting for 1 Hz data</span></h2>
+      <div class="pods">
+        <div class="pod" id="podP"><h3 class="lbl">Port azimuth</h3></div>
+        <div class="pod" id="podS"><h3 class="lbl">Stbd azimuth</h3></div>
+      </div>
+      <p style="margin:6px 0 0;font-size:.74rem;color:var(--ink-3)">Arrow: logged azimuth angle, 0° taken as ahead (zero reference not documented). Rpm and load as logged, scale 0–100.</p>
+      <div class="thr"><span class="lbl">Bow tunnel thruster</span><span class="num" id="vTunnel">--- %</span></div>
+    </section>
+    <section class="panel" aria-labelledby="hEv">
+      <h2><span class="lbl" id="hEv">Event log</span><span class="lbl" style="color:var(--ink-3)">derived from logged values</span></h2>
+      <ol class="events" id="events"></ol>
+    </section>
+    <section class="panel" id="pCrane" aria-labelledby="hCrane">
+      <h2><span class="lbl" id="hCrane">Deck crane</span><span class="only" id="craneOnly">Waiting for 1 Hz data</span></h2>
+      <div class="grid2">
+        <div class="read" id="rdSlew"><span class="lbl">Slewing</span><span class="val" style="font-size:1.2rem">---<small>°</small></span></div>
+        <div class="read" id="rdBoom"><span class="lbl">Main boom</span><span class="val" style="font-size:1.2rem">---<small>°</small></span></div>
+        <div class="read" id="rdOuter"><span class="lbl">Outer boom</span><span class="val" style="font-size:1.2rem">---<small>°</small></span></div>
+        <div class="read" id="rdExt"><span class="lbl">Extension</span><span class="val" style="font-size:1.2rem">---<small>as logged</small></span></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="wrap lower">
+  <section class="panel" aria-labelledby="hTop">
+    <h2><span class="lbl" id="hTop">Signals in this replay</span><span class="lbl" style="color:var(--ink-3)" id="topCount"></span></h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Topic</th><th>Now</th><th>Unit</th><th>Status</th><th>Crosswalk</th></tr></thead>
+        <tbody id="topics"></tbody>
+      </table>
+    </div>
+  </section>
+  <div class="col">
+    <section class="panel" aria-labelledby="hMsg">
+      <h2><span class="lbl" id="hMsg">Message for the selected topic</span></h2>
+      <pre class="msg" id="msg">Select a topic.</pre>
+      <p style="font-size:.8rem;color:var(--ink-3);margin:8px 0 0">This is the shape each value will have when the replay is published over MQTT. The page reads the same shape from the replay file today.</p>
+    </section>
+    <section class="panel about" aria-labelledby="hAbout">
+      <h2><span class="lbl" id="hAbout">About this replay</span></h2>
+      <p><b>What you see.</b> Logged values from the cruise week of 30 October to 3 November 2023, replayed as if live. The page opens at a random moment while the ship is under way. Heading, motion, wind, azimuth angles, crane and engine readings are the logger values at 1 Hz, loaded one day at a time. Operating state, the timeline and the fuel totals use 1-minute means. Wave radar values exist only for the wave-shielding test on 31 October, 10:00 to 12:10 UTC.</p>
+      <p><b>Measured, derived, display only.</b> Values are as logged. Course in the 1-minute data, operating state, the event log, which gensets and consumers are connected, and fuel totals are derived. The ship symbol and needles move smoothly between logged values; that smoothing is display only.</p>
+      <p><b>Credit.</b> Data provided by Robert Skulstad (NTNU); organised by Henrique M. Gaspar. The wave-shielding test is the experiment of Wang et al. (2025), <i>Ocean Engineering</i> 320, 120189. Chart © Kartverket.</p>
+    </section>
+  </div>
+</div>
+</main>
+
+<script>
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+const SVGNS = "http://www.w3.org/2000/svg";
+const RATED_KW = 450;                       // assumed: list of main equipment, item 72
+const LT_OFFSET_H = 1;                      // ship time: CET (UTC+1) after 29 Oct 2023
+const STATE = {
+  stationary:      {label:"Stationary",      tok:"--m0", rule:"under 0.5 kn, azimuth drives idle"},
+  station_keeping: {label:"Station-keeping", tok:"--m1", rule:"under 0.5 kn, azimuth drives running"},
+  manoeuvring:     {label:"Manoeuvring",     tok:"--m2", rule:"0.5 to 8 kn"},
+  transit:         {label:"Transit",         tok:"--m3", rule:"8 kn and above"},
+};
+const NOT_LOGGED = [
+  ["gunnerus/pms/gen/1/power", "P01", "Generator active power (Siemens PMS)"],
+  ["gunnerus/pms/bus/1/voltage", "P07", "Busbar voltage (Siemens PMS)"],
+  ["gunnerus/pms/bus/1/frequency", "P08", "Busbar frequency (Siemens PMS)"],
+  ["gunnerus/azimuth/port/converter_power", "T10", "Frequency converter motor power (HEMOS)"],
+  ["gunnerus/engine/1/start_battery", "E10", "Start battery voltage (Nogva)"],
+];
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let W = null, F = null;            // week (1 min) and fine (1 Hz) replay files
+let T0, TN, FT0 = 0, FTN = 0, topicsHaveDay = false;
+let simT = 0, speed = 60, playing = true, lastFrame = 0, lastUi = 0;
+let cumFuel, cumEn;                 // cumulative litres and kWh at each minute
+let selTopic = "gunnerus/engine/1/load";
+
+/* ---------- helpers ---------- */
+const pad = (n, w = 2) => String(n).padStart(w, "0");
+const fmtHMS = d => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
+const DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtDate = d => `${DAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MON[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+const isNum = v => typeof v === "number" && isFinite(v);
+const fmt = (v, dec, w) => isNum(v) ? v.toFixed(dec) : (w || "---");
+function dm(v, isLat) {
+  if (!isNum(v)) return isLat ? "--°--.---' N" : "---°--.---' E";
+  const h = isLat ? (v >= 0 ? "N" : "S") : (v >= 0 ? "E" : "W");
+  v = Math.abs(v); const d = Math.floor(v), m = (v - d) * 60;
+  return `${isLat ? pad(d) : pad(d, 3)}°${m.toFixed(3).padStart(6, "0")}' ${h}`;
+}
+const wrap360 = a => ((a % 360) + 360) % 360;
+function lerpAng(a, b, f) { let d = wrap360(b - a); if (d > 180) d -= 360; return wrap360(a + d * f); }
+
+/* ---------- data access ---------- */
+// Three sources, most detailed first: the 1 Hz day file of the replay's day (all week), the wave-shielding window
+// (wave radar), the 1-minute week file (state, totals, track, timeline).
+const DAY = {};                      // "2023-10-31" -> {t0, n, topics, arr} | "loading" | "failed"
+const dayKey = t => new Date(t).toISOString().slice(0, 10);
+function decodeDay(j) {
+  const arr = {};
+  for (const [t, m] of Object.entries(j.topics)) {
+    const e = j.data[t], A = /\/(lat|lon)$/.test(t) ? new Float64Array(j.n) : new Float32Array(j.n), sc = Math.pow(10, m.scale);
+    A.fill(NaN); let tt = 0;
+    for (let k = 0; k < e.t.length; k++) {
+      tt += e.t[k]; const end = k + 1 < e.t.length ? tt + e.t[k + 1] : j.n;
+      if (e.v[k] !== null) A.fill(e.v[k] / sc, tt, end);   // the logger writes on change: a value holds until the next entry
+    }
+    arr[t] = A;
+  }
+  return {t0:Date.parse(j.t0), n:j.n, topics:j.topics, arr};
+}
+// The deployed site has the replay files in assets/virtual/ (copied there by .github/workflows/pages.yml);
+// a local preview from the repository root finds them in ../virtual/data/.
+const DATA_BASES = ["assets/virtual/", "../virtual/data/"];
+async function loadJSON(name) {
+  let err;
+  for (const b of DATA_BASES) {
+    try { const r = await fetch(b + name); if (r.ok) { if (DATA_BASES[0] !== b) DATA_BASES.unshift(b); return await r.json(); } err = new Error(`${name}: ${r.status}`); }
+    catch (e) { err = e; }
+  }
+  throw err;
+}
+async function ensureDay(key) {
+  if (DAY[key] || key < dayKey(T0) || key > dayKey(TN - 1)) return;
+  DAY[key] = "loading";
+  try {
+    DAY[key] = decodeDay(await loadJSON(`replay-${key}-1hz.json`));
+    for (const k of Object.keys(DAY)) if (DAY[k] && DAY[k].arr && Math.abs(Date.parse(k) - Date.parse(key)) > 86400e3) delete DAY[k];
+    if (!topicsHaveDay) { topicsHaveDay = true; buildTopics(); }
+  } catch (e) { DAY[key] = "failed"; }
+}
+function curDay() { const d = DAY[dayKey(simT)]; return d && d.arr ? d : null; }
+function dIdx(D) { const x = (simT - D.t0) / 1000; const s = Math.max(0, Math.min(D.n - 1, Math.floor(x))); return [s, x - s]; }
+function wIdx() { const x = (simT - T0) / 60000; const i = Math.max(0, Math.min(W.n - 1, Math.floor(x))); return [i, Math.min(1, Math.max(0, x - i))]; }
+function fIdx() { if (!F) return -1; const i = Math.floor((simT - FT0) / 1000); return (i >= 0 && i < F.n) ? i : -1; }
+const inFine = () => !!curDay();
+const inWaveWindow = () => fIdx() >= 0;
+// latest value of a topic at the replay time
+function get(topic, maxAge = 10) {
+  const D = curDay();
+  if (D && D.arr[topic]) { const [s] = dIdx(D), v = D.arr[topic][s], sc = Math.pow(10, D.topics[topic].scale); return {v:isNaN(v) ? null : Math.round(v * sc) / sc, src:"1 Hz", t:D.t0 + s * 1000}; }
+  const fi = fIdx();
+  if (fi >= 0 && F.data[topic]) {
+    const a = F.data[topic];
+    for (let k = fi; k >= Math.max(0, fi - maxAge); k--) if (a[k] !== null) return {v:a[k], src:"1 Hz", age:fi - k, t:FT0 + k * 1000};
+    if (!W.data[topic]) return {v:null, src:"1 Hz", age:null};
+  }
+  if (W.data[topic]) { const [i] = wIdx(); return {v:W.data[topic][i], src:"1 min", age:0, t:T0 + i * 60000}; }
+  return {v:null, src:null};
+}
+function lastCourse() {        // last derived course within 60 minutes (ship keeps heading when stopped)
+  const [i] = wIdx(), c = W.data["gunnerus/nav/track/cog"];
+  for (let k = i; k >= Math.max(0, i - 60); k--) if (c[k] !== null) return c[k];
+  return null;
+}
+function position() {
+  const D = curDay();
+  if (D) {
+    const [s, f] = dIdx(D), la = D.arr["gunnerus/nav/gps/lat"], lo = D.arr["gunnerus/nav/gps/lon"];
+    if (!isNaN(la[s]) && !isNaN(lo[s])) {
+      if (s + 1 < D.n && !isNaN(la[s + 1])) return [la[s] + (la[s + 1] - la[s]) * f, lo[s] + (lo[s + 1] - lo[s]) * f]; // display only
+      return [la[s], lo[s]];
+    }
+  }
+  const [i, f] = wIdx(), la = W.data["gunnerus/nav/gps/lat"], lo = W.data["gunnerus/nav/gps/lon"];
+  if (la[i] === null) return null;
+  if (i + 1 < W.n && la[i + 1] !== null) return [la[i] + (la[i + 1] - la[i]) * f, lo[i] + (lo[i + 1] - lo[i]) * f]; // display only
+  return [la[i], lo[i]];
+}
+function heading() {          // [degrees, label]; true heading from the 1 Hz data, else course from the 1-minute track
+  const D = curDay();
+  if (D) {
+    const [s, f] = dIdx(D), h = D.arr["gunnerus/nav/mru/heading"];
+    if (!isNaN(h[s])) return [s + 1 < D.n && !isNaN(h[s + 1]) ? lerpAng(h[s], h[s + 1], f) : h[s], "HDG"];
+  }
+  const c = lastCourse(); return c === null ? [null, "COG"] : [c, "COG"];
+}
+
+/* ---------- compass ---------- */
+const cmp = $("compass"); let cardG, cogMark, windMark, lubLbl;
+function buildCompass() {
+  const el = (n, a, p = cmp) => { const e = document.createElementNS(SVGNS, n); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+  el("circle", {r:104, fill:"var(--panel-2)", stroke:"var(--rule-2)"});
+  cardG = el("g", {class:"live"});
+  for (let a = 0; a < 360; a += 5) {
+    const long = a % 30 === 0, mid = a % 10 === 0, r1 = 100, r2 = long ? 86 : mid ? 91 : 95;
+    const s = Math.sin(a * Math.PI / 180), c = -Math.cos(a * Math.PI / 180);
+    el("line", {x1:s * r1, y1:c * r1, x2:s * r2, y2:c * r2, stroke:long ? "var(--ink)" : "var(--ink-3)", "stroke-width":long ? 1.6 : 1}, cardG);
+    if (long) {
+      const t = el("text", {x:s * 74, y:c * 74 + 4, "text-anchor":"middle", fill:a % 90 === 0 ? "var(--read)" : "var(--ink-2)",
+        "font-family":"var(--display)", "font-size":a % 90 === 0 ? 15 : 11, "font-weight":600, transform:`rotate(${a} ${s * 74} ${c * 74})`}, cardG);
+      t.textContent = {0:"N", 90:"E", 180:"S", 270:"W"}[a] || String(a / 10).padStart(2, "0");
+    }
+  }
+  cogMark = el("path", {d:"M0,-104 L-6,-116 L6,-116 Z", fill:"var(--accent)"}, cardG);
+  windMark = el("g", {}, cardG);
+  el("path", {d:"M0,-62 L0,-40 M-5,-48 L0,-40 L5,-48", stroke:"var(--m1)", "stroke-width":2.2, fill:"none"}, windMark);
+  // ship outline and lubber line, fixed (heading up)
+  el("path", {d:"M0,-30 C8,-20 9,8 8,26 L-8,26 C-9,8 -8,-20 0,-30 Z", fill:"none", stroke:"var(--own)", "stroke-width":1.8});
+  el("line", {x1:0, y1:-34, x2:0, y2:-104, stroke:"var(--own)", "stroke-width":1.5});
+  lubLbl = el("text", {x:0, y:44, "text-anchor":"middle", fill:"var(--own)", "font-family":"var(--mono)", "font-size":10});
+}
+function drawCompass(h, cog, wind) {
+  cardG.setAttribute("transform", `rotate(${isNum(h) ? -h : 0})`);
+  cogMark.style.display = isNum(cog) ? "" : "none";
+  if (isNum(cog)) cogMark.setAttribute("transform", `rotate(${cog})`);
+  windMark.style.display = isNum(wind) ? "" : "none";
+  if (isNum(wind)) windMark.setAttribute("transform", `rotate(${wind})`);
+}
+
+/* ---------- inclinometers ---------- */
+function buildIncl() {
+  $("svRoll").innerHTML = `<line x1="-56" y1="0" x2="56" y2="0" stroke="var(--ink-3)" stroke-dasharray="2 3"/>
+    <g class="live" id="gRoll"><path d="M-30,-6 L30,-6 L24,14 L-24,14 Z" fill="var(--panel-2)" stroke="var(--own)" stroke-width="1.6"/><path d="M-10,-6 L-10,-18 L10,-18 L10,-6" fill="none" stroke="var(--own)" stroke-width="1.4"/></g>`;
+  $("svPitch").innerHTML = `<line x1="-56" y1="0" x2="56" y2="0" stroke="var(--ink-3)" stroke-dasharray="2 3"/>
+    <g class="live" id="gPitch"><path d="M-48,-4 L44,-4 L52,-12 L52,6 L-46,10 Z" fill="var(--panel-2)" stroke="var(--own)" stroke-width="1.6"/><path d="M-6,-4 L-6,-16 L20,-16 L20,-4" fill="none" stroke="var(--own)" stroke-width="1.4"/></g>`;
+}
+
+/* ---------- pods ---------- */
+function buildPod(id, side) {
+  const host = $(id);
+  host.insertAdjacentHTML("beforeend", `
+    <svg viewBox="-60 -60 120 120" aria-hidden="true">
+      <circle r="52" fill="var(--panel-2)" stroke="var(--rule-2)"/>
+      ${[0, 90, 180, 270].map(a => `<line x1="0" y1="-52" x2="0" y2="-44" stroke="var(--ink-3)" transform="rotate(${a})"/>`).join("")}
+      <text x="0" y="-36" text-anchor="middle" font-size="9" fill="var(--ink-3)" font-family="var(--mono)">FWD</text>
+      <g class="live" data-k="ord" style="display:none"><path d="M0,0 L0,-40" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="3 3"/></g>
+      <g class="live" data-k="pod"><rect x="-7" y="-14" width="14" height="28" rx="7" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/>
+        <path data-k="thr" d="M0,-14 L0,-42 M-6,-34 L0,-42 L6,-34" stroke="var(--accent)" stroke-width="2.5" fill="none"/></g>
+      <text data-k="ang" x="0" y="54" text-anchor="middle" font-size="10" fill="var(--ink-2)" font-family="var(--mono)">---°</text>
+    </svg>
+    <div class="meter"><span class="lbl">rpm</span><span class="track"><span class="fill" data-k="rpmF"></span></span><span class="num" data-k="rpm">--</span></div>
+    <div class="meter"><span class="lbl">load</span><span class="track"><span class="fill" data-k="loadF" style="background:var(--own)"></span></span><span class="num" data-k="load">--</span></div>`);
+  const q = k => host.querySelector(`[data-k="${k}"]`);
+  return {side, pod:q("pod"), thr:q("thr"), ord:q("ord"), ang:q("ang"), rpmF:q("rpmF"), rpm:q("rpm"), loadF:q("loadF"), load:q("load")};
+}
+let pods;
+function drawPod(p) {
+  const s = p.side, rpm = get(`gunnerus/azimuth/${s}/rpm`).v, load = get(`gunnerus/azimuth/${s}/load`).v;
+  let ang = null, kind = "";
+  if (inFine()) {
+    const fb = get(`gunnerus/azimuth/${s}/angle`, 120), or = get(`gunnerus/azimuth/${s}/angle_order`, 120);
+    if (isNum(fb.v)) { ang = fb.v; kind = "fb"; } else if (isNum(or.v)) { ang = or.v; kind = "order"; }
+  }
+  p.pod.style.display = ang === null ? "none" : "";
+  if (ang !== null) p.pod.setAttribute("transform", `rotate(${ang})`);
+  p.thr.style.opacity = isNum(rpm) && Math.abs(rpm) > 5 ? 1 : .15;
+  p.ang.textContent = ang === null ? (inFine() ? "no angle" : "angle: 1 Hz") : `${ang.toFixed(0)}°${kind === "order" ? " (order)" : ""}`;
+  p.rpmF.style.width = `${Math.min(100, Math.abs(rpm || 0))}%`;
+  p.rpm.textContent = fmt(rpm, 0, "--");
+  p.loadF.style.width = `${Math.min(100, Math.max(0, load || 0))}%`;
+  p.load.textContent = fmt(load, 0, "--");
+}
+
+/* ---------- power plant (simplified single-line view) ---------- */
+let gens = [], loads = {};
+function buildPlant() {
+  const gh = $("gens");
+  for (const n of [1, 2, 3]) {
+    gh.insertAdjacentHTML("beforeend", `
+      <div class="cell"><div class="node" id="gen${n}">
+        <h3><span class="nm"><span class="sym" style="border-color:var(--e${n})">G</span>Genset ${n}</span><span class="run" data-k="run">STOP</span></h3>
+        <div class="bar2" style="height:10px;background:var(--panel);border:1px solid var(--rule);border-radius:2px;position:relative;overflow:hidden;margin-bottom:5px">
+          <span class="fill" data-k="bar" style="position:absolute;inset:0 auto 0 0;width:0;background:var(--e${n})"></span></div>
+        <div class="kv"><span><b data-k="kw">---</b> kW</span><span><b data-k="pct">--</b> %</span><span><b data-k="rpm">----</b> rpm</span><span><b data-k="lph">--.-</b> L/h</span></div>
+        <div class="kv" data-k="det" style="margin-top:4px;font-size:.7rem;color:var(--ink-3)"></div>
+      </div><div class="wire" data-k="w"><span class="brk"></span></div></div>`);
+    const h = gh.lastElementChild, q = k => h.querySelector(`[data-k="${k}"]`);
+    gens.push({n, node:h.querySelector(".node"), w:q("w"), run:q("run"), bar:q("bar"), kw:q("kw"), pct:q("pct"), rpm:q("rpm"), lph:q("lph"), det:q("det")});
+  }
+  const lh = $("loads");
+  const add = (key, name, sym, body, nl) => {
+    lh.insertAdjacentHTML("beforeend", `<div class="cell"><div class="wire" data-k="w"></div>
+      <div class="node${nl ? " nl" : ""}"><h3><span class="nm"><span class="sym">${sym}</span>${name}</span>${nl ? "" : '<span class="run" data-k="run">OFF</span>'}</h3>${body}</div></div>`);
+    const c = lh.lastElementChild, q = k => c.querySelector(`[data-k="${k}"]`);
+    loads[key] = {node:c.querySelector(".node"), w:q("w"), run:q("run"), a:q("a"), b:q("b")};
+  };
+  const azi = `<div class="kv"><span>rpm <b data-k="a">--</b></span><span>load <b data-k="b">--</b></span></div><div class="nlx">units as logged · converter not logged</div>`;
+  add("port", "Port azimuth", "M", azi);
+  add("stbd", "Stbd azimuth", "M", azi);
+  add("bow", "Bow thruster", "M", `<div class="kv"><span>feedback <b data-k="a">--</b> %</span></div><div class="nlx">zero all week</div>`);
+  add("other", "Other consumers", "…", `<div class="nlx">Hotel, deck machinery, winches, research equipment: not logged</div>`, true);
+}
+function drawPlant() {
+  let tot = 0, fuel = 0, any = false, nOn = 0;
+  for (const g of gens) {
+    const kw = get(`gunnerus/engine/${g.n}/load`).v, rpm = get(`gunnerus/engine/${g.n}/speed`).v, lph = get(`gunnerus/engine/${g.n}/fuel`).v;
+    const on = isNum(kw) && kw > 5; if (on) nOn++;
+    g.run.textContent = on ? "RUN" : "STOP"; g.run.classList.toggle("on", on);
+    g.node.classList.toggle("on", on); g.w.classList.toggle("on", on);
+    g.bar.style.width = `${Math.min(100, Math.max(0, (kw || 0) / RATED_KW * 100))}%`;
+    g.kw.textContent = fmt(kw, 0); g.pct.textContent = isNum(kw) ? (kw / RATED_KW * 100).toFixed(0) : "--";
+    g.rpm.textContent = fmt(rpm, 0, "----"); g.lph.textContent = fmt(lph, 1, "--.-");
+    if (isNum(kw)) { tot += kw; any = true; } if (isNum(lph)) fuel += lph;
+    if (inFine()) {
+      const v = q => get(`gunnerus/engine/${g.n}/${q}`).v;
+      g.det.innerHTML = `<span>coolant ${fmt(v("coolant_temp"), 0, "--")}°</span><span>oil ${fmt(v("lube_oil_temp"), 0, "--")}° ${fmt(v("lube_oil_press"), 1, "-.-")} bar</span>
+        <span>exhaust ${fmt(v("exhaust_temp_1"), 0, "---")}/${fmt(v("exhaust_temp_2"), 0, "---")}°</span><span>boost ${fmt(v("boost_press"), 2, "-.--")}</span>`;
+    } else g.det.innerHTML = "";
+  }
+  $("bus").classList.toggle("on", nOn > 0);
+  $("engCount").textContent = `${nOn} of 3 gensets running`;
+  for (const s of ["port", "stbd"]) {
+    const L_ = loads[s], rpm = get(`gunnerus/azimuth/${s}/rpm`).v, ld = get(`gunnerus/azimuth/${s}/load`).v, on = isNum(rpm) && Math.abs(rpm) > 5;
+    L_.a.textContent = fmt(rpm, 0, "--"); L_.b.textContent = fmt(ld, 0, "--");
+    L_.run.textContent = on ? "RUN" : "IDLE"; L_.run.classList.toggle("on", on); L_.node.classList.toggle("on", on); L_.w.classList.toggle("on", on && nOn > 0);
+  }
+  const bt = get("gunnerus/tunnel/bow/feedback").v, bon = isNum(bt) && Math.abs(bt) > 1, B = loads.bow;
+  B.a.textContent = fmt(bt, 0, "--"); B.run.textContent = bon ? "RUN" : "OFF"; B.run.classList.toggle("on", bon); B.node.classList.toggle("on", bon); B.w.classList.toggle("on", bon && nOn > 0);
+  $("vLoad").innerHTML = `${any ? tot.toFixed(0) : "---"}<small>kW</small>`;
+  $("vFuel").innerHTML = `${any ? fuel.toFixed(1) : "--.-"}<small>L/h</small>`;
+  const [i] = wIdx(), dayStart = Math.floor(((simT + LT_OFFSET_H * 3600e3) / 86400e3)) * 86400e3 - LT_OFFSET_H * 3600e3;
+  const j = Math.max(0, Math.floor((dayStart - T0) / 60000));
+  $("vFuelDay").innerHTML = `${(cumFuel[i] - cumFuel[j]).toFixed(0)}<small>L</small>`;
+  $("vEnDay").innerHTML = `${(cumEn[i] - cumEn[j]).toFixed(0)}<small>kWh</small>`;
+  $("dayNote").textContent = dayStart < T0 ? "since data start, 01:00 ship time" : "derived from logged rates";
+}
+
+/* ---------- event log (derived) ---------- */
+let EVENTS = [], transits = [], evShown = -1, evJumped = false;
+function runs(flag, minRun) {   // accepted on/off changes, each kept for at least minRun minutes
+  const out = []; let cur = null, i = 0;
+  while (i < flag.length) {
+    if (flag[i] === null || flag[i] === cur) { i++; continue; }
+    let k = i; while (k < flag.length && (flag[k] === flag[i] || flag[k] === null)) k++;
+    if (k - i >= minRun || cur === null) { if (cur !== null) out.push([i, flag[i]]); cur = flag[i]; }
+    i = k;
+  }
+  return out;
+}
+function buildEvents() {
+  const ev = [], at = i => T0 + i * 60000;
+  for (const n of [1, 2, 3]) {
+    const a = W.data[`gunnerus/engine/${n}/load`].map(v => v === null ? null : v > 5);
+    for (const [i, on] of runs(a, 2)) ev.push({t:at(i), cat:"ENGINE", text:`Genset ${n} ${on ? "started" : "stopped"}`});
+  }
+  for (const s of ["port", "stbd"]) {
+    const a = W.data[`gunnerus/azimuth/${s}/rpm`].map(v => v === null ? null : Math.abs(v) > 5);
+    for (const [i, on] of runs(a, 2)) ev.push({t:at(i), cat:"PROP", text:`${s === "port" ? "Port" : "Starboard"} azimuth ${on ? "running" : "idle"}`});
+  }
+  const st = W.data["gunnerus/ops/state"], sog = W.data["gunnerus/nav/gps/sog"];
+  for (const [i, v] of runs(st, 3)) ev.push({t:at(i), cat:"NAV", text:`${STATE[v] ? STATE[v].label : v}${v === "transit" ? `, ${fmt(sog[Math.min(W.n - 1, i + 2)], 1)} kn` : ""}`});
+  if (F) { ev.push({t:FT0, cat:"DATA", text:"Wave-shielding test starts (wave radar on)"}); ev.push({t:FTN, cat:"DATA", text:"Wave-shielding test ends"}); }
+  EVENTS = ev.sort((a, b) => a.t - b.t);
+  let i = 0;
+  while (i < W.n) { if (st[i] !== "transit") { i++; continue; } let k = i; while (k < W.n && st[k] === "transit") k++; if (k - i >= 12) transits.push([at(i), at(k)]); i = k; }
+}
+function drawEvents() {
+  let n = 0; while (n < EVENTS.length && EVENTS[n].t <= simT) n++;
+  if (n === evShown) return;
+  const flash = !evJumped && evShown >= 0 && n === evShown + 1; evShown = n; evJumped = false;
+  const list = EVENTS.slice(Math.max(0, n - 12), n).reverse();
+  $("events").innerHTML = list.length ? list.map((e, k) => { const d = new Date(e.t + LT_OFFSET_H * 3600e3);
+    return `<li data-t="${e.t}"${k === 0 && flash ? ' class="new"' : ""}><time>${DAYS[d.getUTCDay()]} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}</time><span class="cat ${e.cat}">${e.cat}</span><span>${e.text}</span></li>`; }).join("")
+    : '<li class="empty">No events yet in the replay.</li>';
+}
+$("events").addEventListener("click", e => { const li = e.target.closest("li[data-t]"); if (li) jump(+li.dataset.t); });
+function randomSailing() { const [a, b] = transits[Math.floor(Math.random() * transits.length)]; return a + Math.random() * Math.max(0, b - a - 10 * 60e3); }
+function nextDeparture() { const n = transits.find(([a]) => a - 3 * 60e3 > simT + 60e3) || transits[0]; return n[0] - 3 * 60e3; }
+
+/* ---------- chart ---------- */
+let map = null, ownMk = null, vecLn = null, trail = null, baseLayer = null, follow = true, tileOk = 0, tileErr = 0;
+const KV = l => `https://cache.kartverket.no/v1/wmts/1.0.0/${l}/default/webmercator/{z}/{y}/{x}.png`;
+function shipIcon(h, isHdg) {
+  const col = css("--own");
+  return L.divIcon({className:"ownship", iconSize:[44, 44], iconAnchor:[22, 22],
+    html:`<svg width="44" height="44" viewBox="-22 -22 44 44" style="transform:rotate(${h || 0}deg)">
+      <path d="M0,-17 C5,-11 6,4 5,14 L-5,14 C-6,4 -5,-11 0,-17 Z" fill="${col}" fill-opacity=".25" stroke="${col}" stroke-width="2" ${isHdg ? "" : 'stroke-dasharray="3 2"'}/>
+      <circle r="2" fill="${col}"/></svg>`});
+}
+function setBase(layer) {
+  document.querySelectorAll("#baseSeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.layer === layer)));
+  if (!map) return;
+  if (baseLayer) { map.removeLayer(baseLayer); baseLayer = null; }
+  if (layer) {
+    baseLayer = L.tileLayer(KV(layer), {maxZoom:16, attribution:'&copy; <a href="https://www.kartverket.no/">Kartverket</a>'});
+    baseLayer.on("tileload", () => { tileOk++; $("mapNote").hidden = true; });
+    baseLayer.on("tileerror", () => { tileErr++; if (!tileOk && tileErr > 3) { $("mapNote").hidden = false;
+      $("mapNote").textContent = "Chart tiles from Kartverket could not load here. They load on the published site. Positions and track are still drawn."; } });
+    baseLayer.addTo(map);
+  }
+}
+function buildMap() {
+  if (typeof L === "undefined") { $("mapNote").hidden = false; $("mapNote").textContent = "The map library could not load. All other readouts work."; return; }
+  map = L.map("map", {zoomControl:false, attributionControl:true, zoomSnap:.5}).setView([62.5, 6.2], 11);
+  L.control.zoom({position:"topright"}).addTo(map);
+  map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
+  const la = W.data["gunnerus/nav/gps/lat"], lo = W.data["gunnerus/nav/gps/lon"], segs = [[]];
+  for (let i = 0; i < W.n; i++) { if (la[i] === null) { if (segs.at(-1).length) segs.push([]); } else segs.at(-1).push([la[i], lo[i]]); }
+  L.polyline(segs, {color:css("--ink-3"), weight:1.2, opacity:.7, dashArray:"3 4", interactive:false}).addTo(map);
+  trail = L.polyline([], {color:css("--own"), weight:2.5, opacity:.9, interactive:false}).addTo(map);
+  vecLn = L.polyline([], {color:css("--own"), weight:2, interactive:false}).addTo(map);
+  ownMk = L.marker([62.5, 6.2], {icon:shipIcon(0, false), interactive:false, keyboard:false}).addTo(map);
+  map.on("dragstart", () => { follow = false; $("followBtn").setAttribute("aria-pressed", "false"); });
+  setBase("sjokartraster");
+}
+let trailMinute = -1, lastIconKey = "";
+function drawMap(pos, h, isHdg, sog) {
+  if (!map || !pos) return;
+  ownMk.setLatLng(pos);
+  const key = `${Math.round((h || 0) * 2)}|${isHdg}|${document.documentElement.dataset.bridge}`;
+  if (key !== lastIconKey) { ownMk.setIcon(shipIcon(h, isHdg)); lastIconKey = key; }
+  // 6-minute speed vector, as on an ECDIS
+  const cog = inFine() ? get("gunnerus/nav/gps/cog").v : lastCourse();
+  if (isNum(sog) && sog >= 0.5 && isNum(cog)) {
+    const d = sog * 0.1 * 1852, r = cog * Math.PI / 180;
+    const dLat = d * Math.cos(r) / 111320, dLon = d * Math.sin(r) / (111320 * Math.cos(pos[0] * Math.PI / 180));
+    vecLn.setLatLngs([pos, [pos[0] + dLat, pos[1] + dLon]]);
+  } else vecLn.setLatLngs([]);
+  const [i] = wIdx();
+  if (i !== trailMinute) {
+    trailMinute = i;
+    const la = W.data["gunnerus/nav/gps/lat"], lo = W.data["gunnerus/nav/gps/lon"], pts = [];
+    for (let k = Math.max(0, i - 180); k <= i; k++) if (la[k] !== null) pts.push([la[k], lo[k]]);
+    trail.setLatLngs(pts);
+  }
+  if (follow) map.panTo(pos, {animate:false});
+}
+
+/* ---------- timeline ---------- */
+const tl = $("tl"); let tlBg = null;
+function drawTlBg() {
+  const r = tl.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  if (r.width < 10) return;
+  tl.width = Math.round(r.width * dpr); tl.height = Math.round(78 * dpr);
+  const off = document.createElement("canvas"); off.width = tl.width; off.height = tl.height;
+  const c = off.getContext("2d"); c.scale(dpr, dpr);
+  const w = r.width, H = 78, top = 16, bandH = 8, plotTop = top + bandH + 4, plotH = H - plotTop - 2;
+  const st = W.data["gunnerus/ops/state"], x = i => i / W.n * w;
+  const load = new Array(W.n).fill(0).map((_, i) => [1, 2, 3].reduce((s, n) => s + (W.data[`gunnerus/engine/${n}/load`][i] || 0), 0));
+  for (let i = 0; i < W.n; i++) { const s = STATE[st[i]]; if (!s) continue; c.fillStyle = css(s.tok); c.fillRect(x(i), top, Math.max(1, w / W.n + .5), bandH); }
+  c.beginPath(); c.moveTo(0, plotTop + plotH);
+  const step = Math.max(1, Math.floor(W.n / w));
+  for (let i = 0; i < W.n; i += step) { let m = 0; for (let k = i; k < i + step && k < W.n; k++) m = Math.max(m, load[k]); c.lineTo(x(i), plotTop + plotH - m / 800 * plotH); }
+  c.lineTo(w, plotTop + plotH); c.closePath(); c.fillStyle = css("--rule-2"); c.fill();
+  c.font = `500 10px ${css("--mono")}`; c.fillStyle = css("--ink-2"); c.strokeStyle = css("--ink-3");
+  for (let d = 0; d <= 5; d++) {
+    const xi = x(d * 1440); c.beginPath(); c.moveTo(xi, 0); c.lineTo(xi, H); c.lineWidth = .6; c.stroke();
+    if (d < 5) { const dt = new Date(T0 + d * 86400e3); c.fillText(`${DAYS[dt.getUTCDay()]} ${dt.getUTCDate()} ${MON[dt.getUTCMonth()]}`, xi + 4, 11); }
+  }
+  if (F) { const a = x((FT0 - T0) / 60000), b = x((FTN - T0) / 60000); c.fillStyle = css("--ok"); c.fillRect(a, plotTop + plotH - 3, Math.max(2, b - a), 3);
+    c.fillText("waves", a + 2, plotTop + 10); }
+  tlBg = off;
+}
+function drawTl() {
+  if (!tlBg || !tlBg.width || !tl.width) return;
+  const c = tl.getContext("2d"), dpr = window.devicePixelRatio || 1, w = tl.width / dpr;
+  c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, tl.width, tl.height); c.drawImage(tlBg, 0, 0);
+  c.scale(dpr, dpr);
+  const xx = (simT - T0) / (TN - T0) * w;
+  c.fillStyle = css("--own"); c.fillRect(xx - 1, 12, 2, 66);
+  c.beginPath(); c.moveTo(xx - 5, 12); c.lineTo(xx + 5, 12); c.lineTo(xx, 18); c.fill();
+}
+function tlSeek(ev) { const r = tl.getBoundingClientRect(); const f = Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width)); jump(T0 + f * (TN - T0)); }
+tl.addEventListener("pointerdown", e => { tl.setPointerCapture(e.pointerId); tlSeek(e); tl.onpointermove = tlSeek; });
+tl.addEventListener("pointerup", () => { tl.onpointermove = null; });
+
+/* ---------- topics table ---------- */
+let rows = {};
+function buildTopics() {
+  const tb = $("topics"), all = {};
+  for (const [t, m] of Object.entries(W.topics)) all[t] = {m, w:true};
+  const D = Object.values(DAY).find(d => d && d.arr);
+  if (D) for (const [t, m] of Object.entries(D.topics)) all[t] = Object.assign(all[t] || {m}, {d:true, m});
+  if (F) for (const [t, m] of Object.entries(F.topics)) if (!all[t]) all[t] = {m, f:true};
+  const names = Object.keys(all).sort();
+  let html = "";
+  for (const t of names) {
+    const {m, w, d, f} = all[t];
+    const tag = d && !w ? ' <span class="st nl" title="From the 1 Hz day files">1 Hz</span>' : f ? ' <span class="st nl" title="Only during the wave-shielding test, 31 Oct 10:00-12:10 UTC">31 Oct test</span>' : "";
+    html += `<tr data-t="${t}"><td class="t">${t}</td><td class="v" data-v>---</td><td>${m.unit}</td>
+      <td><span class="st ${m.status}">${m.status}</span>${tag}</td><td class="num">${m.crosswalk || ""}</td></tr>`;
+  }
+  for (const [t, cw, dsc] of NOT_LOGGED) html += `<tr class="nl" title="${dsc}"><td class="t" style="color:var(--ink-3)">${t}</td><td class="v">no data</td><td></td><td><span class="st nl">not logged</span></td><td class="num">${cw}</td></tr>`;
+  tb.innerHTML = html; rows = {};
+  tb.querySelectorAll("tr[data-t]").forEach(tr => { rows[tr.dataset.t] = tr.querySelector("[data-v]"); tr.addEventListener("click", () => { selTopic = tr.dataset.t; markSel(); drawMsg(); }); });
+  $("topCount").textContent = `${names.length} topics with data · ${NOT_LOGGED.length} listed, not logged`;
+  markSel();
+}
+function markSel() { document.querySelectorAll("#topics tr").forEach(tr => tr.classList.toggle("sel", tr.dataset.t === selTopic)); }
+function topicMeta(t) { const D = curDay(); return (D && D.topics[t]) || (F && inWaveWindow() && F.topics[t]) || W.topics[t] || (F && F.topics[t]); }
+function drawTopics() {
+  for (const [t, cell] of Object.entries(rows)) {
+    const r = get(t), v = r.v;
+    cell.textContent = v === null || v === undefined ? "–" : typeof v === "number" ? (Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2)) : v;
+    cell.style.color = v === null || v === undefined ? "var(--ink-3)" : "";
+  }
+}
+function drawMsg() {
+  const m = topicMeta(selTopic), r = get(selTopic);
+  if (!m) { $("msg").textContent = "Select a topic."; return; }
+  const msg = {topic:selTopic, payload:{t:r.t ? new Date(r.t).toISOString().replace(".000", "") : null, v:r.v ?? null, unit:m.unit, status:m.status, rate:r.src === "1 Hz" ? "1 Hz" : "1 min", crosswalk:m.crosswalk || null},
+    meta_topic:`${selTopic}/$meta`, meta:{source:m.source, description:m.description}};
+  $("msg").textContent = JSON.stringify(msg, null, 2);
+}
+
+/* ---------- main readouts ---------- */
+function setRead(id, txt, unit) { $(id).querySelector(".val").innerHTML = `${txt}<small>${unit}</small>`; }
+function ui() {
+  const d = new Date(simT), lt = new Date(simT + LT_OFFSET_H * 3600e3), fine = inFine();
+  $("clkUtc").textContent = fmtHMS(d); $("clkLt").textContent = fmtHMS(lt); $("clkDate").textContent = fmtDate(lt);
+  if (W) ensureDay(dayKey(simT));
+  const rb = $("rateBadge"); rb.textContent = fine ? "1 Hz data" : DAY[dayKey(simT)] === "loading" ? "Loading 1 Hz…" : "1-min data"; rb.classList.toggle("fine", fine);
+  for (const id of ["hdgOnly", "motOnly", "angOnly", "craneOnly"]) $(id).hidden = fine;
+  for (const id of ["pMotion", "pCrane", "rdHdg", "rdRot"]) $(id).classList.toggle("dim", !fine);
+
+  const [h, hk] = heading(), sog = get("gunnerus/nav/gps/sog").v;
+  const cog = fine ? get("gunnerus/nav/gps/cog").v : lastCourse();
+  const wind = fine ? get("gunnerus/env/wind/dir").v : null;
+  drawCompass(h, isNum(sog) && sog >= .5 ? cog : null, wind);
+  lubLbl.textContent = hk === "HDG" ? "" : "COG";
+  setRead("rdHdg", fine && hk === "HDG" ? pad(Math.round(h) % 360, 3) : "---", "°");
+  setRead("rdCog", isNum(cog) && isNum(sog) && sog >= .5 ? pad(Math.round(cog) % 360, 3) : "---", "°");
+  $("rdCog").querySelector(".sub").textContent = fine ? "GPS" : "from 1-min track";
+  setRead("rdSog", fmt(sog, 1, "--.-"), "kn");
+  const rot = fine ? get("gunnerus/nav/mru/yaw_rate").v : null;
+  setRead("rdRot", isNum(rot) ? (rot * 60).toFixed(0) : "---", "°/min");
+
+  const pos = position();
+  $("pos").innerHTML = pos ? `${dm(pos[0], true)}<br>${dm(pos[1], false)}` : "no position";
+  const s = STATE[get("gunnerus/ops/state").v];
+  const chip = $("stateChip"); chip.textContent = s ? s.label : "No state"; chip.style.background = s ? `var(${s.tok})` : "var(--off)";
+  $("stateRule").textContent = s ? s.rule : "";
+
+  const roll = fine ? get("gunnerus/nav/mru/roll").v : null, pitch = fine ? get("gunnerus/nav/mru/pitch").v : null, heave = fine ? get("gunnerus/nav/mru/heave").v : null;
+  $("gRoll").setAttribute("transform", `rotate(${isNum(roll) ? roll * 2 : 0})`);
+  $("gPitch").setAttribute("transform", `rotate(${isNum(pitch) ? -pitch * 3 : 0})`);
+  $("vRoll").textContent = `${fmt(roll, 1, "--.-")}°`; $("vPitch").textContent = `${fmt(pitch, 1, "--.-")}°`;
+  $("vHeave").textContent = `${fmt(heave, 2, "-.--")} m`;
+  $("heaveMark").style.top = `${50 - Math.max(-1, Math.min(1, (heave || 0) / 2)) * 46}%`;
+  setRead("rdWs", fine ? fmt(get("gunnerus/env/wind/speed").v, 1, "--.-") : "--.-", "kn");
+  setRead("rdWd", isNum(wind) ? pad(Math.round(wind) % 360, 3) : "---", "°");
+
+  pods.forEach(drawPod);
+  $("vTunnel").textContent = `${fmt(get("gunnerus/tunnel/bow/feedback").v, 0, "---")} %`;
+  drawPlant(); drawEvents();
+  const ww = inWaveWindow(), hs = ww ? get("gunnerus/env/waves/hs_rangefinder", 180).v : null, ts = ww ? get("gunnerus/env/waves/ts_rangefinder", 180).v : null, hx = ww ? get("gunnerus/env/waves/hs_wavex", 180).v : null;
+  setRead("rdHs", fmt(hs, 2, "-.--"), "m"); setRead("rdTs", fmt(ts, 1, "-.-"), "s");
+  $("hsSub").textContent = isNum(hx) ? `RangeFinder · WaveX ${hx.toFixed(2)} m` : inWaveWindow() ? "wave radar, RangeFinder" : "only during the 31 Oct test";
+  $("tsSub").textContent = inWaveWindow() ? "RangeFinder Ts" : "only during the 31 Oct test";
+  for (const [id, t, unit] of [["rdSlew", "slew", "°"], ["rdBoom", "boom", "°"], ["rdOuter", "outer_boom", "°"], ["rdExt", "extension", "as logged"]])
+    setRead(id, fine ? fmt(get(`gunnerus/crane/main/${t}`).v, 0) : "---", unit);
+
+  drawMap(pos, h, hk === "HDG", sog);
+  drawTopics(); drawMsg();
+}
+
+/* ---------- playback ---------- */
+function jump(t) { simT = Math.min(TN - 1, Math.max(T0, t)); trailMinute = -1; evJumped = true; ui(); drawTl(); }
+function frame(now) {
+  if (!lastFrame) lastFrame = now;
+  const dt = Math.min(250, now - lastFrame); lastFrame = now;
+  if (playing) { simT += dt * speed; if (simT >= TN) simT = T0; }
+  if (now - lastUi > 90) { lastUi = now; ui(); drawTl(); }
+  requestAnimationFrame(frame);
+}
+$("playBtn").onclick = () => { playing = !playing; $("playBtn").textContent = playing ? "Pause" : "Play"; };
+document.querySelectorAll("#speedSeg button").forEach(b => b.onclick = () => {
+  speed = +b.dataset.speed; document.querySelectorAll("#speedSeg button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); });
+$("randBtn").onclick = () => jump(randomSailing());
+$("nextBtn").onclick = () => jump(nextDeparture());
+$("fineBtn").onclick = () => { jump(FT0 + 60e3); setSpeed(1); };
+function setSpeed(v) { speed = v; document.querySelectorAll("#speedSeg button").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.speed === v))); }
+$("gotoForm").addEventListener("submit", e => { e.preventDefault();
+  const [hh, mm] = ($("gotoTime").value || "00:00").split(":").map(Number); jump(+$("gotoDay").value + (hh * 60 + mm) * 60e3); });
+$("followBtn").onclick = () => { follow = !follow; $("followBtn").setAttribute("aria-pressed", String(follow)); if (follow) ui(); };
+document.querySelectorAll("#baseSeg button").forEach(b => b.onclick = () => setBase(b.dataset.layer));
+function setPalette(p) {
+  document.documentElement.dataset.bridge = p;
+  $("palNight").setAttribute("aria-pressed", String(p === "night")); $("palDay").setAttribute("aria-pressed", String(p === "day"));
+  try { localStorage.setItem("gunnerus-bridge-palette", p); } catch (e) {}
+  if (map) { trail.setStyle({color:css("--own")}); vecLn.setStyle({color:css("--own")}); }
+  lastIconKey = ""; if (W) { drawTlBg(); drawLegend(); ui(); drawTl(); }
+}
+$("palNight").onclick = () => setPalette("night"); $("palDay").onclick = () => setPalette("day");
+function drawLegend() {
+  $("legend").innerHTML = Object.values(STATE).map(s => `<span><i style="background:var(${s.tok})"></i>${s.label}</span>`).join("") +
+    `<span><i style="background:var(--rule-2)"></i>Total engine load, 0–800 kW</span><span><i style="background:var(--ok)"></i>Wave-shielding test (wave radar)</span>`;
+}
+window.addEventListener("resize", () => { if (W) { drawTlBg(); drawTl(); } });
+
+/* ---------- start ---------- */
+async function start() {
+  try { const p = localStorage.getItem("gunnerus-bridge-palette"); if (p === "day") setPalette("day"); } catch (e) {}
+  try { W = await loadJSON("replay-2023-w44.json"); }
+  catch (e) { $("console").innerHTML = `<p class="loading">The replay file could not load (${e.message}). Serve the repository root (python3 -m http.server) and open /pages/virtual.html.</p>`; return; }
+  T0 = Date.parse(W.t0); TN = T0 + W.n * 60000;
+  try { F = await loadJSON("replay-2023-10-31-wave-test.json"); FT0 = Date.parse(F.t0); FTN = FT0 + F.n * 1000; } catch (e) { F = null; $("fineBtn").disabled = true; }
+  cumFuel = new Float64Array(W.n + 1); cumEn = new Float64Array(W.n + 1);
+  for (let i = 0; i < W.n; i++) {
+    let f = 0, e = 0; for (const n of [1, 2, 3]) { f += W.data[`gunnerus/engine/${n}/fuel`][i] || 0; e += W.data[`gunnerus/engine/${n}/load`][i] || 0; }
+    cumFuel[i + 1] = cumFuel[i] + f / 60; cumEn[i + 1] = cumEn[i] + e / 60;
+  }
+  const sel = $("gotoDay");
+  for (let d = 0; d < 5; d++) { const dt = new Date(T0 + d * 86400e3); sel.insertAdjacentHTML("beforeend", `<option value="${T0 + d * 86400e3}">${DAYS[dt.getUTCDay()]} ${dt.getUTCDate()} ${MON[dt.getUTCMonth()]}</option>`); }
+  buildCompass(); buildIncl(); pods = [buildPod("podP", "port"), buildPod("podS", "stbd")]; buildPlant(); buildEvents(); buildMap(); buildTopics(); drawLegend();
+  simT = randomSailing(); evJumped = true;
+  await Promise.race([ensureDay(dayKey(simT)), new Promise(r => setTimeout(r, 8000))]);
+  drawTlBg(); ui(); drawTl(); if (map) map.setView(position() || [62.5, 6.2], 13);
+  requestAnimationFrame(frame);
+}
+start();
+})();
+</script>
+</body>
+</html>

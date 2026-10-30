@@ -1,5 +1,5 @@
 # Publishes the showcase page in /pages to GitHub Pages,
-# together with the metadata JSON and the web 3D model from /derived.
+# together with the metadata JSON, the web 3D model from /derived and the replay data from /virtual.
 # One-time setup: Settings → Pages → Build and deployment → Source: "GitHub Actions".
 name: Deploy showcase page
 
@@ -10,6 +10,7 @@ on:
       - "pages/**"
       - "metadata/**"
       - "derived/**"
+      - "virtual/data/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -37,6 +38,7 @@ jobs:
             pages
             metadata
             derived
+            virtual/data
           sparse-checkout-cone-mode: true
 
       - name: Assemble site
@@ -47,6 +49,8 @@ jobs:
           cp metadata/gunnerus_metadata.json _site/metadata/
           mkdir -p _site/assets
           cp derived/3d/gunnerus.glb derived/3d/gunnerus-parts.json _site/assets/
+          mkdir -p _site/assets/virtual
+          cp virtual/data/*.json _site/assets/virtual/
           touch _site/.nojekyll
 
       - uses: actions/configure-pages@v5
