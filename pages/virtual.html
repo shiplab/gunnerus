@@ -22,6 +22,7 @@
   --m0:#7d8c94; --m1:#3fc2a6; --m2:#e6b53a; --m3:#6aa8e8;
   --e1:#a98ad2; --e2:#e69a52; --e3:#5fc0b2;
   --ok:#4fc28a; --warn:#f0c57a; --off:#3a4a56;
+  --s1:#35577e; --s2:#3f86b8; --s3:#47b3a2; --s4:#d6c24c; --s5:#f08a4b;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --body:"Barlow","Segoe UI",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -34,6 +35,7 @@
   --m0:#6b7a84; --m1:#16927a; --m2:#b8860b; --m3:#2a6fc0;
   --e1:#7a5bb0; --e2:#c06a1e; --e3:#2b8f84;
   --ok:#1f8a55; --warn:#9a5b00; --off:#c3cdd3;
+  --s1:#9fbcd8; --s2:#4f88c2; --s3:#24907f; --s4:#c09a1c; --s5:#cf5a22;
 }
 *{box-sizing:border-box}
 html,body{background:var(--bg);color:var(--ink)}
@@ -104,6 +106,7 @@ button,select,input{font:inherit;color:inherit}
 .btn:hover{border-color:var(--accent)}
 .btn.play{min-width:84px;color:var(--read)}
 .goto{display:flex;gap:6px;align-items:center}
+.linkout{flex:1 1 260px;min-width:0;background:var(--panel-2);border:1px solid var(--rule-2);border-radius:4px;padding:5px 6px;font:500 .78rem var(--mono);color:var(--read)}
 .goto select,.goto input{background:var(--panel-2);border:1px solid var(--rule-2);border-radius:4px;padding:5px 6px;font:500 .85rem var(--mono)}
 #tl{display:block;width:100%;height:78px;cursor:pointer;touch-action:none}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;color:var(--ink-2)}
@@ -111,8 +114,13 @@ button,select,input{font:inherit;color:inherit}
 
 /* propulsion */
 .pods{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.pod svg{display:block;width:100%;max-width:130px;margin:0 auto;aspect-ratio:1}
-.pod h3{margin:0 0 4px;text-align:center}
+.pod h3{margin:0 0 2px}
+#dpView{display:block;width:100%;height:330px;margin:0 auto 6px}
+#dpView text{font-family:var(--mono)}
+.trendwrap{position:relative}
+#trend{display:block;width:100%;height:300px}
+.trackleg{display:flex;flex-wrap:wrap;gap:4px 10px;background:var(--panel);border:1px solid var(--rule-2);border-radius:4px;padding:5px 8px;font-size:.72rem;color:var(--ink-2)}
+.trackleg i{display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:4px;vertical-align:2px}
 .meter{display:grid;grid-template-columns:44px 1fr 54px;align-items:center;gap:6px;font-size:.78rem;margin-top:5px}
 .meter .track{height:8px;background:var(--panel-2);border:1px solid var(--rule);border-radius:2px;position:relative;overflow:hidden}
 .meter .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--accent)}
@@ -173,8 +181,10 @@ button,select,input{font:inherit;color:inherit}
 .notlogged{display:flex;justify-content:space-between;gap:10px;font-size:.8rem;color:var(--ink-3);border:1px dashed var(--rule-2);border-radius:3px;padding:6px 8px;margin-top:10px}
 
 /* motion */
-.incl{display:grid;grid-template-columns:1fr 1fr 64px;gap:8px;align-items:end}
-.incl svg{display:block;width:100%;aspect-ratio:1.5}
+.incl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:6px 10px;align-items:end}
+.incl svg{display:block;width:100%;height:118px}
+.incl .read .val{font-size:1.05rem}
+.incl .lbl small{font:500 .62rem var(--mono);letter-spacing:0;text-transform:none;color:var(--ink-3)}
 .heave{height:76px;width:14px;margin:0 auto;border:1px solid var(--rule-2);border-radius:2px;position:relative;background:var(--panel-2)}
 .heave i{position:absolute;left:-4px;right:-4px;height:3px;background:var(--own);top:50%}
 .heave::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--ink-3)}
@@ -261,9 +271,8 @@ pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid va
     <section class="panel" id="pMotion" aria-labelledby="hMot">
       <h2><span class="lbl" id="hMot">Motion and wind</span><span class="only" id="motOnly">Waiting for 1 Hz data</span></h2>
       <div class="incl">
-        <div class="read"><span class="lbl">Roll</span><svg id="svRoll" viewBox="-60 -40 120 80" aria-hidden="true"></svg><span class="val num" id="vRoll" style="font-size:1.05rem">--.-°</span></div>
-        <div class="read"><span class="lbl">Pitch</span><svg id="svPitch" viewBox="-60 -40 120 80" aria-hidden="true"></svg><span class="val num" id="vPitch" style="font-size:1.05rem">--.-°</span></div>
-        <div class="read" style="align-items:center"><span class="lbl">Heave</span><div class="heave"><i id="heaveMark"></i></div><span class="val num" id="vHeave" style="font-size:1.05rem">-.--</span></div>
+        <div class="read"><span class="lbl">Roll <small>drawn ×2</small></span><svg id="svRoll" viewBox="-8 -18.6 16 22.2" preserveAspectRatio="xMidYMax meet" aria-label="Gunnerus seen from astern, rolling"></svg><span class="val num" id="vRoll">--.-°</span></div>
+        <div class="read"><span class="lbl">Pitch <small>×3</small> and heave</span><svg id="svPitch" viewBox="-2 -19.6 39 23.2" preserveAspectRatio="xMidYMax meet" aria-label="Gunnerus seen from starboard, pitching and heaving"></svg><span class="val num"><span id="vPitch">--.-°</span> · <span id="vHeave">-.-- m</span></span></div>
       </div>
       <div class="grid2" style="margin-top:12px">
         <div class="read" id="rdWs"><span class="lbl">Wind speed</span><span class="val">--.-<small>kn</small></span><span class="sub">DP wind sensor</span></div>
@@ -271,6 +280,7 @@ pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid va
         <div class="read" id="rdHs"><span class="lbl">Wave height Hs</span><span class="val">-.--<small>m</small></span><span class="sub" id="hsSub">wave radar, RangeFinder</span></div>
         <div class="read" id="rdTs"><span class="lbl">Wave period</span><span class="val">-.-<small>s</small></span><span class="sub" id="tsSub">RangeFinder Ts</span></div>
       </div>
+      <p class="note" style="margin-top:8px">Outlines from the C-JOB 3D model, seen from astern and from starboard. Roll and pitch are drawn exaggerated, heave to scale. Heave sign as logged.</p>
     </section>
   </div>
 
@@ -288,6 +298,13 @@ pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid va
         <div class="seg" role="group" aria-label="Chart orientation and follow">
           <button type="button" id="followBtn" aria-pressed="true">Follow ship</button>
         </div>
+        <div class="seg" role="group" aria-label="Colour the week's track by" id="trackSeg">
+          <button type="button" data-track="plain" aria-pressed="false">Track</button>
+          <button type="button" data-track="state" aria-pressed="true">State</button>
+          <button type="button" data-track="speed" aria-pressed="false">Speed</button>
+          <button type="button" data-track="load" aria-pressed="false">Load</button>
+        </div>
+        <div class="trackleg" id="trackLeg"></div>
       </div>
       <div class="mapnote" id="mapNote" hidden></div>
     </div>
@@ -296,8 +313,8 @@ pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid va
         <button type="button" class="btn play" id="playBtn">Pause</button>
         <div class="seg" role="group" aria-label="Replay speed" id="speedSeg">
           <button type="button" data-speed="1" aria-pressed="false">1×</button>
-          <button type="button" data-speed="10" aria-pressed="false">10×</button>
-          <button type="button" data-speed="60" aria-pressed="true">60×</button>
+          <button type="button" data-speed="10" aria-pressed="true">10×</button>
+          <button type="button" data-speed="60" aria-pressed="false">60×</button>
           <button type="button" data-speed="600" aria-pressed="false">600×</button>
         </div>
         <button type="button" class="btn" id="randBtn">Random sailing</button>
@@ -309,11 +326,17 @@ pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid va
           <span class="lbl">UTC</span>
           <button type="submit" class="btn">Go</button>
         </form>
+        <button type="button" class="btn" id="linkBtn" title="Copy a link that opens the replay at this moment">Link to this moment</button>
+        <input id="linkOut" class="linkout" readonly hidden aria-label="Link to this moment">
         <button type="button" class="btn" id="fineBtn" title="31 Oct 2023, 10:00 to 12:10 UTC: the wave-shielding experiment, the only time with wave radar values">Wave-shielding test</button>
       </div>
       <h2 style="margin:0" class="lbl" id="hTl">Cruise week 44 · state and total engine load · drag to move</h2>
       <canvas id="tl" aria-label="Timeline of the week. Click or drag to move the replay."></canvas>
       <div class="legend" id="legend"></div>
+    </section>
+    <section class="panel" aria-labelledby="hTr">
+      <h2><span class="lbl" id="hTr">Trends · last 10 minutes</span><span class="only" id="trOnly">Waiting for 1 Hz data</span></h2>
+      <div class="trendwrap"><canvas id="trend" aria-label="Roll, pitch, heave, heading, speed and engine load over the last 10 minutes of the replay"></canvas></div>
     </section>
     <section class="panel" aria-labelledby="hPow">
       <h2><span class="lbl" id="hPow">Power plant · simplified single-line view</span><span class="lbl" style="color:var(--ink-3)" id="engCount"></span></h2>
@@ -335,12 +358,13 @@ pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid va
   <!-- propulsion and power -->
   <div class="col right">
     <section class="panel" aria-labelledby="hProp">
-      <h2><span class="lbl" id="hProp">Propulsion</span><span class="only" id="angOnly">Waiting for 1 Hz data</span></h2>
+      <h2><span class="lbl" id="hProp">Propulsion · plan view</span><span class="only" id="angOnly">Waiting for 1 Hz data</span></h2>
+      <svg id="dpView" viewBox="-12 -40 24 45" aria-label="Gunnerus from above, heading up, with thruster forces, speed and wind"></svg>
       <div class="pods">
         <div class="pod" id="podP"><h3 class="lbl">Port azimuth</h3></div>
         <div class="pod" id="podS"><h3 class="lbl">Stbd azimuth</h3></div>
       </div>
-      <p style="margin:6px 0 0;font-size:.74rem;color:var(--ink-3)">Arrow: logged azimuth angle, 0° taken as ahead (zero reference not documented). Rpm and load as logged, scale 0–100.</p>
+      <p style="margin:6px 0 0;font-size:.74rem;color:var(--ink-3)">Heading up. Thruster arrows: logged azimuth angle, 0° taken as ahead and positive to starboard (not documented), length by load. Green: speed over ground, 1 m per knot. Wind arrow drawn as true direction. Crane: slewing angle, 0° taken as ahead. Outline and positions from the C-JOB 3D model.</p>
       <div class="thr"><span class="lbl">Bow tunnel thruster</span><span class="num" id="vTunnel">--- %</span></div>
     </section>
     <section class="panel" aria-labelledby="hEv">
@@ -377,8 +401,8 @@ pre.msg{margin:0;padding:10px 12px;background:var(--panel-2);border:1px solid va
     </section>
     <section class="panel about" aria-labelledby="hAbout">
       <h2><span class="lbl" id="hAbout">About this replay</span></h2>
-      <p><b>What you see.</b> Logged values from the cruise week of 30 October to 3 November 2023, replayed as if live. The page opens at a random moment while the ship is under way. Heading, motion, wind, azimuth angles, crane and engine readings are the logger values at 1 Hz, loaded one day at a time. Operating state, the timeline and the fuel totals use 1-minute means. Wave radar values exist only for the wave-shielding test on 31 October, 10:00 to 12:10 UTC.</p>
-      <p><b>Measured, derived, display only.</b> Values are as logged. Course in the 1-minute data, operating state, the event log, which gensets and consumers are connected, and fuel totals are derived. The ship symbol and needles move smoothly between logged values; that smoothing is display only.</p>
+      <p><b>What you see.</b> Logged values from the cruise week of 30 October to 3 November 2023, replayed as if live. The page opens at a random moment while the ship is under way, or at the moment in the link (for example <span class="num">virtual.html#t=2023-11-03T12:48:02Z</span>, which then plays at 1×). Heading, motion, wind, azimuth angles, crane and engine readings are the logger values at 1 Hz, loaded one day at a time. Operating state, the event log, the fuel totals and the 3-hour trail come from the same 1 Hz values; the timeline of the week uses 1-minute means. Wave radar values exist only for the wave-shielding test on 31 October, 10:00 to 12:10 UTC.</p>
+      <p><b>Measured, derived, display only.</b> Values are as logged. Course in the 1-minute data, operating state (60-second means, same rules as the power and energy case), the event log, which gensets and consumers are connected, and fuel totals are derived. The ship symbol and needles move smoothly between logged values; that smoothing is display only. Ship outlines and equipment positions come from the C-JOB 3D model; roll and pitch drawings are exaggerated.</p>
       <p><b>Credit.</b> Data provided by Robert Skulstad (NTNU); organised by Henrique M. Gaspar. The wave-shielding test is the experiment of Wang et al. (2025), <i>Ocean Engineering</i> 320, 120189. Chart © Kartverket.</p>
     </section>
   </div>
@@ -408,7 +432,7 @@ const NOT_LOGGED = [
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 let W = null, F = null;            // week (1 min) and fine (1 Hz) replay files
 let T0, TN, FT0 = 0, FTN = 0, topicsHaveDay = false;
-let simT = 0, speed = 60, playing = true, lastFrame = 0, lastUi = 0;
+let simT = 0, speed = 10, playing = true, lastFrame = 0, lastUi = 0;
 let cumFuel, cumEn;                 // cumulative litres and kWh at each minute
 let selTopic = "gunnerus/engine/1/load";
 
@@ -430,8 +454,9 @@ function lerpAng(a, b, f) { let d = wrap360(b - a); if (d > 180) d -= 360; retur
 
 /* ---------- data access ---------- */
 // Three sources, most detailed first: the 1 Hz day file of the replay's day (all week), the wave-shielding window
-// (wave radar), the 1-minute week file (state, totals, track, timeline).
-const DAY = {};                      // "2023-10-31" -> {t0, n, topics, arr} | "loading" | "failed"
+// (wave radar), the 1-minute week file (timeline overview, and anything while a day file is loading).
+const DAY = {};                      // "2023-10-31" -> {t0, n, topics, arr, state, cumFuel, cumEn, events} | "loading" | "failed"
+const DAYEV = {};                    // events derived at 1 Hz, kept after a day's arrays are released
 const dayKey = t => new Date(t).toISOString().slice(0, 10);
 function decodeDay(j) {
   const arr = {};
@@ -444,7 +469,44 @@ function decodeDay(j) {
     }
     arr[t] = A;
   }
-  return {t0:Date.parse(j.t0), n:j.n, topics:j.topics, arr};
+  const D = {t0:Date.parse(j.t0), n:j.n, topics:j.topics, arr};
+  derive1Hz(D);
+  return D;
+}
+const STATE_KEYS = ["stationary", "station_keeping", "manoeuvring", "transit"];
+// Same rules as the power and energy case, applied to 60-second trailing means of the 1 Hz values
+// (so that speed noise near 0.5 or 8 kn does not make the state flicker).
+function derive1Hz(D) {
+  const n = D.n, A = D.arr, sog = A["gunnerus/nav/gps/sog"], rp = A["gunnerus/azimuth/port/rpm"], rs = A["gunnerus/azimuth/stbd/rpm"];
+  const st = new Uint8Array(n).fill(255), WIN = 60;
+  let sS = 0, nS = 0, sP = 0, nP = 0, sR = 0, nR = 0;
+  const add = (v, k) => isNaN(v) ? 0 : v * k;
+  for (let s = 0; s < n; s++) {
+    if (!isNaN(sog[s])) { sS += sog[s]; nS++; } if (!isNaN(rp[s])) { sP += Math.abs(rp[s]); nP++; } if (!isNaN(rs[s])) { sR += Math.abs(rs[s]); nR++; }
+    if (s >= WIN) { const o = s - WIN; if (!isNaN(sog[o])) { sS -= sog[o]; nS--; } if (!isNaN(rp[o])) { sP -= Math.abs(rp[o]); nP--; } if (!isNaN(rs[o])) { sR -= Math.abs(rs[o]); nR--; } }
+    if (!nS) continue;
+    const v = sS / nS, azi = Math.max(nP ? sP / nP : 0, nR ? sR / nR : 0);
+    st[s] = v >= 8 ? 3 : v >= .5 ? 2 : (nP || nR) ? (azi > 5 ? 1 : 0) : 255;
+  }
+  D.state = st;
+  const cf = new Float64Array(n + 1), ce = new Float64Array(n + 1);
+  const F_ = [1, 2, 3].map(k => A[`gunnerus/engine/${k}/fuel`]), E_ = [1, 2, 3].map(k => A[`gunnerus/engine/${k}/load`]);
+  for (let s = 0; s < n; s++) { let f = 0, e = 0; for (let k = 0; k < 3; k++) { f += add(F_[k][s], 1); e += add(E_[k][s], 1); } cf[s + 1] = cf[s] + f / 3600; ce[s + 1] = ce[s] + e / 3600; }
+  D.cumFuel = cf; D.cumEn = ce;
+  // events of the day at 1 Hz, debounced like the 1-minute ones (2 min for machinery, 3 min for the state)
+  const ev = [], at = s => D.t0 + s * 1000;
+  for (const k of [1, 2, 3]) {
+    const a = Array.from(E_[k - 1], v => isNaN(v) ? null : v > 5);
+    for (const [s, on] of runs(a, 120)) ev.push({t:at(s), cat:"ENGINE", text:`Genset ${k} ${on ? "started" : "stopped"}`});
+  }
+  for (const [side, a0] of [["port", rp], ["stbd", rs]]) {
+    const a = Array.from(a0, v => isNaN(v) ? null : Math.abs(v) > 5);
+    for (const [s, on] of runs(a, 120)) ev.push({t:at(s), cat:"PROP", text:`${side === "port" ? "Port" : "Starboard"} azimuth ${on ? "running" : "idle"}`});
+  }
+  const sa = Array.from(st, v => v === 255 ? null : v);
+  for (const [s, v] of runs(sa, 180)) { const k = STATE_KEYS[v], sp = sog[Math.min(n - 1, s + 120)];
+    ev.push({t:at(s), cat:"NAV", text:`${STATE[k].label}${k === "transit" && !isNaN(sp) ? `, ${sp.toFixed(1)} kn` : ""}`}); }
+  D.events = ev;
 }
 // The deployed site has the replay files in assets/virtual/ (copied there by .github/workflows/pages.yml);
 // a local preview from the repository root finds them in ../virtual/data/.
@@ -462,11 +524,27 @@ async function ensureDay(key) {
   DAY[key] = "loading";
   try {
     DAY[key] = decodeDay(await loadJSON(`replay-${key}-1hz.json`));
+    DAYEV[key] = DAY[key].events; mergeEvents();
     for (const k of Object.keys(DAY)) if (DAY[k] && DAY[k].arr && Math.abs(Date.parse(k) - Date.parse(key)) > 86400e3) delete DAY[k];
     if (!topicsHaveDay) { topicsHaveDay = true; buildTopics(); }
   } catch (e) { DAY[key] = "failed"; }
 }
 function curDay() { const d = DAY[dayKey(simT)]; return d && d.arr ? d : null; }
+function stateNow() { const D = curDay(); if (D) { const v = D.state[dIdx(D)[0]]; return v === 255 ? null : STATE_KEYS[v]; } return get("gunnerus/ops/state").v; }
+// cumulative fuel (L) and energy (kWh) from the start of the week: 1 Hz inside a loaded day, 1-minute otherwise
+function cumAt(t) {
+  const D = DAY[dayKey(t)], i0 = Math.max(0, Math.min(W.n, Math.floor((t - T0) / 60000)));
+  if (D && D.arr) { const d0 = Math.round((D.t0 - T0) / 60000), s = Math.max(0, Math.min(D.n, Math.floor((t - D.t0) / 1000)));
+    return [cumFuel[d0] + D.cumFuel[s], cumEn[d0] + D.cumEn[s], true]; }
+  const f = Math.min(1, Math.max(0, (t - T0) / 60000 - i0)), i1 = Math.min(W.n, i0 + 1);
+  return [cumFuel[i0] + (cumFuel[i1] - cumFuel[i0]) * f, cumEn[i0] + (cumEn[i1] - cumEn[i0]) * f, false];
+}
+function posAt(t) {
+  const D = DAY[dayKey(t)];
+  if (D && D.arr) { const s = Math.floor((t - D.t0) / 1000), la = D.arr["gunnerus/nav/gps/lat"][s], lo = D.arr["gunnerus/nav/gps/lon"][s]; if (!isNaN(la) && !isNaN(lo)) return [la, lo]; }
+  const i = Math.floor((t - T0) / 60000); if (i < 0 || i >= W.n) return null;
+  const la = W.data["gunnerus/nav/gps/lat"][i]; return la === null ? null : [la, W.data["gunnerus/nav/gps/lon"][i]];
+}
 function dIdx(D) { const x = (simT - D.t0) / 1000; const s = Math.max(0, Math.min(D.n - 1, Math.floor(x))); return [s, x - s]; }
 function wIdx() { const x = (simT - T0) / 60000; const i = Math.max(0, Math.min(W.n - 1, Math.floor(x))); return [i, Math.min(1, Math.max(0, x - i))]; }
 function fIdx() { if (!F) return -1; const i = Math.floor((simT - FT0) / 1000); return (i >= 0 && i < F.n) ? i : -1; }
@@ -545,48 +623,192 @@ function drawCompass(h, cog, wind) {
   if (isNum(wind)) windMark.setAttribute("transform", `rotate(${wind})`);
 }
 
-/* ---------- inclinometers ---------- */
+/* ---------- ship outlines (from the C-JOB 3D model, virtual/data/gunnerus-outline.json) ---------- */
+let OUT = null;
+const WL = 2.5;            // normal operating draught, m (GA title block)
+const XC = 17;             // pitch centre, m from the aft end of the model (about midships)
+const SVGE = (tag, attrs, parent) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const pathOf = (prof, map) => { const up = prof.map(p => map(p[0], p[2])), lo = prof.slice().reverse().map(p => map(p[0], p[1]));
+  return "M" + up.concat(lo).map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join("L") + "Z"; };
 function buildIncl() {
-  $("svRoll").innerHTML = `<line x1="-56" y1="0" x2="56" y2="0" stroke="var(--ink-3)" stroke-dasharray="2 3"/>
-    <g class="live" id="gRoll"><path d="M-30,-6 L30,-6 L24,14 L-24,14 Z" fill="var(--panel-2)" stroke="var(--own)" stroke-width="1.6"/><path d="M-10,-6 L-10,-18 L10,-18 L10,-6" fill="none" stroke="var(--own)" stroke-width="1.4"/></g>`;
-  $("svPitch").innerHTML = `<line x1="-56" y1="0" x2="56" y2="0" stroke="var(--ink-3)" stroke-dasharray="2 3"/>
-    <g class="live" id="gPitch"><path d="M-48,-4 L44,-4 L52,-12 L52,6 L-46,10 Z" fill="var(--panel-2)" stroke="var(--own)" stroke-width="1.6"/><path d="M-6,-4 L-6,-16 L20,-16 L20,-4" fill="none" stroke="var(--own)" stroke-width="1.4"/></g>`;
+  const sr = $("svRoll"), sp = $("svPitch"); sr.innerHTML = ""; sp.innerHTML = "";
+  // sea below the waterline, fixed
+  SVGE("rect", {x:-8, y:-WL, width:16, height:7, fill:"var(--accent)", "fill-opacity":".12"}, sr);
+  SVGE("line", {x1:-8, y1:-WL, x2:8, y2:-WL, stroke:"var(--accent)", "stroke-width":.08, "stroke-dasharray":".4 .3"}, sr);
+  SVGE("rect", {x:-2, y:-WL, width:39, height:7, fill:"var(--accent)", "fill-opacity":".12"}, sp);
+  SVGE("line", {x1:-2, y1:-WL, x2:37, y2:-WL, stroke:"var(--accent)", "stroke-width":.1, "stroke-dasharray":".6 .4"}, sp);
+  const gR = SVGE("g", {class:"live", id:"gRoll"}, sr), gP = SVGE("g", {class:"live", id:"gPitch"}, sp);
+  if (OUT) {
+    SVGE("path", {d:pathOf(OUT.stern, (y, z) => [z, -y]), fill:"var(--panel-2)", stroke:"var(--own)", "stroke-width":.12, "stroke-linejoin":"round"}, gR);
+    SVGE("path", {d:pathOf(OUT.side, (x, y) => [x, -y]), fill:"var(--panel-2)", stroke:"var(--own)", "stroke-width":.14, "stroke-linejoin":"round"}, gP);
+  } else {
+    SVGE("path", {d:"M-4.8,0 L4.8,0 L4.8,-8 L-4.8,-8 Z M-3,-8 L3,-8 L3,-12 L-3,-12 Z", fill:"var(--panel-2)", stroke:"var(--own)", "stroke-width":.12}, gR);
+    SVGE("path", {d:"M-1,0 L34,0 L35,-8 L-1,-8 Z M12,-8 L30,-8 L30,-12 L12,-12 Z", fill:"var(--panel-2)", stroke:"var(--own)", "stroke-width":.14}, gP);
+  }
+}
+function drawIncl(roll, pitch, heave) {
+  const hv = isNum(heave) ? Math.max(-3, Math.min(3, heave)) : 0;
+  // roll about the waterline at the centreline; positive roll = starboard down (Seapath convention)
+  $("gRoll").setAttribute("transform", `translate(0 ${-hv}) rotate(${isNum(roll) ? roll * 2 : 0} 0 ${-WL})`);
+  // pitch about midships at the waterline; positive pitch = bow up
+  $("gPitch").setAttribute("transform", `translate(0 ${-hv}) rotate(${isNum(pitch) ? -pitch * 3 : 0} ${XC} ${-WL})`);
 }
 
-/* ---------- pods ---------- */
+/* ---------- plan view (DP-style, heading up) ---------- */
+let DP = null;
+function cen(b) { return b ? [(b.min[2] + b.max[2]) / 2, (b.min[0] + b.max[0]) / 2] : null; }   // [z, x]
+function buildDP() {
+  const sv = $("dpView"); sv.innerHTML = "";
+  const P = (z, x) => [z, -x];        // svg coordinates: starboard right, bow up
+  const it = OUT ? OUT.items : {};
+  const podP = cen(it.azimuth_port) || [-2.66, 0.13], podS = cen(it.azimuth_stbd) || [2.64, 0.13];
+  const bow = cen(it.bow_thruster) || [0, 31.5], crane = it.crane ? [(it.crane.min[2] + it.crane.max[2]) / 2, it.crane.max[0] - 0.8] : [3.3, 6.5];
+  SVGE("circle", {cx:0, cy:-17, r:11.2, fill:"none", stroke:"var(--rule-2)", "stroke-width":.08, "stroke-dasharray":".3 .4"}, sv);
+  if (OUT) {
+    SVGE("path", {d:pathOf(OUT.plan_hull, (x, z) => P(z, x)), fill:"var(--panel-2)", stroke:"var(--ink-3)", "stroke-width":.12}, sv);
+    SVGE("path", {d:pathOf(OUT.plan_super, (x, z) => P(z, x)), fill:"var(--rule)", stroke:"var(--rule-2)", "stroke-width":.08}, sv);
+  } else SVGE("path", {d:"M-4.8,1 L4.8,1 L4.8,-30 Q0,-37 -4.8,-30 Z", fill:"var(--panel-2)", stroke:"var(--ink-3)", "stroke-width":.12}, sv);
+  SVGE("line", {x1:0, y1:2, x2:0, y2:-37.5, stroke:"var(--ink-3)", "stroke-width":.06, "stroke-dasharray":".5 .5"}, sv);
+  const arrow = (g, col, w) => SVGE("path", {d:"", stroke:col, "stroke-width":w, fill:"none", "stroke-linecap":"round", "stroke-linejoin":"round"}, g);
+  const mk = (pos, side) => {
+    const g = SVGE("g", {transform:`translate(${pos[0]} ${-pos[1]})`}, sv);
+    const rot = SVGE("g", {}, g);
+    const ord = arrow(rot, "var(--ink-3)", .14); ord.setAttribute("stroke-dasharray", ".4 .3");
+    SVGE("rect", {x:-.55, y:-1.1, width:1.1, height:2.2, rx:.55, fill:"var(--panel)", stroke:"var(--accent)", "stroke-width":.16}, rot);
+    const thr = arrow(rot, "var(--accent)", .3);
+    const txt = SVGE("text", {x:side < 0 ? -1.4 : 1.4, y:3.6, "font-size":1.15, "text-anchor":side < 0 ? "end" : "start", fill:"var(--ink-2)"}, g);
+    return {rot, thr, ord, txt};
+  };
+  const P1 = mk(podP, -1), S1 = mk(podS, 1);
+  const bowG = SVGE("g", {transform:`translate(${bow[0]} ${-bow[1]})`}, sv);
+  SVGE("rect", {x:-1.4, y:-.4, width:2.8, height:.8, fill:"var(--panel)", stroke:"var(--ink-3)", "stroke-width":.1}, bowG);
+  const bowA = arrow(bowG, "var(--accent)", .3);
+  const craneG = SVGE("g", {transform:`translate(${crane[0]} ${-crane[1]})`}, sv);
+  const craneL = SVGE("line", {x1:0, y1:0, x2:0, y2:-5, stroke:"var(--own)", "stroke-width":.28, "stroke-linecap":"round", "stroke-dasharray":".7 .35"}, craneG);
+  SVGE("circle", {r:.55, fill:"var(--panel)", stroke:"var(--own)", "stroke-width":.16}, craneG);
+  const vel = arrow(sv, "var(--m1)", .3);
+  const wind = arrow(sv, "var(--m1)", .22); wind.setAttribute("stroke-dasharray", ".6 .35");
+  const windT = SVGE("text", {"font-size":1.15, "text-anchor":"middle", fill:"var(--m1)"}, sv);
+  const hdgT = SVGE("text", {x:11.8, y:-38.4, "font-size":1.3, "text-anchor":"end", fill:"var(--read)"}, sv);
+  const sogT = SVGE("text", {x:-11.8, y:-38.4, "font-size":1.15, fill:"var(--m1)"}, sv);
+  DP = {P1, S1, bowA, craneL, craneG, vel, wind, windT, hdgT, sogT};
+}
+const arrowPath = (x0, y0, x1, y1, head) => {
+  const a = Math.atan2(y1 - y0, x1 - x0), h = head || .9;
+  return `M${x0.toFixed(2)},${y0.toFixed(2)} L${x1.toFixed(2)},${y1.toFixed(2)} M${(x1 - h * Math.cos(a - .45)).toFixed(2)},${(y1 - h * Math.sin(a - .45)).toFixed(2)} L${x1.toFixed(2)},${y1.toFixed(2)} L${(x1 - h * Math.cos(a + .45)).toFixed(2)},${(y1 - h * Math.sin(a + .45)).toFixed(2)}`;
+};
+function drawDP(h, sog, cog, windDir, windSpd) {
+  if (!DP) return;
+  for (const [p, side] of [[DP.P1, "port"], [DP.S1, "stbd"]]) {
+    const rpm = get(`gunnerus/azimuth/${side}/rpm`).v, load = get(`gunnerus/azimuth/${side}/load`).v;
+    let ang = null, kind = "";
+    if (inFine()) {
+      const fb = get(`gunnerus/azimuth/${side}/angle`, 120), or = get(`gunnerus/azimuth/${side}/angle_order`, 120);
+      if (isNum(fb.v)) { ang = fb.v; kind = ""; } else if (isNum(or.v)) { ang = or.v; kind = " order"; }
+      p.ord.setAttribute("d", isNum(or.v) && isNum(fb.v) && Math.abs(or.v - fb.v) > 3 ? arrowPath(0, 0, Math.sin((or.v - (ang || 0)) * Math.PI / 180) * 4, -Math.cos((or.v - (ang || 0)) * Math.PI / 180) * 4, .6) : "");
+    } else p.ord.setAttribute("d", "");
+    p.rot.setAttribute("transform", `rotate(${isNum(ang) ? ang : 0})`);
+    p.rot.style.opacity = isNum(ang) ? 1 : .3;
+    const L_ = 1.2 + 7 * Math.max(0, Math.min(100, load || 0)) / 100;
+    p.thr.setAttribute("d", isNum(rpm) && Math.abs(rpm) > 5 ? arrowPath(0, -1.1, 0, -1.1 - L_) : "");
+    p.txt.textContent = isNum(ang) ? `${ang.toFixed(0)}°${kind}` : inFine() ? "no angle" : "";
+  }
+  const bt = get("gunnerus/tunnel/bow/feedback").v;
+  DP.bowA.setAttribute("d", isNum(bt) && Math.abs(bt) > 1 ? arrowPath(0, 0, Math.sign(bt) * (1.5 + Math.abs(bt) / 20), 0) : "");
+  const slew = inFine() ? get("gunnerus/crane/main/slew").v : null;
+  DP.craneG.style.display = isNum(slew) ? "" : "none";
+  if (isNum(slew)) DP.craneL.setAttribute("transform", `rotate(${slew})`);
+  // speed over ground relative to the bow, 1 m per knot, from midships
+  if (isNum(sog) && sog >= .3 && isNum(cog) && isNum(h)) {
+    const r = (cog - h) * Math.PI / 180, x0 = 0, y0 = -XC, Lv = Math.min(16, sog);
+    DP.vel.setAttribute("d", arrowPath(x0, y0, x0 + Math.sin(r) * Lv, y0 - Math.cos(r) * Lv));
+  } else DP.vel.setAttribute("d", "");
+  DP.sogT.textContent = isNum(sog) ? `SOG ${sog.toFixed(1)} kn` : "";
+  if (isNum(windDir) && isNum(h)) {
+    const r = (windDir - h) * Math.PI / 180, R = 11.2, Lw = Math.min(6, 1.5 + (windSpd || 0) / 4);
+    const x1 = Math.sin(r) * R, y1 = -XC - Math.cos(r) * R, x0 = Math.sin(r) * (R + Lw), y0 = -XC - Math.cos(r) * (R + Lw);
+    DP.wind.setAttribute("d", arrowPath(x0, y0, x1, y1, .7));
+    DP.windT.setAttribute("x", (Math.sin(r) * (R + Lw + 1.4)).toFixed(2)); DP.windT.setAttribute("y", (-XC - Math.cos(r) * (R + Lw + 1.4) + .4).toFixed(2));
+    DP.windT.textContent = isNum(windSpd) ? `${windSpd.toFixed(0)} kn` : "";
+  } else { DP.wind.setAttribute("d", ""); DP.windT.textContent = ""; }
+  DP.hdgT.textContent = isNum(h) ? `HDG ${pad(Math.round(h) % 360, 3)}°` : "HDG ---";
+}
+
+/* ---------- azimuth meters ---------- */
 function buildPod(id, side) {
   const host = $(id);
   host.insertAdjacentHTML("beforeend", `
-    <svg viewBox="-60 -60 120 120" aria-hidden="true">
-      <circle r="52" fill="var(--panel-2)" stroke="var(--rule-2)"/>
-      ${[0, 90, 180, 270].map(a => `<line x1="0" y1="-52" x2="0" y2="-44" stroke="var(--ink-3)" transform="rotate(${a})"/>`).join("")}
-      <text x="0" y="-36" text-anchor="middle" font-size="9" fill="var(--ink-3)" font-family="var(--mono)">FWD</text>
-      <g class="live" data-k="ord" style="display:none"><path d="M0,0 L0,-40" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="3 3"/></g>
-      <g class="live" data-k="pod"><rect x="-7" y="-14" width="14" height="28" rx="7" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/>
-        <path data-k="thr" d="M0,-14 L0,-42 M-6,-34 L0,-42 L6,-34" stroke="var(--accent)" stroke-width="2.5" fill="none"/></g>
-      <text data-k="ang" x="0" y="54" text-anchor="middle" font-size="10" fill="var(--ink-2)" font-family="var(--mono)">---°</text>
-    </svg>
     <div class="meter"><span class="lbl">rpm</span><span class="track"><span class="fill" data-k="rpmF"></span></span><span class="num" data-k="rpm">--</span></div>
     <div class="meter"><span class="lbl">load</span><span class="track"><span class="fill" data-k="loadF" style="background:var(--own)"></span></span><span class="num" data-k="load">--</span></div>`);
   const q = k => host.querySelector(`[data-k="${k}"]`);
-  return {side, pod:q("pod"), thr:q("thr"), ord:q("ord"), ang:q("ang"), rpmF:q("rpmF"), rpm:q("rpm"), loadF:q("loadF"), load:q("load")};
+  return {side, rpmF:q("rpmF"), rpm:q("rpm"), loadF:q("loadF"), load:q("load")};
 }
 let pods;
 function drawPod(p) {
   const s = p.side, rpm = get(`gunnerus/azimuth/${s}/rpm`).v, load = get(`gunnerus/azimuth/${s}/load`).v;
-  let ang = null, kind = "";
-  if (inFine()) {
-    const fb = get(`gunnerus/azimuth/${s}/angle`, 120), or = get(`gunnerus/azimuth/${s}/angle_order`, 120);
-    if (isNum(fb.v)) { ang = fb.v; kind = "fb"; } else if (isNum(or.v)) { ang = or.v; kind = "order"; }
-  }
-  p.pod.style.display = ang === null ? "none" : "";
-  if (ang !== null) p.pod.setAttribute("transform", `rotate(${ang})`);
-  p.thr.style.opacity = isNum(rpm) && Math.abs(rpm) > 5 ? 1 : .15;
-  p.ang.textContent = ang === null ? (inFine() ? "no angle" : "angle: 1 Hz") : `${ang.toFixed(0)}°${kind === "order" ? " (order)" : ""}`;
   p.rpmF.style.width = `${Math.min(100, Math.abs(rpm || 0))}%`;
   p.rpm.textContent = fmt(rpm, 0, "--");
   p.loadF.style.width = `${Math.min(100, Math.max(0, load || 0))}%`;
   p.load.textContent = fmt(load, 0, "--");
+}
+
+/* ---------- trends: last 10 minutes at 1 Hz ---------- */
+const TREND_S = 600;
+const TRENDS = [
+  {key:"roll", label:"Roll", unit:"°", topic:"gunnerus/nav/mru/roll", sym:true, floor:2, dec:1, tok:"--accent"},
+  {key:"pitch", label:"Pitch", unit:"°", topic:"gunnerus/nav/mru/pitch", sym:true, floor:1, dec:1, tok:"--accent"},
+  {key:"heave", label:"Heave", unit:"m", topic:"gunnerus/nav/mru/heave", sym:true, floor:.3, dec:2, tok:"--accent"},
+  {key:"hdg", label:"Heading", unit:"°", topic:"gunnerus/nav/mru/heading", angle:true, floor:5, dec:0, tok:"--read"},
+  {key:"sog", label:"SOG", unit:"kn", topic:"gunnerus/nav/gps/sog", fixed:[0, 12], dec:1, tok:"--m1"},
+  {key:"load", label:"Engine load", unit:"kW", sum:["gunnerus/engine/1/load", "gunnerus/engine/2/load", "gunnerus/engine/3/load"], fixed:[0, 1000], dec:0, tok:"--e2"},
+];
+function trendSeries(D, s0, tr) {
+  const out = new Float32Array(TREND_S).fill(NaN);
+  if (tr.sum) {
+    const A = tr.sum.map(t => D.arr[t]);
+    for (let k = 0; k < TREND_S; k++) { const s = s0 + k; if (s < 0 || s >= D.n) continue; let v = 0, ok = false; for (const a of A) if (a && !isNaN(a[s])) { v += a[s]; ok = true; } if (ok) out[k] = v; }
+  } else { const a = D.arr[tr.topic]; if (a) for (let k = 0; k < TREND_S; k++) { const s = s0 + k; if (s >= 0 && s < D.n) out[k] = a[s]; } }
+  return out;
+}
+function drawTrend() {
+  const cv = $("trend"), r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  if (r.width < 10) return;
+  if (cv.width !== Math.round(r.width * dpr)) { cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); }
+  const c = cv.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, r.width, r.height);
+  const D = curDay(); $("trOnly").hidden = !!D;
+  const W_ = r.width, H_ = r.height, top = 4, axisH = 16, rowH = (H_ - top - axisH) / TRENDS.length, narrow = W_ < 520, x0 = narrow ? 92 : 136, x1 = W_ - 50;
+  const ink2 = css("--ink-2"), ink3 = css("--ink-3"), rule = css("--rule"), read = css("--read");
+  c.font = `500 11px ${css("--mono")}`; c.textBaseline = "middle";
+  // time grid every 2 minutes, "now" at the right
+  for (let m = 0; m <= 10; m += narrow ? 5 : 2) { const x = x1 - (m / 10) * (x1 - x0); c.strokeStyle = rule; c.lineWidth = 1; c.beginPath(); c.moveTo(x + .5, top); c.lineTo(x + .5, H_ - axisH); c.stroke();
+    c.fillStyle = ink3; c.textAlign = "center"; c.fillText(m === 0 ? "now" : `−${m} min`, x, H_ - axisH / 2); }
+  const s0 = D ? dIdx(D)[0] - TREND_S + 1 : 0;
+  TRENDS.forEach((tr, i) => {
+    const y0 = top + i * rowH, y1 = y0 + rowH - 6;
+    c.fillStyle = ink2; c.textAlign = "left"; c.font = `600 11px ${css("--display")}`; c.fillText((narrow && tr.key === "load" ? "Load" : tr.label).toUpperCase(), 0, y0 + rowH / 2 - 7);
+    c.font = `500 11px ${css("--mono")}`;
+    c.strokeStyle = rule; c.beginPath(); c.moveTo(x0, y1 + 3.5); c.lineTo(x1, y1 + 3.5); c.stroke();
+    if (!D) return;
+    let v = trendSeries(D, s0, tr), lo, hi, cur = v[TREND_S - 1];
+    if (tr.angle && !isNaN(cur)) { v = v.map(a => isNaN(a) ? a : cur + ((((a - cur) % 360) + 540) % 360 - 180)); }
+    let mn = Infinity, mx = -Infinity; for (const a of v) if (!isNaN(a)) { mn = Math.min(mn, a); mx = Math.max(mx, a); }
+    if (!isFinite(mn)) { c.fillStyle = ink3; c.textAlign = "left"; c.fillText("not logged", x0 + 6, (y0 + y1) / 2); return; }
+    if (tr.fixed) [lo, hi] = [tr.fixed[0], Math.max(tr.fixed[1], mx)];
+    else if (tr.sym) { const m = Math.max(tr.floor, Math.abs(mn), Math.abs(mx)) * 1.1; lo = -m; hi = m; }
+    else { const m = Math.max(tr.floor, Math.abs(mn - cur), Math.abs(mx - cur)) * 1.1; lo = cur - m; hi = cur + m; }
+    const Y = a => y1 - (a - lo) / (hi - lo) * (y1 - y0 - 2);
+    if (tr.sym) { c.strokeStyle = ink3; c.setLineDash([2, 3]); c.beginPath(); c.moveTo(x0, Y(0) + .5); c.lineTo(x1, Y(0) + .5); c.stroke(); c.setLineDash([]); }
+    c.fillStyle = ink3; c.textAlign = "right";
+    const lab = a => tr.angle ? pad(Math.round(((a % 360) + 360) % 360), 3) : (Math.abs(a) < 10 && tr.dec ? a.toFixed(tr.dec) : a.toFixed(0));
+    c.font = `500 10px ${css("--mono")}`; c.fillText(lab(hi), x0 - 6, y0 + 6); c.fillText(lab(lo), x0 - 6, y1 - 3);
+    c.strokeStyle = css(tr.tok); c.lineWidth = 1.5; c.beginPath(); let pen = false;
+    for (let k = 0; k < TREND_S; k++) { const a = v[k]; if (isNaN(a)) { pen = false; continue; } const x = x0 + k / (TREND_S - 1) * (x1 - x0), y = Y(a); if (pen) c.lineTo(x, y); else { c.moveTo(x, y); pen = true; } }
+    c.stroke();
+    if (!isNaN(cur)) { c.fillStyle = css(tr.tok); c.beginPath(); c.arc(x1, Y(cur), 3, 0, 7); c.fill();
+      c.fillStyle = read; c.textAlign = "left"; c.font = `500 12px ${css("--mono")}`;
+      c.fillText(`${tr.angle ? pad(Math.round(((cur % 360) + 360) % 360), 3) : cur.toFixed(tr.dec)}${tr.unit === "°" ? "°" : ""}`, x1 + 7, Y(cur));
+      c.fillStyle = ink3; c.font = `500 10px ${css("--mono")}`; if (tr.unit !== "°") c.fillText(tr.unit, x1 + 7, Y(cur) + 12); }
+  });
 }
 
 /* ---------- power plant (simplified single-line view) ---------- */
@@ -646,15 +868,22 @@ function drawPlant() {
   B.a.textContent = fmt(bt, 0, "--"); B.run.textContent = bon ? "RUN" : "OFF"; B.run.classList.toggle("on", bon); B.node.classList.toggle("on", bon); B.w.classList.toggle("on", bon && nOn > 0);
   $("vLoad").innerHTML = `${any ? tot.toFixed(0) : "---"}<small>kW</small>`;
   $("vFuel").innerHTML = `${any ? fuel.toFixed(1) : "--.-"}<small>L/h</small>`;
-  const [i] = wIdx(), dayStart = Math.floor(((simT + LT_OFFSET_H * 3600e3) / 86400e3)) * 86400e3 - LT_OFFSET_H * 3600e3;
-  const j = Math.max(0, Math.floor((dayStart - T0) / 60000));
-  $("vFuelDay").innerHTML = `${(cumFuel[i] - cumFuel[j]).toFixed(0)}<small>L</small>`;
-  $("vEnDay").innerHTML = `${(cumEn[i] - cumEn[j]).toFixed(0)}<small>kWh</small>`;
-  $("dayNote").textContent = dayStart < T0 ? "since data start, 01:00 ship time" : "derived from logged rates";
+  const dayStart = Math.max(T0, Math.floor(((simT + LT_OFFSET_H * 3600e3) / 86400e3)) * 86400e3 - LT_OFFSET_H * 3600e3);
+  const [f1, e1, hz] = cumAt(simT), [f0, e0] = cumAt(dayStart);
+  $("vFuelDay").innerHTML = `${(f1 - f0).toFixed(0)}<small>L</small>`;
+  $("vEnDay").innerHTML = `${(e1 - e0).toFixed(0)}<small>kWh</small>`;
+  $("dayNote").textContent = dayStart <= T0 ? "since data start, 01:00 ship time" : `derived from logged rates${hz ? ", 1 Hz" : ""}`;
 }
 
 /* ---------- event log (derived) ---------- */
-let EVENTS = [], transits = [], evShown = -1, evJumped = false;
+let EVENTS = [], EV_WEEK = [], transits = [], evShown = -1, evJumped = false;
+// The 1-minute events are replaced, day by day, by the same events derived at 1 Hz once that day's file has loaded.
+function mergeEvents() {
+  const days = Object.keys(DAYEV);
+  const inDay = t => days.includes(dayKey(t));
+  EVENTS = EV_WEEK.filter(e => e.cat === "DATA" || !inDay(e.t)).concat(...days.map(k => DAYEV[k])).sort((a, b) => a.t - b.t);
+  evShown = -1;
+}
 function runs(flag, minRun) {   // accepted on/off changes, each kept for at least minRun minutes
   const out = []; let cur = null, i = 0;
   while (i < flag.length) {
@@ -678,7 +907,7 @@ function buildEvents() {
   const st = W.data["gunnerus/ops/state"], sog = W.data["gunnerus/nav/gps/sog"];
   for (const [i, v] of runs(st, 3)) ev.push({t:at(i), cat:"NAV", text:`${STATE[v] ? STATE[v].label : v}${v === "transit" ? `, ${fmt(sog[Math.min(W.n - 1, i + 2)], 1)} kn` : ""}`});
   if (F) { ev.push({t:FT0, cat:"DATA", text:"Wave-shielding test starts (wave radar on)"}); ev.push({t:FTN, cat:"DATA", text:"Wave-shielding test ends"}); }
-  EVENTS = ev.sort((a, b) => a.t - b.t);
+  EV_WEEK = ev.sort((a, b) => a.t - b.t); mergeEvents();
   let i = 0;
   while (i < W.n) { if (st[i] !== "transit") { i++; continue; } let k = i; while (k < W.n && st[k] === "transit") k++; if (k - i >= 12) transits.push([at(i), at(k)]); i = k; }
 }
@@ -688,9 +917,10 @@ function drawEvents() {
   const flash = !evJumped && evShown >= 0 && n === evShown + 1; evShown = n; evJumped = false;
   const list = EVENTS.slice(Math.max(0, n - 12), n).reverse();
   $("events").innerHTML = list.length ? list.map((e, k) => { const d = new Date(e.t + LT_OFFSET_H * 3600e3);
-    return `<li data-t="${e.t}"${k === 0 && flash ? ' class="new"' : ""}><time>${DAYS[d.getUTCDay()]} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}</time><span class="cat ${e.cat}">${e.cat}</span><span>${e.text}</span></li>`; }).join("")
+    return `<li data-t="${e.t}"${k === 0 && flash ? ' class="new"' : ""}><time>${DAYS[d.getUTCDay()]} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}${days1Hz(e.t) ? `:${pad(d.getUTCSeconds())}` : ""}</time><span class="cat ${e.cat}">${e.cat}</span><span>${e.text}</span></li>`; }).join("")
     : '<li class="empty">No events yet in the replay.</li>';
 }
+const days1Hz = t => !!DAYEV[dayKey(t)];
 $("events").addEventListener("click", e => { const li = e.target.closest("li[data-t]"); if (li) jump(+li.dataset.t); });
 function randomSailing() { const [a, b] = transits[Math.floor(Math.random() * transits.length)]; return a + Math.random() * Math.max(0, b - a - 10 * 60e3); }
 function nextDeparture() { const n = transits.find(([a]) => a - 3 * 60e3 > simT + 60e3) || transits[0]; return n[0] - 3 * 60e3; }
@@ -724,14 +954,51 @@ function buildMap() {
   map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
   const la = W.data["gunnerus/nav/gps/lat"], lo = W.data["gunnerus/nav/gps/lon"], segs = [[]];
   for (let i = 0; i < W.n; i++) { if (la[i] === null) { if (segs.at(-1).length) segs.push([]); } else segs.at(-1).push([la[i], lo[i]]); }
-  L.polyline(segs, {color:css("--ink-3"), weight:1.2, opacity:.7, dashArray:"3 4", interactive:false}).addTo(map);
-  trail = L.polyline([], {color:css("--own"), weight:2.5, opacity:.9, interactive:false}).addTo(map);
+  weekSegs = segs; trackRenderer = L.canvas({padding:.5}); trackLayer = L.layerGroup().addTo(map); drawTrack();
+  trail = L.polyline([], {color:css("--read"), weight:2, opacity:.75, interactive:false}).addTo(map);
   vecLn = L.polyline([], {color:css("--own"), weight:2, interactive:false}).addTo(map);
   ownMk = L.marker([62.5, 6.2], {icon:shipIcon(0, false), interactive:false, keyboard:false}).addTo(map);
   map.on("dragstart", () => { follow = false; $("followBtn").setAttribute("aria-pressed", "false"); });
   setBase("sjokartraster");
 }
 let trailMinute = -1, lastIconKey = "";
+/* the week's track, plain or coloured by operating state, speed or total engine load (1-minute values) */
+let trackMode = "state", trackLayer = null, trackRenderer = null, weekSegs = [];
+const TRACK = {
+  state: {label:"Operating state", bin:i => W.data["gunnerus/ops/state"][i], keys:Object.keys(STATE), tok:k => STATE[k].tok, name:k => STATE[k].label},
+  speed: {label:"Speed over ground", edges:[2, 5, 8, 10], names:["< 2 kn", "2–5", "5–8", "8–10", "≥ 10 kn"], val:i => W.data["gunnerus/nav/gps/sog"][i]},
+  load:  {label:"Total engine load", edges:[100, 250, 400, 600], names:["< 100 kW", "100–250", "250–400", "400–600", "≥ 600 kW"],
+          val:i => { let v = null; for (const n of [1, 2, 3]) { const x = W.data[`gunnerus/engine/${n}/load`][i]; if (x !== null) v = (v || 0) + x; } return v; }},
+};
+function trackBin(mode, i) {
+  const T = TRACK[mode];
+  if (mode === "state") { const k = T.bin(i); return STATE[k] ? k : null; }
+  const v = T.val(i); if (v === null) return null; let b = 0; while (b < T.edges.length && v >= T.edges[b]) b++; return b;
+}
+function trackTok(mode, b) { return mode === "state" ? STATE[b].tok : `--s${b + 1}`; }
+function drawTrack() {
+  if (!trackLayer) return;
+  trackLayer.clearLayers();
+  document.querySelectorAll("#trackSeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.track === trackMode)));
+  const leg = $("trackLeg");
+  if (trackMode === "plain") {
+    L.polyline(weekSegs, {color:css("--ink-3"), weight:1.2, opacity:.7, dashArray:"3 4", interactive:false, renderer:trackRenderer}).addTo(trackLayer);
+    leg.hidden = true; return;
+  }
+  const la = W.data["gunnerus/nav/gps/lat"], lo = W.data["gunnerus/nav/gps/lon"];
+  let run = [], runBin = null;
+  const flush = () => { if (run.length > 1 && runBin !== null) L.polyline(run, {color:css(trackTok(trackMode, runBin)), weight:3, opacity:.85, interactive:false, renderer:trackRenderer}).addTo(trackLayer); };
+  for (let i = 0; i < W.n; i++) {
+    if (la[i] === null) { flush(); run = []; runBin = null; continue; }
+    const b = trackBin(trackMode, i), p = [la[i], lo[i]];
+    if (b !== runBin) { const last = run.at(-1); flush(); run = last ? [last, p] : [p]; runBin = b; } else run.push(p);
+  }
+  flush();
+  const T = TRACK[trackMode];
+  const items = trackMode === "state" ? T.keys.map(k => [STATE[k].tok, STATE[k].label]) : T.names.map((nm, b) => [`--s${b + 1}`, nm]);
+  leg.innerHTML = items.map(([tok, nm]) => `<span><i style="background:var(${tok})"></i>${nm}</span>`).join("");
+  leg.hidden = false;
+}
 function drawMap(pos, h, isHdg, sog) {
   if (!map || !pos) return;
   ownMk.setLatLng(pos);
@@ -744,12 +1011,12 @@ function drawMap(pos, h, isHdg, sog) {
     const dLat = d * Math.cos(r) / 111320, dLon = d * Math.sin(r) / (111320 * Math.cos(pos[0] * Math.PI / 180));
     vecLn.setLatLngs([pos, [pos[0] + dLat, pos[1] + dLon]]);
   } else vecLn.setLatLngs([]);
-  const [i] = wIdx();
-  if (i !== trailMinute) {
-    trailMinute = i;
-    const la = W.data["gunnerus/nav/gps/lat"], lo = W.data["gunnerus/nav/gps/lon"], pts = [];
-    for (let k = Math.max(0, i - 180); k <= i; k++) if (la[k] !== null) pts.push([la[k], lo[k]]);
-    trail.setLatLngs(pts);
+  const step = Math.floor(simT / 10000);
+  if (step !== trailMinute) {           // the last 3 hours, one point every 10 s (1 Hz positions where the day is loaded)
+    trailMinute = step;
+    const pts = [];
+    for (let t = Math.max(T0, simT - 3 * 3600e3); t <= simT; t += 10000) { const p = posAt(t); if (p) pts.push(p); }
+    pts.push(pos); trail.setLatLngs(pts);
   }
   if (follow) map.panTo(pos, {animate:false});
 }
@@ -855,20 +1122,20 @@ function ui() {
 
   const pos = position();
   $("pos").innerHTML = pos ? `${dm(pos[0], true)}<br>${dm(pos[1], false)}` : "no position";
-  const s = STATE[get("gunnerus/ops/state").v];
+  const s = STATE[stateNow()];
   const chip = $("stateChip"); chip.textContent = s ? s.label : "No state"; chip.style.background = s ? `var(${s.tok})` : "var(--off)";
   $("stateRule").textContent = s ? s.rule : "";
 
   const roll = fine ? get("gunnerus/nav/mru/roll").v : null, pitch = fine ? get("gunnerus/nav/mru/pitch").v : null, heave = fine ? get("gunnerus/nav/mru/heave").v : null;
-  $("gRoll").setAttribute("transform", `rotate(${isNum(roll) ? roll * 2 : 0})`);
-  $("gPitch").setAttribute("transform", `rotate(${isNum(pitch) ? -pitch * 3 : 0})`);
+  drawIncl(roll, pitch, heave);
   $("vRoll").textContent = `${fmt(roll, 1, "--.-")}°`; $("vPitch").textContent = `${fmt(pitch, 1, "--.-")}°`;
   $("vHeave").textContent = `${fmt(heave, 2, "-.--")} m`;
-  $("heaveMark").style.top = `${50 - Math.max(-1, Math.min(1, (heave || 0) / 2)) * 46}%`;
   setRead("rdWs", fine ? fmt(get("gunnerus/env/wind/speed").v, 1, "--.-") : "--.-", "kn");
   setRead("rdWd", isNum(wind) ? pad(Math.round(wind) % 360, 3) : "---", "°");
 
   pods.forEach(drawPod);
+  drawDP(h, sog, cog, wind, fine ? get("gunnerus/env/wind/speed").v : null);
+  drawTrend();
   $("vTunnel").textContent = `${fmt(get("gunnerus/tunnel/bow/feedback").v, 0, "---")} %`;
   drawPlant(); drawEvents();
   const ww = inWaveWindow(), hs = ww ? get("gunnerus/env/waves/hs_rangefinder", 180).v : null, ts = ww ? get("gunnerus/env/waves/ts_rangefinder", 180).v : null, hx = ww ? get("gunnerus/env/waves/hs_wavex", 180).v : null;
@@ -881,6 +1148,21 @@ function ui() {
   drawMap(pos, h, hk === "HDG", sog);
   drawTopics(); drawMsg();
 }
+
+/* ---------- links to a moment ---------- */
+const isoSec = t => new Date(Math.floor(t / 1000) * 1000).toISOString().replace(".000Z", "Z");
+function hashTime() {
+  const m = /^#t=(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?)Z?$/.exec(location.hash || "");
+  if (!m) return null; const t = Date.parse(m[1] + "Z"); return isNaN(t) || t < T0 || t >= TN ? null : t;
+}
+window.addEventListener("hashchange", () => { const t = hashTime(); if (t !== null && W) { jump(t); setSpeed(1); } });
+$("linkBtn").onclick = async () => {
+  const url = location.href.split("#")[0] + "#t=" + isoSec(simT), out = $("linkOut");
+  out.value = url; out.hidden = false;
+  try { await navigator.clipboard.writeText(url); $("linkBtn").textContent = "Link copied"; }
+  catch (e) { out.focus(); out.select(); $("linkBtn").textContent = "Copy the link"; }
+  setTimeout(() => { $("linkBtn").textContent = "Link to this moment"; }, 2500);
+};
 
 /* ---------- playback ---------- */
 function jump(t) { simT = Math.min(TN - 1, Math.max(T0, t)); trailMinute = -1; evJumped = true; ui(); drawTl(); }
@@ -902,11 +1184,12 @@ $("gotoForm").addEventListener("submit", e => { e.preventDefault();
   const [hh, mm] = ($("gotoTime").value || "00:00").split(":").map(Number); jump(+$("gotoDay").value + (hh * 60 + mm) * 60e3); });
 $("followBtn").onclick = () => { follow = !follow; $("followBtn").setAttribute("aria-pressed", String(follow)); if (follow) ui(); };
 document.querySelectorAll("#baseSeg button").forEach(b => b.onclick = () => setBase(b.dataset.layer));
+document.querySelectorAll("#trackSeg button").forEach(b => b.onclick = () => { trackMode = b.dataset.track; drawTrack(); });
 function setPalette(p) {
   document.documentElement.dataset.bridge = p;
   $("palNight").setAttribute("aria-pressed", String(p === "night")); $("palDay").setAttribute("aria-pressed", String(p === "day"));
   try { localStorage.setItem("gunnerus-bridge-palette", p); } catch (e) {}
-  if (map) { trail.setStyle({color:css("--own")}); vecLn.setStyle({color:css("--own")}); }
+  if (map) { trail.setStyle({color:css("--read")}); vecLn.setStyle({color:css("--own")}); drawTrack(); }
   lastIconKey = ""; if (W) { drawTlBg(); drawLegend(); ui(); drawTl(); }
 }
 $("palNight").onclick = () => setPalette("night"); $("palDay").onclick = () => setPalette("day");
@@ -914,7 +1197,7 @@ function drawLegend() {
   $("legend").innerHTML = Object.values(STATE).map(s => `<span><i style="background:var(${s.tok})"></i>${s.label}</span>`).join("") +
     `<span><i style="background:var(--rule-2)"></i>Total engine load, 0–800 kW</span><span><i style="background:var(--ok)"></i>Wave-shielding test (wave radar)</span>`;
 }
-window.addEventListener("resize", () => { if (W) { drawTlBg(); drawTl(); } });
+window.addEventListener("resize", () => { if (W) { drawTlBg(); drawTl(); drawTrend(); } });
 
 /* ---------- start ---------- */
 async function start() {
@@ -930,8 +1213,11 @@ async function start() {
   }
   const sel = $("gotoDay");
   for (let d = 0; d < 5; d++) { const dt = new Date(T0 + d * 86400e3); sel.insertAdjacentHTML("beforeend", `<option value="${T0 + d * 86400e3}">${DAYS[dt.getUTCDay()]} ${dt.getUTCDate()} ${MON[dt.getUTCMonth()]}</option>`); }
-  buildCompass(); buildIncl(); pods = [buildPod("podP", "port"), buildPod("podS", "stbd")]; buildPlant(); buildEvents(); buildMap(); buildTopics(); drawLegend();
-  simT = randomSailing(); evJumped = true;
+  try { OUT = await loadJSON("gunnerus-outline.json"); } catch (e) { OUT = null; }
+  buildCompass(); buildIncl(); buildDP(); pods = [buildPod("podP", "port"), buildPod("podS", "stbd")]; buildPlant(); buildEvents(); buildMap(); buildTopics(); drawLegend();
+  const linked = hashTime();
+  simT = linked !== null ? linked : randomSailing(); evJumped = true;
+  if (linked !== null) setSpeed(1);
   await Promise.race([ensureDay(dayKey(simT)), new Promise(r => setTimeout(r, 8000))]);
   drawTlBg(); ui(); drawTl(); if (map) map.setView(position() || [62.5, 6.2], 13);
   requestAnimationFrame(frame);

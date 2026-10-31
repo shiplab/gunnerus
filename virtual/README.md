@@ -1,8 +1,12 @@
 # Virtual bridge
 
-A replay of R/V Gunnerus in operation, shown as a bridge display: chart, heading and course, motion, wind, azimuth drives, power plant, crane and an event log. The page is [`pages/virtual.html`](../pages/virtual.html), published at <https://shiplab.github.io/gunnerus/virtual.html>.
+A replay of R/V Gunnerus in operation, shown as a bridge display: chart, heading and course, motion, wind, a plan view of the thrusters, trends of the last ten minutes, power plant, crane and an event log. The page is [`pages/virtual.html`](../pages/virtual.html), published at <https://shiplab.github.io/gunnerus/virtual.html>.
 
-The data are the logged values from the cruise week of **30 October to 3 November 2023**, replayed as if live. Nothing on the page is live. The page opens at a random moment while the ship is under way; you can jump to any time, replay at 1× to 600× and follow the event log.
+[![The virtual bridge on 3 November 2023, 12:48 UTC: transit at 10 knots, rolling 8.7°, two of three gensets running](images/virtual-bridge.png)](https://shiplab.github.io/gunnerus/virtual.html)
+
+*The virtual bridge on 3 November 2023 at 12:48 UTC: in transit at 10 knots, rolling 8.7°, two of the three gensets running. On the live page the chart shows Kartverket's sea chart under the track; the tiles are not part of this picture.*
+
+The data are the logged values from the cruise week of **30 October to 3 November 2023**, replayed as if live. Nothing on the page is live. The page opens at a random moment while the ship is under way and plays at 10×; you can jump to any time, replay at 1× to 600×, colour the week's track by operating state, speed or engine load, and follow the event log. A link opens the replay at a given second, for example <https://shiplab.github.io/gunnerus/virtual.html#t=2023-11-03T12:48:02Z> (the *Link to this moment* button makes one); a linked moment plays at 1×.
 
 Data provided by Robert Skulstad (NTNU, <https://www.ntnu.edu/employees/robert.skulstad>); organised by Henrique M. Gaspar. Part of the same week was used for the wave-shielding experiment ([`operational/wave-shielding-2023`](../operational/wave-shielding-2023/)).
 
@@ -19,7 +23,10 @@ Data provided by Robert Skulstad (NTNU, <https://www.ntnu.edu/employees/robert.s
 | `data/replay-2023-10-30-1hz.json` … `replay-2023-11-03-1hz.json` | One file per UTC day: 52 logger signals at 1 Hz (navigation, motion, wind, azimuth drives, tunnel thruster, crane, three engines with temperatures and pressures). The page loads the day it is replaying. | 6.2–7.9 MB each |
 | `data/replay-2023-10-31-wave-test.json` | Miros wave radar values during the wave-shielding test, 31 Oct 2023 10:00–12:10 UTC (the only wave data in the week). | 0.2 MB |
 | `scripts/build_replay.py` | Builds the week file and the wave-test file from data already in this repository. | |
+| `data/gunnerus-outline.json` | Outlines of the ship from above, from astern and from the side, and the positions of the azimuth drives, bow thruster and crane, for the plan view and the motion drawings. | 6 kB |
 | `scripts/build_days.py` | Builds the 1 Hz day files from the raw logger export (not in this repository). | |
+| `scripts/build_outline.mjs` | Builds the outline file from the 3D model in [`derived/3d/`](../derived/README.md) (Node.js). | |
+| `images/virtual-bridge.png` | The screenshot above. | 0.2 MB |
 
 The deploy workflow ([`.github/workflows/pages.yml`](../.github/workflows/pages.yml)) copies `data/*.json` to `assets/virtual/` on the website.
 
@@ -29,6 +36,7 @@ The deploy workflow ([`.github/workflows/pages.yml`](../.github/workflows/pages.
 | --- | --- |
 | Week file | [`operational/power-energy-2023/data/power_1min.csv.gz`](../operational/power-energy-2023/) (1-minute means of the NUC logger; operating states and their rules are explained there). |
 | Day files | The raw NUC logger export of the cruise week (`Gunnerus-w44/copy1` … `copy5`, long format `time, tag, value`, one file per UTC day, about 260 MB each). The raw files stay with the data owner. |
+| Outline file | [`derived/3d/gunnerus.glb`](../derived/README.md), the C-JOB 3D model simplified by NTNU: envelopes of the mesh in 0.25–0.5 m slices, and bounding boxes of the parts. |
 | Wave-test file | [`operational/wave-shielding-2023/data/wave_radar_params.csv`](../operational/wave-shielding-2023/) (Wang et al. 2025, *Ocean Engineering* 320, 120189). |
 
 The day files were checked against [`operational/wave-shielding-2023/data/vessel_1hz.csv.gz`](../operational/wave-shielding-2023/), which comes from the same raw files: roll, heave and engine load are identical over the test window, heading and azimuth angle agree within 0.05° (stored here to 0.1°), latitude within 0.00005°.
@@ -72,9 +80,9 @@ Over MQTT (phase 2), a topic will carry one payload per value, `{"t": "2023-11-0
 ## Measured, derived, assumed
 
 - **Measured:** every topic marked `measured`, as logged. No values are interpolated.
-- **Derived:** operating state, course from the 1-minute track, the event log (genset start and stop, azimuth running or idle, state changes; changes shorter than 2–3 minutes are ignored), which gensets and consumers are drawn connected (engine load above 5 kW, azimuth rpm above 5), fuel and energy since midnight.
-- **Display only:** the ship symbol and the needles move smoothly between logged values; the roll and pitch drawings are exaggerated (×2 and ×3).
-- **Assumed:** ship time UTC+1 (CET, after 29 Oct 2023); azimuth angle 0° = ahead; engine rated power 450 kW for the load bars (list of main equipment; 475 kW on the engine room arrangement).
+- **Derived:** operating state (from 60-second means of the 1 Hz speed and azimuth rpm, with the rules of the power and energy case: transit from 8 kn, manoeuvring from 0.5 kn, otherwise station-keeping if an azimuth runs above 5 rpm, else stationary), course from the 1-minute track while a day file is loading, the event log (genset start and stop, azimuth running or idle, state changes; changes shorter than 2 minutes for machinery and 3 minutes for the state are ignored), which gensets and consumers are drawn connected (engine load above 5 kW, azimuth rpm above 5), and fuel and energy since midnight ship time (logged rates summed second by second). The timeline of the week uses the 1-minute file.
+- **Display only:** the ship symbol and the needles move smoothly between logged values; the roll and pitch drawings are exaggerated (×2 and ×3), heave is to scale. The trends show the last ten minutes of the 1 Hz values as logged.
+- **Assumed:** ship time UTC+1 (CET, after 29 Oct 2023); azimuth angle 0° = ahead and positive to starboard; crane slewing angle 0° = ahead; wind direction drawn as true; positive roll = starboard down and positive pitch = bow up (Seapath convention); waterline at the normal operating draught, 2.5 m; engine rated power 450 kW for the load bars (list of main equipment; 475 kW on the engine room arrangement). Equipment positions in the plan view are approximate (from the 3D model).
 
 ## Known issues
 
@@ -94,7 +102,10 @@ From the repository root (pandas, numpy):
 ```sh
 python3 virtual/scripts/build_replay.py                       # week file and wave-test file
 python3 virtual/scripts/build_days.py "<…>/Gunnerus-w44"      # day files from the raw export, about 20 s per day
+node virtual/scripts/build_outline.mjs derived/3d/gunnerus.glb derived/3d/gunnerus-parts.json virtual/data/gunnerus-outline.json
 ```
+
+The outline script needs `npm install @gltf-transform/core@4 @gltf-transform/extensions@4 meshoptimizer@0.21.0`.
 
 Preview: serve the repository root (`python3 -m http.server 8000`) and open <http://localhost:8000/pages/virtual.html>. The page finds the data in `../virtual/data/` when it is not deployed.
 

@@ -17,6 +17,7 @@
 | Documents | 5 engineering documents: weight, tonnage, specification, equipment and document lists |
 | Metadata | GA drawing as JSON, coded by SFI group and DNV VIS/GMOD; a crosswalk of 53 ship signals across vendors, logger and asset model, with two 2019 log extracts and a blind AI translator test |
 | Operational | 2 cases: the 2023 wave-shielding experiment (ship motion, crane, engines, thrusters, incident and sheltered waves, about 16 MB) and a power and energy profile of the cruise week (engines, azimuth drives, fuel, operating modes, under 1 MB) |
+| Virtual bridge | The cruise week of 2023 replayed as a bridge display: chart, heading, motion, wind, azimuth drives, power plant and event log, from the ship's logger at 1 Hz (about 36 MB) |
 | Licence | CC BY-NC 4.0 (engineering documents: CC BY-SA 4.0) |
 | Website | <https://shiplab.github.io/gunnerus/> |
 | DOI | [10.5281/zenodo.22983657](https://doi.org/10.5281/zenodo.22983657) (all versions) |
@@ -88,6 +89,7 @@ The folder READMEs describe what each sheet shows. [`polarkonsult/README.md`](po
 | [`extended/CJOB/docs/`](extended/CJOB/docs/README.md) | C-JOB engineering documents: weight calculation (411.79 t light ship), gross and net tonnage calculation, specification, list of main equipment, list of project documents. **Licensed CC BY-SA 4.0.** |
 | [`metadata/`](metadata/README.md) | The general arrangement drawing as structured JSON, and [`metadata/signals/`](metadata/signals/README.md): the ship as a set of 53 signals. See [Metadata](#metadata). |
 | [`operational/`](operational/README.md) | Data measured on board in service, one folder per case, each tied to a published study. See [Operational data](#operational-data). |
+| [`virtual/`](virtual/README.md) | The cruise week of 30 October – 3 November 2023 as replay data for the virtual bridge: one file per day at 1 Hz, a 1-minute file for the week, and the scripts that make them. See [Virtual bridge](#virtual-bridge). |
 | [`derived/`](derived/README.md) | A 3.6 MB glTF of the C-JOB model with parts grouped by SFI group and equipment matched to the C-JOB list, plus older, approximate material from vessel.js (2020): a textured visual model and a ship specification with hull offsets. For visualisation and teaching, not a source for dimensions. |
 | [`pages/`](pages/README.md) | Source of the [website](https://shiplab.github.io/gunnerus/). |
 | [`images/`](images/README.md) | Images used in this README. |
@@ -125,6 +127,12 @@ The file is derived from the general arrangement alone, not from class documents
 | [Power and energy profile](operational/power-energy-2023/README.md) | 30 Oct – 3 Nov 2023 | Operating profile of the power and energy system over five days, one row per minute: speed, GPS position, the three engines (load, fuel consumption, speed), the two azimuth drives, and four operating states, with shares of time, energy and fuel by state, speed and engine. Every column is marked measured, derived or assumed. Under 1 MB. Data from [Robert Skulstad](https://www.ntnu.edu/employees/robert.skulstad), organised by Henrique M. Gaspar. | None yet: the case README says what is ours |
 
 For a case with a study, the experiment, its set-up and its findings are those of the study; cite it when you use the data (see [How to cite](#how-to-cite)). The wave-shielding dataset is organised by Jisang Ha and Henrique M. Gaspar (NTNU); the power and energy dataset holds data provided by Robert Skulstad (NTNU), organised by Henrique M. Gaspar. The [website](https://shiplab.github.io/gunnerus/#operational) shows the wave-shielding case as a chart and table, and the [power and energy page](https://shiplab.github.io/gunnerus/power-energy.html) shows the operating profile, with a track on the open map of Kartverket.
+
+## Virtual bridge
+
+[`virtual/`](virtual/README.md) replays Gunnerus in operation as a bridge display: the [virtual bridge](https://shiplab.github.io/gunnerus/virtual.html) shows the chart and track, heading and course, the ship rolling, pitching and heaving, wind, a plan view of the two azimuth drives as on a DP screen, trends of the last ten minutes, the three gensets on a simplified single-line view, the crane and an event log, for any moment of the cruise week of 30 October – 3 November 2023. The page opens while the ship is under way and plays back at 10× (1× to 600×). The values are the ship's logger data at 1 Hz, from the same week as the operational cases; nothing on the page is live. Data provided by [Robert Skulstad](https://www.ntnu.edu/employees/robert.skulstad), organised by Henrique M. Gaspar.
+
+Each signal is a topic with its unit, source and status, named so that the same data can later be published live over MQTT. [`virtual/README.md`](virtual/README.md) describes the files, the message format, what is measured, derived or assumed, and the known issues.
 
 ## The vessel
 

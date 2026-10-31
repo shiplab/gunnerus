@@ -1,12 +1,13 @@
 # Showcase page
 
-Source for the GitHub Pages site that presents this repository, <https://shiplab.github.io/gunnerus/>. It is deployed by [`.github/workflows/pages.yml`](../.github/workflows/pages.yml), which assembles the site from three places:
+Source for the GitHub Pages site that presents this repository, <https://shiplab.github.io/gunnerus/>. It is deployed by [`.github/workflows/pages.yml`](../.github/workflows/pages.yml), which assembles the site from four places:
 
 | Site path | Copied from |
 | --- | --- |
 | `/` (page, thumbnails, logo) | this folder, `pages/` |
 | `/metadata/gunnerus_metadata.json` | [`metadata/gunnerus_metadata.json`](../metadata/README.md) |
 | `/assets/gunnerus.glb` | [`derived/3d/gunnerus.glb`](../derived/README.md) |
+| `/assets/virtual/*.json` | [`virtual/data/`](../virtual/README.md) |
 
 ## Files in this folder
 
@@ -22,6 +23,8 @@ Source for the GitHub Pages site that presents this repository, <https://shiplab
 | `explorer.html` | The ship explorer: pick a part of the 3D model to see its equipment-list items, specification lines, drawings, GA metadata, weight group and measured data; a *Coverage* view lists all 127 items of the C-JOB list of main equipment and where each appears. Links such as `explorer.html#part=part03` or `#item=72` open a part or item directly. |
 | `assets/explorer/explorer.json` | The cross-reference index behind the explorer (about 330 kB). Made by `tools/build_explorer_data.py` from files in this repository; rerun it when the drawings, documents, metadata, 3D parts or operational case change. |
 | `tools/build_explorer_data.py` | Builds `assets/explorer/explorer.json`. Needs pandas, numpy and `pdftotext` (poppler). Explains how each kind of link is made; the keyword patterns for drawing labels and the hand-made links are at the top of the script. |
+| `virtual.html` | The virtual bridge: the cruise week of 2023 replayed as a bridge display (chart with coloured track, heading, ship outlines moving with roll, pitch and heave, wind, a plan view of the thrusters, ten-minute trends, power plant, crane, event log, signal list). Leaflet from cdnjs and Kartverket tiles for the chart, Google Fonts; the rest is plain HTML, SVG and canvas. Reads `assets/virtual/` on the site, `../virtual/data/` in a local preview. See [`virtual/README.md`](../virtual/README.md). |
+| `assets/virtual-bridge.webp` | Screenshot of the virtual bridge for its card in the *Operational* section (45 kB). |
 | `assets/thumbs/*.webp` | First-sheet previews of the 15 drawings, rendered from the PDFs and trimmed. |
 | `assets/ntnu-logo.svg` | NTNU logo (colour, horizontal). |
 
