@@ -223,3 +223,8 @@ __marimo__/
 *.dwl
 *.dwl2
 plot.log
+
+# Original 3D CAD models: only the compressed .7z archives are committed
+extended/CJOB/3d models/*.3dm
+extended/CJOB/3d models/*.3dmbak
+extended/CJOB/3d models/*.stp
